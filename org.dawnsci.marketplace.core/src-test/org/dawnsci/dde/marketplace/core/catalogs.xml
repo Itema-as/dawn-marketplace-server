@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+	curl http://marketplace.eclipse.org/catalogs/api/p 
+	-Dorg.eclipse.epp.internal.mpc.core.service.DefaultCatalogService.url=http://mydomain.tld
+-->
+<marketplace>
+  <catalogs>
+    <catalog id="38413" title="Eclipse Marketplace" url="http://marketplace.eclipse.org" selfContained="0" icon="http://marketplace.eclipse.org/sites/default/files/eclipse-catalog.png">
+      <description>Eclipse Marketplace (MP) is a place to find and keep track of Eclipse-based solutions.</description>
+      <dependenciesRepository></dependenciesRepository>
+      <wizard title="">
+        <icon>http://marketplace.eclipse.org/sites/default/files/marketplace_catalog_icon_0.png</icon>
+        <searchtab enabled="1">Search</searchtab>
+        <populartab enabled="1">Popular</populartab>
+        <recenttab enabled="1">Recent</recenttab>
+        <news shorttitle="December Newsletter" timestamp="1450328400">https://www.eclipse.org/community/eclipse_newsletter/2015/december/</news>
+      </wizard>
+    </catalog>
+    <catalog id="2671769" title="Obeo Marketplace" url="http://marketplace.eclipse.org/dedicated_catalog_hosting/2671769" selfContained="0" icon="http://marketplace.eclipse.org/sites/default/files/obeo-marketplace_0_0.png">
+      <description>Obeo is a leading company on software modeling and modernization. Obeo Marketplace supplies code generators, designers, code parsers...</description>
+      <dependenciesRepository></dependenciesRepository>
+      <wizard title="Obeo Marketplace Catalog">
+        <icon>http://marketplace.eclipse.org/sites/default/files/obeo-marketplace-wizard_0.png</icon>
+        <searchtab enabled="1">Search</searchtab>
+        <populartab enabled="1">Popular</populartab>
+        <recenttab enabled="1">Recent</recenttab>
+        <news shorttitle="News" timestamp="1452056400">http://blog.obeo.fr/en</news>
+      </wizard>
+    </catalog>
+  </catalogs>
+</marketplace>

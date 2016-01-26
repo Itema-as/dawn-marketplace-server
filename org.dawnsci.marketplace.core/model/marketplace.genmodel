@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.dawnsci.dde.marketplace.core/src-gen" modelPluginID="org.dawnsci.dde.marketplace.core"
+    modelName="Marketplace" modelPluginClass="" generateSchema="true" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="8.0" copyrightFields="false"
+    interfaceNamePattern="" classNamePattern="" operationReflection="true" importOrganizing="true">
+  <foreignModel>marketplace.ecore</foreignModel>
+  <genPackages prefix="Marketplace" basePackage="org.dawnsci" resource="XML" disposableProviderFactory="true"
+      ecorePackage="marketplace.ecore#/">
+    <genClasses ecoreClass="marketplace.ecore#//Node">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute marketplace.ecore#//Node/id"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute marketplace.ecore#//Node/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute marketplace.ecore#//Node/type"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference marketplace.ecore#//Node/categories"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference marketplace.ecore#//Node/tags"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute marketplace.ecore#//Node/owner"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute marketplace.ecore#//Node/favorited"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute marketplace.ecore#//Node/installstotal"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute marketplace.ecore#//Node/installsrecent"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute marketplace.ecore#//Node/shortdescription"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute marketplace.ecore#//Node/body"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute marketplace.ecore#//Node/created"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute marketplace.ecore#//Node/changed"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute marketplace.ecore#//Node/foundationmember"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute marketplace.ecore#//Node/homepageurl"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute marketplace.ecore#//Node/image"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute marketplace.ecore#//Node/license"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute marketplace.ecore#//Node/companyname"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute marketplace.ecore#//Node/status"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute marketplace.ecore#//Node/supporturl"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute marketplace.ecore#//Node/version"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute marketplace.ecore#//Node/eclipseversion"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute marketplace.ecore#//Node/updateurl"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference marketplace.ecore#//Node/ius"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference marketplace.ecore#//Node/platforms"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute marketplace.ecore#//Node/url"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute marketplace.ecore#//Node/screenshot"/>
+    </genClasses>
+    <genClasses ecoreClass="marketplace.ecore#//Category">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute marketplace.ecore#//Category/id"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute marketplace.ecore#//Category/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute marketplace.ecore#//Category/url"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute marketplace.ecore#//Category/count"/>
+    </genClasses>
+    <genClasses ecoreClass="marketplace.ecore#//Tag">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute marketplace.ecore#//Tag/id"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute marketplace.ecore#//Tag/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute marketplace.ecore#//Tag/url"/>
+    </genClasses>
+    <genClasses ecoreClass="marketplace.ecore#//Iu">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute marketplace.ecore#//Iu/selected"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute marketplace.ecore#//Iu/mixed"/>
+    </genClasses>
+    <genClasses ecoreClass="marketplace.ecore#//Platform">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute marketplace.ecore#//Platform/mixed"/>
+    </genClasses>
+    <genClasses ecoreClass="marketplace.ecore#//Platforms">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference marketplace.ecore#//Platforms/items"/>
+    </genClasses>
+    <genClasses ecoreClass="marketplace.ecore#//Ius">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference marketplace.ecore#//Ius/items"/>
+    </genClasses>
+    <genClasses ecoreClass="marketplace.ecore#//Marketplace">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference marketplace.ecore#//Marketplace/node"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference marketplace.ecore#//Marketplace/catalogs"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference marketplace.ecore#//Marketplace/market"/>
+    </genClasses>
+    <genClasses ecoreClass="marketplace.ecore#//Categories">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference marketplace.ecore#//Categories/items"/>
+    </genClasses>
+    <genClasses ecoreClass="marketplace.ecore#//Tags">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference marketplace.ecore#//Tags/items"/>
+    </genClasses>
+    <genClasses ecoreClass="marketplace.ecore#//Catalogs">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference marketplace.ecore#//Catalogs/items"/>
+    </genClasses>
+    <genClasses ecoreClass="marketplace.ecore#//Catalog">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute marketplace.ecore#//Catalog/id"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute marketplace.ecore#//Catalog/title"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute marketplace.ecore#//Catalog/url"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute marketplace.ecore#//Catalog/selfContained"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute marketplace.ecore#//Catalog/icon"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute marketplace.ecore#//Catalog/description"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute marketplace.ecore#//Catalog/dependenciesRepository"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference marketplace.ecore#//Catalog/wizard"/>
+    </genClasses>
+    <genClasses ecoreClass="marketplace.ecore#//Wizard">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute marketplace.ecore#//Wizard/title"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute marketplace.ecore#//Wizard/icon"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference marketplace.ecore#//Wizard/searchtab"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference marketplace.ecore#//Wizard/populartab"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference marketplace.ecore#//Wizard/recenttab"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference marketplace.ecore#//Wizard/news"/>
+    </genClasses>
+    <genClasses ecoreClass="marketplace.ecore#//SearchTab">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute marketplace.ecore#//SearchTab/enabled"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute marketplace.ecore#//SearchTab/mixed"/>
+    </genClasses>
+    <genClasses ecoreClass="marketplace.ecore#//PopularTab">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute marketplace.ecore#//PopularTab/enabled"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute marketplace.ecore#//PopularTab/mixed"/>
+    </genClasses>
+    <genClasses ecoreClass="marketplace.ecore#//RecentTab">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute marketplace.ecore#//RecentTab/enabled"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute marketplace.ecore#//RecentTab/mixed"/>
+    </genClasses>
+    <genClasses ecoreClass="marketplace.ecore#//News">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute marketplace.ecore#//News/shorttitle"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute marketplace.ecore#//News/mixed"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute marketplace.ecore#//News/timestamp"/>
+    </genClasses>
+    <genClasses ecoreClass="marketplace.ecore#//Market">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute marketplace.ecore#//Market/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute marketplace.ecore#//Market/id"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute marketplace.ecore#//Market/url"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference marketplace.ecore#//Market/category"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

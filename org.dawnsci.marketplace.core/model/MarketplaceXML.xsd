@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xsd:schema xmlns:org.dawnsci.dde="http://org.dawnsci.dde/marketplace" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://org.dawnsci.dde/marketplace">
+  <xsd:complexType name="Node">
+    <xsd:sequence>
+      <xsd:element maxOccurs="1" minOccurs="0" name="categories" type="org.dawnsci.dde:Categories"/>
+      <xsd:element maxOccurs="1" minOccurs="0" name="tags" type="org.dawnsci.dde:Tags"/>
+      <xsd:element maxOccurs="1" minOccurs="0" name="ius" type="org.dawnsci.dde:Ius"/>
+      <xsd:element maxOccurs="1" minOccurs="0" name="platforms" type="org.dawnsci.dde:Platforms"/>
+    </xsd:sequence>
+    <xsd:attribute name="id" type="xsd:string"/>
+    <xsd:attribute name="name" type="xsd:string"/>
+    <xsd:attribute name="type" type="xsd:string"/>
+    <xsd:attribute name="owner" type="xsd:string"/>
+    <xsd:attribute name="favorited" type="xsd:int"/>
+    <xsd:attribute name="installstotal" type="xsd:int"/>
+    <xsd:attribute name="installsrecent" type="xsd:int"/>
+    <xsd:attribute name="shortdescription" type="xsd:string"/>
+    <xsd:attribute name="body" type="xsd:string"/>
+    <xsd:attribute name="created" type="xsd:long"/>
+    <xsd:attribute name="changed" type="xsd:long"/>
+    <xsd:attribute name="foundationmember" type="xsd:int"/>
+    <xsd:attribute name="homepageurl" type="xsd:string"/>
+    <xsd:attribute name="image" type="xsd:string"/>
+    <xsd:attribute name="license" type="xsd:string"/>
+    <xsd:attribute name="companyname" type="xsd:string"/>
+    <xsd:attribute name="status" type="xsd:string"/>
+    <xsd:attribute name="supporturl" type="xsd:string"/>
+    <xsd:attribute name="version" type="xsd:string"/>
+    <xsd:attribute name="eclipseversion" type="xsd:string"/>
+    <xsd:attribute name="updateurl" type="xsd:string"/>
+    <xsd:attribute name="url" type="xsd:string"/>
+    <xsd:attribute name="screenshot" type="xsd:string"/>
+  </xsd:complexType>
+  <xsd:element name="Node" type="org.dawnsci.dde:Node"/>
+  <xsd:complexType name="Category">
+    <xsd:attribute name="id" type="xsd:string" use="required"/>
+    <xsd:attribute name="name" type="xsd:string" use="required"/>
+    <xsd:attribute name="url" type="xsd:string" use="required"/>
+    <xsd:attribute name="count" type="xsd:int"/>
+  </xsd:complexType>
+  <xsd:element name="Category" type="org.dawnsci.dde:Category"/>
+  <xsd:complexType name="Tag">
+    <xsd:attribute name="id" type="xsd:string"/>
+    <xsd:attribute name="name" type="xsd:string"/>
+    <xsd:attribute name="url" type="xsd:string"/>
+  </xsd:complexType>
+  <xsd:element name="Tag" type="org.dawnsci.dde:Tag"/>
+  <xsd:complexType name="Iu">
+    <xsd:attribute name="selected" type="xsd:boolean"/>
+  </xsd:complexType>
+  <xsd:element name="Iu" type="org.dawnsci.dde:Iu"/>
+  <xsd:complexType name="Platform"/>
+  <xsd:element name="Platform" type="org.dawnsci.dde:Platform"/>
+  <xsd:complexType name="Platforms">
+    <xsd:sequence>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="items" type="org.dawnsci.dde:Platform"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="Platforms" type="org.dawnsci.dde:Platforms"/>
+  <xsd:complexType name="Ius">
+    <xsd:sequence>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="items" type="org.dawnsci.dde:Iu"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="Ius" type="org.dawnsci.dde:Ius"/>
+  <xsd:complexType name="Marketplace">
+    <xsd:sequence>
+      <xsd:element maxOccurs="1" minOccurs="0" name="catalogs" type="org.dawnsci.dde:Catalogs"/>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="market" type="org.dawnsci.dde:Market"/>
+    </xsd:sequence>
+    <xsd:attribute name="node" type="xsd:string"/>
+  </xsd:complexType>
+  <xsd:element name="Marketplace" type="org.dawnsci.dde:Marketplace"/>
+  <xsd:complexType name="Categories">
+    <xsd:sequence>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="items" type="org.dawnsci.dde:Category"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="Categories" type="org.dawnsci.dde:Categories"/>
+  <xsd:complexType name="Tags">
+    <xsd:sequence>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="items" type="org.dawnsci.dde:Tag"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="Tags" type="org.dawnsci.dde:Tags"/>
+  <xsd:complexType name="Catalogs">
+    <xsd:sequence>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="items" type="org.dawnsci.dde:Catalog"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="Catalogs" type="org.dawnsci.dde:Catalogs"/>
+  <xsd:complexType name="Catalog">
+    <xsd:sequence>
+      <xsd:element maxOccurs="1" minOccurs="1" name="wizard" type="org.dawnsci.dde:Wizard"/>
+    </xsd:sequence>
+    <xsd:attribute name="id" type="xsd:string"/>
+    <xsd:attribute name="title" type="xsd:string"/>
+    <xsd:attribute name="url" type="xsd:string"/>
+    <xsd:attribute name="selfContained" type="xsd:string"/>
+    <xsd:attribute name="icon" type="xsd:string"/>
+    <xsd:attribute name="description" type="xsd:string"/>
+    <xsd:attribute name="dependenciesRepository" type="xsd:string"/>
+  </xsd:complexType>
+  <xsd:element name="Catalog" type="org.dawnsci.dde:Catalog"/>
+  <xsd:complexType name="Wizard">
+    <xsd:sequence>
+      <xsd:element maxOccurs="1" minOccurs="1" name="searchtab" type="org.dawnsci.dde:SearchTab"/>
+      <xsd:element maxOccurs="1" minOccurs="1" name="populartab" type="org.dawnsci.dde:PopularTab"/>
+      <xsd:element maxOccurs="1" minOccurs="1" name="recenttab" type="org.dawnsci.dde:RecentTab"/>
+      <xsd:element maxOccurs="1" minOccurs="1" name="news" type="org.dawnsci.dde:News"/>
+    </xsd:sequence>
+    <xsd:attribute name="title" type="xsd:string"/>
+    <xsd:attribute name="icon" type="xsd:string"/>
+  </xsd:complexType>
+  <xsd:element name="Wizard" type="org.dawnsci.dde:Wizard"/>
+  <xsd:complexType name="SearchTab">
+    <xsd:attribute name="enabled" type="xsd:int" use="required"/>
+  </xsd:complexType>
+  <xsd:element name="SearchTab" type="org.dawnsci.dde:SearchTab"/>
+  <xsd:complexType name="PopularTab">
+    <xsd:attribute name="enabled" type="xsd:int" use="required"/>
+  </xsd:complexType>
+  <xsd:element name="PopularTab" type="org.dawnsci.dde:PopularTab"/>
+  <xsd:complexType name="RecentTab">
+    <xsd:attribute name="enabled" type="xsd:int" use="required"/>
+  </xsd:complexType>
+  <xsd:element name="RecentTab" type="org.dawnsci.dde:RecentTab"/>
+  <xsd:complexType name="News">
+    <xsd:attribute name="shorttitle" type="xsd:string" use="required"/>
+    <xsd:attribute name="timestamp" type="xsd:long"/>
+  </xsd:complexType>
+  <xsd:element name="News" type="org.dawnsci.dde:News"/>
+  <xsd:complexType name="Market">
+    <xsd:attribute name="name" type="xsd:string"/>
+    <xsd:attribute name="id" type="xsd:long"/>
+    <xsd:attribute name="url" type="xsd:string"/>
+    <xsd:attribute name="category" type="xsd:string"/>
+  </xsd:complexType>
+  <xsd:element name="Market" type="org.dawnsci.dde:Market"/>
+</xsd:schema>

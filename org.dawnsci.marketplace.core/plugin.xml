@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+<plugin>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated marketplace -->
+      <package
+            uri="http://org.dawnsci.dde/marketplace"
+            class="org.dawnsci.marketplace.MarketplacePackage"
+            genModel="model/marketplace.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.extension_parser">
+      <!-- @generated marketplace -->
+      <parser
+            type="marketplace"
+            class="org.dawnsci.marketplace.util.MarketplaceResourceFactoryImpl"/>
+   </extension>
+
+</plugin>

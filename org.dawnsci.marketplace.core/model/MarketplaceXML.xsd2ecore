@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd2ecore:XSD2EcoreMappingRoot xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:xsd2ecore="http://www.eclipse.org/emf/2002/XSD2Ecore" inputs="marketplace.ecore#/" outputs="MarketplaceXML.xsd#/">
+  <nested inputs="marketplace.ecore#/" outputs="MarketplaceXML.xsd#/">
+    <nested inputs="marketplace.ecore#//Node" outputs="MarketplaceXML.xsd#//Node;XSDComplexTypeDefinition">
+      <nested inputs="marketplace.ecore#//Node/id" outputs="MarketplaceXML.xsd#//Node;XSDComplexTypeDefinition/XSDAttributeUse"/>
+      <nested inputs="marketplace.ecore#//Node/name" outputs="MarketplaceXML.xsd#//Node;XSDComplexTypeDefinition/XSDAttributeUse=1"/>
+      <nested inputs="marketplace.ecore#//Node/type" outputs="MarketplaceXML.xsd#//Node;XSDComplexTypeDefinition/XSDAttributeUse=2"/>
+      <nested inputs="marketplace.ecore#//Node/owner" outputs="MarketplaceXML.xsd#//Node;XSDComplexTypeDefinition/XSDAttributeUse=3"/>
+      <nested inputs="marketplace.ecore#//Node/favorited" outputs="MarketplaceXML.xsd#//Node;XSDComplexTypeDefinition/XSDAttributeUse=4"/>
+      <nested inputs="marketplace.ecore#//Node/installstotal" outputs="MarketplaceXML.xsd#//Node;XSDComplexTypeDefinition/XSDAttributeUse=5"/>
+      <nested inputs="marketplace.ecore#//Node/installsrecent" outputs="MarketplaceXML.xsd#//Node;XSDComplexTypeDefinition/XSDAttributeUse=6"/>
+      <nested inputs="marketplace.ecore#//Node/shortdescription" outputs="MarketplaceXML.xsd#//Node;XSDComplexTypeDefinition/XSDAttributeUse=7"/>
+      <nested inputs="marketplace.ecore#//Node/body" outputs="MarketplaceXML.xsd#//Node;XSDComplexTypeDefinition/XSDAttributeUse=8"/>
+      <nested inputs="marketplace.ecore#//Node/created" outputs="MarketplaceXML.xsd#//Node;XSDComplexTypeDefinition/XSDAttributeUse=9"/>
+      <nested inputs="marketplace.ecore#//Node/changed" outputs="MarketplaceXML.xsd#//Node;XSDComplexTypeDefinition/XSDAttributeUse=10"/>
+      <nested inputs="marketplace.ecore#//Node/foundationmember" outputs="MarketplaceXML.xsd#//Node;XSDComplexTypeDefinition/XSDAttributeUse=11"/>
+      <nested inputs="marketplace.ecore#//Node/homepageurl" outputs="MarketplaceXML.xsd#//Node;XSDComplexTypeDefinition/XSDAttributeUse=12"/>
+      <nested inputs="marketplace.ecore#//Node/image" outputs="MarketplaceXML.xsd#//Node;XSDComplexTypeDefinition/XSDAttributeUse=13"/>
+      <nested inputs="marketplace.ecore#//Node/license" outputs="MarketplaceXML.xsd#//Node;XSDComplexTypeDefinition/XSDAttributeUse=14"/>
+      <nested inputs="marketplace.ecore#//Node/companyname" outputs="MarketplaceXML.xsd#//Node;XSDComplexTypeDefinition/XSDAttributeUse=15"/>
+      <nested inputs="marketplace.ecore#//Node/status" outputs="MarketplaceXML.xsd#//Node;XSDComplexTypeDefinition/XSDAttributeUse=16"/>
+      <nested inputs="marketplace.ecore#//Node/supporturl" outputs="MarketplaceXML.xsd#//Node;XSDComplexTypeDefinition/XSDAttributeUse=17"/>
+      <nested inputs="marketplace.ecore#//Node/version" outputs="MarketplaceXML.xsd#//Node;XSDComplexTypeDefinition/XSDAttributeUse=18"/>
+      <nested inputs="marketplace.ecore#//Node/eclipseversion" outputs="MarketplaceXML.xsd#//Node;XSDComplexTypeDefinition/XSDAttributeUse=19"/>
+      <nested inputs="marketplace.ecore#//Node/updateurl" outputs="MarketplaceXML.xsd#//Node;XSDComplexTypeDefinition/XSDAttributeUse=20"/>
+      <nested inputs="marketplace.ecore#//Node/url" outputs="MarketplaceXML.xsd#//Node;XSDComplexTypeDefinition/XSDAttributeUse=21"/>
+      <nested inputs="marketplace.ecore#//Node/screenshot" outputs="MarketplaceXML.xsd#//Node;XSDComplexTypeDefinition/XSDAttributeUse=22"/>
+      <nested inputs="marketplace.ecore#//Node/categories" outputs="MarketplaceXML.xsd#//Node;XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle"/>
+      <nested inputs="marketplace.ecore#//Node/tags" outputs="MarketplaceXML.xsd#//Node;XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=1"/>
+      <nested inputs="marketplace.ecore#//Node/ius" outputs="MarketplaceXML.xsd#//Node;XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=2"/>
+      <nested inputs="marketplace.ecore#//Node/platforms" outputs="MarketplaceXML.xsd#//Node;XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=3"/>
+    </nested>
+    <nested inputs="marketplace.ecore#//Node" outputs="MarketplaceXML.xsd#//Node;XSDElementDeclaration"/>
+    <nested inputs="marketplace.ecore#//Category" outputs="MarketplaceXML.xsd#//Category;XSDComplexTypeDefinition=1">
+      <nested inputs="marketplace.ecore#//Category/id" outputs="MarketplaceXML.xsd#//Category;XSDComplexTypeDefinition=1/XSDAttributeUse"/>
+      <nested inputs="marketplace.ecore#//Category/name" outputs="MarketplaceXML.xsd#//Category;XSDComplexTypeDefinition=1/XSDAttributeUse=1"/>
+      <nested inputs="marketplace.ecore#//Category/url" outputs="MarketplaceXML.xsd#//Category;XSDComplexTypeDefinition=1/XSDAttributeUse=2"/>
+      <nested inputs="marketplace.ecore#//Category/count" outputs="MarketplaceXML.xsd#//Category;XSDComplexTypeDefinition=1/XSDAttributeUse=3"/>
+    </nested>
+    <nested inputs="marketplace.ecore#//Category" outputs="MarketplaceXML.xsd#//Category;XSDElementDeclaration=1"/>
+    <nested inputs="marketplace.ecore#//Tag" outputs="MarketplaceXML.xsd#//Tag;XSDComplexTypeDefinition=2">
+      <nested inputs="marketplace.ecore#//Tag/id" outputs="MarketplaceXML.xsd#//Tag;XSDComplexTypeDefinition=2/XSDAttributeUse"/>
+      <nested inputs="marketplace.ecore#//Tag/name" outputs="MarketplaceXML.xsd#//Tag;XSDComplexTypeDefinition=2/XSDAttributeUse=1"/>
+      <nested inputs="marketplace.ecore#//Tag/url" outputs="MarketplaceXML.xsd#//Tag;XSDComplexTypeDefinition=2/XSDAttributeUse=2"/>
+    </nested>
+    <nested inputs="marketplace.ecore#//Tag" outputs="MarketplaceXML.xsd#//Tag;XSDElementDeclaration=2"/>
+    <nested inputs="marketplace.ecore#//Iu" outputs="MarketplaceXML.xsd#//Iu;XSDComplexTypeDefinition=3">
+      <nested inputs="marketplace.ecore#//Iu/selected" outputs="MarketplaceXML.xsd#//Iu;XSDComplexTypeDefinition=3/XSDAttributeUse"/>
+    </nested>
+    <nested inputs="marketplace.ecore#//Iu" outputs="MarketplaceXML.xsd#//Iu;XSDElementDeclaration=3"/>
+    <nested inputs="marketplace.ecore#//Platform" outputs="MarketplaceXML.xsd#//Platform;XSDComplexTypeDefinition=4"/>
+    <nested inputs="marketplace.ecore#//Platform" outputs="MarketplaceXML.xsd#//Platform;XSDElementDeclaration=4"/>
+    <nested inputs="marketplace.ecore#//Platforms" outputs="MarketplaceXML.xsd#//Platforms;XSDComplexTypeDefinition=5">
+      <nested inputs="marketplace.ecore#//Platforms/items" outputs="MarketplaceXML.xsd#//Platforms;XSDComplexTypeDefinition=5/XSDParticle/XSDModelGroup/XSDParticle"/>
+    </nested>
+    <nested inputs="marketplace.ecore#//Platforms" outputs="MarketplaceXML.xsd#//Platforms;XSDElementDeclaration=5"/>
+    <nested inputs="marketplace.ecore#//Ius" outputs="MarketplaceXML.xsd#//Ius;XSDComplexTypeDefinition=6">
+      <nested inputs="marketplace.ecore#//Ius/items" outputs="MarketplaceXML.xsd#//Ius;XSDComplexTypeDefinition=6/XSDParticle/XSDModelGroup/XSDParticle"/>
+    </nested>
+    <nested inputs="marketplace.ecore#//Ius" outputs="MarketplaceXML.xsd#//Ius;XSDElementDeclaration=6"/>
+    <nested inputs="marketplace.ecore#//Marketplace" outputs="MarketplaceXML.xsd#//Marketplace;XSDComplexTypeDefinition=7">
+      <nested inputs="marketplace.ecore#//Marketplace/node" outputs="MarketplaceXML.xsd#//Marketplace;XSDComplexTypeDefinition=7/XSDAttributeUse"/>
+      <nested inputs="marketplace.ecore#//Marketplace/catalogs" outputs="MarketplaceXML.xsd#//Marketplace;XSDComplexTypeDefinition=7/XSDParticle/XSDModelGroup/XSDParticle"/>
+      <nested inputs="marketplace.ecore#//Marketplace/market" outputs="MarketplaceXML.xsd#//Marketplace;XSDComplexTypeDefinition=7/XSDParticle/XSDModelGroup/XSDParticle=1"/>
+    </nested>
+    <nested inputs="marketplace.ecore#//Marketplace" outputs="MarketplaceXML.xsd#//Marketplace;XSDElementDeclaration=7"/>
+    <nested inputs="marketplace.ecore#//Categories" outputs="MarketplaceXML.xsd#//Categories;XSDComplexTypeDefinition=8">
+      <nested inputs="marketplace.ecore#//Categories/items" outputs="MarketplaceXML.xsd#//Categories;XSDComplexTypeDefinition=8/XSDParticle/XSDModelGroup/XSDParticle"/>
+    </nested>
+    <nested inputs="marketplace.ecore#//Categories" outputs="MarketplaceXML.xsd#//Categories;XSDElementDeclaration=8"/>
+    <nested inputs="marketplace.ecore#//Tags" outputs="MarketplaceXML.xsd#//Tags;XSDComplexTypeDefinition=9">
+      <nested inputs="marketplace.ecore#//Tags/items" outputs="MarketplaceXML.xsd#//Tags;XSDComplexTypeDefinition=9/XSDParticle/XSDModelGroup/XSDParticle"/>
+    </nested>
+    <nested inputs="marketplace.ecore#//Tags" outputs="MarketplaceXML.xsd#//Tags;XSDElementDeclaration=9"/>
+    <nested inputs="marketplace.ecore#//Catalogs" outputs="MarketplaceXML.xsd#//Catalogs;XSDComplexTypeDefinition=10">
+      <nested inputs="marketplace.ecore#//Catalogs/items" outputs="MarketplaceXML.xsd#//Catalogs;XSDComplexTypeDefinition=10/XSDParticle/XSDModelGroup/XSDParticle"/>
+    </nested>
+    <nested inputs="marketplace.ecore#//Catalogs" outputs="MarketplaceXML.xsd#//Catalogs;XSDElementDeclaration=10"/>
+    <nested inputs="marketplace.ecore#//Catalog" outputs="MarketplaceXML.xsd#//Catalog;XSDComplexTypeDefinition=11">
+      <nested inputs="marketplace.ecore#//Catalog/id" outputs="MarketplaceXML.xsd#//Catalog;XSDComplexTypeDefinition=11/XSDAttributeUse"/>
+      <nested inputs="marketplace.ecore#//Catalog/title" outputs="MarketplaceXML.xsd#//Catalog;XSDComplexTypeDefinition=11/XSDAttributeUse=1"/>
+      <nested inputs="marketplace.ecore#//Catalog/url" outputs="MarketplaceXML.xsd#//Catalog;XSDComplexTypeDefinition=11/XSDAttributeUse=2"/>
+      <nested inputs="marketplace.ecore#//Catalog/selfContained" outputs="MarketplaceXML.xsd#//Catalog;XSDComplexTypeDefinition=11/XSDAttributeUse=3"/>
+      <nested inputs="marketplace.ecore#//Catalog/icon" outputs="MarketplaceXML.xsd#//Catalog;XSDComplexTypeDefinition=11/XSDAttributeUse=4"/>
+      <nested inputs="marketplace.ecore#//Catalog/description" outputs="MarketplaceXML.xsd#//Catalog;XSDComplexTypeDefinition=11/XSDAttributeUse=5"/>
+      <nested inputs="marketplace.ecore#//Catalog/dependenciesRepository" outputs="MarketplaceXML.xsd#//Catalog;XSDComplexTypeDefinition=11/XSDAttributeUse=6"/>
+      <nested inputs="marketplace.ecore#//Catalog/wizard" outputs="MarketplaceXML.xsd#//Catalog;XSDComplexTypeDefinition=11/XSDParticle/XSDModelGroup/XSDParticle"/>
+    </nested>
+    <nested inputs="marketplace.ecore#//Catalog" outputs="MarketplaceXML.xsd#//Catalog;XSDElementDeclaration=11"/>
+    <nested inputs="marketplace.ecore#//Wizard" outputs="MarketplaceXML.xsd#//Wizard;XSDComplexTypeDefinition=12">
+      <nested inputs="marketplace.ecore#//Wizard/title" outputs="MarketplaceXML.xsd#//Wizard;XSDComplexTypeDefinition=12/XSDAttributeUse"/>
+      <nested inputs="marketplace.ecore#//Wizard/icon" outputs="MarketplaceXML.xsd#//Wizard;XSDComplexTypeDefinition=12/XSDAttributeUse=1"/>
+      <nested inputs="marketplace.ecore#//Wizard/searchtab" outputs="MarketplaceXML.xsd#//Wizard;XSDComplexTypeDefinition=12/XSDParticle/XSDModelGroup/XSDParticle"/>
+      <nested inputs="marketplace.ecore#//Wizard/populartab" outputs="MarketplaceXML.xsd#//Wizard;XSDComplexTypeDefinition=12/XSDParticle/XSDModelGroup/XSDParticle=1"/>
+      <nested inputs="marketplace.ecore#//Wizard/recenttab" outputs="MarketplaceXML.xsd#//Wizard;XSDComplexTypeDefinition=12/XSDParticle/XSDModelGroup/XSDParticle=2"/>
+      <nested inputs="marketplace.ecore#//Wizard/news" outputs="MarketplaceXML.xsd#//Wizard;XSDComplexTypeDefinition=12/XSDParticle/XSDModelGroup/XSDParticle=3"/>
+    </nested>
+    <nested inputs="marketplace.ecore#//Wizard" outputs="MarketplaceXML.xsd#//Wizard;XSDElementDeclaration=12"/>
+    <nested inputs="marketplace.ecore#//SearchTab" outputs="MarketplaceXML.xsd#//SearchTab;XSDComplexTypeDefinition=13">
+      <nested inputs="marketplace.ecore#//SearchTab/enabled" outputs="MarketplaceXML.xsd#//SearchTab;XSDComplexTypeDefinition=13/XSDAttributeUse"/>
+    </nested>
+    <nested inputs="marketplace.ecore#//SearchTab" outputs="MarketplaceXML.xsd#//SearchTab;XSDElementDeclaration=13"/>
+    <nested inputs="marketplace.ecore#//PopularTab" outputs="MarketplaceXML.xsd#//PopularTab;XSDComplexTypeDefinition=14">
+      <nested inputs="marketplace.ecore#//PopularTab/enabled" outputs="MarketplaceXML.xsd#//PopularTab;XSDComplexTypeDefinition=14/XSDAttributeUse"/>
+    </nested>
+    <nested inputs="marketplace.ecore#//PopularTab" outputs="MarketplaceXML.xsd#//PopularTab;XSDElementDeclaration=14"/>
+    <nested inputs="marketplace.ecore#//RecentTab" outputs="MarketplaceXML.xsd#//RecentTab;XSDComplexTypeDefinition=15">
+      <nested inputs="marketplace.ecore#//RecentTab/enabled" outputs="MarketplaceXML.xsd#//RecentTab;XSDComplexTypeDefinition=15/XSDAttributeUse"/>
+    </nested>
+    <nested inputs="marketplace.ecore#//RecentTab" outputs="MarketplaceXML.xsd#//RecentTab;XSDElementDeclaration=15"/>
+    <nested inputs="marketplace.ecore#//News" outputs="MarketplaceXML.xsd#//News;XSDComplexTypeDefinition=16">
+      <nested inputs="marketplace.ecore#//News/shorttitle" outputs="MarketplaceXML.xsd#//News;XSDComplexTypeDefinition=16/XSDAttributeUse"/>
+      <nested inputs="marketplace.ecore#//News/timestamp" outputs="MarketplaceXML.xsd#//News;XSDComplexTypeDefinition=16/XSDAttributeUse=1"/>
+    </nested>
+    <nested inputs="marketplace.ecore#//News" outputs="MarketplaceXML.xsd#//News;XSDElementDeclaration=16"/>
+    <nested inputs="marketplace.ecore#//Market" outputs="MarketplaceXML.xsd#//Market;XSDComplexTypeDefinition=17">
+      <nested inputs="marketplace.ecore#//Market/name" outputs="MarketplaceXML.xsd#//Market;XSDComplexTypeDefinition=17/XSDAttributeUse"/>
+      <nested inputs="marketplace.ecore#//Market/id" outputs="MarketplaceXML.xsd#//Market;XSDComplexTypeDefinition=17/XSDAttributeUse=1"/>
+      <nested inputs="marketplace.ecore#//Market/url" outputs="MarketplaceXML.xsd#//Market;XSDComplexTypeDefinition=17/XSDAttributeUse=2"/>
+      <nested inputs="marketplace.ecore#//Market/category" outputs="MarketplaceXML.xsd#//Market;XSDComplexTypeDefinition=17/XSDAttributeUse=3"/>
+    </nested>
+    <nested inputs="marketplace.ecore#//Market" outputs="MarketplaceXML.xsd#//Market;XSDElementDeclaration=17"/>
+  </nested>
+</xsd2ecore:XSD2EcoreMappingRoot>
