@@ -20,4 +20,8 @@ There is one exception to adding /api/p at the end and that is for search result
 
 ## Usage
 
-`-Dorg.eclipse.epp.internal.mpc.core.service.DefaultCatalogService.url=http://mydomain.tld`
+In order to test a development version of the marketplace server, one can do the following (with Spring tools installed):
+
+1. Launch the org.dawnsci.marketplace.server as a _Spring Boot App_
+2. Start Eclipse with required parameters. E.g. `/Eclipse.app/Contents/MacOS/eclipse -vmargs -Dorg.eclipse.epp.internal.mpc.core.service.DefaultMarketplaceService.url=http://localhost:8080/mpc -Dorg.eclipse.epp.internal.mpc.core.service.DefaultCatalogService.url=http://localhost:8080/mpc`
+
