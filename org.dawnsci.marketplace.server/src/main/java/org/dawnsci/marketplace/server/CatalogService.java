@@ -24,21 +24,22 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class CatalogService {
-
-	private Marketplace marketplace;
-	
-	private Marketplace catalogs;
 			
-	public Marketplace getMarketplace() {
+	public Marketplace getContent(String identifier) {
 		// TODO: Realize data from a persistent store
-		return marketplace;
+		return null;
 	}
 
 	public Marketplace getCatalogs() {
 		// TODO: Realize data from a persistent store
-		return catalogs;
+		return null;
 	}	
 	
+	public Marketplace getMarkets() {
+		// TODO: Realize data from a persistent store
+		return null;
+	}	
+
 	/**
 	 * Registers a new resource factory for the data structures. This is normally
 	 * done through Eclipse extension points but we also need to be able to

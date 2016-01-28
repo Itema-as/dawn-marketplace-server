@@ -105,7 +105,7 @@ public interface Market extends EObject {
 	void setUrl(String value);
 
 	/**
-	 * Returns the value of the '<em><b>Category</b></em>' reference list.
+	 * Returns the value of the '<em><b>Category</b></em>' containment reference list.
 	 * The list contents are of type {@link org.dawnsci.marketplace.Category}.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -113,9 +113,9 @@ public interface Market extends EObject {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Category</em>' reference list.
+	 * @return the value of the '<em>Category</em>' containment reference list.
 	 * @see org.dawnsci.marketplace.MarketplacePackage#getMarket_Category()
-	 * @model required="true"
+	 * @model containment="true" required="true"
 	 *        extendedMetaData="name='category'"
 	 * @generated
 	 */

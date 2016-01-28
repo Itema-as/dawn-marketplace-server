@@ -60,4 +60,40 @@ public class IntegrationTests {
 			e.printStackTrace();
 		}
 	}
+	
+	@Test
+	public void testGetMarkets() {
+		try {
+			ResponseEntity<String> entity = this.restTemplate
+					.getForEntity("http://localhost:" + this.port + "/mpc/api/p", String.class);
+			assertEquals(HttpStatus.OK, entity.getStatusCode());
+			System.out.println(entity.getBody());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Test
+	public void testGetNode() {
+		try {
+			ResponseEntity<String> entity = this.restTemplate
+					.getForEntity("http://localhost:" + this.port + "/mpc/node/364668/api/p", String.class);
+			assertEquals(HttpStatus.OK, entity.getStatusCode());
+			System.out.println(entity.getBody());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Test
+	public void testGetContent() {
+		try {
+			ResponseEntity<String> entity = this.restTemplate
+					.getForEntity("http://localhost:" + this.port + "/mpc/content/364668/api/p", String.class);
+			assertEquals(HttpStatus.OK, entity.getStatusCode());
+			System.out.println(entity.getBody());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 }

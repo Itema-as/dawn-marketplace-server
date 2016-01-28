@@ -1191,7 +1191,7 @@ public interface MarketplacePackage extends EPackage {
 	int MARKET__URL = 2;
 
 	/**
-	 * The feature id for the '<em><b>Category</b></em>' reference list.
+	 * The feature id for the '<em><b>Category</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -2135,10 +2135,10 @@ public interface MarketplacePackage extends EPackage {
 	EAttribute getMarket_Url();
 
 	/**
-	 * Returns the meta object for the reference list '{@link org.dawnsci.marketplace.Market#getCategory <em>Category</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.dawnsci.marketplace.Market#getCategory <em>Category</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Category</em>'.
+	 * @return the meta object for the containment reference list '<em>Category</em>'.
 	 * @see org.dawnsci.marketplace.Market#getCategory()
 	 * @see #getMarket()
 	 * @generated
@@ -2844,7 +2844,7 @@ public interface MarketplacePackage extends EPackage {
 		 */
 		EAttribute MARKET__URL = eINSTANCE.getMarket_Url();
 		/**
-		 * The meta object literal for the '<em><b>Category</b></em>' reference list feature.
+		 * The meta object literal for the '<em><b>Category</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated

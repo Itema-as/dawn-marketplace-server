@@ -131,10 +131,12 @@
   </xsd:complexType>
   <xsd:element name="News" type="org.dawnsci.dde:News"/>
   <xsd:complexType name="Market">
+    <xsd:sequence>
+      <xsd:element maxOccurs="unbounded" minOccurs="1" name="category" type="org.dawnsci.dde:Category"/>
+    </xsd:sequence>
     <xsd:attribute name="name" type="xsd:string"/>
     <xsd:attribute name="id" type="xsd:long"/>
     <xsd:attribute name="url" type="xsd:string"/>
-    <xsd:attribute name="category" type="xsd:string"/>
   </xsd:complexType>
   <xsd:element name="Market" type="org.dawnsci.dde:Market"/>
 </xsd:schema>

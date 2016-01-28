@@ -9,14 +9,17 @@ import org.dawnsci.marketplace.Market;
 import org.dawnsci.marketplace.MarketplacePackage;
 import org.eclipse.emf.common.notify.Notification;
 
+import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 
+import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
-import org.eclipse.emf.ecore.util.EObjectResolvingEList;
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
  * <!-- begin-user-doc -->
@@ -96,7 +99,7 @@ public class MarketImpl extends MinimalEObjectImpl.Container implements Market {
 	protected String url = URL_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getCategory() <em>Category</em>}' reference list.
+	 * The cached value of the '{@link #getCategory() <em>Category</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getCategory()
@@ -194,9 +197,23 @@ public class MarketImpl extends MinimalEObjectImpl.Container implements Market {
 	 */
 	public EList<Category> getCategory() {
 		if (category == null) {
-			category = new EObjectResolvingEList<Category>(Category.class, this, MarketplacePackage.MARKET__CATEGORY);
+			category = new EObjectContainmentEList<Category>(Category.class, this, MarketplacePackage.MARKET__CATEGORY);
 		}
 		return category;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case MarketplacePackage.MARKET__CATEGORY:
+				return ((InternalEList<?>)getCategory()).basicRemove(otherEnd, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
 
 	/**

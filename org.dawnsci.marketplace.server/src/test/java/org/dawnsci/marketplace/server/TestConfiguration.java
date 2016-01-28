@@ -52,6 +52,8 @@ public class TestConfiguration {
 		// mock the catalog service and return hard coded results from XML-files when requested
 		CatalogService repositoryService = Mockito.mock(CatalogService.class);
 		Mockito.when(repositoryService.getCatalogs()).thenReturn(loadResource("catalogs.xml"));
+		Mockito.when(repositoryService.getContent("364668")).thenReturn(loadResource("364668.xml"));
+		Mockito.when(repositoryService.getMarkets()).thenReturn(loadResource("markets.xml"));
 		return repositoryService;
 	}
 
