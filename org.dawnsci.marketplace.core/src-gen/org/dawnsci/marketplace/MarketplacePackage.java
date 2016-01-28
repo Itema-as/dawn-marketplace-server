@@ -645,13 +645,22 @@ public interface MarketplacePackage extends EPackage {
 	int MARKETPLACE__MARKET = 2;
 
 	/**
+	 * The feature id for the '<em><b>Featured</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MARKETPLACE__FEATURED = 3;
+
+	/**
 	 * The number of structural features of the '<em>Marketplace</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MARKETPLACE_FEATURE_COUNT = 3;
+	int MARKETPLACE_FEATURE_COUNT = 4;
 
 	/**
 	 * The number of operations of the '<em>Marketplace</em>' class.
@@ -1218,6 +1227,52 @@ public interface MarketplacePackage extends EPackage {
 	int MARKET_OPERATION_COUNT = 0;
 
 	/**
+	 * The meta object id for the '{@link org.dawnsci.marketplace.impl.FeaturedImpl <em>Featured</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.dawnsci.marketplace.impl.FeaturedImpl
+	 * @see org.dawnsci.marketplace.impl.MarketplacePackageImpl#getFeatured()
+	 * @generated
+	 */
+	int FEATURED = 18;
+
+	/**
+	 * The feature id for the '<em><b>Count</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FEATURED__COUNT = 0;
+
+	/**
+	 * The feature id for the '<em><b>Nodes</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FEATURED__NODES = 1;
+
+	/**
+	 * The number of structural features of the '<em>Featured</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FEATURED_FEATURE_COUNT = 2;
+
+	/**
+	 * The number of operations of the '<em>Featured</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FEATURED_OPERATION_COUNT = 0;
+
+	/**
 	 * Returns the meta object for class '{@link org.dawnsci.marketplace.Node <em>Node</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1716,6 +1771,17 @@ public interface MarketplacePackage extends EPackage {
 	EReference getMarketplace_Market();
 
 	/**
+	 * Returns the meta object for the containment reference '{@link org.dawnsci.marketplace.Marketplace#getFeatured <em>Featured</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Featured</em>'.
+	 * @see org.dawnsci.marketplace.Marketplace#getFeatured()
+	 * @see #getMarketplace()
+	 * @generated
+	 */
+	EReference getMarketplace_Featured();
+
+	/**
 	 * Returns the meta object for class '{@link org.dawnsci.marketplace.Categories <em>Categories</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2146,6 +2212,38 @@ public interface MarketplacePackage extends EPackage {
 	EReference getMarket_Category();
 
 	/**
+	 * Returns the meta object for class '{@link org.dawnsci.marketplace.Featured <em>Featured</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Featured</em>'.
+	 * @see org.dawnsci.marketplace.Featured
+	 * @generated
+	 */
+	EClass getFeatured();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.dawnsci.marketplace.Featured#getCount <em>Count</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Count</em>'.
+	 * @see org.dawnsci.marketplace.Featured#getCount()
+	 * @see #getFeatured()
+	 * @generated
+	 */
+	EAttribute getFeatured_Count();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.dawnsci.marketplace.Featured#getNodes <em>Nodes</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Nodes</em>'.
+	 * @see org.dawnsci.marketplace.Featured#getNodes()
+	 * @see #getFeatured()
+	 * @generated
+	 */
+	EReference getFeatured_Nodes();
+
+	/**
 	 * Returns the meta object for the attribute '{@link org.dawnsci.marketplace.Node#getType <em>Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2551,6 +2649,13 @@ public interface MarketplacePackage extends EPackage {
 		 */
 		EReference MARKETPLACE__MARKET = eINSTANCE.getMarketplace_Market();
 		/**
+		 * The meta object literal for the '<em><b>Featured</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference MARKETPLACE__FEATURED = eINSTANCE.getMarketplace_Featured();
+		/**
 		 * The meta object literal for the '{@link org.dawnsci.marketplace.impl.CategoriesImpl <em>Categories</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2850,6 +2955,29 @@ public interface MarketplacePackage extends EPackage {
 		 * @generated
 		 */
 		EReference MARKET__CATEGORY = eINSTANCE.getMarket_Category();
+		/**
+		 * The meta object literal for the '{@link org.dawnsci.marketplace.impl.FeaturedImpl <em>Featured</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.dawnsci.marketplace.impl.FeaturedImpl
+		 * @see org.dawnsci.marketplace.impl.MarketplacePackageImpl#getFeatured()
+		 * @generated
+		 */
+		EClass FEATURED = eINSTANCE.getFeatured();
+		/**
+		 * The meta object literal for the '<em><b>Count</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute FEATURED__COUNT = eINSTANCE.getFeatured_Count();
+		/**
+		 * The meta object literal for the '<em><b>Nodes</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference FEATURED__NODES = eINSTANCE.getFeatured_Nodes();
 		/**
 		 * The meta object literal for the '<em><b>Type</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->

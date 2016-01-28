@@ -5,6 +5,7 @@ package org.dawnsci.marketplace.impl;
 import java.util.Collection;
 
 import org.dawnsci.marketplace.Catalogs;
+import org.dawnsci.marketplace.Featured;
 import org.dawnsci.marketplace.Market;
 import org.dawnsci.marketplace.Marketplace;
 import org.dawnsci.marketplace.MarketplacePackage;
@@ -32,6 +33,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link org.dawnsci.marketplace.impl.MarketplaceImpl#getNode <em>Node</em>}</li>
  *   <li>{@link org.dawnsci.marketplace.impl.MarketplaceImpl#getCatalogs <em>Catalogs</em>}</li>
  *   <li>{@link org.dawnsci.marketplace.impl.MarketplaceImpl#getMarket <em>Market</em>}</li>
+ *   <li>{@link org.dawnsci.marketplace.impl.MarketplaceImpl#getFeatured <em>Featured</em>}</li>
  * </ul>
  *
  * @generated
@@ -66,6 +68,16 @@ public class MarketplaceImpl extends MinimalEObjectImpl.Container implements Mar
 	 * @ordered
 	 */
 	protected EList<Market> market;
+
+	/**
+	 * The cached value of the '{@link #getFeatured() <em>Featured</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getFeatured()
+	 * @generated
+	 * @ordered
+	 */
+	protected Featured featured;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -184,6 +196,49 @@ public class MarketplaceImpl extends MinimalEObjectImpl.Container implements Mar
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public Featured getFeatured() {
+		return featured;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetFeatured(Featured newFeatured, NotificationChain msgs) {
+		Featured oldFeatured = featured;
+		featured = newFeatured;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, MarketplacePackage.MARKETPLACE__FEATURED, oldFeatured, newFeatured);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setFeatured(Featured newFeatured) {
+		if (newFeatured != featured) {
+			NotificationChain msgs = null;
+			if (featured != null)
+				msgs = ((InternalEObject)featured).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - MarketplacePackage.MARKETPLACE__FEATURED, null, msgs);
+			if (newFeatured != null)
+				msgs = ((InternalEObject)newFeatured).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - MarketplacePackage.MARKETPLACE__FEATURED, null, msgs);
+			msgs = basicSetFeatured(newFeatured, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, MarketplacePackage.MARKETPLACE__FEATURED, newFeatured, newFeatured));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -191,6 +246,8 @@ public class MarketplaceImpl extends MinimalEObjectImpl.Container implements Mar
 				return basicSetCatalogs(null, msgs);
 			case MarketplacePackage.MARKETPLACE__MARKET:
 				return ((InternalEList<?>)getMarket()).basicRemove(otherEnd, msgs);
+			case MarketplacePackage.MARKETPLACE__FEATURED:
+				return basicSetFeatured(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -210,6 +267,8 @@ public class MarketplaceImpl extends MinimalEObjectImpl.Container implements Mar
 				return getCatalogs();
 			case MarketplacePackage.MARKETPLACE__MARKET:
 				return getMarket();
+			case MarketplacePackage.MARKETPLACE__FEATURED:
+				return getFeatured();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -233,6 +292,9 @@ public class MarketplaceImpl extends MinimalEObjectImpl.Container implements Mar
 				getMarket().clear();
 				getMarket().addAll((Collection<? extends Market>)newValue);
 				return;
+			case MarketplacePackage.MARKETPLACE__FEATURED:
+				setFeatured((Featured)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -254,6 +316,9 @@ public class MarketplaceImpl extends MinimalEObjectImpl.Container implements Mar
 			case MarketplacePackage.MARKETPLACE__MARKET:
 				getMarket().clear();
 				return;
+			case MarketplacePackage.MARKETPLACE__FEATURED:
+				setFeatured((Featured)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -272,6 +337,8 @@ public class MarketplaceImpl extends MinimalEObjectImpl.Container implements Mar
 				return catalogs != null;
 			case MarketplacePackage.MARKETPLACE__MARKET:
 				return market != null && !market.isEmpty();
+			case MarketplacePackage.MARKETPLACE__FEATURED:
+				return featured != null;
 		}
 		return super.eIsSet(featureID);
 	}

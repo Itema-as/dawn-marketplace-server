@@ -184,6 +184,15 @@ public interface MarketplaceFactory extends EFactory {
 	Market createMarket();
 
 	/**
+	 * Returns a new object of class '<em>Featured</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Featured</em>'.
+	 * @generated
+	 */
+	Featured createFeatured();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

@@ -6,6 +6,7 @@ import org.dawnsci.marketplace.Catalog;
 import org.dawnsci.marketplace.Catalogs;
 import org.dawnsci.marketplace.Categories;
 import org.dawnsci.marketplace.Category;
+import org.dawnsci.marketplace.Featured;
 import org.dawnsci.marketplace.Iu;
 import org.dawnsci.marketplace.Ius;
 import org.dawnsci.marketplace.Market;
@@ -158,6 +159,13 @@ public class MarketplacePackageImpl extends EPackageImpl implements MarketplaceP
 	 * @generated
 	 */
 	private EClass marketEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass featuredEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -639,6 +647,15 @@ public class MarketplacePackageImpl extends EPackageImpl implements MarketplaceP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getMarketplace_Featured() {
+		return (EReference)marketplaceEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getCategories() {
 		return categoriesEClass;
 	}
@@ -999,6 +1016,33 @@ public class MarketplacePackageImpl extends EPackageImpl implements MarketplaceP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getFeatured() {
+		return featuredEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getFeatured_Count() {
+		return (EAttribute)featuredEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getFeatured_Nodes() {
+		return (EReference)featuredEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EAttribute getNode_Type() {
 		return (EAttribute)nodeEClass.getEStructuralFeatures().get(2);
 	}
@@ -1115,6 +1159,7 @@ public class MarketplacePackageImpl extends EPackageImpl implements MarketplaceP
 		createEReference(marketplaceEClass, MARKETPLACE__NODE);
 		createEReference(marketplaceEClass, MARKETPLACE__CATALOGS);
 		createEReference(marketplaceEClass, MARKETPLACE__MARKET);
+		createEReference(marketplaceEClass, MARKETPLACE__FEATURED);
 
 		categoriesEClass = createEClass(CATEGORIES);
 		createEReference(categoriesEClass, CATEGORIES__ITEMS);
@@ -1165,6 +1210,10 @@ public class MarketplacePackageImpl extends EPackageImpl implements MarketplaceP
 		createEAttribute(marketEClass, MARKET__ID);
 		createEAttribute(marketEClass, MARKET__URL);
 		createEReference(marketEClass, MARKET__CATEGORY);
+
+		featuredEClass = createEClass(FEATURED);
+		createEAttribute(featuredEClass, FEATURED__COUNT);
+		createEReference(featuredEClass, FEATURED__NODES);
 	}
 
 	/**
@@ -1254,6 +1303,7 @@ public class MarketplacePackageImpl extends EPackageImpl implements MarketplaceP
 		initEReference(getMarketplace_Node(), this.getNode(), null, "node", null, 0, 1, Marketplace.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getMarketplace_Catalogs(), this.getCatalogs(), null, "catalogs", null, 0, 1, Marketplace.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getMarketplace_Market(), this.getMarket(), null, "market", null, 0, -1, Marketplace.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getMarketplace_Featured(), this.getFeatured(), null, "featured", null, 0, 1, Marketplace.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(categoriesEClass, Categories.class, "Categories", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getCategories_Items(), this.getCategory(), null, "items", null, 0, -1, Categories.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1304,6 +1354,10 @@ public class MarketplacePackageImpl extends EPackageImpl implements MarketplaceP
 		initEAttribute(getMarket_Id(), ecorePackage.getELong(), "id", null, 0, 1, Market.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getMarket_Url(), ecorePackage.getEString(), "url", null, 0, 1, Market.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getMarket_Category(), this.getCategory(), null, "category", null, 1, -1, Market.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(featuredEClass, Featured.class, "Featured", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getFeatured_Count(), ecorePackage.getEIntegerObject(), "count", "0", 0, 1, Featured.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getFeatured_Nodes(), this.getNode(), null, "nodes", null, 0, -1, Featured.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);
@@ -1615,6 +1669,12 @@ public class MarketplacePackageImpl extends EPackageImpl implements MarketplaceP
 		   source, 
 		   new String[] {
 			 "name", "category"
+		   });	
+		addAnnotation
+		  (getFeatured_Nodes(), 
+		   source, 
+		   new String[] {
+			 "name", "node"
 		   });
 	}
 

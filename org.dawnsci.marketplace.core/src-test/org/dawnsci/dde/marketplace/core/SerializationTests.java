@@ -21,6 +21,26 @@ public class SerializationTests {
 	/**
 	 * Tests parsing the result from a REST API call to marketplace.eclipse.org
 	 * <pre>
+	 * curl http://marketplace.eclipse.org/featured/api/p
+	 * </pre>
+	 * @throws IOException 
+	 */
+	@Test
+	public void testFeatured() throws IOException{		
+		registerResourceFactory();		
+		ResourceSet resourceSet = new ResourceSetImpl();
+		resourceSet.getPackageRegistry().put(null, MarketplacePackage.eINSTANCE);
+		URL url = SerializationTests.class.getResource("featured.xml");
+		URI uri = URI.createURI(url.toString());
+		Resource resource = resourceSet.createResource(uri);
+		resource.load(null);
+		// load will fail of the there's not a match in structure or fields
+		resource.getContents();
+	}
+
+	/**
+	 * Tests parsing the result from a REST API call to marketplace.eclipse.org
+	 * <pre>
 	 * curl http://marketplace.eclipse.org/node/364668/api/p
 	 * </pre>
 	 * @throws IOException 
