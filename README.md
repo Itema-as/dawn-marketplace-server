@@ -1,4 +1,4 @@
-# DAWN Eclipse Marketplace Server
+# DAWN Marketplace Server
 
 An open source Eclipse marketplace server based on the [marketplace client REST API](https://wiki.eclipse.org/Marketplace/REST).
 
