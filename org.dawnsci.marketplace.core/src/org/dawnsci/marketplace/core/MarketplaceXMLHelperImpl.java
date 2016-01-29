@@ -1,4 +1,4 @@
-package org.dawnsci.dde.marketplace.core;
+package org.dawnsci.marketplace.core;
 
 import org.eclipse.emf.ecore.xmi.impl.XMLHelperImpl;
 

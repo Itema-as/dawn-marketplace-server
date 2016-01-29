@@ -33,12 +33,12 @@ public interface Category extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Id</em>' attribute.
-	 * @see #setId(String)
+	 * @see #setId(Long)
 	 * @see org.dawnsci.marketplace.MarketplacePackage#getCategory_Id()
-	 * @model required="true"
+	 * @model id="true" required="true"
 	 * @generated
 	 */
-	String getId();
+	Long getId();
 
 	/**
 	 * Sets the value of the '{@link org.dawnsci.marketplace.Category#getId <em>Id</em>}' attribute.
@@ -48,7 +48,7 @@ public interface Category extends EObject {
 	 * @see #getId()
 	 * @generated
 	 */
-	void setId(String value);
+	void setId(Long value);
 
 	/**
 	 * Returns the value of the '<em><b>Name</b></em>' attribute.

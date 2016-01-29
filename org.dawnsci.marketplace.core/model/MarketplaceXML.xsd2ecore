@@ -62,7 +62,7 @@
     <nested inputs="marketplace.ecore#//Marketplace" outputs="MarketplaceXML.xsd#//Marketplace;XSDComplexTypeDefinition=7">
       <nested inputs="marketplace.ecore#//Marketplace/node" outputs="MarketplaceXML.xsd#//Marketplace;XSDComplexTypeDefinition=7/XSDAttributeUse"/>
       <nested inputs="marketplace.ecore#//Marketplace/catalogs" outputs="MarketplaceXML.xsd#//Marketplace;XSDComplexTypeDefinition=7/XSDParticle/XSDModelGroup/XSDParticle"/>
-      <nested inputs="marketplace.ecore#//Marketplace/market" outputs="MarketplaceXML.xsd#//Marketplace;XSDComplexTypeDefinition=7/XSDParticle/XSDModelGroup/XSDParticle=1"/>
+      <nested inputs="marketplace.ecore#//Marketplace/markets" outputs="MarketplaceXML.xsd#//Marketplace;XSDComplexTypeDefinition=7/XSDParticle/XSDModelGroup/XSDParticle=1"/>
       <nested inputs="marketplace.ecore#//Marketplace/featured" outputs="MarketplaceXML.xsd#//Marketplace;XSDComplexTypeDefinition=7/XSDParticle/XSDModelGroup/XSDParticle=2"/>
     </nested>
     <nested inputs="marketplace.ecore#//Marketplace" outputs="MarketplaceXML.xsd#//Marketplace;XSDElementDeclaration=7"/>

@@ -89,7 +89,7 @@ public interface Wizard extends EObject {
 	 * @return the value of the '<em>Searchtab</em>' containment reference.
 	 * @see #setSearchtab(SearchTab)
 	 * @see org.dawnsci.marketplace.MarketplacePackage#getWizard_Searchtab()
-	 * @model containment="true" required="true"
+	 * @model containment="true"
 	 * @generated
 	 */
 	SearchTab getSearchtab();
@@ -115,7 +115,7 @@ public interface Wizard extends EObject {
 	 * @return the value of the '<em>Populartab</em>' containment reference.
 	 * @see #setPopulartab(PopularTab)
 	 * @see org.dawnsci.marketplace.MarketplacePackage#getWizard_Populartab()
-	 * @model containment="true" required="true"
+	 * @model containment="true"
 	 * @generated
 	 */
 	PopularTab getPopulartab();
@@ -141,7 +141,7 @@ public interface Wizard extends EObject {
 	 * @return the value of the '<em>Recenttab</em>' containment reference.
 	 * @see #setRecenttab(RecentTab)
 	 * @see org.dawnsci.marketplace.MarketplacePackage#getWizard_Recenttab()
-	 * @model containment="true" required="true"
+	 * @model containment="true"
 	 * @generated
 	 */
 	RecentTab getRecenttab();
@@ -167,7 +167,7 @@ public interface Wizard extends EObject {
 	 * @return the value of the '<em>News</em>' containment reference.
 	 * @see #setNews(News)
 	 * @see org.dawnsci.marketplace.MarketplacePackage#getWizard_News()
-	 * @model containment="true" required="true"
+	 * @model containment="true"
 	 * @generated
 	 */
 	News getNews();

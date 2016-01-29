@@ -67,7 +67,7 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String ID_EDEFAULT = null;
+	protected static final Long ID_EDEFAULT = null;
 	/**
 	 * The cached value of the '{@link #getId() <em>Id</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -76,7 +76,7 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 	 * @generated
 	 * @ordered
 	 */
-	protected String id = ID_EDEFAULT;
+	protected Long id = ID_EDEFAULT;
 	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -533,7 +533,7 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getId() {
+	public Long getId() {
 		return id;
 	}
 
@@ -542,8 +542,8 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setId(String newId) {
-		String oldId = id;
+	public void setId(Long newId) {
+		Long oldId = id;
 		id = newId;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, MarketplacePackage.NODE__ID, oldId, id));
@@ -1278,7 +1278,7 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case MarketplacePackage.NODE__ID:
-				setId((String)newValue);
+				setId((Long)newValue);
 				return;
 			case MarketplacePackage.NODE__NAME:
 				setName((String)newValue);

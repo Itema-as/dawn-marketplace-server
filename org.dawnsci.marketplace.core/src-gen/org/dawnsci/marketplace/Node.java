@@ -57,12 +57,12 @@ public interface Node extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Id</em>' attribute.
-	 * @see #setId(String)
+	 * @see #setId(Long)
 	 * @see org.dawnsci.marketplace.MarketplacePackage#getNode_Id()
 	 * @model id="true"
 	 * @generated
 	 */
-	String getId();
+	Long getId();
 
 	/**
 	 * Sets the value of the '{@link org.dawnsci.marketplace.Node#getId <em>Id</em>}' attribute.
@@ -72,7 +72,7 @@ public interface Node extends EObject {
 	 * @see #getId()
 	 * @generated
 	 */
-	void setId(String value);
+	void setId(Long value);
 
 	/**
 	 * Returns the value of the '<em><b>Name</b></em>' attribute.
@@ -190,6 +190,7 @@ public interface Node extends EObject {
 	 * @see #setShortdescription(String)
 	 * @see org.dawnsci.marketplace.MarketplacePackage#getNode_Shortdescription()
 	 * @model extendedMetaData="kind='element'"
+	 *        annotation="teneo.jpa value='@Lob'"
 	 * @generated
 	 */
 	String getShortdescription();
@@ -216,6 +217,7 @@ public interface Node extends EObject {
 	 * @see #setBody(String)
 	 * @see org.dawnsci.marketplace.MarketplacePackage#getNode_Body()
 	 * @model extendedMetaData="kind='element'"
+	 *        annotation="teneo.jpa value='@Lob'"
 	 * @generated
 	 */
 	String getBody();

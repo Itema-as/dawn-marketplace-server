@@ -5,6 +5,9 @@
         <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
         <wb-resource deploy-path="/" source-path="/src/main/_webapp"/>
         <wb-resource deploy-path="/" source-path="/src/main/webapp"/>
+        <dependent-module archiveName="org.dawnsci.marketplace.core-1.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/org.dawnsci.marketplace.core/org.dawnsci.marketplace.core">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
         <property name="java-output-path" value="/org.dawnsci.marketplace.server/target/classes"/>
         <property name="context-root" value="org.dawnsci.marketplace.server"/>
     </wb-module>

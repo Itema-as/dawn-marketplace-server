@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<marketplace>
+	<catalogs>
+		<catalog id="1000" title="DAWN Plug-in Marketplace" url="http://localhost:8080/mpc"
+			selfContained="0"
+			icon="http://marketplace.eclipse.org/sites/default/files/eclipse-catalog.png">
+			<description>The DAWN Plug-in Marketplace.</description>
+			<dependenciesRepository></dependenciesRepository>
+			<wizard title="DAWN Plug-in Catalog">
+				<icon>http://marketplace.eclipse.org/sites/default/files/marketplace_catalog_icon_0.png
+				</icon>
+				<searchtab enabled="1">Search</searchtab>
+				<news shorttitle="News" timestamp="5000">http://www.dawnsci.org</news>
+			</wizard>
+		</catalog>
+		<catalog id="38413" title="Eclipse Marketplace" url="http://marketplace.eclipse.org"
+			selfContained="0"
+			icon="http://marketplace.eclipse.org/sites/default/files/eclipse-catalog.png">
+			<description>Eclipse Marketplace (MP) is a place to find and keep
+				track of Eclipse-based solutions.</description>
+			<dependenciesRepository></dependenciesRepository>
+			<wizard title="">
+				<icon>http://marketplace.eclipse.org/sites/default/files/marketplace_catalog_icon_0.png
+				</icon>
+				<searchtab enabled="1">Search</searchtab>
+				<populartab enabled="1">Popular</populartab>
+				<recenttab enabled="1">Recent</recenttab>
+				<news shorttitle="January Newsletter" timestamp="1453352400">http://www.eclipse.org/community/eclipse_newsletter/2016/january/
+				</news>
+			</wizard>
+		</catalog>
+		<catalog id="2671769" title="Obeo Marketplace"
+			url="http://marketplace.eclipse.org/dedicated_catalog_hosting/2671769"
+			selfContained="0"
+			icon="http://marketplace.eclipse.org/sites/default/files/obeo-marketplace_0_0.png">
+			<description>Obeo is a leading company on software modeling and
+				modernization. Obeo Marketplace supplies code generators, designers,
+				code parsers...</description>
+			<dependenciesRepository></dependenciesRepository>
+			<wizard title="Obeo Marketplace Catalog">
+				<icon>http://marketplace.eclipse.org/sites/default/files/obeo-marketplace-wizard_0.png
+				</icon>
+				<searchtab enabled="1">Search</searchtab>
+				<populartab enabled="1">Popular</populartab>
+				<recenttab enabled="1">Recent</recenttab>
+				<news shorttitle="News" timestamp="1452056400">http://blog.obeo.fr/en</news>
+			</wizard>
+		</catalog>
+	</catalogs>
+</marketplace>

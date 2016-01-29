@@ -16,15 +16,15 @@ import org.springframework.boot.context.web.SpringBootServletInitializer;
 
 @SpringBootApplication
 public class EclipseMarketplaceApplication extends SpringBootServletInitializer {
-		
+
 	@Override
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
 		return application.sources(EclipseMarketplaceApplication.class);
 	}
 
 	public static void main(String[] args) {
-		new EclipseMarketplaceApplication()
-			.configure(new SpringApplicationBuilder(EclipseMarketplaceApplication.class))
-			.run(args);
-    }
+		new EclipseMarketplaceApplication().configure(new SpringApplicationBuilder(EclipseMarketplaceApplication.class))
+				.run(args);
+	}
+
 }

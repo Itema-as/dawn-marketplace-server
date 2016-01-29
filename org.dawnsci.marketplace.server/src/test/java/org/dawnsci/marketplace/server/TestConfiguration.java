@@ -18,7 +18,7 @@ import org.dawnsci.marketplace.Marketplace;
 import org.dawnsci.marketplace.MarketplacePackage;
 import org.dawnsci.marketplace.util.MarketplaceResourceFactoryImpl;
 import org.dawnsci.marketplace.util.MarketplaceResourceImpl;
-import org.dawnsci.marketplace.server.CatalogService;
+import org.dawnsci.marketplace.server.DataService;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -48,13 +48,23 @@ public class TestConfiguration {
 
 	@Bean
 	@Primary
-	public CatalogService catalogService() {
-		// mock the catalog service and return hard coded results from XML-files when requested
-		CatalogService repositoryService = Mockito.mock(CatalogService.class);
-		Mockito.when(repositoryService.getCatalogs()).thenReturn(loadResource("catalogs.xml"));
-		Mockito.when(repositoryService.getContent("364668")).thenReturn(loadResource("364668.xml"));
-		Mockito.when(repositoryService.getMarkets()).thenReturn(loadResource("markets.xml"));
-		return repositoryService;
+	public DataService catalogService() {
+		// mock the data service and return hard coded results from XML-files when requested
+		DataService dataService = Mockito.mock(DataService.class);
+		Mockito.when(dataService.getCatalogs()).thenReturn(loadResource("catalogs.xml"));
+		Mockito.when(dataService.getContent("364668")).thenReturn(loadResource("364668.xml"));
+		Mockito.when(dataService.getMarkets()).thenReturn(loadResource("markets.xml"));
+		Mockito.when(dataService.getFeatured()).thenReturn(loadResource("featured.xml"));
+		return dataService;
+	}
+
+	@Bean
+	@Primary
+	public HibernateService hibernateService() {
+		// mock the Hibernate service and inhibit setting up the database.
+		HibernateService hibernateService = Mockito.mock(HibernateService.class);
+		Mockito.when(hibernateService.sessionFactory()).thenReturn(null);
+		return hibernateService;
 	}
 
 	private Marketplace loadResource(String filename) {

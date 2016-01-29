@@ -32,7 +32,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <ul>
  *   <li>{@link org.dawnsci.marketplace.impl.MarketplaceImpl#getNode <em>Node</em>}</li>
  *   <li>{@link org.dawnsci.marketplace.impl.MarketplaceImpl#getCatalogs <em>Catalogs</em>}</li>
- *   <li>{@link org.dawnsci.marketplace.impl.MarketplaceImpl#getMarket <em>Market</em>}</li>
+ *   <li>{@link org.dawnsci.marketplace.impl.MarketplaceImpl#getMarkets <em>Markets</em>}</li>
  *   <li>{@link org.dawnsci.marketplace.impl.MarketplaceImpl#getFeatured <em>Featured</em>}</li>
  * </ul>
  *
@@ -60,14 +60,14 @@ public class MarketplaceImpl extends MinimalEObjectImpl.Container implements Mar
 	protected Catalogs catalogs;
 
 	/**
-	 * The cached value of the '{@link #getMarket() <em>Market</em>}' containment reference list.
+	 * The cached value of the '{@link #getMarkets() <em>Markets</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getMarket()
+	 * @see #getMarkets()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Market> market;
+	protected EList<Market> markets;
 
 	/**
 	 * The cached value of the '{@link #getFeatured() <em>Featured</em>}' containment reference.
@@ -184,11 +184,11 @@ public class MarketplaceImpl extends MinimalEObjectImpl.Container implements Mar
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Market> getMarket() {
-		if (market == null) {
-			market = new EObjectContainmentEList<Market>(Market.class, this, MarketplacePackage.MARKETPLACE__MARKET);
+	public EList<Market> getMarkets() {
+		if (markets == null) {
+			markets = new EObjectContainmentEList<Market>(Market.class, this, MarketplacePackage.MARKETPLACE__MARKETS);
 		}
-		return market;
+		return markets;
 	}
 
 	/**
@@ -244,8 +244,8 @@ public class MarketplaceImpl extends MinimalEObjectImpl.Container implements Mar
 		switch (featureID) {
 			case MarketplacePackage.MARKETPLACE__CATALOGS:
 				return basicSetCatalogs(null, msgs);
-			case MarketplacePackage.MARKETPLACE__MARKET:
-				return ((InternalEList<?>)getMarket()).basicRemove(otherEnd, msgs);
+			case MarketplacePackage.MARKETPLACE__MARKETS:
+				return ((InternalEList<?>)getMarkets()).basicRemove(otherEnd, msgs);
 			case MarketplacePackage.MARKETPLACE__FEATURED:
 				return basicSetFeatured(null, msgs);
 		}
@@ -265,8 +265,8 @@ public class MarketplaceImpl extends MinimalEObjectImpl.Container implements Mar
 				return basicGetNode();
 			case MarketplacePackage.MARKETPLACE__CATALOGS:
 				return getCatalogs();
-			case MarketplacePackage.MARKETPLACE__MARKET:
-				return getMarket();
+			case MarketplacePackage.MARKETPLACE__MARKETS:
+				return getMarkets();
 			case MarketplacePackage.MARKETPLACE__FEATURED:
 				return getFeatured();
 		}
@@ -288,9 +288,9 @@ public class MarketplaceImpl extends MinimalEObjectImpl.Container implements Mar
 			case MarketplacePackage.MARKETPLACE__CATALOGS:
 				setCatalogs((Catalogs)newValue);
 				return;
-			case MarketplacePackage.MARKETPLACE__MARKET:
-				getMarket().clear();
-				getMarket().addAll((Collection<? extends Market>)newValue);
+			case MarketplacePackage.MARKETPLACE__MARKETS:
+				getMarkets().clear();
+				getMarkets().addAll((Collection<? extends Market>)newValue);
 				return;
 			case MarketplacePackage.MARKETPLACE__FEATURED:
 				setFeatured((Featured)newValue);
@@ -313,8 +313,8 @@ public class MarketplaceImpl extends MinimalEObjectImpl.Container implements Mar
 			case MarketplacePackage.MARKETPLACE__CATALOGS:
 				setCatalogs((Catalogs)null);
 				return;
-			case MarketplacePackage.MARKETPLACE__MARKET:
-				getMarket().clear();
+			case MarketplacePackage.MARKETPLACE__MARKETS:
+				getMarkets().clear();
 				return;
 			case MarketplacePackage.MARKETPLACE__FEATURED:
 				setFeatured((Featured)null);
@@ -335,8 +335,8 @@ public class MarketplaceImpl extends MinimalEObjectImpl.Container implements Mar
 				return node != null;
 			case MarketplacePackage.MARKETPLACE__CATALOGS:
 				return catalogs != null;
-			case MarketplacePackage.MARKETPLACE__MARKET:
-				return market != null && !market.isEmpty();
+			case MarketplacePackage.MARKETPLACE__MARKETS:
+				return markets != null && !markets.isEmpty();
 			case MarketplacePackage.MARKETPLACE__FEATURED:
 				return featured != null;
 		}

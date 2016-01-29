@@ -62,6 +62,18 @@ public class IntegrationTests {
 	}
 	
 	@Test
+	public void testGetFeatured() {
+		try {
+			ResponseEntity<String> entity = this.restTemplate
+					.getForEntity("http://localhost:" + this.port + "/mpc/featured/api/p", String.class);
+			assertEquals(HttpStatus.OK, entity.getStatusCode());
+			System.out.println(entity.getBody());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Test
 	public void testGetMarkets() {
 		try {
 			ResponseEntity<String> entity = this.restTemplate

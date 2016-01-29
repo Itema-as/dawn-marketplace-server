@@ -36,7 +36,7 @@ public class CategoryImpl extends MinimalEObjectImpl.Container implements Catego
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String ID_EDEFAULT = null;
+	protected static final Long ID_EDEFAULT = null;
 
 	/**
 	 * The cached value of the '{@link #getId() <em>Id</em>}' attribute.
@@ -46,7 +46,7 @@ public class CategoryImpl extends MinimalEObjectImpl.Container implements Catego
 	 * @generated
 	 * @ordered
 	 */
-	protected String id = ID_EDEFAULT;
+	protected Long id = ID_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
@@ -132,7 +132,7 @@ public class CategoryImpl extends MinimalEObjectImpl.Container implements Catego
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getId() {
+	public Long getId() {
 		return id;
 	}
 
@@ -141,8 +141,8 @@ public class CategoryImpl extends MinimalEObjectImpl.Container implements Catego
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setId(String newId) {
-		String oldId = id;
+	public void setId(Long newId) {
+		Long oldId = id;
 		id = newId;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, MarketplacePackage.CATEGORY__ID, oldId, id));
@@ -240,7 +240,7 @@ public class CategoryImpl extends MinimalEObjectImpl.Container implements Catego
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case MarketplacePackage.CATEGORY__ID:
-				setId((String)newValue);
+				setId((Long)newValue);
 				return;
 			case MarketplacePackage.CATEGORY__NAME:
 				setName((String)newValue);

@@ -31,8 +31,8 @@ import org.springframework.stereotype.Component;
 public class MarketplaceEndpoint {
 
 	@Autowired
-	private CatalogService catalogService;
-
+	private DataService dataService;
+	
 	/**
 	 * http://marketplace.eclipse.org/api/p
 	 * 
@@ -41,7 +41,7 @@ public class MarketplaceEndpoint {
 	@GET
 	@Path("api/p")
 	public String getMarkets() throws Exception {
-		return serialize(catalogService.getMarkets());
+		return serialize(dataService.getMarkets());
 	}
 
 	/**
@@ -52,7 +52,18 @@ public class MarketplaceEndpoint {
 	@GET
 	@Path("catalogs/api/p")
 	public String getCatalogs() throws Exception {
-		return serialize(catalogService.getCatalogs());
+		return serialize(dataService.getCatalogs());
+	}
+
+	/**
+	 * http://marketplace.eclipse.org/featured/api/p
+	 * 
+	 * @return
+	 */
+	@GET
+	@Path("featured/api/p")
+	public String getFeatured() throws Exception {
+		return serialize(dataService.getFeatured());
 	}
 
 	/**
@@ -65,7 +76,7 @@ public class MarketplaceEndpoint {
 	@GET
 	@Path("node/{id}/api/p")
 	public String getNode(@PathParam("id") String id) throws Exception {
-		return serialize(catalogService.getContent(id));
+		return serialize(dataService.getContent(id));
 	}
 
 	/**
@@ -78,7 +89,7 @@ public class MarketplaceEndpoint {
 	@GET
 	@Path("content/{id}/api/p")
 	public String getContent(@PathParam("id") String id) throws Exception {
-		return serialize(catalogService.getContent(id));
+		return serialize(dataService.getContent(id));
 	}
 
 	private String serialize(Marketplace rootElement) throws IOException {

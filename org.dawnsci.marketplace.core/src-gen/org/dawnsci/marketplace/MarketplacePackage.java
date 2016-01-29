@@ -38,7 +38,7 @@ public interface MarketplacePackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String eNS_URI = "http://org.dawnsci.dde/marketplace";
+	String eNS_URI = "http://org.dawnsci/marketplace";
 
 	/**
 	 * The package namespace name.
@@ -46,7 +46,7 @@ public interface MarketplacePackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String eNS_PREFIX = "org.dawnsci.dde";
+	String eNS_PREFIX = "org.dawnsci";
 
 	/**
 	 * The singleton instance of the package.
@@ -636,13 +636,13 @@ public interface MarketplacePackage extends EPackage {
 	int MARKETPLACE__CATALOGS = 1;
 
 	/**
-	 * The feature id for the '<em><b>Market</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Markets</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MARKETPLACE__MARKET = 2;
+	int MARKETPLACE__MARKETS = 2;
 
 	/**
 	 * The feature id for the '<em><b>Featured</b></em>' containment reference.
@@ -1760,15 +1760,15 @@ public interface MarketplacePackage extends EPackage {
 	EReference getMarketplace_Catalogs();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.dawnsci.marketplace.Marketplace#getMarket <em>Market</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.dawnsci.marketplace.Marketplace#getMarkets <em>Markets</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Market</em>'.
-	 * @see org.dawnsci.marketplace.Marketplace#getMarket()
+	 * @return the meta object for the containment reference list '<em>Markets</em>'.
+	 * @see org.dawnsci.marketplace.Marketplace#getMarkets()
 	 * @see #getMarketplace()
 	 * @generated
 	 */
-	EReference getMarketplace_Market();
+	EReference getMarketplace_Markets();
 
 	/**
 	 * Returns the meta object for the containment reference '{@link org.dawnsci.marketplace.Marketplace#getFeatured <em>Featured</em>}'.
@@ -2642,12 +2642,12 @@ public interface MarketplacePackage extends EPackage {
 		 */
 		EReference MARKETPLACE__CATALOGS = eINSTANCE.getMarketplace_Catalogs();
 		/**
-		 * The meta object literal for the '<em><b>Market</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Markets</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference MARKETPLACE__MARKET = eINSTANCE.getMarketplace_Market();
+		EReference MARKETPLACE__MARKETS = eINSTANCE.getMarketplace_Markets();
 		/**
 		 * The meta object literal for the '<em><b>Featured</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
