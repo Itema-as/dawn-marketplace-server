@@ -37,12 +37,12 @@ public interface Catalog extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Id</em>' attribute.
-	 * @see #setId(String)
+	 * @see #setId(Long)
 	 * @see org.dawnsci.marketplace.MarketplacePackage#getCatalog_Id()
-	 * @model
+	 * @model id="true"
 	 * @generated
 	 */
-	String getId();
+	Long getId();
 
 	/**
 	 * Sets the value of the '{@link org.dawnsci.marketplace.Catalog#getId <em>Id</em>}' attribute.
@@ -52,7 +52,7 @@ public interface Catalog extends EObject {
 	 * @see #getId()
 	 * @generated
 	 */
-	void setId(String value);
+	void setId(Long value);
 
 	/**
 	 * Returns the value of the '<em><b>Title</b></em>' attribute.

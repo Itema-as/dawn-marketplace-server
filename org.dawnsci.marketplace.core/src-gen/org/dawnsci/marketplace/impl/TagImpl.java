@@ -35,7 +35,7 @@ public class TagImpl extends MinimalEObjectImpl.Container implements Tag {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String ID_EDEFAULT = null;
+	protected static final Long ID_EDEFAULT = null;
 
 	/**
 	 * The cached value of the '{@link #getId() <em>Id</em>}' attribute.
@@ -45,7 +45,7 @@ public class TagImpl extends MinimalEObjectImpl.Container implements Tag {
 	 * @generated
 	 * @ordered
 	 */
-	protected String id = ID_EDEFAULT;
+	protected Long id = ID_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
@@ -111,7 +111,7 @@ public class TagImpl extends MinimalEObjectImpl.Container implements Tag {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getId() {
+	public Long getId() {
 		return id;
 	}
 
@@ -120,8 +120,8 @@ public class TagImpl extends MinimalEObjectImpl.Container implements Tag {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setId(String newId) {
-		String oldId = id;
+	public void setId(Long newId) {
+		Long oldId = id;
 		id = newId;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, MarketplacePackage.TAG__ID, oldId, id));
@@ -196,7 +196,7 @@ public class TagImpl extends MinimalEObjectImpl.Container implements Tag {
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case MarketplacePackage.TAG__ID:
-				setId((String)newValue);
+				setId((Long)newValue);
 				return;
 			case MarketplacePackage.TAG__NAME:
 				setName((String)newValue);

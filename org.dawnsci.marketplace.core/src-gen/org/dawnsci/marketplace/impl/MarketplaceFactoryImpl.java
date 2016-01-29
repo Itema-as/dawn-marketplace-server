@@ -73,6 +73,7 @@ public class MarketplaceFactoryImpl extends EFactoryImpl implements MarketplaceF
 			case MarketplacePackage.RECENT_TAB: return createRecentTab();
 			case MarketplacePackage.NEWS: return createNews();
 			case MarketplacePackage.MARKET: return createMarket();
+			case MarketplacePackage.FEATURED: return createFeatured();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -256,6 +257,16 @@ public class MarketplaceFactoryImpl extends EFactoryImpl implements MarketplaceF
 	public Market createMarket() {
 		MarketImpl market = new MarketImpl();
 		return market;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Featured createFeatured() {
+		FeaturedImpl featured = new FeaturedImpl();
+		return featured;
 	}
 
 	/**

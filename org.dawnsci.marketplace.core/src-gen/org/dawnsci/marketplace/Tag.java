@@ -32,12 +32,12 @@ public interface Tag extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Id</em>' attribute.
-	 * @see #setId(String)
+	 * @see #setId(Long)
 	 * @see org.dawnsci.marketplace.MarketplacePackage#getTag_Id()
-	 * @model
+	 * @model id="true"
 	 * @generated
 	 */
-	String getId();
+	Long getId();
 
 	/**
 	 * Sets the value of the '{@link org.dawnsci.marketplace.Tag#getId <em>Id</em>}' attribute.
@@ -47,7 +47,7 @@ public interface Tag extends EObject {
 	 * @see #getId()
 	 * @generated
 	 */
-	void setId(String value);
+	void setId(Long value);
 
 	/**
 	 * Returns the value of the '<em><b>Name</b></em>' attribute.

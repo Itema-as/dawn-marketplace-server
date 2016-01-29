@@ -61,8 +61,36 @@
 			<artifactId>org.eclipse.emf.ecore.xmi</artifactId>
 			<version>2.11.0-v20150123-0347</version>
 		</dependency>
+		<!-- Persistence -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-core</artifactId>
+		</dependency>	
+		<dependency>
+			<groupId>org.hsqldb</groupId>
+			<artifactId>hsqldb</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.emf</groupId>
+			<artifactId>org.eclipse.emf.teneo</artifactId>
+			<version>2.1.0-v201501071531</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.emf</groupId>
+			<artifactId>org.eclipse.emf.teneo.annotations</artifactId>
+			<version>2.1.0-v201501071531</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.emf</groupId>
+			<artifactId>org.eclipse.emf.teneo.hibernate</artifactId>
+			<version>2.1.0-v201501071531</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.emf</groupId>
+			<artifactId>org.eclipse.emf.teneo.hibernate.mapper</artifactId>
+			<version>2.1.0-v201501071531</version>
+		</dependency>
 	</dependencies>
-
 	<!-- Package as an executable jar -->
 	<build>
 		<plugins>

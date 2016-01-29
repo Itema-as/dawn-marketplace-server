@@ -66,7 +66,7 @@ public class MarketImpl extends MinimalEObjectImpl.Container implements Market {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final long ID_EDEFAULT = 0L;
+	protected static final Long ID_EDEFAULT = null;
 
 	/**
 	 * The cached value of the '{@link #getId() <em>Id</em>}' attribute.
@@ -76,7 +76,7 @@ public class MarketImpl extends MinimalEObjectImpl.Container implements Market {
 	 * @generated
 	 * @ordered
 	 */
-	protected long id = ID_EDEFAULT;
+	protected Long id = ID_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getUrl() <em>Url</em>}' attribute.
@@ -153,7 +153,7 @@ public class MarketImpl extends MinimalEObjectImpl.Container implements Market {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
@@ -162,8 +162,8 @@ public class MarketImpl extends MinimalEObjectImpl.Container implements Market {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setId(long newId) {
-		long oldId = id;
+	public void setId(Long newId) {
+		Long oldId = id;
 		id = newId;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, MarketplacePackage.MARKET__ID, oldId, id));
@@ -297,7 +297,7 @@ public class MarketImpl extends MinimalEObjectImpl.Container implements Market {
 			case MarketplacePackage.MARKET__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case MarketplacePackage.MARKET__ID:
-				return id != ID_EDEFAULT;
+				return ID_EDEFAULT == null ? id != null : !ID_EDEFAULT.equals(id);
 			case MarketplacePackage.MARKET__URL:
 				return URL_EDEFAULT == null ? url != null : !URL_EDEFAULT.equals(url);
 			case MarketplacePackage.MARKET__CATEGORY:

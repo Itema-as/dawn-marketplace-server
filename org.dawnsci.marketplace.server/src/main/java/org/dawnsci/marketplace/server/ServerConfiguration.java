@@ -14,11 +14,11 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class CatalogConfiguration {
-
+public class ServerConfiguration {
+		
 	@Bean
-	public CatalogService catalogService() {
-		return new CatalogService();
+	public DataService catalogService() {
+		return new DataService();
 	}
-
+	
 }

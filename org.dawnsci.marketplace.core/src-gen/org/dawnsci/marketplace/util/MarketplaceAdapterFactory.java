@@ -139,6 +139,10 @@ public class MarketplaceAdapterFactory extends AdapterFactoryImpl {
 				return createMarketAdapter();
 			}
 			@Override
+			public Adapter caseFeatured(Featured object) {
+				return createFeaturedAdapter();
+			}
+			@Override
 			public Adapter defaultCase(EObject object) {
 				return createEObjectAdapter();
 			}
@@ -407,6 +411,20 @@ public class MarketplaceAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createMarketAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.dawnsci.marketplace.Featured <em>Featured</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.dawnsci.marketplace.Featured
+	 * @generated
+	 */
+	public Adapter createFeaturedAdapter() {
 		return null;
 	}
 

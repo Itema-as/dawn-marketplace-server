@@ -5,7 +5,7 @@
    <extension point="org.eclipse.emf.ecore.generated_package">
       <!-- @generated marketplace -->
       <package
-            uri="http://org.dawnsci.dde/marketplace"
+            uri="http://org.dawnsci/marketplace"
             class="org.dawnsci.marketplace.MarketplacePackage"
             genModel="model/marketplace.genmodel"/>
    </extension>

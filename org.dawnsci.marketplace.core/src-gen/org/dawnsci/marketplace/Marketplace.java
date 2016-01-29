@@ -16,7 +16,8 @@ import org.eclipse.emf.ecore.EObject;
  * <ul>
  *   <li>{@link org.dawnsci.marketplace.Marketplace#getNode <em>Node</em>}</li>
  *   <li>{@link org.dawnsci.marketplace.Marketplace#getCatalogs <em>Catalogs</em>}</li>
- *   <li>{@link org.dawnsci.marketplace.Marketplace#getMarket <em>Market</em>}</li>
+ *   <li>{@link org.dawnsci.marketplace.Marketplace#getMarkets <em>Markets</em>}</li>
+ *   <li>{@link org.dawnsci.marketplace.Marketplace#getFeatured <em>Featured</em>}</li>
  * </ul>
  *
  * @see org.dawnsci.marketplace.MarketplacePackage#getMarketplace()
@@ -77,20 +78,46 @@ public interface Marketplace extends EObject {
 	void setCatalogs(Catalogs value);
 
 	/**
-	 * Returns the value of the '<em><b>Market</b></em>' containment reference list.
+	 * Returns the value of the '<em><b>Markets</b></em>' containment reference list.
 	 * The list contents are of type {@link org.dawnsci.marketplace.Market}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Market</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Markets</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Market</em>' containment reference list.
-	 * @see org.dawnsci.marketplace.MarketplacePackage#getMarketplace_Market()
+	 * @return the value of the '<em>Markets</em>' containment reference list.
+	 * @see org.dawnsci.marketplace.MarketplacePackage#getMarketplace_Markets()
 	 * @model containment="true"
 	 *        extendedMetaData="name='market'"
 	 * @generated
 	 */
-	EList<Market> getMarket();
+	EList<Market> getMarkets();
+
+	/**
+	 * Returns the value of the '<em><b>Featured</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Featured</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Featured</em>' containment reference.
+	 * @see #setFeatured(Featured)
+	 * @see org.dawnsci.marketplace.MarketplacePackage#getMarketplace_Featured()
+	 * @model containment="true"
+	 * @generated
+	 */
+	Featured getFeatured();
+
+	/**
+	 * Sets the value of the '{@link org.dawnsci.marketplace.Marketplace#getFeatured <em>Featured</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Featured</em>' containment reference.
+	 * @see #getFeatured()
+	 * @generated
+	 */
+	void setFeatured(Featured value);
 
 } // Marketplace

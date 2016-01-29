@@ -2,6 +2,5 @@
     <wb-module deploy-name="org.dawnsci.marketplace.core">
         <wb-resource deploy-path="/" source-path="/src"/>
         <wb-resource deploy-path="/" source-path="/src-gen"/>
-        <wb-resource deploy-path="/" source-path="/src-test"/>
     </wb-module>
 </project-modules>
