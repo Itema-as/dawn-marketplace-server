@@ -20,14 +20,10 @@ There is one exception to adding /api/p at the end and that is for search result
 
 ## Usage
 
-### From the command line
+### Starting the server
 
-1. Execute `java -jar org.dawnsci.marketplace.server-1.0-SNAPSHOT.war` on the command line.
-2. Start Eclipse with required parameters. E.g. `/Eclipse.app/Contents/MacOS/eclipse -vmargs -Dorg.eclipse.epp.internal.mpc.core.service.DefaultMarketplaceService.url=http://localhost:8080/mpc -Dorg.eclipse.epp.internal.mpc.core.service.DefaultCatalogService.url=http://localhost:8080/mpc`
+When doing development on this code, one should start the server from within Eclipse. That will allow you to do normal debugging. Make sure the [Spring tool suite](https://marketplace.eclipse.org/content/spring-ide) is installed and launch the __org.dawnsci.marketplace.server__ project as a _Spring Boot App_
 
-### From within the IDE
-In order to test a development version of the marketplace server, one can do the following (with Spring tools installed):
+### Using the marketplace client
 
-1. Launch the org.dawnsci.marketplace.server as a _Spring Boot App_
-2. Start Eclipse with required parameters. E.g. `/Eclipse.app/Contents/MacOS/eclipse -vmargs -Dorg.eclipse.epp.internal.mpc.core.service.DefaultMarketplaceService.url=http://localhost:8080/mpc -Dorg.eclipse.epp.internal.mpc.core.service.DefaultCatalogService.url=http://localhost:8080/mpc`
-
+Start Eclipse with required parameters. E.g. `/Eclipse.app/Contents/MacOS/eclipse -vmargs -Dorg.eclipse.epp.internal.mpc.core.service.DefaultMarketplaceService.url=http://localhost:8080/mpc -Dorg.eclipse.epp.internal.mpc.core.service.DefaultCatalogService.url=http://localhost:8080/mpc`
