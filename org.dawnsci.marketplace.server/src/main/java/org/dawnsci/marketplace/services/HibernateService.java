@@ -11,6 +11,7 @@
 package org.dawnsci.marketplace.services;
 
 import java.io.InputStream;
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
@@ -56,7 +57,7 @@ public class HibernateService {
 		props.setProperty(Environment.USER, "sa");
 		// close database when all connections are lost.
 //		props.setProperty(Environment.URL, "jdbc:hsqldb:file:database/Marketplace;shutdown=true;hsqldb.default_table_type=cached");
-		props.setProperty(Environment.URL, "jdbc:hsqldb:mem:database/Marketplace;shutdown=true;hsqldb.default_table_type=cached");
+		props.setProperty(Environment.URL, "jdbc:hsqldb:mem:database/Marketplace");
 		props.setProperty(Environment.PASS, "");
 		props.setProperty(Environment.DIALECT, org.hibernate.dialect.HSQLDialect.class.getName());
 		props.setProperty(Environment.ENABLE_LAZY_LOAD_NO_TRANS, "true");
@@ -87,9 +88,10 @@ public class HibernateService {
 			// persisting container objects, such as "Marketplace".
 			Node node = loadResource("sample.xml").getNode();
 			// create 50 sample plug-ins
-			for (int i=1000;i<=1050;i++){
+			for (int i=1000;i<=1005;i++){
 				node.setId(Long.valueOf(i));
 				node.setName("Sample plug-in #"+(i-999));
+				node.setChanged(LocalDate.now().toEpochDay());
 				session.saveOrUpdate(EcoreUtil.copy(node));
 			}
 			// create the markets
