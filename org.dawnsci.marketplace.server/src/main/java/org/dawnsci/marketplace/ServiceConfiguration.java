@@ -8,13 +8,17 @@
  * Contributors:
  *    Torkild U. Resheim - initial API and implementation
  ****************************************************************************/
-package org.dawnsci.marketplace.server;
+package org.dawnsci.marketplace;
 
+import org.dawnsci.marketplace.services.DataService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+/**
+ * @author Torkild U. Resheim, Itema AS
+ */
 @Configuration
-public class ServerConfiguration {
+public class ServiceConfiguration {
 		
 	@Bean
 	public DataService catalogService() {

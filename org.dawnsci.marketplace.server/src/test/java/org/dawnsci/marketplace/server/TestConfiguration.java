@@ -18,7 +18,8 @@ import org.dawnsci.marketplace.Marketplace;
 import org.dawnsci.marketplace.MarketplacePackage;
 import org.dawnsci.marketplace.util.MarketplaceResourceFactoryImpl;
 import org.dawnsci.marketplace.util.MarketplaceResourceImpl;
-import org.dawnsci.marketplace.server.DataService;
+import org.dawnsci.marketplace.services.DataService;
+import org.dawnsci.marketplace.services.HibernateService;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -42,7 +43,7 @@ import org.springframework.context.annotation.Profile;
  */
 @Configuration
 @EnableAutoConfiguration
-@ComponentScan(basePackages = { "org.dawnsci.marketplace.server" })
+@ComponentScan(basePackages = { "org.dawnsci.marketplace" })
 @Profile("test")
 public class TestConfiguration {
 

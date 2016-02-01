@@ -8,7 +8,7 @@
  * Contributors:
  *    Torkild U. Resheim - initial API and implementation
  ****************************************************************************/
-package org.dawnsci.marketplace.server;
+package org.dawnsci.marketplace.services;
 
 import org.dawnsci.marketplace.Catalogs;
 import org.dawnsci.marketplace.Featured;
@@ -19,7 +19,9 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+/**
+ * @author Torkild U. Resheim, Itema AS
+ */
 @Service
 public class DataService {
 	

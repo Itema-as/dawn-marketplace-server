@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+
+<title>DAWN Marketplace</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<h1>DAWN Marketplace</h1>
+	<div th:each="node: ${featured.featured.nodes}">
+		<h2 th:text="${node.name}"></h2>
+		<img th:src="${node.image}"></img> <img th:src="${node.screenshot}"></img>
+		<div th:utext="${node.shortdescription}"></div>
+		<div>Last updated <span th:text="${#calendars.format(node.changed,'dd MMMM yyyy')}"></span> by <span th:text="${node.owner}"></span></div>
+	</div>
+</body>
+</html>

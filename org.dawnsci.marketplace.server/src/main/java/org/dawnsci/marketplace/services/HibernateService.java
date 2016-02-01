@@ -1,4 +1,14 @@
-package org.dawnsci.marketplace.server;
+/*****************************************************************************
+ * Copyright (c) 2016 Diamond Light Source Ltd.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *    Torkild U. Resheim - initial API and implementation
+ ****************************************************************************/
+package org.dawnsci.marketplace.services;
 
 import java.io.InputStream;
 import java.util.HashMap;
@@ -30,7 +40,9 @@ import org.hibernate.Transaction;
 import org.hibernate.cfg.Environment;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
-
+/**
+ * @author Torkild U. Resheim, Itema AS
+ */
 @Service
 public class HibernateService {
 	
@@ -43,7 +55,8 @@ public class HibernateService {
 		props.setProperty(Environment.DRIVER, "org.hsqldb.jdbcDriver");
 		props.setProperty(Environment.USER, "sa");
 		// close database when all connections are lost.
-		props.setProperty(Environment.URL, "jdbc:hsqldb:file:database/Marketplace;shutdown=true;hsqldb.default_table_type=cached");
+//		props.setProperty(Environment.URL, "jdbc:hsqldb:file:database/Marketplace;shutdown=true;hsqldb.default_table_type=cached");
+		props.setProperty(Environment.URL, "jdbc:hsqldb:mem:database/Marketplace;shutdown=true;hsqldb.default_table_type=cached");
 		props.setProperty(Environment.PASS, "");
 		props.setProperty(Environment.DIALECT, org.hibernate.dialect.HSQLDialect.class.getName());
 		props.setProperty(Environment.ENABLE_LAZY_LOAD_NO_TRANS, "true");
@@ -67,7 +80,6 @@ public class HibernateService {
 	 * Populate the database with some initial data.
 	 */
 	void prepopulate() {
-		System.out.println("Loading data");
 		Session session = hbds.getSessionFactory().openSession();
 		Transaction tx = session.beginTransaction();
 		try {
