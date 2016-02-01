@@ -3,5 +3,9 @@ body {
     padding-top: 50px;
     padding-bottom: 20px;
 }
-
+.logo {
+	padding: 8px;
+	padding-left: 32px;
+	float: right;
+}
 
