@@ -8,19 +8,23 @@
  * Contributors:
  *    Torkild U. Resheim - initial API and implementation
  ****************************************************************************/
-package org.dawnsci.marketplace.server;
+package org.dawnsci.marketplace;
 
+import javax.ws.rs.ApplicationPath;
+
+import org.dawnsci.marketplace.endpoints.MarketplaceEndpoint;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.springframework.stereotype.Component;
-
+/**
+ * REST server entry point. All calls to the REST server must be prefixed by "/mpc".
+ *
+ * @author Torkild U. Resheim, Itema AS
+ */
 @Component
-public class ApplicationConfiguration extends ResourceConfig {
+@ApplicationPath("/mpc")
+public class RestConfiguration extends ResourceConfig {
 	
-	public ApplicationConfiguration() {
-		registerEndpoints();
-	}
-
-	private void registerEndpoints() {
+	public RestConfiguration() {
 		register(MarketplaceEndpoint.class);
-	}	
+	}
 }

@@ -8,12 +8,23 @@
  * Contributors:
  *    Torkild U. Resheim - initial API and implementation
  ****************************************************************************/
-package org.dawnsci.marketplace.server;
+package org.dawnsci.marketplace;
 
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.context.web.SpringBootServletInitializer;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Import;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
+/**
+ * Main entry point.
+ * 
+ * @author Torkild U. Resheim, Itema AS
+ */
+@EnableWebMvc
+@ComponentScan(basePackages = "org.dawnsci.marketplace")
+@Import(WebMvcInitializer.class)
 @SpringBootApplication
 public class EclipseMarketplaceApplication extends SpringBootServletInitializer {
 

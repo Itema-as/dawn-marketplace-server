@@ -8,7 +8,7 @@
  * Contributors:
  *    Torkild U. Resheim - initial API and implementation
  ****************************************************************************/
-package org.dawnsci.marketplace.server;
+package org.dawnsci.marketplace.endpoints;
 
 import java.io.IOException;
 import java.io.StringWriter;
@@ -18,16 +18,20 @@ import java.util.Map;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
 
 import org.dawnsci.marketplace.Marketplace;
+import org.dawnsci.marketplace.services.DataService;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.emf.ecore.xmi.impl.XMLResourceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
-@Component
-@Path("/mpc")
+/**
+ * @author Torkild U. Resheim, Itema AS
+ */
+@Path("/")
+@Produces("text/xml")
 public class MarketplaceEndpoint {
 
 	@Autowired
