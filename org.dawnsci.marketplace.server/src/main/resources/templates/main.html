@@ -1,17 +1,84 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head lang="en">
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="/css/bootstrap.min.css"></link>
+<!-- Custom styles for this template -->
+<link href="/css/jumbotron.css" rel="stylesheet"></link>
+<!-- Optional theme -->
+<link rel="stylesheet" href="/css/bootstrap-theme.min.css"></link>
+<!-- Latest compiled and minified JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
 
 <title>DAWN Marketplace</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-	<h1>DAWN Marketplace</h1>
-	<div th:each="node: ${featured.featured.nodes}">
-		<h2 th:text="${node.name}"></h2>
-		<img th:src="${node.image}"></img> <img th:src="${node.screenshot}"></img>
-		<div th:utext="${node.shortdescription}"></div>
-		<div>Last updated <span th:text="${#calendars.format(node.changed,'dd MMMM yyyy')}"></span> by <span th:text="${node.owner}"></span></div>
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed"
+					data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+					aria-controls="navbar">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#">DAWN Marketplace</a>
+			</div>
+			<div id="navbar" class="navbar-collapse collapse">
+				<form class="navbar-form navbar-right">
+					<div class="form-group">
+						<input type="text" placeholder="Email" class="form-control"></input>
+					</div>
+					<div class="form-group">
+						<input type="password" placeholder="Password" class="form-control"></input>
+					</div>
+					<button type="submit" class="btn btn-success">Sign in</button>
+				</form>
+			</div>
+			<!--/.navbar-collapse -->
+		</div>
+	</nav>
+
+	<!-- Main jumbotron for a primary marketing message or call to action -->
+	<div class="jumbotron">
+		<div class="container">
+			<h1>DAWN Marketplace</h1>
+			<p>This is a template for a simple marketing or informational
+				website. It includes a large callout called a jumbotron and three
+				supporting pieces of content. Use it as a starting point to create
+				something more unique.</p>
+			<p>
+				<a class="btn btn-primary btn-lg" href="#" role="button">Learn
+					more &raquo;</a>
+			</p>
+		</div>
+	</div>
+
+	<div class="container">
+
+
+		<div class="row">
+			<div th:each="node: ${featured.featured.nodes}">
+				<div class="col-sm-6 col-md-4">
+					<div class="thumbnail">
+						<img th:src="${node.screenshot}"></img>
+						<div class="caption">
+							<h3 th:text="${node.name}"></h3>
+							<p th:utext="${node.shortdescription}"></p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- 		
+		<div>
+			Last updated <span
+				th:text="${#calendars.format(node.changed,'dd MMMM yyyy')}"></span>
+			by <span th:text="${node.owner}"></span>
+		</div>
+	 -->
 	</div>
 </body>
 </html>

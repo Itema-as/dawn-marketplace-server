@@ -56,7 +56,7 @@ public class DataService {
 	}
 
 	/**
-	 * Returns a server-defined number of featured results.
+	 * Returns the three features that was last updated.
 	 * 
 	 * @return
 	 */
@@ -66,7 +66,8 @@ public class DataService {
 		Featured featured = MarketplaceFactory.eINSTANCE.createFeatured();
 		marketplace.setFeatured(featured);		
 		Session session = sessionFactory.openSession();
-		Query query = session.createQuery("SELECT node FROM Node node");
+		Query query = session.createQuery("SELECT node FROM Node node ORDER BY node.changed ASC");
+		query.setMaxResults(3);
 		featured.getNodes().addAll(query.list());
 		session.close();
 		return marketplace;
