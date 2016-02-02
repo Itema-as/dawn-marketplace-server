@@ -11,6 +11,7 @@
 package org.dawnsci.marketplace.controllers;
 
 import java.security.Principal;
+import java.util.Date;
 
 import org.dawnsci.marketplace.services.DataService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping(value = "/", produces = MediaType.TEXT_HTML_VALUE, method = RequestMethod.GET)
 public class NodeListController {
 	
+
+	public static class DateUtils {		
+	    public static Date create(long timestamp) {
+	        return new Date(timestamp);
+	    }
+	}
+	
 	@Autowired
 	private DataService dataService;
 
@@ -36,6 +44,7 @@ public class NodeListController {
 	public String showMainView(ModelMap map, Principal principal ) {
 		map.addAttribute("featured", dataService.getFeatured());
 		map.addAttribute("updated", dataService.getUpdated());
+		map.addAttribute("dateUtils", new DateUtils());
 		return "main";
 	}
 }

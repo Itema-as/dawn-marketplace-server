@@ -14,6 +14,7 @@ import org.dawnsci.marketplace.Catalogs;
 import org.dawnsci.marketplace.Featured;
 import org.dawnsci.marketplace.Marketplace;
 import org.dawnsci.marketplace.MarketplaceFactory;
+import org.dawnsci.marketplace.Node;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -29,8 +30,13 @@ public class DataService {
 	private SessionFactory sessionFactory;
 		
 	public Marketplace getContent(String identifier) {
-		// TODO: Realize data from a persistent store		
-		return null;
+		Marketplace marketplace = MarketplaceFactory.eINSTANCE.createMarketplace();	
+		Session session = sessionFactory.openSession();
+		Query query = session.createQuery("SELECT node FROM Node node WHERE node.id='"+identifier+"'");
+		query.setMaxResults(1);
+		marketplace.setNode((Node) query.list().get(0));
+		session.close();
+		return marketplace;
 	}
 
 	@SuppressWarnings("unchecked")

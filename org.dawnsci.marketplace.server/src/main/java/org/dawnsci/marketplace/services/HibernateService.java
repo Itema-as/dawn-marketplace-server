@@ -11,7 +11,6 @@
 package org.dawnsci.marketplace.services;
 
 import java.io.InputStream;
-import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
@@ -41,6 +40,7 @@ import org.hibernate.Transaction;
 import org.hibernate.cfg.Environment;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
+
 /**
  * @author Torkild U. Resheim, Itema AS
  */
@@ -91,7 +91,7 @@ public class HibernateService {
 			for (int i=1000;i<=1200;i++){
 				node.setId(Long.valueOf(i));
 				node.setName("Sample plug-in #"+(i-999));
-				node.setChanged(LocalDate.now().toEpochDay());
+				node.setChanged(System.currentTimeMillis());
 				session.saveOrUpdate(EcoreUtil.copy(node));
 			}
 			// create the markets

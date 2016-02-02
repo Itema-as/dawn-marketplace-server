@@ -96,6 +96,20 @@ public class MarketplaceEndpoint {
 		return serialize(dataService.getContent(id));
 	}
 
+	/**
+	 * http://marketplace.eclipse.org/content/[node id]/api/p
+	 * 
+	 * @param id
+	 *            content identifier
+	 * @return
+	 */
+	@GET
+	@Path("marketplace-client-intro?mpc_install={id}")
+	public String getInstall(@PathParam("id") String id) throws Exception {
+		System.out.println("MarketplaceEndpoint.getInstall()");
+		return "test";
+	}
+
 	private String serialize(Marketplace rootElement) throws IOException {
 		Map<String, Object> saveOptions = new HashMap<String, Object>();
 		saveOptions.put(XMLResource.OPTION_EXTENDED_META_DATA, Boolean.TRUE);
