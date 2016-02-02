@@ -25,6 +25,7 @@ public class WebMvcDispatcherConfig extends WebMvcConfigurerAdapter {
 		registry.addResourceHandler("/js/**").addResourceLocations("static/js/");
 		registry.addResourceHandler("/css/**").addResourceLocations("static/css/");
 		registry.addResourceHandler("/html/**").addResourceLocations("static/html/");
+		registry.addResourceHandler("/fonts/**").addResourceLocations("static/fonts/");
 		registry.addResourceHandler("/images/**").addResourceLocations("static/images/");
 	}
 }
