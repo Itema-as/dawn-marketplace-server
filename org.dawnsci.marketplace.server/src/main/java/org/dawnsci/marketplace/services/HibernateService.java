@@ -88,7 +88,7 @@ public class HibernateService {
 			// persisting container objects, such as "Marketplace".
 			Node node = loadResource("sample.xml").getNode();
 			// create 50 sample plug-ins
-			for (int i=1000;i<=1005;i++){
+			for (int i=1000;i<=1200;i++){
 				node.setId(Long.valueOf(i));
 				node.setName("Sample plug-in #"+(i-999));
 				node.setChanged(LocalDate.now().toEpochDay());

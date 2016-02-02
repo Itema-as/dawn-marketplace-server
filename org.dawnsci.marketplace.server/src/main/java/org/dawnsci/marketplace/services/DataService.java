@@ -73,5 +73,23 @@ public class DataService {
 		return marketplace;
 	}
 
+	/**
+	 * Returns the 50 most recent updated solutions
+	 * 
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	public Marketplace getUpdated() {
+		Marketplace marketplace = MarketplaceFactory.eINSTANCE.createMarketplace();	
+		Featured featured = MarketplaceFactory.eINSTANCE.createFeatured();
+		marketplace.setFeatured(featured);		
+		Session session = sessionFactory.openSession();
+		Query query = session.createQuery("SELECT node FROM Node node ORDER BY node.changed ASC");
+		query.setMaxResults(50);
+		featured.getNodes().addAll(query.list());
+		session.close();
+		return marketplace;
+	}
+
 
 }

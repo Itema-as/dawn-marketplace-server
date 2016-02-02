@@ -1,18 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head lang="en">
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="/css/bootstrap.min.css"></link>
-<!-- Custom styles for this template -->
-<link href="/css/jumbotron.css" rel="stylesheet"></link>
-<!-- Optional theme -->
-<link rel="stylesheet" href="/css/bootstrap-theme.min.css"></link>
-<!-- Latest compiled and minified JavaScript -->
-<script src="/js/bootstrap.min.js"></script>
-
-<title>DAWN Marketplace</title>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-</head>
+<head th:replace="../fragments/header :: header"></head>
 <body>
 	<nav class="navbar navbar-inverse navbar-fixed-top">
 		<div class="container-fluid">
@@ -59,18 +47,19 @@
 		</div>
 	</div>
 
-	<div class="container">
+	<div class="container-fluid">
 
 	<!--  th:href="@{/marketplace-client-intro(mpc_install=${node.id})}"  -->
 
+		<!-- Featured solutions -->
 		<div class="row">
 			<div th:each="node: ${featured.featured.nodes}">
 				<div class="col-sm-6 col-md-4">
 					<div class="thumbnail">
 						<img th:src="${node.screenshot}"></img>
 						<div class="caption">
-							<h3 th:text="${node.name}"></h3>
-							<p th:utext="${#strings.abbreviate(node.shortdescription,300)}"></p>
+							<h3><a th:href="@{/content(id=${node.id})}"><span th:text="${node.name}"></span></a></h3>
+							<p th:utext="${node.shortdescription}"></p>
 							<a role="button"
 								th:href="@{http://localhost:8080/marketplace-client-intro(mpc_install=${node.id})}">
 								<button class="btn btn-success" title="Drag to your running Eclipse workspace to install Red Hat JBoss Developer Studio Integration Stack (Luna)">
@@ -80,6 +69,21 @@
 							</a>
 						</div>
 					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div th:each="node: ${updated.featured.nodes}">
+				<div class="col-sm-6 col-md-4">
+					<h4><a th:href="@{/content(id=${node.id})}"><span th:text="${node.name}"></span></a></h4>
+					<p th:utext="${#strings.abbreviate(node.shortdescription,300)}"></p>
+					<a role="button"
+						th:href="@{http://localhost:8080/marketplace-client-intro(mpc_install=${node.id})}">
+						<button class="btn" title="Drag to your running Eclipse workspace to install Red Hat JBoss Developer Studio Integration Stack (Luna)">
+							<span class="glyphicon glyphicon-cloud-download"
+								aria-hidden="true"></span>&nbsp;Install
+						</button>
+					</a>
 				</div>
 			</div>
 		</div>

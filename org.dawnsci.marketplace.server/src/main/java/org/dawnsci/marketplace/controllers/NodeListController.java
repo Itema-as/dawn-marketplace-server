@@ -35,6 +35,7 @@ public class NodeListController {
 	@RequestMapping(value = "/")
 	public String showMainView(ModelMap map, Principal principal ) {
 		map.addAttribute("featured", dataService.getFeatured());
+		map.addAttribute("updated", dataService.getUpdated());
 		return "main";
 	}
 }
