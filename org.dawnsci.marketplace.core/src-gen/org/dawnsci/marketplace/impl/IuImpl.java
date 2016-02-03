@@ -24,32 +24,33 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.dawnsci.marketplace.impl.IuImpl#getSelected <em>Selected</em>}</li>
+ *   <li>{@link org.dawnsci.marketplace.impl.IuImpl#isSelected <em>Selected</em>}</li>
  *   <li>{@link org.dawnsci.marketplace.impl.IuImpl#getMixed <em>Mixed</em>}</li>
+ *   <li>{@link org.dawnsci.marketplace.impl.IuImpl#isRequired <em>Required</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class IuImpl extends MinimalEObjectImpl.Container implements Iu {
 	/**
-	 * The default value of the '{@link #getSelected() <em>Selected</em>}' attribute.
+	 * The default value of the '{@link #isSelected() <em>Selected</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getSelected()
+	 * @see #isSelected()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final Boolean SELECTED_EDEFAULT = null;
+	protected static final boolean SELECTED_EDEFAULT = false;
 
 	/**
-	 * The cached value of the '{@link #getSelected() <em>Selected</em>}' attribute.
+	 * The cached value of the '{@link #isSelected() <em>Selected</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getSelected()
+	 * @see #isSelected()
 	 * @generated
 	 * @ordered
 	 */
-	protected Boolean selected = SELECTED_EDEFAULT;
+	protected boolean selected = SELECTED_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getMixed() <em>Mixed</em>}' attribute list.
@@ -60,6 +61,26 @@ public class IuImpl extends MinimalEObjectImpl.Container implements Iu {
 	 * @ordered
 	 */
 	protected FeatureMap mixed;
+
+	/**
+	 * The default value of the '{@link #isRequired() <em>Required</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isRequired()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean REQUIRED_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isRequired() <em>Required</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isRequired()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean required = REQUIRED_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -85,7 +106,7 @@ public class IuImpl extends MinimalEObjectImpl.Container implements Iu {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Boolean getSelected() {
+	public boolean isSelected() {
 		return selected;
 	}
 
@@ -94,8 +115,8 @@ public class IuImpl extends MinimalEObjectImpl.Container implements Iu {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setSelected(Boolean newSelected) {
-		Boolean oldSelected = selected;
+	public void setSelected(boolean newSelected) {
+		boolean oldSelected = selected;
 		selected = newSelected;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, MarketplacePackage.IU__SELECTED, oldSelected, selected));
@@ -111,6 +132,27 @@ public class IuImpl extends MinimalEObjectImpl.Container implements Iu {
 			mixed = new BasicFeatureMap(this, MarketplacePackage.IU__MIXED);
 		}
 		return mixed;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean isRequired() {
+		return required;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setRequired(boolean newRequired) {
+		boolean oldRequired = required;
+		required = newRequired;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, MarketplacePackage.IU__REQUIRED, oldRequired, required));
 	}
 
 	/**
@@ -136,10 +178,12 @@ public class IuImpl extends MinimalEObjectImpl.Container implements Iu {
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case MarketplacePackage.IU__SELECTED:
-				return getSelected();
+				return isSelected();
 			case MarketplacePackage.IU__MIXED:
 				if (coreType) return getMixed();
 				return ((FeatureMap.Internal)getMixed()).getWrapper();
+			case MarketplacePackage.IU__REQUIRED:
+				return isRequired();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -157,6 +201,9 @@ public class IuImpl extends MinimalEObjectImpl.Container implements Iu {
 				return;
 			case MarketplacePackage.IU__MIXED:
 				((FeatureMap.Internal)getMixed()).set(newValue);
+				return;
+			case MarketplacePackage.IU__REQUIRED:
+				setRequired((Boolean)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -176,6 +223,9 @@ public class IuImpl extends MinimalEObjectImpl.Container implements Iu {
 			case MarketplacePackage.IU__MIXED:
 				getMixed().clear();
 				return;
+			case MarketplacePackage.IU__REQUIRED:
+				setRequired(REQUIRED_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -189,9 +239,11 @@ public class IuImpl extends MinimalEObjectImpl.Container implements Iu {
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case MarketplacePackage.IU__SELECTED:
-				return SELECTED_EDEFAULT == null ? selected != null : !SELECTED_EDEFAULT.equals(selected);
+				return selected != SELECTED_EDEFAULT;
 			case MarketplacePackage.IU__MIXED:
 				return mixed != null && !mixed.isEmpty();
+			case MarketplacePackage.IU__REQUIRED:
+				return required != REQUIRED_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -210,6 +262,8 @@ public class IuImpl extends MinimalEObjectImpl.Container implements Iu {
 		result.append(selected);
 		result.append(", mixed: ");
 		result.append(mixed);
+		result.append(", required: ");
+		result.append(required);
 		result.append(')');
 		return result.toString();
 	}

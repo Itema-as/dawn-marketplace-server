@@ -3,7 +3,7 @@
 	<name>org.dawnsci.marketplace.server</name>
 	<comment></comment>
 	<projects>
-		<project>org.dawnsci.dde.marketplace.core</project>
+		<project>org.dawnsci.marketplace.core</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

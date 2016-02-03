@@ -18,6 +18,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.dawnsci.marketplace.Marketplace#getCatalogs <em>Catalogs</em>}</li>
  *   <li>{@link org.dawnsci.marketplace.Marketplace#getMarkets <em>Markets</em>}</li>
  *   <li>{@link org.dawnsci.marketplace.Marketplace#getFeatured <em>Featured</em>}</li>
+ *   <li>{@link org.dawnsci.marketplace.Marketplace#getBaseUrl <em>Base Url</em>}</li>
  * </ul>
  *
  * @see org.dawnsci.marketplace.MarketplacePackage#getMarketplace()
@@ -26,26 +27,26 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface Marketplace extends EObject {
 	/**
-	 * Returns the value of the '<em><b>Node</b></em>' reference.
+	 * Returns the value of the '<em><b>Node</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Node</em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Node</em>' reference.
+	 * @return the value of the '<em>Node</em>' containment reference.
 	 * @see #setNode(Node)
 	 * @see org.dawnsci.marketplace.MarketplacePackage#getMarketplace_Node()
-	 * @model
+	 * @model containment="true"
 	 * @generated
 	 */
 	Node getNode();
 
 	/**
-	 * Sets the value of the '{@link org.dawnsci.marketplace.Marketplace#getNode <em>Node</em>}' reference.
+	 * Sets the value of the '{@link org.dawnsci.marketplace.Marketplace#getNode <em>Node</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Node</em>' reference.
+	 * @param value the new value of the '<em>Node</em>' containment reference.
 	 * @see #getNode()
 	 * @generated
 	 */
@@ -119,5 +120,30 @@ public interface Marketplace extends EObject {
 	 * @generated
 	 */
 	void setFeatured(Featured value);
+
+	/**
+	 * Returns the value of the '<em><b>Base Url</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Used to calcuate URL's in contained objects.
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Base Url</em>' attribute.
+	 * @see #setBaseUrl(String)
+	 * @see org.dawnsci.marketplace.MarketplacePackage#getMarketplace_BaseUrl()
+	 * @model transient="true"
+	 * @generated
+	 */
+	String getBaseUrl();
+
+	/**
+	 * Sets the value of the '{@link org.dawnsci.marketplace.Marketplace#getBaseUrl <em>Base Url</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Base Url</em>' attribute.
+	 * @see #getBaseUrl()
+	 * @generated
+	 */
+	void setBaseUrl(String value);
 
 } // Marketplace

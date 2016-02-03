@@ -2,7 +2,9 @@ package org.dawnsci.marketplace.configurations;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.MediaType;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
+import org.springframework.web.servlet.config.annotation.ContentNegotiationConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
@@ -27,5 +29,15 @@ public class WebMvcConfiguration extends WebMvcConfigurerAdapter{
 	    multipartResolver.setMaxUploadSize(1_073_741_824); // 1GB
 	    return multipartResolver;
 	}	
-}
+	@Override
+	  public void configureContentNegotiation(ContentNegotiationConfigurer configurer) {
+	    configurer.favorPathExtension(false).
+	            favorParameter(true).
+	            parameterName("mediaType").
+	            ignoreAcceptHeader(true).
+	            useJaf(false).
+	            defaultContentType(MediaType.TEXT_HTML).
+	            mediaType("xml", MediaType.APPLICATION_XML).
+	            mediaType("json", MediaType.APPLICATION_JSON);
+	  }}
 

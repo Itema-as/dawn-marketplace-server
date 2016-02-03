@@ -7,8 +7,17 @@
       <xsd:element maxOccurs="1" minOccurs="0" name="ius" type="org.dawnsci:Ius"/>
       <xsd:element maxOccurs="1" minOccurs="0" name="platforms" type="org.dawnsci:Platforms"/>
     </xsd:sequence>
-    <xsd:attribute name="id" type="xsd:long"/>
-    <xsd:attribute name="name" type="xsd:string"/>
+    <xsd:attribute name="id" type="xsd:long">
+      <xsd:annotation>
+        <xsd:documentation>Unique identifier
+</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="name" type="xsd:string">
+      <xsd:annotation>
+        <xsd:documentation>Listing title</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
     <xsd:attribute name="type" type="xsd:string"/>
     <xsd:attribute name="owner" type="xsd:string"/>
     <xsd:attribute name="favorited" type="xsd:int"/>
@@ -19,17 +28,41 @@
     <xsd:attribute name="created" type="xsd:long"/>
     <xsd:attribute name="changed" type="xsd:long"/>
     <xsd:attribute name="foundationmember" type="xsd:int"/>
-    <xsd:attribute name="homepageurl" type="xsd:string"/>
-    <xsd:attribute name="image" type="xsd:string"/>
+    <xsd:attribute name="homepageurl" type="xsd:string">
+      <xsd:annotation>
+        <xsd:documentation>Home page URL.</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="image" type="xsd:string">
+      <xsd:annotation>
+        <xsd:documentation>Image URL.</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
     <xsd:attribute name="license" type="xsd:string"/>
     <xsd:attribute name="companyname" type="xsd:string"/>
     <xsd:attribute name="status" type="xsd:string"/>
-    <xsd:attribute name="supporturl" type="xsd:string"/>
+    <xsd:attribute name="supporturl" type="xsd:string">
+      <xsd:annotation>
+        <xsd:documentation>Support site URL.</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
     <xsd:attribute name="version" type="xsd:string"/>
     <xsd:attribute name="eclipseversion" type="xsd:string"/>
-    <xsd:attribute name="updateurl" type="xsd:string"/>
-    <xsd:attribute name="url" type="xsd:string"/>
-    <xsd:attribute name="screenshot" type="xsd:string"/>
+    <xsd:attribute name="updateurl" type="xsd:string">
+      <xsd:annotation>
+        <xsd:documentation>p2-repository URL.</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute default="" name="url" type="xsd:string">
+      <xsd:annotation>
+        <xsd:documentation>Marketplace relateive URL.</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="screenshot" type="xsd:string">
+      <xsd:annotation>
+        <xsd:documentation>Screenshot URL.</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
   </xsd:complexType>
   <xsd:element name="Node" type="org.dawnsci:Node"/>
   <xsd:complexType name="Category">
@@ -47,6 +80,7 @@
   <xsd:element name="Tag" type="org.dawnsci:Tag"/>
   <xsd:complexType name="Iu">
     <xsd:attribute name="selected" type="xsd:boolean"/>
+    <xsd:attribute name="required" type="xsd:boolean"/>
   </xsd:complexType>
   <xsd:element name="Iu" type="org.dawnsci:Iu"/>
   <xsd:complexType name="Platform"/>
@@ -65,11 +99,11 @@
   <xsd:element name="Ius" type="org.dawnsci:Ius"/>
   <xsd:complexType name="Marketplace">
     <xsd:sequence>
+      <xsd:element maxOccurs="1" minOccurs="0" name="node" type="org.dawnsci:Node"/>
       <xsd:element maxOccurs="1" minOccurs="0" name="catalogs" type="org.dawnsci:Catalogs"/>
       <xsd:element maxOccurs="unbounded" minOccurs="0" name="markets" type="org.dawnsci:Market"/>
       <xsd:element maxOccurs="1" minOccurs="0" name="featured" type="org.dawnsci:Featured"/>
     </xsd:sequence>
-    <xsd:attribute name="node" type="xsd:string"/>
   </xsd:complexType>
   <xsd:element name="Marketplace" type="org.dawnsci:Marketplace"/>
   <xsd:complexType name="Categories">

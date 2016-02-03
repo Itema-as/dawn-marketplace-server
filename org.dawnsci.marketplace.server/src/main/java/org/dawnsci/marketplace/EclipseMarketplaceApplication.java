@@ -34,8 +34,13 @@ public class EclipseMarketplaceApplication extends SpringBootServletInitializer 
 	}
 
 	public static void main(String[] args) {
-		new EclipseMarketplaceApplication().configure(new SpringApplicationBuilder(EclipseMarketplaceApplication.class))
+		try {
+			new EclipseMarketplaceApplication().configure(new SpringApplicationBuilder(EclipseMarketplaceApplication.class))
 				.run(args);
+		} catch (Exception e){
+			// https://github.com/spring-projects/spring-boot/issues/3100
+			// org.springframework.boot.devtools.restart.SilentExitExceptionHandler$SilentExitException			
+		}
 	}
 
 }

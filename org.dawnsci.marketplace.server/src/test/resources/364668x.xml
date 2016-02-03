@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- curl http://marketplace.eclipse.org/node/364668/api/p -->
 <marketplace>
   <node id="364668" name="OS X Eclipse Launcher" url="http://marketplace.eclipse.org/content/os-x-eclipse-launcher">
     <type>resource</type>
@@ -13,8 +12,8 @@
     </tags>
     <owner>Torkild Resheim</owner>
     <favorited>22</favorited>
-    <installstotal>9458</installstotal>
-    <installsrecent>310</installsrecent>
+    <installstotal>9647</installstotal>
+    <installsrecent>364</installsrecent>
     <shortdescription><![CDATA[<p>
 A little utility for Mac OS X that adds a <strong>Open Workspace</strong> menu entry which when activated opens the selected workspace in a new Eclipse instance. In addition Eclipse instance icons get a badge with the workspace name. This can be set in <strong>Preferences > General > Workspace</strong>. If unspecified the last segment of the workspace path will be used.
 </p>
@@ -63,7 +62,14 @@ Issues are reported in <a href="https://github.com/turesheim/eclipse-launcher/is
     <companyname><![CDATA[Torkild U. Resheim]]></companyname>
     <status>Production/Stable</status>
     <supporturl><![CDATA[https://github.com/turesheim/eclipse-launcher/issues]]></supporturl>
-    <version></version>
-    <eclipseversion></eclipseversion>
+    <version>3.0.0</version>
+    <eclipseversion>4.5, 4.4, 4.3, 4.2, 4.1</eclipseversion>
+    <updateurl>https://resheim.net/p2/eclipse-launcher/</updateurl>
+    <ius>
+      <iu required="TRUE">net.resheim.eclipse.launcher</iu>
+    </ius>
+    <platforms>
+      <platform>Mac</platform>
+    </platforms>
   </node>
 </marketplace>
