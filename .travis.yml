@@ -14,6 +14,7 @@ deploy:
   file_glob: true
   file: ${HOME}/build/${TRAVIS_REPO_SLUG}/org.dawnsci.marketplace.server/target/org.dawnsci.marketplace.server-*.war
   on:
-    repo: itema-as/eclipse-marketplace-server
+    repo: Itema-as/eclipse-marketplace-server
     tags: true
     all_branches: true
+    
