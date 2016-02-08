@@ -10,11 +10,13 @@
  ****************************************************************************/
 package org.dawnsci.marketplace.services;
 
+import java.io.File;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
+import org.apache.commons.io.FileUtils;
 import org.dawnsci.marketplace.Catalog;
 import org.dawnsci.marketplace.Catalogs;
 import org.dawnsci.marketplace.Market;
@@ -38,25 +40,31 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Environment;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
+import org.zeroturnaround.zip.ZipUtil;
 
 /**
  * @author Torkild U. Resheim, Itema AS
  */
 @Service
 public class HibernateService {
-	
+
 	private HbDataStore hbds;
-	 
+
+	@Autowired
+	private FileService fileService;
+
 	@Bean
-	public SessionFactory sessionFactory(){
+	public SessionFactory sessionFactory() {
 		// http://hsqldb.org/doc/2.0/guide/deployment-chapt.html#dec_app_dev_testing
 		final Properties props = new Properties();
 		props.setProperty(Environment.DRIVER, "org.hsqldb.jdbcDriver");
 		props.setProperty(Environment.USER, "sa");
 		// close database when all connections are lost.
-//		props.setProperty(Environment.URL, "jdbc:hsqldb:file:database/Marketplace;shutdown=true;hsqldb.default_table_type=cached");
+		// props.setProperty(Environment.URL,
+		// "jdbc:hsqldb:file:database/Marketplace;shutdown=true;hsqldb.default_table_type=cached");
 		props.setProperty(Environment.URL, "jdbc:hsqldb:mem:database/Marketplace");
 		props.setProperty(Environment.PASS, "");
 		props.setProperty(Environment.DIALECT, org.hibernate.dialect.HSQLDialect.class.getName());
@@ -76,7 +84,7 @@ public class HibernateService {
 		prepopulate();
 		return hbds.getSessionFactory();
 	}
-	
+
 	/**
 	 * Populate the database with some initial data.
 	 */
@@ -86,54 +94,80 @@ public class HibernateService {
 		try {
 			// EcoreUtil.copy is used here to avoid having Hibernate
 			// persisting container objects, such as "Marketplace".
-			Node node = loadResource("sample.xml").getNode();
+			Node node = loadSerialized("data/sample.xml").getNode();
 			// create 50 sample plug-ins
-			for (int i=1000;i<=1200;i++){
-				node.setId(Long.valueOf(i));
-				node.setName("Sample plug-in #"+(i-999));
-				node.setChanged(System.currentTimeMillis());
-				session.saveOrUpdate(EcoreUtil.copy(node));
+			for (int i = 1; i <= 10; i++) {
+				Node copy = EcoreUtil.copy(node);
+				copy.setId(Long.valueOf(i));
+				copy.setName("Sample plug-in #" + i);
+				copy.setImage("default_2.png");
+				copy.setScreenshot("screenshot.png");
+				copy.setUpdateurl("http://localhost:8080/files/"+i+"/p2-repo/");
+				copy.setChanged(System.currentTimeMillis());
+				session.saveOrUpdate(copy);
+
+				File file = fileService.getFile(String.valueOf(copy.getId()), "default_2.png");
+				FileUtils.copyInputStreamToFile(getInputStream("data/default_2.png"), file);
+
+				File file2 = fileService.getFile(String.valueOf(copy.getId()), "screenshot.png");
+				FileUtils.copyInputStreamToFile(getInputStream("data/screenshot.png"), file2);
+				
+				File file3 = fileService.getFile(String.valueOf(copy.getId()));
+				ZipUtil.unpack(getInputStream("data/p2-repo.zip"), file3);
 			}
 			// create the markets
-			EList<Market> markets = loadResource("markets.xml").getMarkets();
+			EList<Market> markets = loadSerialized("data/markets.xml").getMarkets();
 			for (Market market : markets) {
-				session.saveOrUpdate(EcoreUtil.copy(market));			
+				session.saveOrUpdate(EcoreUtil.copy(market));
 			}
 			// create the catalogs list
-			Catalogs catalogs = loadResource("catalogs.xml").getCatalogs();
+			Catalogs catalogs = loadSerialized("data/catalogs.xml").getCatalogs();
 			EList<Catalog> items = catalogs.getItems();
 			for (Catalog catalog : items) {
-				session.saveOrUpdate(EcoreUtil.copy(catalog));			
+				session.saveOrUpdate(EcoreUtil.copy(catalog));
 			}
 			session.flush();
 			session.getTransaction().commit();
-		} catch (Exception e){
+		} catch (Exception e) {
 			tx.rollback();
+			e.printStackTrace();
 		} finally {
 			session.close();
 		}
 	}
-	
+
 	/**
-	 * Loads a marketplace resource from XML. The file requested must be 
-	 * present in the classpath.
+	 * Loads a marketplace resource from XML. The file requested must be present
+	 * in the classpath.
 	 * 
-	 * @param filename the filename to load
+	 * @param filename
+	 *            the filename to load
 	 * @return
 	 */
-	private Marketplace loadResource(String filename) {
+	private Marketplace loadSerialized(String filename) {
 		ResourceSet rs = new ResourceSetImpl();
 		rs.getPackageRegistry().put(null, MarketplacePackage.eINSTANCE);
 		try {
 			Resource resource = rs.createResource(URI.createFileURI(filename));
 			InputStream is = DataService.class.getClassLoader().getResource(filename).openStream();
-			resource.load(is,rs.getLoadOptions());
+			resource.load(is, rs.getLoadOptions());
 			return (Marketplace) resource.getContents().get(0);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return null;
 	}
+
+	private InputStream getInputStream(String filename) {
+		try {
+			InputStream is = DataService.class.getClassLoader().getResource(filename).openStream();
+			return is;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
 	/**
 	 * Registers a new resource factory for the data structures. This is
 	 * normally done through Eclipse extension points but we also need to be

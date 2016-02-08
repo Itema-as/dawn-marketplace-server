@@ -56,13 +56,17 @@ public interface Node extends EObject {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Unique identifier
+	 * 
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Id</em>' attribute.
-	 * @see #setId(Long)
+	 * @see #setId(long)
 	 * @see org.dawnsci.marketplace.MarketplacePackage#getNode_Id()
 	 * @model id="true"
 	 * @generated
 	 */
-	Long getId();
+	long getId();
 
 	/**
 	 * Sets the value of the '{@link org.dawnsci.marketplace.Node#getId <em>Id</em>}' attribute.
@@ -72,7 +76,7 @@ public interface Node extends EObject {
 	 * @see #getId()
 	 * @generated
 	 */
-	void setId(Long value);
+	void setId(long value);
 
 	/**
 	 * Returns the value of the '<em><b>Name</b></em>' attribute.
@@ -82,6 +86,9 @@ public interface Node extends EObject {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Listing title
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Name</em>' attribute.
 	 * @see #setName(String)
 	 * @see org.dawnsci.marketplace.MarketplacePackage#getNode_Name()
@@ -109,12 +116,12 @@ public interface Node extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Favorited</em>' attribute.
-	 * @see #setFavorited(Integer)
+	 * @see #setFavorited(int)
 	 * @see org.dawnsci.marketplace.MarketplacePackage#getNode_Favorited()
 	 * @model extendedMetaData="kind='element'"
 	 * @generated
 	 */
-	Integer getFavorited();
+	int getFavorited();
 
 	/**
 	 * Sets the value of the '{@link org.dawnsci.marketplace.Node#getFavorited <em>Favorited</em>}' attribute.
@@ -124,7 +131,7 @@ public interface Node extends EObject {
 	 * @see #getFavorited()
 	 * @generated
 	 */
-	void setFavorited(Integer value);
+	void setFavorited(int value);
 
 	/**
 	 * Returns the value of the '<em><b>Installstotal</b></em>' attribute.
@@ -135,12 +142,12 @@ public interface Node extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Installstotal</em>' attribute.
-	 * @see #setInstallstotal(Integer)
+	 * @see #setInstallstotal(int)
 	 * @see org.dawnsci.marketplace.MarketplacePackage#getNode_Installstotal()
 	 * @model extendedMetaData="kind='element'"
 	 * @generated
 	 */
-	Integer getInstallstotal();
+	int getInstallstotal();
 
 	/**
 	 * Sets the value of the '{@link org.dawnsci.marketplace.Node#getInstallstotal <em>Installstotal</em>}' attribute.
@@ -150,7 +157,7 @@ public interface Node extends EObject {
 	 * @see #getInstallstotal()
 	 * @generated
 	 */
-	void setInstallstotal(Integer value);
+	void setInstallstotal(int value);
 
 	/**
 	 * Returns the value of the '<em><b>Installsrecent</b></em>' attribute.
@@ -161,12 +168,12 @@ public interface Node extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Installsrecent</em>' attribute.
-	 * @see #setInstallsrecent(Integer)
+	 * @see #setInstallsrecent(int)
 	 * @see org.dawnsci.marketplace.MarketplacePackage#getNode_Installsrecent()
 	 * @model extendedMetaData="kind='element'"
 	 * @generated
 	 */
-	Integer getInstallsrecent();
+	int getInstallsrecent();
 
 	/**
 	 * Sets the value of the '{@link org.dawnsci.marketplace.Node#getInstallsrecent <em>Installsrecent</em>}' attribute.
@@ -176,7 +183,7 @@ public interface Node extends EObject {
 	 * @see #getInstallsrecent()
 	 * @generated
 	 */
-	void setInstallsrecent(Integer value);
+	void setInstallsrecent(int value);
 
 	/**
 	 * Returns the value of the '<em><b>Shortdescription</b></em>' attribute.
@@ -241,12 +248,12 @@ public interface Node extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Created</em>' attribute.
-	 * @see #setCreated(Long)
+	 * @see #setCreated(long)
 	 * @see org.dawnsci.marketplace.MarketplacePackage#getNode_Created()
 	 * @model extendedMetaData="kind='element'"
 	 * @generated
 	 */
-	Long getCreated();
+	long getCreated();
 
 	/**
 	 * Sets the value of the '{@link org.dawnsci.marketplace.Node#getCreated <em>Created</em>}' attribute.
@@ -256,7 +263,7 @@ public interface Node extends EObject {
 	 * @see #getCreated()
 	 * @generated
 	 */
-	void setCreated(Long value);
+	void setCreated(long value);
 
 	/**
 	 * Returns the value of the '<em><b>Changed</b></em>' attribute.
@@ -267,12 +274,12 @@ public interface Node extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Changed</em>' attribute.
-	 * @see #setChanged(Long)
+	 * @see #setChanged(long)
 	 * @see org.dawnsci.marketplace.MarketplacePackage#getNode_Changed()
 	 * @model extendedMetaData="kind='element'"
 	 * @generated
 	 */
-	Long getChanged();
+	long getChanged();
 
 	/**
 	 * Sets the value of the '{@link org.dawnsci.marketplace.Node#getChanged <em>Changed</em>}' attribute.
@@ -282,7 +289,7 @@ public interface Node extends EObject {
 	 * @see #getChanged()
 	 * @generated
 	 */
-	void setChanged(Long value);
+	void setChanged(long value);
 
 	/**
 	 * Returns the value of the '<em><b>Foundationmember</b></em>' attribute.
@@ -293,12 +300,12 @@ public interface Node extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Foundationmember</em>' attribute.
-	 * @see #setFoundationmember(Integer)
+	 * @see #setFoundationmember(int)
 	 * @see org.dawnsci.marketplace.MarketplacePackage#getNode_Foundationmember()
 	 * @model extendedMetaData="kind='element'"
 	 * @generated
 	 */
-	Integer getFoundationmember();
+	int getFoundationmember();
 
 	/**
 	 * Sets the value of the '{@link org.dawnsci.marketplace.Node#getFoundationmember <em>Foundationmember</em>}' attribute.
@@ -308,7 +315,7 @@ public interface Node extends EObject {
 	 * @see #getFoundationmember()
 	 * @generated
 	 */
-	void setFoundationmember(Integer value);
+	void setFoundationmember(int value);
 
 	/**
 	 * Returns the value of the '<em><b>Homepageurl</b></em>' attribute.
@@ -318,6 +325,9 @@ public interface Node extends EObject {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Home page URL.
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Homepageurl</em>' attribute.
 	 * @see #setHomepageurl(String)
 	 * @see org.dawnsci.marketplace.MarketplacePackage#getNode_Homepageurl()
@@ -344,6 +354,9 @@ public interface Node extends EObject {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Image URL.
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Image</em>' attribute.
 	 * @see #setImage(String)
 	 * @see org.dawnsci.marketplace.MarketplacePackage#getNode_Image()
@@ -448,6 +461,9 @@ public interface Node extends EObject {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Support site URL.
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Supporturl</em>' attribute.
 	 * @see #setSupporturl(String)
 	 * @see org.dawnsci.marketplace.MarketplacePackage#getNode_Supporturl()
@@ -526,6 +542,9 @@ public interface Node extends EObject {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * p2-repository URL.
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Updateurl</em>' attribute.
 	 * @see #setUpdateurl(String)
 	 * @see org.dawnsci.marketplace.MarketplacePackage#getNode_Updateurl()
@@ -600,16 +619,20 @@ public interface Node extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Url</b></em>' attribute.
+	 * The default value is <code>""</code>.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Url</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Marketplace relateive URL.
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Url</em>' attribute.
 	 * @see #setUrl(String)
 	 * @see org.dawnsci.marketplace.MarketplacePackage#getNode_Url()
-	 * @model
+	 * @model default="" unique="false" volatile="true" derived="true"
 	 * @generated
 	 */
 	String getUrl();
@@ -632,10 +655,13 @@ public interface Node extends EObject {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Screenshot URL.
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Screenshot</em>' attribute.
 	 * @see #setScreenshot(String)
 	 * @see org.dawnsci.marketplace.MarketplacePackage#getNode_Screenshot()
-	 * @model extendedMetaData="name='platforms'"
+	 * @model extendedMetaData="kind='element'"
 	 * @generated
 	 */
 	String getScreenshot();

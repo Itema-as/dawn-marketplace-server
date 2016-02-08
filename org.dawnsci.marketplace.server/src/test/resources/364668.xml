@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- curl http://marketplace.eclipse.org/node/364668/api/p -->
 <marketplace>
   <node id="364668" name="OS X Eclipse Launcher" url="http://marketplace.eclipse.org/content/os-x-eclipse-launcher">
     <type>resource</type>

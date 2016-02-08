@@ -11,6 +11,7 @@
 package org.dawnsci.marketplace;
 
 import org.dawnsci.marketplace.services.DataService;
+import org.dawnsci.marketplace.services.FileService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -25,4 +26,8 @@ public class ServiceConfiguration {
 		return new DataService();
 	}
 	
+	@Bean
+	public FileService fileService() {
+		return new FileService();
+	}
 }

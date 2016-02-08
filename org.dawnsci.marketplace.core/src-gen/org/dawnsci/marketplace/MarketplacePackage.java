@@ -476,13 +476,22 @@ public interface MarketplacePackage extends EPackage {
 	int IU__MIXED = 1;
 
 	/**
+	 * The feature id for the '<em><b>Required</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IU__REQUIRED = 2;
+
+	/**
 	 * The number of structural features of the '<em>Iu</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int IU_FEATURE_COUNT = 2;
+	int IU_FEATURE_COUNT = 3;
 
 	/**
 	 * The number of operations of the '<em>Iu</em>' class.
@@ -618,7 +627,7 @@ public interface MarketplacePackage extends EPackage {
 	int MARKETPLACE = 7;
 
 	/**
-	 * The feature id for the '<em><b>Node</b></em>' reference.
+	 * The feature id for the '<em><b>Node</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -654,13 +663,22 @@ public interface MarketplacePackage extends EPackage {
 	int MARKETPLACE__FEATURED = 3;
 
 	/**
+	 * The feature id for the '<em><b>Base Url</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MARKETPLACE__BASE_URL = 4;
+
+	/**
 	 * The number of structural features of the '<em>Marketplace</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MARKETPLACE_FEATURE_COUNT = 4;
+	int MARKETPLACE_FEATURE_COUNT = 5;
 
 	/**
 	 * The number of operations of the '<em>Marketplace</em>' class.
@@ -1643,11 +1661,11 @@ public interface MarketplacePackage extends EPackage {
 	EClass getIu();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.dawnsci.marketplace.Iu#getSelected <em>Selected</em>}'.
+	 * Returns the meta object for the attribute '{@link org.dawnsci.marketplace.Iu#isSelected <em>Selected</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Selected</em>'.
-	 * @see org.dawnsci.marketplace.Iu#getSelected()
+	 * @see org.dawnsci.marketplace.Iu#isSelected()
 	 * @see #getIu()
 	 * @generated
 	 */
@@ -1663,6 +1681,17 @@ public interface MarketplacePackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getIu_Mixed();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.dawnsci.marketplace.Iu#isRequired <em>Required</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Required</em>'.
+	 * @see org.dawnsci.marketplace.Iu#isRequired()
+	 * @see #getIu()
+	 * @generated
+	 */
+	EAttribute getIu_Required();
 
 	/**
 	 * Returns the meta object for class '{@link org.dawnsci.marketplace.Platform <em>Platform</em>}'.
@@ -1738,10 +1767,10 @@ public interface MarketplacePackage extends EPackage {
 	EClass getMarketplace();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.dawnsci.marketplace.Marketplace#getNode <em>Node</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.dawnsci.marketplace.Marketplace#getNode <em>Node</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Node</em>'.
+	 * @return the meta object for the containment reference '<em>Node</em>'.
 	 * @see org.dawnsci.marketplace.Marketplace#getNode()
 	 * @see #getMarketplace()
 	 * @generated
@@ -1780,6 +1809,17 @@ public interface MarketplacePackage extends EPackage {
 	 * @generated
 	 */
 	EReference getMarketplace_Featured();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.dawnsci.marketplace.Marketplace#getBaseUrl <em>Base Url</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Base Url</em>'.
+	 * @see org.dawnsci.marketplace.Marketplace#getBaseUrl()
+	 * @see #getMarketplace()
+	 * @generated
+	 */
+	EAttribute getMarketplace_BaseUrl();
 
 	/**
 	 * Returns the meta object for class '{@link org.dawnsci.marketplace.Categories <em>Categories</em>}'.
@@ -2571,6 +2611,13 @@ public interface MarketplacePackage extends EPackage {
 		 */
 		EAttribute IU__MIXED = eINSTANCE.getIu_Mixed();
 		/**
+		 * The meta object literal for the '<em><b>Required</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute IU__REQUIRED = eINSTANCE.getIu_Required();
+		/**
 		 * The meta object literal for the '{@link org.dawnsci.marketplace.impl.PlatformImpl <em>Platform</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2628,7 +2675,7 @@ public interface MarketplacePackage extends EPackage {
 		 */
 		EClass MARKETPLACE = eINSTANCE.getMarketplace();
 		/**
-		 * The meta object literal for the '<em><b>Node</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Node</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
@@ -2655,6 +2702,13 @@ public interface MarketplacePackage extends EPackage {
 		 * @generated
 		 */
 		EReference MARKETPLACE__FEATURED = eINSTANCE.getMarketplace_Featured();
+		/**
+		 * The meta object literal for the '<em><b>Base Url</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute MARKETPLACE__BASE_URL = eINSTANCE.getMarketplace_BaseUrl();
 		/**
 		 * The meta object literal for the '{@link org.dawnsci.marketplace.impl.CategoriesImpl <em>Categories</em>}' class.
 		 * <!-- begin-user-doc -->

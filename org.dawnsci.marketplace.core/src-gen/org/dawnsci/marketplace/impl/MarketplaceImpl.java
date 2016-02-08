@@ -34,13 +34,14 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link org.dawnsci.marketplace.impl.MarketplaceImpl#getCatalogs <em>Catalogs</em>}</li>
  *   <li>{@link org.dawnsci.marketplace.impl.MarketplaceImpl#getMarkets <em>Markets</em>}</li>
  *   <li>{@link org.dawnsci.marketplace.impl.MarketplaceImpl#getFeatured <em>Featured</em>}</li>
+ *   <li>{@link org.dawnsci.marketplace.impl.MarketplaceImpl#getBaseUrl <em>Base Url</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class MarketplaceImpl extends MinimalEObjectImpl.Container implements Marketplace {
 	/**
-	 * The cached value of the '{@link #getNode() <em>Node</em>}' reference.
+	 * The cached value of the '{@link #getNode() <em>Node</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getNode()
@@ -80,6 +81,26 @@ public class MarketplaceImpl extends MinimalEObjectImpl.Container implements Mar
 	protected Featured featured;
 
 	/**
+	 * The default value of the '{@link #getBaseUrl() <em>Base Url</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getBaseUrl()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String BASE_URL_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getBaseUrl() <em>Base Url</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getBaseUrl()
+	 * @generated
+	 * @ordered
+	 */
+	protected String baseUrl = BASE_URL_EDEFAULT;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -104,14 +125,6 @@ public class MarketplaceImpl extends MinimalEObjectImpl.Container implements Mar
 	 * @generated
 	 */
 	public Node getNode() {
-		if (node != null && node.eIsProxy()) {
-			InternalEObject oldNode = (InternalEObject)node;
-			node = (Node)eResolveProxy(oldNode);
-			if (node != oldNode) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, MarketplacePackage.MARKETPLACE__NODE, oldNode, node));
-			}
-		}
 		return node;
 	}
 
@@ -120,8 +133,14 @@ public class MarketplaceImpl extends MinimalEObjectImpl.Container implements Mar
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Node basicGetNode() {
-		return node;
+	public NotificationChain basicSetNode(Node newNode, NotificationChain msgs) {
+		Node oldNode = node;
+		node = newNode;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, MarketplacePackage.MARKETPLACE__NODE, oldNode, newNode);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
 	}
 
 	/**
@@ -130,10 +149,17 @@ public class MarketplaceImpl extends MinimalEObjectImpl.Container implements Mar
 	 * @generated
 	 */
 	public void setNode(Node newNode) {
-		Node oldNode = node;
-		node = newNode;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, MarketplacePackage.MARKETPLACE__NODE, oldNode, node));
+		if (newNode != node) {
+			NotificationChain msgs = null;
+			if (node != null)
+				msgs = ((InternalEObject)node).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - MarketplacePackage.MARKETPLACE__NODE, null, msgs);
+			if (newNode != null)
+				msgs = ((InternalEObject)newNode).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - MarketplacePackage.MARKETPLACE__NODE, null, msgs);
+			msgs = basicSetNode(newNode, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, MarketplacePackage.MARKETPLACE__NODE, newNode, newNode));
 	}
 
 	/**
@@ -239,9 +265,32 @@ public class MarketplaceImpl extends MinimalEObjectImpl.Container implements Mar
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getBaseUrl() {
+		return baseUrl;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setBaseUrl(String newBaseUrl) {
+		String oldBaseUrl = baseUrl;
+		baseUrl = newBaseUrl;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, MarketplacePackage.MARKETPLACE__BASE_URL, oldBaseUrl, baseUrl));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
+			case MarketplacePackage.MARKETPLACE__NODE:
+				return basicSetNode(null, msgs);
 			case MarketplacePackage.MARKETPLACE__CATALOGS:
 				return basicSetCatalogs(null, msgs);
 			case MarketplacePackage.MARKETPLACE__MARKETS:
@@ -261,14 +310,15 @@ public class MarketplaceImpl extends MinimalEObjectImpl.Container implements Mar
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case MarketplacePackage.MARKETPLACE__NODE:
-				if (resolve) return getNode();
-				return basicGetNode();
+				return getNode();
 			case MarketplacePackage.MARKETPLACE__CATALOGS:
 				return getCatalogs();
 			case MarketplacePackage.MARKETPLACE__MARKETS:
 				return getMarkets();
 			case MarketplacePackage.MARKETPLACE__FEATURED:
 				return getFeatured();
+			case MarketplacePackage.MARKETPLACE__BASE_URL:
+				return getBaseUrl();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -295,6 +345,9 @@ public class MarketplaceImpl extends MinimalEObjectImpl.Container implements Mar
 			case MarketplacePackage.MARKETPLACE__FEATURED:
 				setFeatured((Featured)newValue);
 				return;
+			case MarketplacePackage.MARKETPLACE__BASE_URL:
+				setBaseUrl((String)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -319,6 +372,9 @@ public class MarketplaceImpl extends MinimalEObjectImpl.Container implements Mar
 			case MarketplacePackage.MARKETPLACE__FEATURED:
 				setFeatured((Featured)null);
 				return;
+			case MarketplacePackage.MARKETPLACE__BASE_URL:
+				setBaseUrl(BASE_URL_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -339,8 +395,26 @@ public class MarketplaceImpl extends MinimalEObjectImpl.Container implements Mar
 				return markets != null && !markets.isEmpty();
 			case MarketplacePackage.MARKETPLACE__FEATURED:
 				return featured != null;
+			case MarketplacePackage.MARKETPLACE__BASE_URL:
+				return BASE_URL_EDEFAULT == null ? baseUrl != null : !BASE_URL_EDEFAULT.equals(baseUrl);
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (baseUrl: ");
+		result.append(baseUrl);
+		result.append(')');
+		return result.toString();
 	}
 
 } //MarketplaceImpl

@@ -6,6 +6,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 import org.dawnsci.marketplace.Categories;
 import org.dawnsci.marketplace.Ius;
+import org.dawnsci.marketplace.Marketplace;
 import org.dawnsci.marketplace.MarketplacePackage;
 import org.dawnsci.marketplace.Node;
 import org.dawnsci.marketplace.Platforms;
@@ -13,15 +14,15 @@ import org.dawnsci.marketplace.Tags;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
-
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 
 /**
- * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Node</b></em>'.
- * <!-- end-user-doc -->
+ * <!-- begin-user-doc --> An implementation of the model object '
+ * <em><b>Node</b></em>'. <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
@@ -57,30 +58,29 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
  *
  * @generated
  */
-@XmlRootElement(name="Node")
+@XmlRootElement(name = "Node")
 public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 	/**
-	 * The default value of the '{@link #getId() <em>Id</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * The default value of the '{@link #getId() <em>Id</em>}' attribute. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getId()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final Long ID_EDEFAULT = null;
+	protected static final long ID_EDEFAULT = 0L;
 	/**
-	 * The cached value of the '{@link #getId() <em>Id</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * The cached value of the '{@link #getId() <em>Id</em>}' attribute. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getId()
 	 * @generated
 	 * @ordered
 	 */
-	protected Long id = ID_EDEFAULT;
+	protected long id = ID_EDEFAULT;
 	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getName()
 	 * @generated
 	 * @ordered
@@ -88,8 +88,7 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 	protected static final String NAME_EDEFAULT = null;
 	/**
 	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getName()
 	 * @generated
 	 * @ordered
@@ -97,8 +96,7 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 	protected String name = NAME_EDEFAULT;
 	/**
 	 * The default value of the '{@link #getType() <em>Type</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getType()
 	 * @generated
 	 * @ordered
@@ -106,8 +104,7 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 	protected static final String TYPE_EDEFAULT = null;
 	/**
 	 * The cached value of the '{@link #getType() <em>Type</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getType()
 	 * @generated
 	 * @ordered
@@ -115,8 +112,7 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 	protected String type = TYPE_EDEFAULT;
 	/**
 	 * The cached value of the '{@link #getCategories() <em>Categories</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getCategories()
 	 * @generated
 	 * @ordered
@@ -124,8 +120,7 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 	protected Categories categories;
 	/**
 	 * The cached value of the '{@link #getTags() <em>Tags</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getTags()
 	 * @generated
 	 * @ordered
@@ -133,8 +128,7 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 	protected Tags tags;
 	/**
 	 * The default value of the '{@link #getOwner() <em>Owner</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getOwner()
 	 * @generated
 	 * @ordered
@@ -142,8 +136,7 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 	protected static final String OWNER_EDEFAULT = null;
 	/**
 	 * The cached value of the '{@link #getOwner() <em>Owner</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getOwner()
 	 * @generated
 	 * @ordered
@@ -151,62 +144,60 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 	protected String owner = OWNER_EDEFAULT;
 	/**
 	 * The default value of the '{@link #getFavorited() <em>Favorited</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getFavorited()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final Integer FAVORITED_EDEFAULT = null;
+	protected static final int FAVORITED_EDEFAULT = 0;
 	/**
 	 * The cached value of the '{@link #getFavorited() <em>Favorited</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getFavorited()
 	 * @generated
 	 * @ordered
 	 */
-	protected Integer favorited = FAVORITED_EDEFAULT;
+	protected int favorited = FAVORITED_EDEFAULT;
 	/**
 	 * The default value of the '{@link #getInstallstotal() <em>Installstotal</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
 	 * @see #getInstallstotal()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final Integer INSTALLSTOTAL_EDEFAULT = null;
+	protected static final int INSTALLSTOTAL_EDEFAULT = 0;
 	/**
 	 * The cached value of the '{@link #getInstallstotal() <em>Installstotal</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
 	 * @see #getInstallstotal()
 	 * @generated
 	 * @ordered
 	 */
-	protected Integer installstotal = INSTALLSTOTAL_EDEFAULT;
+	protected int installstotal = INSTALLSTOTAL_EDEFAULT;
 	/**
 	 * The default value of the '{@link #getInstallsrecent() <em>Installsrecent</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
 	 * @see #getInstallsrecent()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final Integer INSTALLSRECENT_EDEFAULT = null;
+	protected static final int INSTALLSRECENT_EDEFAULT = 0;
 	/**
 	 * The cached value of the '{@link #getInstallsrecent() <em>Installsrecent</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
 	 * @see #getInstallsrecent()
 	 * @generated
 	 * @ordered
 	 */
-	protected Integer installsrecent = INSTALLSRECENT_EDEFAULT;
+	protected int installsrecent = INSTALLSRECENT_EDEFAULT;
 	/**
 	 * The default value of the '{@link #getShortdescription() <em>Shortdescription</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
 	 * @see #getShortdescription()
 	 * @generated
 	 * @ordered
@@ -214,8 +205,8 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 	protected static final String SHORTDESCRIPTION_EDEFAULT = null;
 	/**
 	 * The cached value of the '{@link #getShortdescription() <em>Shortdescription</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
 	 * @see #getShortdescription()
 	 * @generated
 	 * @ordered
@@ -223,8 +214,7 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 	protected String shortdescription = SHORTDESCRIPTION_EDEFAULT;
 	/**
 	 * The default value of the '{@link #getBody() <em>Body</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getBody()
 	 * @generated
 	 * @ordered
@@ -232,8 +222,7 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 	protected static final String BODY_EDEFAULT = null;
 	/**
 	 * The cached value of the '{@link #getBody() <em>Body</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getBody()
 	 * @generated
 	 * @ordered
@@ -241,62 +230,57 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 	protected String body = BODY_EDEFAULT;
 	/**
 	 * The default value of the '{@link #getCreated() <em>Created</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getCreated()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final Long CREATED_EDEFAULT = null;
+	protected static final long CREATED_EDEFAULT = 0L;
 	/**
 	 * The cached value of the '{@link #getCreated() <em>Created</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getCreated()
 	 * @generated
 	 * @ordered
 	 */
-	protected Long created = CREATED_EDEFAULT;
+	protected long created = CREATED_EDEFAULT;
 	/**
 	 * The default value of the '{@link #getChanged() <em>Changed</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getChanged()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final Long CHANGED_EDEFAULT = null;
+	protected static final long CHANGED_EDEFAULT = 0L;
 	/**
 	 * The cached value of the '{@link #getChanged() <em>Changed</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getChanged()
 	 * @generated
 	 * @ordered
 	 */
-	protected Long changed = CHANGED_EDEFAULT;
+	protected long changed = CHANGED_EDEFAULT;
 	/**
 	 * The default value of the '{@link #getFoundationmember() <em>Foundationmember</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
 	 * @see #getFoundationmember()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final Integer FOUNDATIONMEMBER_EDEFAULT = null;
+	protected static final int FOUNDATIONMEMBER_EDEFAULT = 0;
 	/**
 	 * The cached value of the '{@link #getFoundationmember() <em>Foundationmember</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
 	 * @see #getFoundationmember()
 	 * @generated
 	 * @ordered
 	 */
-	protected Integer foundationmember = FOUNDATIONMEMBER_EDEFAULT;
+	protected int foundationmember = FOUNDATIONMEMBER_EDEFAULT;
 	/**
 	 * The default value of the '{@link #getHomepageurl() <em>Homepageurl</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getHomepageurl()
 	 * @generated
 	 * @ordered
@@ -304,8 +288,7 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 	protected static final String HOMEPAGEURL_EDEFAULT = null;
 	/**
 	 * The cached value of the '{@link #getHomepageurl() <em>Homepageurl</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getHomepageurl()
 	 * @generated
 	 * @ordered
@@ -313,8 +296,7 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 	protected String homepageurl = HOMEPAGEURL_EDEFAULT;
 	/**
 	 * The default value of the '{@link #getImage() <em>Image</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getImage()
 	 * @generated
 	 * @ordered
@@ -322,8 +304,7 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 	protected static final String IMAGE_EDEFAULT = null;
 	/**
 	 * The cached value of the '{@link #getImage() <em>Image</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getImage()
 	 * @generated
 	 * @ordered
@@ -331,8 +312,7 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 	protected String image = IMAGE_EDEFAULT;
 	/**
 	 * The default value of the '{@link #getLicense() <em>License</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getLicense()
 	 * @generated
 	 * @ordered
@@ -340,8 +320,7 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 	protected static final String LICENSE_EDEFAULT = null;
 	/**
 	 * The cached value of the '{@link #getLicense() <em>License</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getLicense()
 	 * @generated
 	 * @ordered
@@ -349,8 +328,7 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 	protected String license = LICENSE_EDEFAULT;
 	/**
 	 * The default value of the '{@link #getCompanyname() <em>Companyname</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getCompanyname()
 	 * @generated
 	 * @ordered
@@ -358,8 +336,7 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 	protected static final String COMPANYNAME_EDEFAULT = null;
 	/**
 	 * The cached value of the '{@link #getCompanyname() <em>Companyname</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getCompanyname()
 	 * @generated
 	 * @ordered
@@ -367,8 +344,7 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 	protected String companyname = COMPANYNAME_EDEFAULT;
 	/**
 	 * The default value of the '{@link #getStatus() <em>Status</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getStatus()
 	 * @generated
 	 * @ordered
@@ -376,8 +352,7 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 	protected static final String STATUS_EDEFAULT = null;
 	/**
 	 * The cached value of the '{@link #getStatus() <em>Status</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getStatus()
 	 * @generated
 	 * @ordered
@@ -385,8 +360,7 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 	protected String status = STATUS_EDEFAULT;
 	/**
 	 * The default value of the '{@link #getSupporturl() <em>Supporturl</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getSupporturl()
 	 * @generated
 	 * @ordered
@@ -394,8 +368,7 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 	protected static final String SUPPORTURL_EDEFAULT = null;
 	/**
 	 * The cached value of the '{@link #getSupporturl() <em>Supporturl</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getSupporturl()
 	 * @generated
 	 * @ordered
@@ -403,8 +376,7 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 	protected String supporturl = SUPPORTURL_EDEFAULT;
 	/**
 	 * The default value of the '{@link #getVersion() <em>Version</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getVersion()
 	 * @generated
 	 * @ordered
@@ -412,8 +384,7 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 	protected static final String VERSION_EDEFAULT = null;
 	/**
 	 * The cached value of the '{@link #getVersion() <em>Version</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getVersion()
 	 * @generated
 	 * @ordered
@@ -421,8 +392,8 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 	protected String version = VERSION_EDEFAULT;
 	/**
 	 * The default value of the '{@link #getEclipseversion() <em>Eclipseversion</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
 	 * @see #getEclipseversion()
 	 * @generated
 	 * @ordered
@@ -430,8 +401,8 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 	protected static final String ECLIPSEVERSION_EDEFAULT = null;
 	/**
 	 * The cached value of the '{@link #getEclipseversion() <em>Eclipseversion</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
 	 * @see #getEclipseversion()
 	 * @generated
 	 * @ordered
@@ -439,8 +410,7 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 	protected String eclipseversion = ECLIPSEVERSION_EDEFAULT;
 	/**
 	 * The default value of the '{@link #getUpdateurl() <em>Updateurl</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getUpdateurl()
 	 * @generated
 	 * @ordered
@@ -448,8 +418,7 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 	protected static final String UPDATEURL_EDEFAULT = null;
 	/**
 	 * The cached value of the '{@link #getUpdateurl() <em>Updateurl</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getUpdateurl()
 	 * @generated
 	 * @ordered
@@ -457,8 +426,7 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 	protected String updateurl = UPDATEURL_EDEFAULT;
 	/**
 	 * The cached value of the '{@link #getIus() <em>Ius</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getIus()
 	 * @generated
 	 * @ordered
@@ -466,35 +434,24 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 	protected Ius ius;
 	/**
 	 * The cached value of the '{@link #getPlatforms() <em>Platforms</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getPlatforms()
 	 * @generated
 	 * @ordered
 	 */
 	protected Platforms platforms;
 	/**
-	 * The default value of the '{@link #getUrl() <em>Url</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * The default value of the '{@link #getUrl() <em>Url</em>}' attribute. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getUrl()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String URL_EDEFAULT = null;
-	/**
-	 * The cached value of the '{@link #getUrl() <em>Url</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getUrl()
-	 * @generated
-	 * @ordered
-	 */
-	protected String url = URL_EDEFAULT;
+	protected static final String URL_EDEFAULT = "";
 	/**
 	 * The default value of the '{@link #getScreenshot() <em>Screenshot</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getScreenshot()
 	 * @generated
 	 * @ordered
@@ -502,16 +459,15 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 	protected static final String SCREENSHOT_EDEFAULT = null;
 	/**
 	 * The cached value of the '{@link #getScreenshot() <em>Screenshot</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getScreenshot()
 	 * @generated
 	 * @ordered
 	 */
 	protected String screenshot = SCREENSHOT_EDEFAULT;
+
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	protected NodeImpl() {
@@ -519,8 +475,7 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -529,29 +484,26 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Long getId() {
+	public long getId() {
 		return id;
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setId(Long newId) {
-		Long oldId = id;
+	public void setId(long newId) {
+		long oldId = id;
 		id = newId;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, MarketplacePackage.NODE__ID, oldId, id));
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public String getName() {
@@ -559,8 +511,7 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public void setName(String newName) {
@@ -571,71 +522,64 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Integer getFavorited() {
+	public int getFavorited() {
 		return favorited;
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setFavorited(Integer newFavorited) {
-		Integer oldFavorited = favorited;
+	public void setFavorited(int newFavorited) {
+		int oldFavorited = favorited;
 		favorited = newFavorited;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, MarketplacePackage.NODE__FAVORITED, oldFavorited, favorited));
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Integer getInstallstotal() {
+	public int getInstallstotal() {
 		return installstotal;
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setInstallstotal(Integer newInstallstotal) {
-		Integer oldInstallstotal = installstotal;
+	public void setInstallstotal(int newInstallstotal) {
+		int oldInstallstotal = installstotal;
 		installstotal = newInstallstotal;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, MarketplacePackage.NODE__INSTALLSTOTAL, oldInstallstotal, installstotal));
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Integer getInstallsrecent() {
+	public int getInstallsrecent() {
 		return installsrecent;
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setInstallsrecent(Integer newInstallsrecent) {
-		Integer oldInstallsrecent = installsrecent;
+	public void setInstallsrecent(int newInstallsrecent) {
+		int oldInstallsrecent = installsrecent;
 		installsrecent = newInstallsrecent;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, MarketplacePackage.NODE__INSTALLSRECENT, oldInstallsrecent, installsrecent));
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public String getShortdescription() {
@@ -643,8 +587,7 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public void setShortdescription(String newShortdescription) {
@@ -655,8 +598,7 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public String getBody() {
@@ -664,8 +606,7 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public void setBody(String newBody) {
@@ -676,71 +617,64 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Long getCreated() {
+	public long getCreated() {
 		return created;
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setCreated(Long newCreated) {
-		Long oldCreated = created;
+	public void setCreated(long newCreated) {
+		long oldCreated = created;
 		created = newCreated;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, MarketplacePackage.NODE__CREATED, oldCreated, created));
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Long getChanged() {
+	public long getChanged() {
 		return changed;
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setChanged(Long newChanged) {
-		Long oldChanged = changed;
+	public void setChanged(long newChanged) {
+		long oldChanged = changed;
 		changed = newChanged;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, MarketplacePackage.NODE__CHANGED, oldChanged, changed));
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Integer getFoundationmember() {
+	public int getFoundationmember() {
 		return foundationmember;
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setFoundationmember(Integer newFoundationmember) {
-		Integer oldFoundationmember = foundationmember;
+	public void setFoundationmember(int newFoundationmember) {
+		int oldFoundationmember = foundationmember;
 		foundationmember = newFoundationmember;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, MarketplacePackage.NODE__FOUNDATIONMEMBER, oldFoundationmember, foundationmember));
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public String getHomepageurl() {
@@ -748,8 +682,7 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public void setHomepageurl(String newHomepageurl) {
@@ -760,17 +693,19 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated Not
 	 */
 	public String getImage() {
-		return image;
+		if (getBaseUrl() == null) {
+			return image;
+		}
+		return getBaseUrl() + "/files/" + getId() + "/" + image;
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public void setImage(String newImage) {
@@ -781,8 +716,7 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public String getLicense() {
@@ -790,8 +724,7 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public void setLicense(String newLicense) {
@@ -802,8 +735,7 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public String getCompanyname() {
@@ -811,8 +743,7 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public void setCompanyname(String newCompanyname) {
@@ -823,8 +754,7 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public String getStatus() {
@@ -832,8 +762,7 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public void setStatus(String newStatus) {
@@ -844,8 +773,7 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public String getSupporturl() {
@@ -853,8 +781,7 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public void setSupporturl(String newSupporturl) {
@@ -865,8 +792,7 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public String getVersion() {
@@ -874,8 +800,7 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public void setVersion(String newVersion) {
@@ -886,8 +811,7 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public String getEclipseversion() {
@@ -895,8 +819,7 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public void setEclipseversion(String newEclipseversion) {
@@ -907,17 +830,16 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public String getUpdateurl() {
-		return updateurl;
+		 return updateurl;
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public void setUpdateurl(String newUpdateurl) {
@@ -928,8 +850,7 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public Ius getIus() {
@@ -937,8 +858,7 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public NotificationChain basicSetIus(Ius newIus, NotificationChain msgs) {
@@ -952,8 +872,7 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public void setIus(Ius newIus) {
@@ -971,8 +890,7 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public Platforms getPlatforms() {
@@ -980,8 +898,7 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public NotificationChain basicSetPlatforms(Platforms newPlatforms, NotificationChain msgs) {
@@ -995,8 +912,7 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public void setPlatforms(Platforms newPlatforms) {
@@ -1014,38 +930,50 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated Not
 	 */
 	public String getUrl() {
-		return url;
+		if (getBaseUrl() == null) {
+			return "";
+		}
+		return getBaseUrl() + "/" + getId();
+	}
+
+	public String getBaseUrl() {
+		EObject rootContainer = EcoreUtil.getRootContainer(this);
+		if (rootContainer != null && rootContainer instanceof Marketplace) {
+			String baseUrl = ((Marketplace) rootContainer).getBaseUrl();
+			if (baseUrl != null) {
+				return baseUrl;
+			}
+		}
+		return null;
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated Not
 	 */
 	public void setUrl(String newUrl) {
-		String oldUrl = url;
-		url = newUrl;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, MarketplacePackage.NODE__URL, oldUrl, url));
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated Not
 	 */
 	public String getScreenshot() {
-		return screenshot;
+		if (getBaseUrl() == null) {
+			return screenshot;
+		}
+		return getBaseUrl() + "/files/" + getId() + "/" + screenshot;
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public void setScreenshot(String newScreenshot) {
@@ -1056,8 +984,7 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -1076,8 +1003,7 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public String getType() {
@@ -1085,8 +1011,7 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public void setType(String newType) {
@@ -1097,8 +1022,7 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public Categories getCategories() {
@@ -1106,8 +1030,7 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public NotificationChain basicSetCategories(Categories newCategories, NotificationChain msgs) {
@@ -1121,8 +1044,7 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public void setCategories(Categories newCategories) {
@@ -1140,8 +1062,7 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public Tags getTags() {
@@ -1149,8 +1070,7 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public NotificationChain basicSetTags(Tags newTags, NotificationChain msgs) {
@@ -1164,8 +1084,7 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public void setTags(Tags newTags) {
@@ -1183,8 +1102,7 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public String getOwner() {
@@ -1192,8 +1110,7 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public void setOwner(String newOwner) {
@@ -1204,8 +1121,7 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -1270,8 +1186,7 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -1363,8 +1278,7 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -1456,15 +1370,14 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case MarketplacePackage.NODE__ID:
-				return ID_EDEFAULT == null ? id != null : !ID_EDEFAULT.equals(id);
+				return id != ID_EDEFAULT;
 			case MarketplacePackage.NODE__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case MarketplacePackage.NODE__TYPE:
@@ -1476,21 +1389,21 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 			case MarketplacePackage.NODE__OWNER:
 				return OWNER_EDEFAULT == null ? owner != null : !OWNER_EDEFAULT.equals(owner);
 			case MarketplacePackage.NODE__FAVORITED:
-				return FAVORITED_EDEFAULT == null ? favorited != null : !FAVORITED_EDEFAULT.equals(favorited);
+				return favorited != FAVORITED_EDEFAULT;
 			case MarketplacePackage.NODE__INSTALLSTOTAL:
-				return INSTALLSTOTAL_EDEFAULT == null ? installstotal != null : !INSTALLSTOTAL_EDEFAULT.equals(installstotal);
+				return installstotal != INSTALLSTOTAL_EDEFAULT;
 			case MarketplacePackage.NODE__INSTALLSRECENT:
-				return INSTALLSRECENT_EDEFAULT == null ? installsrecent != null : !INSTALLSRECENT_EDEFAULT.equals(installsrecent);
+				return installsrecent != INSTALLSRECENT_EDEFAULT;
 			case MarketplacePackage.NODE__SHORTDESCRIPTION:
 				return SHORTDESCRIPTION_EDEFAULT == null ? shortdescription != null : !SHORTDESCRIPTION_EDEFAULT.equals(shortdescription);
 			case MarketplacePackage.NODE__BODY:
 				return BODY_EDEFAULT == null ? body != null : !BODY_EDEFAULT.equals(body);
 			case MarketplacePackage.NODE__CREATED:
-				return CREATED_EDEFAULT == null ? created != null : !CREATED_EDEFAULT.equals(created);
+				return created != CREATED_EDEFAULT;
 			case MarketplacePackage.NODE__CHANGED:
-				return CHANGED_EDEFAULT == null ? changed != null : !CHANGED_EDEFAULT.equals(changed);
+				return changed != CHANGED_EDEFAULT;
 			case MarketplacePackage.NODE__FOUNDATIONMEMBER:
-				return FOUNDATIONMEMBER_EDEFAULT == null ? foundationmember != null : !FOUNDATIONMEMBER_EDEFAULT.equals(foundationmember);
+				return foundationmember != FOUNDATIONMEMBER_EDEFAULT;
 			case MarketplacePackage.NODE__HOMEPAGEURL:
 				return HOMEPAGEURL_EDEFAULT == null ? homepageurl != null : !HOMEPAGEURL_EDEFAULT.equals(homepageurl);
 			case MarketplacePackage.NODE__IMAGE:
@@ -1514,7 +1427,7 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 			case MarketplacePackage.NODE__PLATFORMS:
 				return platforms != null;
 			case MarketplacePackage.NODE__URL:
-				return URL_EDEFAULT == null ? url != null : !URL_EDEFAULT.equals(url);
+				return URL_EDEFAULT == null ? getUrl() != null : !URL_EDEFAULT.equals(getUrl());
 			case MarketplacePackage.NODE__SCREENSHOT:
 				return SCREENSHOT_EDEFAULT == null ? screenshot != null : !SCREENSHOT_EDEFAULT.equals(screenshot);
 		}
@@ -1522,8 +1435,7 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -1573,12 +1485,10 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 		result.append(eclipseversion);
 		result.append(", updateurl: ");
 		result.append(updateurl);
-		result.append(", url: ");
-		result.append(url);
 		result.append(", screenshot: ");
 		result.append(screenshot);
 		result.append(')');
 		return result.toString();
 	}
 
-} //NodeImpl
+} // NodeImpl

@@ -4,9 +4,14 @@ An open source Eclipse marketplace server based on the [marketplace client REST 
 
 This server is built on [Spring Boot](http://projects.spring.io/spring-boot/), Eclipse EMF, HyperSQL DB, Hibernate and Teneo. It is self-contained, so there is no need to install anything for deployment except for Java 8. While it is created for serving [DAWN](http://www.dawnsci.org) plug-ins, it can be used for distributing any Eclipse plug-ins as it is compatible with the Eclipse Marketplace client.
 
-Note that the server is not yet complete and can not be used in production.
+**Note that the server is not yet feature complete and can not be used in production.**
 
-## Supported API calls
+## REST API calls
+
+Note that this implementation of the server currently prefix all REST calls with "mpc". So for instance getting details of a particular product will look like this: `http://localhost:8080/mpc/node/123/api/p`.
+
+### From the Eclipse Marketplace API documentation
+
 This provisional API will be identified by /api/p at the end of most urls.
 - [x]	`/api/p` - Returns Markets + Categories
 - [x] `/catalogs/api/p` - Returns a listing of all catalogs that are browsable with the MPC.
@@ -30,6 +35,8 @@ When doing development on this code, you should start the server from within Ecl
 
 When running the standalone server you need to start it from the command line. E.g. `java -jar org.dawnsci.marketplace.server-1.0-SNAPSHOT.war`
 
+Currently when starting the server it will run the database in memory and create a number of items for testing. A folder named _solutions_ will be created next to the *.jar file, or in the project root when running from the IDE. This contains all file resources for the solutions. These can be accessed from a browser using the syntax `http://localhost:8080/files/{solution-id}/{file-name}`.
+
 ### Using the marketplace client
 
-Start Eclipse with required parameters. E.g. `/Eclipse.app/Contents/MacOS/eclipse -vmargs -Dorg.eclipse.epp.internal.mpc.core.service.DefaultMarketplaceService.url=http://localhost:8080/mpc -Dorg.eclipse.epp.internal.mpc.core.service.DefaultCatalogService.url=http://localhost:8080/mpc`
+Start Eclipse with required parameters for connecting to the server, e.g. `/Eclipse.app/Contents/MacOS/eclipse -vmargs -Dorg.eclipse.epp.internal.mpc.core.service.DefaultMarketplaceService.url=http://localhost:8080/mpc -Dorg.eclipse.epp.internal.mpc.core.service.DefaultCatalogService.url=http://localhost:8080/mpc`

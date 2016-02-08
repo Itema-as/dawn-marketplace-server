@@ -10,19 +10,16 @@
  ****************************************************************************/
 package org.dawnsci.marketplace;
 
-import org.dawnsci.marketplace.configurations.WebMvcDispatcherConfig;
+import javax.servlet.FilterRegistration;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+
 import org.dawnsci.marketplace.configurations.WebMvcConfiguration;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.context.ContextLoaderListener;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 import org.springframework.web.filter.CharacterEncodingFilter;
-import org.springframework.web.servlet.DispatcherServlet;
-
-import javax.servlet.FilterRegistration;
-import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
-import javax.servlet.ServletRegistration;
 
 /**
  * Initialises the Web MVC application, this can be reach at the root of the
@@ -48,7 +45,7 @@ public class WebMvcInitializer implements WebApplicationInitializer {
 
 		// Manage the lifecycle of the root application context
 		container.addListener(new ContextLoaderListener(rootContext));
-
+/*
 		// Create the dispatcher servlet's Spring application context
 		AnnotationConfigWebApplicationContext dispatcherContext = new AnnotationConfigWebApplicationContext();
 		dispatcherContext.register(WebMvcDispatcherConfig.class);
@@ -58,5 +55,6 @@ public class WebMvcInitializer implements WebApplicationInitializer {
 				new DispatcherServlet(dispatcherContext));
 		dispatcher.setLoadOnStartup(1);
 		dispatcher.addMapping("/");
+*/		
 	}
 }

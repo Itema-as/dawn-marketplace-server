@@ -47,6 +47,7 @@
     <nested inputs="marketplace.ecore#//Tag" outputs="MarketplaceXML.xsd#//Tag;XSDElementDeclaration=2"/>
     <nested inputs="marketplace.ecore#//Iu" outputs="MarketplaceXML.xsd#//Iu;XSDComplexTypeDefinition=3">
       <nested inputs="marketplace.ecore#//Iu/selected" outputs="MarketplaceXML.xsd#//Iu;XSDComplexTypeDefinition=3/XSDAttributeUse"/>
+      <nested inputs="marketplace.ecore#//Iu/required" outputs="MarketplaceXML.xsd#//Iu;XSDComplexTypeDefinition=3/XSDAttributeUse=1"/>
     </nested>
     <nested inputs="marketplace.ecore#//Iu" outputs="MarketplaceXML.xsd#//Iu;XSDElementDeclaration=3"/>
     <nested inputs="marketplace.ecore#//Platform" outputs="MarketplaceXML.xsd#//Platform;XSDComplexTypeDefinition=4"/>
@@ -60,10 +61,10 @@
     </nested>
     <nested inputs="marketplace.ecore#//Ius" outputs="MarketplaceXML.xsd#//Ius;XSDElementDeclaration=6"/>
     <nested inputs="marketplace.ecore#//Marketplace" outputs="MarketplaceXML.xsd#//Marketplace;XSDComplexTypeDefinition=7">
-      <nested inputs="marketplace.ecore#//Marketplace/node" outputs="MarketplaceXML.xsd#//Marketplace;XSDComplexTypeDefinition=7/XSDAttributeUse"/>
-      <nested inputs="marketplace.ecore#//Marketplace/catalogs" outputs="MarketplaceXML.xsd#//Marketplace;XSDComplexTypeDefinition=7/XSDParticle/XSDModelGroup/XSDParticle"/>
-      <nested inputs="marketplace.ecore#//Marketplace/markets" outputs="MarketplaceXML.xsd#//Marketplace;XSDComplexTypeDefinition=7/XSDParticle/XSDModelGroup/XSDParticle=1"/>
-      <nested inputs="marketplace.ecore#//Marketplace/featured" outputs="MarketplaceXML.xsd#//Marketplace;XSDComplexTypeDefinition=7/XSDParticle/XSDModelGroup/XSDParticle=2"/>
+      <nested inputs="marketplace.ecore#//Marketplace/node" outputs="MarketplaceXML.xsd#//Marketplace;XSDComplexTypeDefinition=7/XSDParticle/XSDModelGroup/XSDParticle"/>
+      <nested inputs="marketplace.ecore#//Marketplace/catalogs" outputs="MarketplaceXML.xsd#//Marketplace;XSDComplexTypeDefinition=7/XSDParticle/XSDModelGroup/XSDParticle=1"/>
+      <nested inputs="marketplace.ecore#//Marketplace/markets" outputs="MarketplaceXML.xsd#//Marketplace;XSDComplexTypeDefinition=7/XSDParticle/XSDModelGroup/XSDParticle=2"/>
+      <nested inputs="marketplace.ecore#//Marketplace/featured" outputs="MarketplaceXML.xsd#//Marketplace;XSDComplexTypeDefinition=7/XSDParticle/XSDModelGroup/XSDParticle=3"/>
     </nested>
     <nested inputs="marketplace.ecore#//Marketplace" outputs="MarketplaceXML.xsd#//Marketplace;XSDElementDeclaration=7"/>
     <nested inputs="marketplace.ecore#//Categories" outputs="MarketplaceXML.xsd#//Categories;XSDComplexTypeDefinition=8">

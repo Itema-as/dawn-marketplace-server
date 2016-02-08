@@ -20,30 +20,41 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 /**
  * @author Torkild U. Resheim, Itema AS
  */
 @Service
 public class DataService {
-	
+
 	@Autowired
 	private SessionFactory sessionFactory;
-		
+	
+	private String baseUrl = "http://localhost:8080";
+
 	public Marketplace getContent(String identifier) {
-		Marketplace marketplace = MarketplaceFactory.eINSTANCE.createMarketplace();	
+		Marketplace marketplace = MarketplaceFactory.eINSTANCE.createMarketplace();
+		marketplace.setBaseUrl(baseUrl);
 		Session session = sessionFactory.openSession();
-		Query query = session.createQuery("SELECT node FROM Node node WHERE node.id='"+identifier+"'");
-		query.setMaxResults(1);
-		marketplace.setNode((Node) query.list().get(0));
-		session.close();
+		try {
+			Query query = session.createQuery("SELECT node FROM Node node WHERE node.id='" + identifier + "'");
+			query.setMaxResults(1);
+			if (query.list().isEmpty()) {
+				return marketplace;
+			}
+			marketplace.setNode((Node) query.list().get(0));
+		} finally {
+			session.close();
+		}
 		return marketplace;
 	}
 
 	@SuppressWarnings("unchecked")
 	public Marketplace getCatalogs() {
-		Marketplace marketplace = MarketplaceFactory.eINSTANCE.createMarketplace();	
+		Marketplace marketplace = MarketplaceFactory.eINSTANCE.createMarketplace();
+		marketplace.setBaseUrl(baseUrl);
 		Catalogs catalogs = MarketplaceFactory.eINSTANCE.createCatalogs();
-		marketplace.setCatalogs(catalogs);		
+		marketplace.setCatalogs(catalogs);
 		Session session = sessionFactory.openSession();
 		Query query = session.createQuery("SELECT catalog FROM Catalog catalog");
 		catalogs.getItems().addAll(query.list());
@@ -53,7 +64,8 @@ public class DataService {
 
 	@SuppressWarnings("unchecked")
 	public Marketplace getMarkets() {
-		Marketplace marketplace = MarketplaceFactory.eINSTANCE.createMarketplace();	
+		Marketplace marketplace = MarketplaceFactory.eINSTANCE.createMarketplace();
+		marketplace.setBaseUrl(baseUrl);
 		Session session = sessionFactory.openSession();
 		Query query = session.createQuery("SELECT market FROM Market market");
 		marketplace.getMarkets().addAll(query.list());
@@ -67,10 +79,11 @@ public class DataService {
 	 * @return
 	 */
 	@SuppressWarnings("unchecked")
-	public Marketplace getFeatured() {		
-		Marketplace marketplace = MarketplaceFactory.eINSTANCE.createMarketplace();	
+	public Marketplace getFeatured() {
+		Marketplace marketplace = MarketplaceFactory.eINSTANCE.createMarketplace();
+		marketplace.setBaseUrl(baseUrl);
 		Featured featured = MarketplaceFactory.eINSTANCE.createFeatured();
-		marketplace.setFeatured(featured);		
+		marketplace.setFeatured(featured);
 		Session session = sessionFactory.openSession();
 		Query query = session.createQuery("SELECT node FROM Node node ORDER BY node.changed ASC");
 		query.setMaxResults(3);
@@ -86,9 +99,10 @@ public class DataService {
 	 */
 	@SuppressWarnings("unchecked")
 	public Marketplace getUpdated() {
-		Marketplace marketplace = MarketplaceFactory.eINSTANCE.createMarketplace();	
+		Marketplace marketplace = MarketplaceFactory.eINSTANCE.createMarketplace();
+		marketplace.setBaseUrl(baseUrl);
 		Featured featured = MarketplaceFactory.eINSTANCE.createFeatured();
-		marketplace.setFeatured(featured);		
+		marketplace.setFeatured(featured);
 		Session session = sessionFactory.openSession();
 		Query query = session.createQuery("SELECT node FROM Node node ORDER BY node.changed ASC");
 		query.setMaxResults(50);
@@ -96,6 +110,5 @@ public class DataService {
 		session.close();
 		return marketplace;
 	}
-
 
 }
