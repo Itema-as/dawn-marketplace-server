@@ -1,4 +1,4 @@
-# DAWN Marketplace Server
+# DAWN Marketplace Server [![Build Status](https://travis-ci.org/Itema-as/eclipse-marketplace-server.svg?branch=master)](https://travis-ci.org/Itema-as/eclipse-marketplace-server)
 
 An open source Eclipse marketplace server based on the [marketplace client REST API](https://wiki.eclipse.org/Marketplace/REST).
 
