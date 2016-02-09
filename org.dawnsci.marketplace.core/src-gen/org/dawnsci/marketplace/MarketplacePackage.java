@@ -672,13 +672,22 @@ public interface MarketplacePackage extends EPackage {
 	int MARKETPLACE__BASE_URL = 4;
 
 	/**
+	 * The feature id for the '<em><b>Search</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MARKETPLACE__SEARCH = 5;
+
+	/**
 	 * The number of structural features of the '<em>Marketplace</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MARKETPLACE_FEATURE_COUNT = 5;
+	int MARKETPLACE_FEATURE_COUNT = 6;
 
 	/**
 	 * The number of operations of the '<em>Marketplace</em>' class.
@@ -1291,6 +1300,70 @@ public interface MarketplacePackage extends EPackage {
 	int FEATURED_OPERATION_COUNT = 0;
 
 	/**
+	 * The meta object id for the '{@link org.dawnsci.marketplace.impl.SearchImpl <em>Search</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.dawnsci.marketplace.impl.SearchImpl
+	 * @see org.dawnsci.marketplace.impl.MarketplacePackageImpl#getSearch()
+	 * @generated
+	 */
+	int SEARCH = 19;
+
+	/**
+	 * The feature id for the '<em><b>Term</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SEARCH__TERM = 0;
+
+	/**
+	 * The feature id for the '<em><b>Url</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SEARCH__URL = 1;
+
+	/**
+	 * The feature id for the '<em><b>Count</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SEARCH__COUNT = 2;
+
+	/**
+	 * The feature id for the '<em><b>Nodes</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SEARCH__NODES = 3;
+
+	/**
+	 * The number of structural features of the '<em>Search</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SEARCH_FEATURE_COUNT = 4;
+
+	/**
+	 * The number of operations of the '<em>Search</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SEARCH_OPERATION_COUNT = 0;
+
+	/**
 	 * Returns the meta object for class '{@link org.dawnsci.marketplace.Node <em>Node</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1822,6 +1895,17 @@ public interface MarketplacePackage extends EPackage {
 	EAttribute getMarketplace_BaseUrl();
 
 	/**
+	 * Returns the meta object for the containment reference '{@link org.dawnsci.marketplace.Marketplace#getSearch <em>Search</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Search</em>'.
+	 * @see org.dawnsci.marketplace.Marketplace#getSearch()
+	 * @see #getMarketplace()
+	 * @generated
+	 */
+	EReference getMarketplace_Search();
+
+	/**
 	 * Returns the meta object for class '{@link org.dawnsci.marketplace.Categories <em>Categories</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2284,6 +2368,60 @@ public interface MarketplacePackage extends EPackage {
 	EReference getFeatured_Nodes();
 
 	/**
+	 * Returns the meta object for class '{@link org.dawnsci.marketplace.Search <em>Search</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Search</em>'.
+	 * @see org.dawnsci.marketplace.Search
+	 * @generated
+	 */
+	EClass getSearch();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.dawnsci.marketplace.Search#getTerm <em>Term</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Term</em>'.
+	 * @see org.dawnsci.marketplace.Search#getTerm()
+	 * @see #getSearch()
+	 * @generated
+	 */
+	EAttribute getSearch_Term();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.dawnsci.marketplace.Search#getUrl <em>Url</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Url</em>'.
+	 * @see org.dawnsci.marketplace.Search#getUrl()
+	 * @see #getSearch()
+	 * @generated
+	 */
+	EAttribute getSearch_Url();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.dawnsci.marketplace.Search#getCount <em>Count</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Count</em>'.
+	 * @see org.dawnsci.marketplace.Search#getCount()
+	 * @see #getSearch()
+	 * @generated
+	 */
+	EAttribute getSearch_Count();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.dawnsci.marketplace.Search#getNodes <em>Nodes</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Nodes</em>'.
+	 * @see org.dawnsci.marketplace.Search#getNodes()
+	 * @see #getSearch()
+	 * @generated
+	 */
+	EReference getSearch_Nodes();
+
+	/**
 	 * Returns the meta object for the attribute '{@link org.dawnsci.marketplace.Node#getType <em>Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2710,6 +2848,13 @@ public interface MarketplacePackage extends EPackage {
 		 */
 		EAttribute MARKETPLACE__BASE_URL = eINSTANCE.getMarketplace_BaseUrl();
 		/**
+		 * The meta object literal for the '<em><b>Search</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference MARKETPLACE__SEARCH = eINSTANCE.getMarketplace_Search();
+		/**
 		 * The meta object literal for the '{@link org.dawnsci.marketplace.impl.CategoriesImpl <em>Categories</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -3032,6 +3177,43 @@ public interface MarketplacePackage extends EPackage {
 		 * @generated
 		 */
 		EReference FEATURED__NODES = eINSTANCE.getFeatured_Nodes();
+		/**
+		 * The meta object literal for the '{@link org.dawnsci.marketplace.impl.SearchImpl <em>Search</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.dawnsci.marketplace.impl.SearchImpl
+		 * @see org.dawnsci.marketplace.impl.MarketplacePackageImpl#getSearch()
+		 * @generated
+		 */
+		EClass SEARCH = eINSTANCE.getSearch();
+		/**
+		 * The meta object literal for the '<em><b>Term</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute SEARCH__TERM = eINSTANCE.getSearch_Term();
+		/**
+		 * The meta object literal for the '<em><b>Url</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute SEARCH__URL = eINSTANCE.getSearch_Url();
+		/**
+		 * The meta object literal for the '<em><b>Count</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute SEARCH__COUNT = eINSTANCE.getSearch_Count();
+		/**
+		 * The meta object literal for the '<em><b>Nodes</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference SEARCH__NODES = eINSTANCE.getSearch_Nodes();
 		/**
 		 * The meta object literal for the '<em><b>Type</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->

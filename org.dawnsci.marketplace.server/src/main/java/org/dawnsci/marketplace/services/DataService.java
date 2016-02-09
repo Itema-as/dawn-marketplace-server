@@ -9,12 +9,14 @@
  *    Torkild U. Resheim - initial API and implementation
  ****************************************************************************/
 package org.dawnsci.marketplace.services;
+import java.util.List;
 
 import org.dawnsci.marketplace.Catalogs;
 import org.dawnsci.marketplace.Featured;
 import org.dawnsci.marketplace.Marketplace;
 import org.dawnsci.marketplace.MarketplaceFactory;
 import org.dawnsci.marketplace.Node;
+import org.dawnsci.marketplace.Search;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -26,6 +28,17 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class DataService {
+	/**
+	 * HQL query to use when searching for a solution using a simple substring
+	 * search.
+	 */
+	private static final String HQL_SEARCH = 
+			"select node from Node node where " +
+			"lower(node.name) like :term or " +
+			"lower(node.owner) like :term or " +
+			"lower(str(node.shortdescription)) like :term or " +
+			"lower(str(node.body)) like :term " +
+			"order by node.changed desc";
 
 	@Autowired
 	private SessionFactory sessionFactory;
@@ -107,6 +120,23 @@ public class DataService {
 		Query query = session.createQuery("SELECT node FROM Node node ORDER BY node.changed ASC");
 		query.setMaxResults(50);
 		featured.getNodes().addAll(query.list());
+		session.close();
+		return marketplace;
+	}
+
+	@SuppressWarnings("unchecked")
+	public Marketplace getSearchResult(String term) {
+		Marketplace marketplace = MarketplaceFactory.eINSTANCE.createMarketplace();
+		marketplace.setBaseUrl(baseUrl);
+		Search search = MarketplaceFactory.eINSTANCE.createSearch();
+		marketplace.setSearch(search);
+		Session session = sessionFactory.openSession();
+		term = term.toLowerCase();
+		Query query = session.createQuery(HQL_SEARCH).setString("term", "%"+term+"%");
+		List<Node> list = query.list();
+		search.getNodes().addAll(list);
+		search.setCount(search.getNodes().size());
+		search.setTerm(term);
 		session.close();
 		return marketplace;
 	}
