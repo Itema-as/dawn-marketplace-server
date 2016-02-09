@@ -831,11 +831,10 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public String getUpdateurl() {
-		 return updateurl;
+		return updateurl;
 	}
 
 	/**
@@ -941,7 +940,14 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 		return getBaseUrl() + "/" + getId();
 	}
 
-	public String getBaseUrl() {
+	/**
+	 * Used to calculate the base URL of URL's relative to the marketplace 
+	 * server. This can only be found if this instance is contained within an
+	 * object which root container is a Marketplace instance.
+	 *  
+	 * @return the base URL or <code>null</code>
+	 */
+	private String getBaseUrl() {
 		EObject rootContainer = EcoreUtil.getRootContainer(this);
 		if (rootContainer != null && rootContainer instanceof Marketplace) {
 			String baseUrl = ((Marketplace) rootContainer).getBaseUrl();

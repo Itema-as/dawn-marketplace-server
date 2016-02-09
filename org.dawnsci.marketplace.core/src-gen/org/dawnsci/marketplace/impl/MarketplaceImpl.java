@@ -10,6 +10,7 @@ import org.dawnsci.marketplace.Market;
 import org.dawnsci.marketplace.Marketplace;
 import org.dawnsci.marketplace.MarketplacePackage;
 import org.dawnsci.marketplace.Node;
+import org.dawnsci.marketplace.Search;
 import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.common.notify.NotificationChain;
@@ -35,6 +36,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link org.dawnsci.marketplace.impl.MarketplaceImpl#getMarkets <em>Markets</em>}</li>
  *   <li>{@link org.dawnsci.marketplace.impl.MarketplaceImpl#getFeatured <em>Featured</em>}</li>
  *   <li>{@link org.dawnsci.marketplace.impl.MarketplaceImpl#getBaseUrl <em>Base Url</em>}</li>
+ *   <li>{@link org.dawnsci.marketplace.impl.MarketplaceImpl#getSearch <em>Search</em>}</li>
  * </ul>
  *
  * @generated
@@ -99,6 +101,16 @@ public class MarketplaceImpl extends MinimalEObjectImpl.Container implements Mar
 	 * @ordered
 	 */
 	protected String baseUrl = BASE_URL_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getSearch() <em>Search</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSearch()
+	 * @generated
+	 * @ordered
+	 */
+	protected Search search;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -286,6 +298,49 @@ public class MarketplaceImpl extends MinimalEObjectImpl.Container implements Mar
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public Search getSearch() {
+		return search;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetSearch(Search newSearch, NotificationChain msgs) {
+		Search oldSearch = search;
+		search = newSearch;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, MarketplacePackage.MARKETPLACE__SEARCH, oldSearch, newSearch);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setSearch(Search newSearch) {
+		if (newSearch != search) {
+			NotificationChain msgs = null;
+			if (search != null)
+				msgs = ((InternalEObject)search).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - MarketplacePackage.MARKETPLACE__SEARCH, null, msgs);
+			if (newSearch != null)
+				msgs = ((InternalEObject)newSearch).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - MarketplacePackage.MARKETPLACE__SEARCH, null, msgs);
+			msgs = basicSetSearch(newSearch, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, MarketplacePackage.MARKETPLACE__SEARCH, newSearch, newSearch));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -297,6 +352,8 @@ public class MarketplaceImpl extends MinimalEObjectImpl.Container implements Mar
 				return ((InternalEList<?>)getMarkets()).basicRemove(otherEnd, msgs);
 			case MarketplacePackage.MARKETPLACE__FEATURED:
 				return basicSetFeatured(null, msgs);
+			case MarketplacePackage.MARKETPLACE__SEARCH:
+				return basicSetSearch(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -319,6 +376,8 @@ public class MarketplaceImpl extends MinimalEObjectImpl.Container implements Mar
 				return getFeatured();
 			case MarketplacePackage.MARKETPLACE__BASE_URL:
 				return getBaseUrl();
+			case MarketplacePackage.MARKETPLACE__SEARCH:
+				return getSearch();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -348,6 +407,9 @@ public class MarketplaceImpl extends MinimalEObjectImpl.Container implements Mar
 			case MarketplacePackage.MARKETPLACE__BASE_URL:
 				setBaseUrl((String)newValue);
 				return;
+			case MarketplacePackage.MARKETPLACE__SEARCH:
+				setSearch((Search)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -375,6 +437,9 @@ public class MarketplaceImpl extends MinimalEObjectImpl.Container implements Mar
 			case MarketplacePackage.MARKETPLACE__BASE_URL:
 				setBaseUrl(BASE_URL_EDEFAULT);
 				return;
+			case MarketplacePackage.MARKETPLACE__SEARCH:
+				setSearch((Search)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -397,6 +462,8 @@ public class MarketplaceImpl extends MinimalEObjectImpl.Container implements Mar
 				return featured != null;
 			case MarketplacePackage.MARKETPLACE__BASE_URL:
 				return BASE_URL_EDEFAULT == null ? baseUrl != null : !BASE_URL_EDEFAULT.equals(baseUrl);
+			case MarketplacePackage.MARKETPLACE__SEARCH:
+				return search != null;
 		}
 		return super.eIsSet(featureID);
 	}

@@ -19,6 +19,7 @@ import org.dawnsci.marketplace.Platform;
 import org.dawnsci.marketplace.Platforms;
 import org.dawnsci.marketplace.PopularTab;
 import org.dawnsci.marketplace.RecentTab;
+import org.dawnsci.marketplace.Search;
 import org.dawnsci.marketplace.SearchTab;
 import org.dawnsci.marketplace.Tag;
 import org.dawnsci.marketplace.Tags;
@@ -166,6 +167,13 @@ public class MarketplacePackageImpl extends EPackageImpl implements MarketplaceP
 	 * @generated
 	 */
 	private EClass featuredEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass searchEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -674,6 +682,15 @@ public class MarketplacePackageImpl extends EPackageImpl implements MarketplaceP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getMarketplace_Search() {
+		return (EReference)marketplaceEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getCategories() {
 		return categoriesEClass;
 	}
@@ -1061,6 +1078,51 @@ public class MarketplacePackageImpl extends EPackageImpl implements MarketplaceP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getSearch() {
+		return searchEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getSearch_Term() {
+		return (EAttribute)searchEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getSearch_Url() {
+		return (EAttribute)searchEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getSearch_Count() {
+		return (EAttribute)searchEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getSearch_Nodes() {
+		return (EReference)searchEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EAttribute getNode_Type() {
 		return (EAttribute)nodeEClass.getEStructuralFeatures().get(2);
 	}
@@ -1180,6 +1242,7 @@ public class MarketplacePackageImpl extends EPackageImpl implements MarketplaceP
 		createEReference(marketplaceEClass, MARKETPLACE__MARKETS);
 		createEReference(marketplaceEClass, MARKETPLACE__FEATURED);
 		createEAttribute(marketplaceEClass, MARKETPLACE__BASE_URL);
+		createEReference(marketplaceEClass, MARKETPLACE__SEARCH);
 
 		categoriesEClass = createEClass(CATEGORIES);
 		createEReference(categoriesEClass, CATEGORIES__ITEMS);
@@ -1234,6 +1297,12 @@ public class MarketplacePackageImpl extends EPackageImpl implements MarketplaceP
 		featuredEClass = createEClass(FEATURED);
 		createEAttribute(featuredEClass, FEATURED__COUNT);
 		createEReference(featuredEClass, FEATURED__NODES);
+
+		searchEClass = createEClass(SEARCH);
+		createEAttribute(searchEClass, SEARCH__TERM);
+		createEAttribute(searchEClass, SEARCH__URL);
+		createEAttribute(searchEClass, SEARCH__COUNT);
+		createEReference(searchEClass, SEARCH__NODES);
 	}
 
 	/**
@@ -1326,6 +1395,7 @@ public class MarketplacePackageImpl extends EPackageImpl implements MarketplaceP
 		initEReference(getMarketplace_Markets(), this.getMarket(), null, "markets", null, 0, -1, Marketplace.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getMarketplace_Featured(), this.getFeatured(), null, "featured", null, 0, 1, Marketplace.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getMarketplace_BaseUrl(), ecorePackage.getEString(), "baseUrl", null, 0, 1, Marketplace.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getMarketplace_Search(), this.getSearch(), null, "search", null, 0, 1, Marketplace.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(categoriesEClass, Categories.class, "Categories", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getCategories_Items(), this.getCategory(), null, "items", null, 0, -1, Categories.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1380,6 +1450,12 @@ public class MarketplacePackageImpl extends EPackageImpl implements MarketplaceP
 		initEClass(featuredEClass, Featured.class, "Featured", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getFeatured_Count(), ecorePackage.getEIntegerObject(), "count", "0", 0, 1, Featured.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getFeatured_Nodes(), this.getNode(), null, "nodes", null, 0, -1, Featured.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(searchEClass, Search.class, "Search", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getSearch_Term(), ecorePackage.getEString(), "term", null, 1, 1, Search.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getSearch_Url(), ecorePackage.getEString(), "url", null, 1, 1, Search.class, !IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEAttribute(getSearch_Count(), ecorePackage.getEInt(), "count", null, 1, 1, Search.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getSearch_Nodes(), this.getNode(), null, "nodes", null, 0, -1, Search.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);
@@ -1696,6 +1772,12 @@ public class MarketplacePackageImpl extends EPackageImpl implements MarketplaceP
 		   });	
 		addAnnotation
 		  (getFeatured_Nodes(), 
+		   source, 
+		   new String[] {
+			 "name", "node"
+		   });	
+		addAnnotation
+		  (getSearch_Nodes(), 
 		   source, 
 		   new String[] {
 			 "name", "node"

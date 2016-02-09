@@ -103,6 +103,7 @@
       <xsd:element maxOccurs="1" minOccurs="0" name="catalogs" type="org.dawnsci:Catalogs"/>
       <xsd:element maxOccurs="unbounded" minOccurs="0" name="markets" type="org.dawnsci:Market"/>
       <xsd:element maxOccurs="1" minOccurs="0" name="featured" type="org.dawnsci:Featured"/>
+      <xsd:element maxOccurs="1" minOccurs="0" name="search" type="org.dawnsci:Search"/>
     </xsd:sequence>
   </xsd:complexType>
   <xsd:element name="Marketplace" type="org.dawnsci:Marketplace"/>
@@ -181,4 +182,13 @@
     <xsd:attribute default="0" name="count" type="xsd:int"/>
   </xsd:complexType>
   <xsd:element name="Featured" type="org.dawnsci:Featured"/>
+  <xsd:complexType name="Search">
+    <xsd:sequence>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="nodes" type="org.dawnsci:Node"/>
+    </xsd:sequence>
+    <xsd:attribute name="term" type="xsd:string" use="required"/>
+    <xsd:attribute name="url" type="xsd:string" use="required"/>
+    <xsd:attribute name="count" type="xsd:int" use="required"/>
+  </xsd:complexType>
+  <xsd:element name="Search" type="org.dawnsci:Search"/>
 </xsd:schema>

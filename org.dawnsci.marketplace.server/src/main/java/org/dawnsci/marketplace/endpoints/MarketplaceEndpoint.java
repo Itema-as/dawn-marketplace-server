@@ -49,6 +49,17 @@ public class MarketplaceEndpoint {
 	}
 
 	/**
+	 * http://marketplace.eclipse.org/api/p
+	 * 
+	 * @return
+	 */
+	@GET
+	@Path("api/p/search/apachesolr_search/{term}")
+	public String getSearchResult(@PathParam("term") String term) throws Exception {
+		return serialize(dataService.getSearchResult(term));
+	}
+
+	/**
 	 * http://marketplace.eclipse.org/catalogs/api/p
 	 * 
 	 * @return

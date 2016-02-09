@@ -55,7 +55,6 @@ public class IntegrationTests {
 			ResponseEntity<String> entity = this.restTemplate
 					.getForEntity("http://localhost:" + this.port + "/mpc/catalogs/api/p", String.class);
 			assertEquals(HttpStatus.OK, entity.getStatusCode());
-			System.out.println(entity.getBody());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -67,7 +66,6 @@ public class IntegrationTests {
 			ResponseEntity<String> entity = this.restTemplate
 					.getForEntity("http://localhost:" + this.port + "/mpc/featured/api/p", String.class);
 			assertEquals(HttpStatus.OK, entity.getStatusCode());
-			System.out.println(entity.getBody());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -79,7 +77,6 @@ public class IntegrationTests {
 			ResponseEntity<String> entity = this.restTemplate
 					.getForEntity("http://localhost:" + this.port + "/mpc/api/p", String.class);
 			assertEquals(HttpStatus.OK, entity.getStatusCode());
-			System.out.println(entity.getBody());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -91,7 +88,6 @@ public class IntegrationTests {
 			ResponseEntity<String> entity = this.restTemplate
 					.getForEntity("http://localhost:" + this.port + "/mpc/node/364668/api/p", String.class);
 			assertEquals(HttpStatus.OK, entity.getStatusCode());
-			System.out.println(entity.getBody());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -103,7 +99,6 @@ public class IntegrationTests {
 			ResponseEntity<String> entity = this.restTemplate
 					.getForEntity("http://localhost:" + this.port + "/mpc/content/364668/api/p", String.class);
 			assertEquals(HttpStatus.OK, entity.getStatusCode());
-			System.out.println(entity.getBody());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

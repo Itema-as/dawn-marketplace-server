@@ -65,6 +65,7 @@
       <nested inputs="marketplace.ecore#//Marketplace/catalogs" outputs="MarketplaceXML.xsd#//Marketplace;XSDComplexTypeDefinition=7/XSDParticle/XSDModelGroup/XSDParticle=1"/>
       <nested inputs="marketplace.ecore#//Marketplace/markets" outputs="MarketplaceXML.xsd#//Marketplace;XSDComplexTypeDefinition=7/XSDParticle/XSDModelGroup/XSDParticle=2"/>
       <nested inputs="marketplace.ecore#//Marketplace/featured" outputs="MarketplaceXML.xsd#//Marketplace;XSDComplexTypeDefinition=7/XSDParticle/XSDModelGroup/XSDParticle=3"/>
+      <nested inputs="marketplace.ecore#//Marketplace/search" outputs="MarketplaceXML.xsd#//Marketplace;XSDComplexTypeDefinition=7/XSDParticle/XSDModelGroup/XSDParticle=4"/>
     </nested>
     <nested inputs="marketplace.ecore#//Marketplace" outputs="MarketplaceXML.xsd#//Marketplace;XSDElementDeclaration=7"/>
     <nested inputs="marketplace.ecore#//Categories" outputs="MarketplaceXML.xsd#//Categories;XSDComplexTypeDefinition=8">
@@ -128,5 +129,12 @@
       <nested inputs="marketplace.ecore#//Featured/nodes" outputs="MarketplaceXML.xsd#//Featured;XSDComplexTypeDefinition=18/XSDParticle/XSDModelGroup/XSDParticle"/>
     </nested>
     <nested inputs="marketplace.ecore#//Featured" outputs="MarketplaceXML.xsd#//Featured;XSDElementDeclaration=18"/>
+    <nested inputs="marketplace.ecore#//Search" outputs="MarketplaceXML.xsd#//Search;XSDComplexTypeDefinition=19">
+      <nested inputs="marketplace.ecore#//Search/term" outputs="MarketplaceXML.xsd#//Search;XSDComplexTypeDefinition=19/XSDAttributeUse"/>
+      <nested inputs="marketplace.ecore#//Search/url" outputs="MarketplaceXML.xsd#//Search;XSDComplexTypeDefinition=19/XSDAttributeUse=1"/>
+      <nested inputs="marketplace.ecore#//Search/count" outputs="MarketplaceXML.xsd#//Search;XSDComplexTypeDefinition=19/XSDAttributeUse=2"/>
+      <nested inputs="marketplace.ecore#//Search/nodes" outputs="MarketplaceXML.xsd#//Search;XSDComplexTypeDefinition=19/XSDParticle/XSDModelGroup/XSDParticle"/>
+    </nested>
+    <nested inputs="marketplace.ecore#//Search" outputs="MarketplaceXML.xsd#//Search;XSDElementDeclaration=19"/>
   </nested>
 </xsd2ecore:XSD2EcoreMappingRoot>

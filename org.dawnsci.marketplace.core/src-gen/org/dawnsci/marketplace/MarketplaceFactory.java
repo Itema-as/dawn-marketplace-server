@@ -193,6 +193,15 @@ public interface MarketplaceFactory extends EFactory {
 	Featured createFeatured();
 
 	/**
+	 * Returns a new object of class '<em>Search</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Search</em>'.
+	 * @generated
+	 */
+	Search createSearch();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

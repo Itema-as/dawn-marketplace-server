@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.dawnsci.marketplace.Marketplace#getMarkets <em>Markets</em>}</li>
  *   <li>{@link org.dawnsci.marketplace.Marketplace#getFeatured <em>Featured</em>}</li>
  *   <li>{@link org.dawnsci.marketplace.Marketplace#getBaseUrl <em>Base Url</em>}</li>
+ *   <li>{@link org.dawnsci.marketplace.Marketplace#getSearch <em>Search</em>}</li>
  * </ul>
  *
  * @see org.dawnsci.marketplace.MarketplacePackage#getMarketplace()
@@ -145,5 +146,31 @@ public interface Marketplace extends EObject {
 	 * @generated
 	 */
 	void setBaseUrl(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Search</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Search</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Search</em>' containment reference.
+	 * @see #setSearch(Search)
+	 * @see org.dawnsci.marketplace.MarketplacePackage#getMarketplace_Search()
+	 * @model containment="true"
+	 * @generated
+	 */
+	Search getSearch();
+
+	/**
+	 * Sets the value of the '{@link org.dawnsci.marketplace.Marketplace#getSearch <em>Search</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Search</em>' containment reference.
+	 * @see #getSearch()
+	 * @generated
+	 */
+	void setSearch(Search value);
 
 } // Marketplace
