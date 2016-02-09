@@ -2,19 +2,18 @@ language: java
 sudo: false
 script: mvn clean verify
 jdk:
-  - oraclejdk8
+- oraclejdk8
 cache:
   directories:
-    - $HOME/.m2
+  - $HOME/.m2
 deploy:
   provider: releases
   skip_cleanup: true
-  api_key:
-    secure: B8c3qW9LC01YqsRAMtHc3S5fnhFxcTiRqoKIoLZJcFQi+nci21d7QIv9eMyUxupKDokfXjqW2yc1JNN7VU25U/rU8vbfIEEoH6TqWOGiwSL+dF718GM5UHdnM/2cbefo9WU/bBQzfNV+fR881y5auasAZns87oFNQ4PIyQ2xpwQ=
   file_glob: true
   file: ${HOME}/build/${TRAVIS_REPO_SLUG}/org.dawnsci.marketplace.server/target/org.dawnsci.marketplace.server-*.war
   on:
     repo: Itema-as/eclipse-marketplace-server
     tags: true
     all_branches: true
-    
+  api-key:
+    secure: io75pMSK+MjCLsWpsZWHT23ghYK/KaR2aOV8kgNNYrqiIJhbz5luIKI0i8OgezqWcIFynYjRJ84B7CYv1g2bWbgpdS08qcw3XczqVtyBHs2MoXgMPeEjMRIAVIGiAr8FLCG/1P7MP8R8PBwbYmSAGDzNffia6YDgoOjkKKZPNDoSYl5Is78FqEWEnKXWrbphgA3Ex/P8KGwPntNJ/BxPzGiDznOxnsKFQdT5bHVHWm/wHBkHuUephLO/1H3moyc09yHeqen/b9Jl/ScY/gc4MlSVk8nTKZI2MgQfYD2iJtnQq92bPQdxch2czdd12aycpMRm+KvanVK+7Zwtd8NG+5IOLx1EJldYMX/PFlxUXofXX97EMDv7il9PAtq2mteyL6FaXVnnAk4HW1DcmiXQLhsnHCDIuTHJLZ+/fxjI6p+Yzgb4O8b4+dfQNLtfzGyC8UEV7LHXfIoy7Lg6SRQ5TuqoMZ3QJf+/SqczvF19A2Nm/oQuQTWXjj55PZxIo0f2J0r/9Tt6OYZNXwYqzS7YXcINa0PTQr2a1gzdkR68Ruj6t//vgVcTJPjd5SRnpWtxmxHmJ16rALbb57tBKDY1mGxcwtaj5scDZBMUDZsiEX2xwAUJM+gyaLikZZxTj61utjQEdIqasJfCXBSj6+oKoFDBEr0YLjLRE+t2jenzM+M=
