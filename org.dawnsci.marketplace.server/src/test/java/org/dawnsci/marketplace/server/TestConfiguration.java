@@ -53,7 +53,7 @@ public class TestConfiguration {
 		// mock the data service and return hard coded results from XML-files when requested
 		DataService dataService = Mockito.mock(DataService.class);
 		Mockito.when(dataService.getCatalogs()).thenReturn(loadResource("catalogs.xml"));
-		Mockito.when(dataService.getContent("364668")).thenReturn(loadResource("364668.xml"));
+		Mockito.when(dataService.getContent(364668)).thenReturn(loadResource("364668.xml"));
 		Mockito.when(dataService.getMarkets()).thenReturn(loadResource("markets.xml"));
 		Mockito.when(dataService.getFeatured()).thenReturn(loadResource("featured.xml"));
 		return dataService;

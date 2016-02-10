@@ -45,7 +45,7 @@ public class DataService {
 	
 	private String baseUrl = "http://localhost:8080";
 
-	public Marketplace getContent(String identifier) {
+	public Marketplace getContent(int identifier) {
 		Marketplace marketplace = MarketplaceFactory.eINSTANCE.createMarketplace();
 		marketplace.setBaseUrl(baseUrl);
 		Session session = sessionFactory.openSession();

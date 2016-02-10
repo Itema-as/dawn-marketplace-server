@@ -1,14 +1,16 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:fragment="header">
-	<!-- Latest compiled and minified CSS -->
-	<link rel="stylesheet" href="/css/bootstrap.min.css"></link>
-	<!-- Custom styles for this template -->
-	<link href="/css/jumbotron.css" rel="stylesheet"></link>
-	<!-- Optional theme -->
-	<link rel="stylesheet" href="/css/bootstrap-theme.min.css"></link>
-	<!-- Latest compiled and minified JavaScript -->
-	<script src="/js/bootstrap.min.js"></script>	
+	<!-- ensure proper rendering and touch zooming -->
+	<meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+	<!-- latest compiled and minified CSS -->
+	<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"></link>
+	<!-- custom styles for this template -->
+	<link th:href="@{/css/jumbotron.css}" rel="stylesheet"></link>
+	<!-- optional theme -->
+	<link rel="stylesheet" th:href="@{/css/bootstrap-theme.min.css}"></link>
+	<!-- latest compiled and minified JavaScript -->
+	<script th:src="@{/js/bootstrap.min.js}"></script>	
 	<title>DAWN Marketplace</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>

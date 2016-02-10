@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head></head>
+<body>
+	<!-- search -->
+	<div th:fragment="sidebar" class="panel panel-default">
+		<div class="panel-body">	
+			<div class="input-group input-group-sm">
+				<span class="input-group-addon" id="sizing-addon1">
+					<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+				</span>
+				<input
+					type="text" class="form-control" placeholder="Search"
+					aria-describedby="sizing-addon1"></input>
+				<span class="input-group-btn">
+	        	<button class="btn btn-default" type="button">Go!</button>
+	      </span>				
+			</div>
+		</div>
+	</div>
+</body>
+</html>

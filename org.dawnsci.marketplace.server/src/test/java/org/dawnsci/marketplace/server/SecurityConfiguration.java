@@ -8,7 +8,7 @@
  * Contributors:
  *    Torkild U. Resheim - initial API and implementation
  ****************************************************************************/
-package org.dawnsci.marketplace.configurations;
+package org.dawnsci.marketplace.server;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

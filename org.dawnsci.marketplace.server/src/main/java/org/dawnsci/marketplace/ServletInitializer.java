@@ -10,11 +10,9 @@
  ****************************************************************************/
 package org.dawnsci.marketplace;
 
-import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.context.web.SpringBootServletInitializer;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Import;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 /**
@@ -24,23 +22,11 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
  */
 @EnableWebMvc
 @ComponentScan(basePackages = "org.dawnsci.marketplace")
-@Import(WebMvcInitializer.class)
-@SpringBootApplication
-public class EclipseMarketplaceApplication extends SpringBootServletInitializer {
+//@Import(WebMvcInitializer.class)
+public class ServletInitializer extends SpringBootServletInitializer {
 
 	@Override
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-		return application.sources(EclipseMarketplaceApplication.class);
+		return application.sources(ServletInitializer.class);
 	}
-
-	public static void main(String[] args) {
-		try {
-			new EclipseMarketplaceApplication().configure(new SpringApplicationBuilder(EclipseMarketplaceApplication.class))
-				.run(args);
-		} catch (Exception e){
-			// https://github.com/spring-projects/spring-boot/issues/3100
-			// org.springframework.boot.devtools.restart.SilentExitExceptionHandler$SilentExitException			
-		}
-	}
-
 }

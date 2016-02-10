@@ -701,7 +701,7 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 		if (getBaseUrl() == null) {
 			return image;
 		}
-		return getBaseUrl() + "/files/" + getId() + "/" + image;
+		return "/files/" + getId() + "/" + image;
 	}
 
 	/**
@@ -975,7 +975,7 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 		if (getBaseUrl() == null) {
 			return screenshot;
 		}
-		return getBaseUrl() + "/files/" + getId() + "/" + screenshot;
+		return "/files/" + getId() + "/" + screenshot;
 	}
 
 	/**
