@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="../fragments/header :: header"></head>
+<body>
+	<!-- navigation bar -->
+	<div th:replace="../fragments/navbar :: navbar"></div>
+
+	<!-- main content -->
+	<div class="container-fluid" style="margin-top: 20px">
+		<div class="row">
+
+			<!-- side bar -->
+			<div class="col-md-4">
+				<div th:replace="../fragments/sidebar :: sidebar"></div>
+			</div>
+
+			<!-- content -->
+			<div class="col-md-8">
+				<h2 style="margin-top: 0px;">
+					<img height="48px" th:src="${content.node.image}"></img><span
+						th:text="${content.node.name}"></span>
+				</h2>
+				<div class="row">
+					<div class="col-md-11">
+						<img class="img-responsive thumbnail"
+							th:src="${content.node.screenshot}"></img>
+					</div>
+					<div class="col-md-1">
+						<a role="button" th:href="@{~/mpc/marketplace-client-intro(mpc_install=${content.node.id})}"
+							title="Drag to install">
+							<span class="glyphicon glyphicon-cloud-download" aria-hidden="true" style="font-size: 16pt;"></span>
+						</a> 
+						<a role="button" th:href="${content.node.homepageurl}" title="Home">
+							<span class="glyphicon glyphicon-home" aria-hidden="true" style="font-size: 16pt;"></span>
+						</a> 
+						<a role="button" th:href="${content.node.supporturl}" title="Support">
+							<span class="glyphicon glyphicon-info-sign" aria-hidden="true" style="font-size: 16pt;"></span>
+						</a>
+					</div>
+				</div>
+				<div th:utext="${content.node.body}"></div>
+				<!-- categories and tags-->
+				<p>
+					<strong>Categories:</strong> <span th:each="category: ${content.node.categories.items}"
+							class="label label-success" th:text="${category.name}"></span>
+				</p>
+				<p>
+					<strong>Tags:</strong> <span th:each="tag: ${content.node.tags.items}"
+							class="label label-info" th:text="${tag.name}"></span>
+				</p>
+				<!-- additional details -->
+				<div th:replace="../fragments/solution :: additional"></div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

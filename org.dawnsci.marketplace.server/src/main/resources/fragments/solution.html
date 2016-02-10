@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head></head>
+<body>
+	<!-- 	
+		presents a longer solution summary with a thumbnail image of the 
+		screenshot, the short description and the install button. 
+	-->
+	<div th:fragment="additional" class="panel panel-default">
+		<div class="panel-heading">
+			<h3 class="panel-title">Additional Details</h3>
+		</div>
+		<div class="panel-body">
+			<table>
+			<tr>
+				<td>Eclipse Versions:</td>
+				<td style="padding-left: 1em;"
+					th:text="${content.node.eclipseversion}"></td>
+			</tr>
+			<tr>
+				<td>Platform Support:</td>
+				<td style="padding-left: 1em;">
+					<span th:each="platform: ${content.node.platforms.items}" 
+						th:text="${typeUtilities.getText(platform)}"></span>
+				</td>
+			</tr>
+			<tr>
+				<td>Organisation Name:</td>
+				<td style="padding-left: 1em;" 
+					th:text="${content.node.companyname}"></td>
+			</tr>
+			<tr>
+				<td>Development Status:</td>
+				<td style="padding-left: 1em;"
+					th:text="${content.node.status}"></td>
+			</tr>
+			<tr>
+				<td>License:</td>
+				<td style="padding-left: 1em;"
+					th:text="${content.node.license}"></td>
+			</tr>
+			<tr>
+				<td>Date Updated:</td>
+				<td style="padding-left: 1em;"
+					th:text="${typeUtilities.getDate(content.node.changed)}"></td>
+			</tr>
+			<tr>
+				<td>Date Created:</td>
+				<td style="padding-left: 1em;"
+					th:text="${typeUtilities.getDate(content.node.created)}"></td>
+			</tr>
+			<tr>
+				<td>Owner:</td>
+				<td style="padding-left: 1em;"
+					th:text="${content.node.owner}"></td>
+			</tr>
+			</table>
+		</div>
+	</div>
+</body>
+</html>

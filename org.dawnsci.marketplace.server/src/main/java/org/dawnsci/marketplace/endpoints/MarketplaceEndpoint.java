@@ -90,7 +90,7 @@ public class MarketplaceEndpoint {
 	 */
 	@GET
 	@Path("node/{id}/api/p")
-	public String getNode(@PathParam("id") String id) throws Exception {
+	public String getNode(@PathParam("id") int id) throws Exception {
 		return serialize(dataService.getContent(id));
 	}
 
@@ -103,7 +103,7 @@ public class MarketplaceEndpoint {
 	 */
 	@GET
 	@Path("content/{id}/api/p")
-	public String getContent(@PathParam("id") String id) throws Exception {
+	public String getContent(@PathParam("id") int id) throws Exception {
 		return serialize(dataService.getContent(id));
 	}
 

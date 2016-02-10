@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head></head>
+<body>
+	<!-- 	
+		presents a longer solution summary with a thumbnail image of the 
+		screenshot, the short description and the install button. 
+	-->
+	<div th:fragment="summary" class="thumbnail">
+		<img th:src="${node.screenshot}"></img>
+		<div class="caption">
+			<h3>
+				<a th:href="@{/content/}+${node.id}"><span
+					th:text="${node.name}"></span></a>
+			</h3>
+			<p th:utext="${node.shortdescription}"></p>
+			<p class="text-muted">
+				<i>Last updated&nbsp;<span
+					th:text="${typeUtilities.getDate(node.changed)}"></span>&nbsp;by&nbsp;<span
+					th:text="${node.owner}"></span></i>
+			</p>
+			<a role="button"
+				th:href="@{~/mpc/marketplace-client-intro(mpc_install=${node.id})}">
+				<button class="btn btn-success"
+					title="Drag to your running Eclipse workspace to install Red Hat JBoss Developer Studio Integration Stack (Luna)">
+					<span class="glyphicon glyphicon-cloud-download" aria-hidden="true"></span>&nbsp;Install
+				</button>
+			</a>
+		</div>
+	</div>
+	<!-- 
+					<div class="row">
+						<div th:each="node: ${updated.featured.nodes}">
+							<div class="col-md-4">
+								<h4>
+									<a th:href="@{/content/}+${node.id}"><span
+										th:text="${node.name}"></span></a>
+								</h4>
+								<p th:utext="${#strings.abbreviate(node.shortdescription,300)}"></p>
+								<p class="text-muted">
+									<i>Last updated&nbsp;<span
+										th:text="${dateUtils.create(node.changed)}"></span>&nbsp;by&nbsp;<span
+										th:text="${node.owner}"></span></i>
+								</p>
+								<a role="button"
+									th:href="@{~/mpc/marketplace-client-intro(mpc_install=${node.id})}">
+									<button class="btn"
+										title="Drag to your running Eclipse workspace to install Red Hat JBoss Developer Studio Integration Stack (Luna)">
+										<span class="glyphicon glyphicon-cloud-download"
+											aria-hidden="true"></span>&nbsp;Install
+									</button>
+								</a>
+								<hr />
+							</div>
+						</div>
+					</div>
+					 -->
+</body>
+</html>
