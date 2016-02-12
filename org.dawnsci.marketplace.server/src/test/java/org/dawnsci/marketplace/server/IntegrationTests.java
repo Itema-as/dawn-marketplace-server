@@ -88,6 +88,7 @@ public class IntegrationTests {
 			ResponseEntity<String> entity = this.restTemplate
 					.getForEntity("http://localhost:" + this.port + "/mpc/node/364668/api/p", String.class);
 			assertEquals(HttpStatus.OK, entity.getStatusCode());
+			// TODO: Test image, url and other depending on baseURL.
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

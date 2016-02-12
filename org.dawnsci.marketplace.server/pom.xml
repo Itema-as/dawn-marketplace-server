@@ -25,6 +25,18 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-jersey</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-commons</artifactId>
+		</dependency>
+        <dependency>
+        	<groupId>org.springframework</groupId>
+        	<artifactId>spring-jdbc</artifactId>
+        </dependency>
 		<!-- Test framework -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -99,15 +111,7 @@
 			<groupId>org.thymeleaf</groupId>
 			<artifactId>thymeleaf-spring4</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>org.thymeleaf.extras</groupId>
-			<artifactId>thymeleaf-extras-springsecurity4</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-security</artifactId>
-		</dependency>
-		<!-- file type detection -->
+    	<!-- file type detection -->
 		<dependency>
 			<groupId>org.jdom</groupId>
  			<artifactId>jdom2</artifactId>
@@ -127,12 +131,63 @@
 			<artifactId>ant</artifactId>
 			<version>1.9.4</version>
 		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-autoconfigure</artifactId>
+		</dependency>
 		<!-- File handling -->
 		<dependency>
 			<groupId>org.zeroturnaround</groupId>
 			<artifactId>zt-zip</artifactId>
 			<version>1.8</version>
 		</dependency>
+		<!-- Security and authentication -->
+		<dependency>
+			<groupId>org.thymeleaf.extras</groupId>
+			<artifactId>thymeleaf-extras-springsecurity4</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+		<!-- Spring Social -->
+		<dependency>     
+		    <groupId>org.springframework.social</groupId>
+		    <artifactId>spring-social-core</artifactId>
+		</dependency>
+		<dependency>     
+		    <groupId>org.springframework.social</groupId>
+		    <artifactId>spring-social-security</artifactId>
+		</dependency>
+		<dependency>
+		    <groupId>org.springframework.social</groupId>
+		    <artifactId>spring-social-web</artifactId>
+		</dependency>
+       	<dependency>
+            <groupId>org.springframework.social</groupId>
+            <artifactId>spring-social-facebook</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.social</groupId>
+            <artifactId>spring-social-twitter</artifactId>
+        </dependency>
+		<dependency>
+		  <groupId>org.springframework.social</groupId>
+		  <artifactId>spring-social-google</artifactId>
+		  <version>1.0.0.RELEASE</version>
+		</dependency>
+        <dependency>
+        	<groupId>org.springframework</groupId>
+        	<artifactId>spring-tx</artifactId>
+        </dependency>
+        <dependency>
+        	<groupId>org.aspectj</groupId>
+        	<artifactId>aspectjrt</artifactId>
+        </dependency>
+        <dependency>
+        	<groupId>org.aspectj</groupId>
+        	<artifactId>aspectjweaver</artifactId>
+        </dependency>
 	</dependencies>
 	<!-- Package as an executable jar -->
 	<build>
@@ -163,8 +218,25 @@
 			</snapshots>
 		</repository>
 		<repository>
-			<id>spring-milestones</id>
-			<url>http://repo.spring.io/milestone</url>
+		    <id>spring-repo</id>
+		    <name>Spring Repository</name>
+		    <url>http://repo.spring.io/release</url>
+		</repository>   		
+	    <repository>
+	        <id>spring-milestones</id>
+	        <name>Spring Milestones</name>
+	        <url>http://repo.spring.io/milestone</url>
+	        <snapshots>
+	            <enabled>false</enabled>
+	        </snapshots>
+	    </repository>
+	    		<repository>
+		    <id>spring-snapshot</id>
+		    <name>Spring Snapshot Repository</name>
+		    <url>http://repo.spring.io/snapshot</url>
+			<snapshots>
+        		<enabled>true</enabled>
+    		</snapshots>
 		</repository>
 	</repositories>
 	<pluginRepositories>
@@ -177,4 +249,7 @@
 			<url>http://repo.spring.io/milestone</url>
 		</pluginRepository>
 	</pluginRepositories>
+	<organization>
+		<name>Diamond Light Source</name>
+	</organization>
 </project>

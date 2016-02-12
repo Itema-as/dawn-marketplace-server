@@ -117,7 +117,6 @@ public class MarketplaceEndpoint {
 	@GET
 	@Path("marketplace-client-intro?mpc_install={id}")
 	public String getInstall(@PathParam("id") String id) throws Exception {
-		System.out.println("MarketplaceEndpoint.getInstall()");
 		return "test";
 	}
 

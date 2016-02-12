@@ -22,7 +22,6 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
  */
 @EnableWebMvc
 @ComponentScan(basePackages = "org.dawnsci.marketplace")
-//@Import(WebMvcInitializer.class)
 public class ServletInitializer extends SpringBootServletInitializer {
 
 	@Override
