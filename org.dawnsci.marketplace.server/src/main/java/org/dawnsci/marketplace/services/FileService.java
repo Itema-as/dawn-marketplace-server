@@ -23,25 +23,40 @@ import org.springframework.stereotype.Service;
 @Service
 public class FileService {
 
-	private static Path root;
+	private static Path solutionsRoot;
+
+	private static Path pagesRoot;
 
 	public FileService() {
-		root = new File(System.getProperty("user.dir"),"solutions").toPath();
-		if (!root.toFile().exists()) {
-			root.toFile().mkdirs();
+		solutionsRoot = new File(System.getProperty("user.dir"),"solutions").toPath();
+		if (!solutionsRoot.toFile().exists()) {
+			solutionsRoot.toFile().mkdirs();
+		}
+		pagesRoot = new File(System.getProperty("user.dir"),"pages").toPath();
+		if (!pagesRoot.toFile().exists()) {
+			pagesRoot.toFile().mkdirs();
 		}
 	}
 	
-	public File getFile(String path){
+	public File getPageFile(String path){
 		// TODO: make sure solution exists
 		// TODO: filename must only be one segment
-		return root.resolve(path).toFile();
+		if (path.startsWith("pages/")){
+			path = path.substring(path.indexOf("/")+1);
+		}
+		return pagesRoot.resolve(path).toFile();
+	}
+	
+	public File getSolutionFile(String path){
+		// TODO: make sure solution exists
+		// TODO: filename must only be one segment
+		return solutionsRoot.resolve(path).toFile();
 	}
 
 	public File getFile(String solution, String filename){
 		// TODO: make sure solution exists
 		// TODO: filename must only be one segment
-		File file = root.resolve(solution).resolve(filename).toFile();
+		File file = solutionsRoot.resolve(solution).resolve(filename).toFile();
 		// some safety measures
 		if (file.isDirectory()){
 			return null;

@@ -10,6 +10,7 @@
  ****************************************************************************/
 package org.dawnsci.marketplace.controllers;
 
+import java.nio.file.Path;
 import java.security.Principal;
 import java.util.Date;
 import java.util.Locale;
@@ -20,6 +21,7 @@ import javax.inject.Provider;
 import org.dawnsci.marketplace.MarketplaceFactory;
 import org.dawnsci.marketplace.Platform;
 import org.dawnsci.marketplace.services.DataService;
+import org.dawnsci.marketplace.services.FileService;
 import org.dawnsci.marketplace.social.account.Account;
 import org.dawnsci.marketplace.social.account.AccountRepository;
 import org.eclipse.emf.ecore.EStructuralFeature;
@@ -41,6 +43,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.HandlerMapping;
 
 /**
  * Controller for viewing public marketplace information.
@@ -83,6 +86,9 @@ public class NodeListController {
 	@Autowired
 	private DataService dataService;
 
+	@Autowired
+	private FileService fileService;
+
 	@Inject
 	public NodeListController(Provider<ConnectionRepository> connectionRepositoryProvider,
 			AccountRepository accountRepository) {
@@ -112,6 +118,8 @@ public class NodeListController {
 		map.addAttribute("featured", dataService.getFeatured());
 		map.addAttribute("updated", dataService.getUpdated());
 		map.addAttribute("typeUtilities", DATE_UTILS);
+		Path path = fileService.getPageFile("welcome.md").toPath();			
+		map.addAttribute("text", PageController.parse(path));
 		addProfile(map, principal);
 		return "main";
 	}

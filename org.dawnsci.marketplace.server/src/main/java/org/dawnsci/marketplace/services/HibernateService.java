@@ -11,6 +11,7 @@
 package org.dawnsci.marketplace.services;
 
 import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
@@ -112,7 +113,7 @@ public class HibernateService {
 				File file2 = fileService.getFile(String.valueOf(copy.getId()), "screenshot.png");
 				FileUtils.copyInputStreamToFile(getInputStream("data/screenshot.png"), file2);
 				
-				File file3 = fileService.getFile(String.valueOf(copy.getId()));
+				File file3 = fileService.getSolutionFile(String.valueOf(copy.getId()));
 				ZipUtil.unpack(getInputStream("data/p2-repo.zip"), file3);
 			}
 			// create the markets
@@ -134,6 +135,16 @@ public class HibernateService {
 		} finally {
 			session.close();
 		}
+		try {
+			// create static pages
+			File file2 = fileService.getPageFile("eclipse.png");
+			FileUtils.copyInputStreamToFile(getInputStream("data/pages/eclipse.png"), file2);
+			file2 = fileService.getPageFile("welcome.md");
+			FileUtils.copyInputStreamToFile(getInputStream("data/pages/welcome.md"), file2);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
 	}
 
 	/**

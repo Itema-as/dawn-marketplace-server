@@ -9,7 +9,6 @@ import org.apache.tika.Tika;
 import org.dawnsci.marketplace.services.FileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.FileSystemResource;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -18,20 +17,16 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.HandlerMapping;
 
 /**
+ * Handles file resources under "/files/".
+ * 
  * @author Torkild U. Resheim, Itema AS
  */
 @Controller
 @RequestMapping(value = "/files")
 public class FileController {
-	
-	@ResponseStatus(value = HttpStatus.NOT_FOUND)
-	public class ResourceNotFoundException extends RuntimeException {
-		private static final long serialVersionUID = 117564246904183787L;
-	}
 	
 	@Autowired
 	private FileService fileService;
