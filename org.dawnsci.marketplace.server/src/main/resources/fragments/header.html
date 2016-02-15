@@ -1,6 +1,10 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html 
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head th:fragment="header">
+	<!-- latest compiled and minified JQuery -->
+	<script th:src="@{/js/jquery-2.2.0.min.js}"></script>	
 	<!-- ensure proper rendering and touch zooming -->
 	<meta name="viewport" content="width=device-width, initial-scale=1"></meta>
 	<!-- latest compiled and minified CSS -->
@@ -9,10 +13,16 @@
 	<link th:href="@{/css/jumbotron.css}" rel="stylesheet"></link>
 	<!-- optional theme -->
 	<link rel="stylesheet" th:href="@{/css/bootstrap-theme.min.css}"></link>
-	<!-- latest compiled and minified JavaScript -->
+	<!-- font awesome -->
+	<link rel="stylesheet" th:href="@{/css/font-awesome.min.css}"></link>
+	<!-- latest compiled and minified Bootstrap -->
 	<script th:src="@{/js/bootstrap.min.js}"></script>	
 	<title>DAWN Marketplace</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<!-- CSRF protection -->
+ 	<meta name="_csrf" th:content="${_csrf.token}"/>
+ 	<!-- default header name is X-CSRF-TOKEN -->
+ 	<meta name="_csrf_header" th:content="${_csrf.headerName}"/>	
 </head>
 <body>
 </body>

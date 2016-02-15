@@ -30,4 +30,5 @@ public class ServiceConfiguration {
 	public FileService fileService() {
 		return new FileService();
 	}
+
 }

@@ -1,13 +1,12 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html 
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head></head>
 <body>
 	<div th:fragment="navbar">
 		<nav class="navbar navbar-inverse navbar-fixed-top">
 			<div class="container-fluid">
-				<a class="navbar-brand logo"> <img
-					th:src="@{/images/logo_48x48.png}" height="35px" />
-				</a>
 				<div class="navbar-header">
 					<button type="button" class="navbar-toggle collapsed"
 						data-toggle="collapse" data-target="#navbar" aria-expanded="false"
@@ -18,18 +17,21 @@
 					</button>
 					<a class="navbar-brand" href="/">DAWN Marketplace</a>
 				</div>
-				<div id="navbar" class="navbar-collapse collapse">
-					<form class="navbar-form navbar-right">
-						<div class="form-group">
-							<input type="text" placeholder="Email" class="form-control"></input>
-						</div>
-						<div class="form-group">
-							<input type="password" placeholder="Password"
-								class="form-control"></input>
-						</div>
-						<button type="submit" class="btn btn-success">Sign in</button>
-					</form>
+				<div class="navbar-form navbar-right">
+					<a th:href="@{/signin}" sec:authorize="!isAuthenticated()" class="btn btn-default">Sign In</a>
 				</div>
+				<form class="navbar-form navbar-right" method="POST" th:action="@{/signout}" sec:authorize="isAuthenticated()">
+					<a th:href="@{/twitter}" th:if="${null != account}">
+						<span th:if="${null != profileImage}">
+							<img th:src="${profileImage}" height="32px"/>
+						</span>
+						<span th:if="${null == profileImage}">
+							<span th:text="${account.firstName}"></span> <span th:text="${account.lastName}"></span>
+						</span>
+					</a>
+					<input type="hidden" name="_csrf" th:value="${_csrf.token}" />
+					<button class="btn btn-default" type="submit">Sign Out</button>
+				</form>
 				<!--/.navbar-collapse -->
 			</div>
 		</nav>

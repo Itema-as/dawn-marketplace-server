@@ -56,6 +56,8 @@ public class DataService {
 				return marketplace;
 			}
 			marketplace.setNode((Node) query.list().get(0));
+		} catch (Exception e){
+			e.printStackTrace();
 		} finally {
 			session.close();
 		}
@@ -130,14 +132,19 @@ public class DataService {
 		marketplace.setBaseUrl(baseUrl);
 		Search search = MarketplaceFactory.eINSTANCE.createSearch();
 		marketplace.setSearch(search);
-		Session session = sessionFactory.openSession();
 		term = term.toLowerCase();
-		Query query = session.createQuery(HQL_SEARCH).setString("term", "%"+term+"%");
-		List<Node> list = query.list();
-		search.getNodes().addAll(list);
-		search.setCount(search.getNodes().size());
 		search.setTerm(term);
-		session.close();
+		Session session = sessionFactory.openSession();
+		try {
+			Query query = session.createQuery(HQL_SEARCH).setString("term", "%"+term+"%");
+			List<Node> list = query.list();
+			search.getNodes().addAll(list);
+			search.setCount(search.getNodes().size());
+		} catch (Exception e){
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
 		return marketplace;
 	}
 
