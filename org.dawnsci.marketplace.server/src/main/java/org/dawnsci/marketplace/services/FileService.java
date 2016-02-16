@@ -39,8 +39,6 @@ public class FileService {
 	}
 	
 	public File getPageFile(String path){
-		// TODO: make sure solution exists
-		// TODO: filename must only be one segment
 		if (path.startsWith("pages/")){
 			path = path.substring(path.indexOf("/")+1);
 		}
