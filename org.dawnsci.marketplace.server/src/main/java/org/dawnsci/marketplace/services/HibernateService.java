@@ -17,6 +17,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
+import javax.inject.Inject;
+
 import org.apache.commons.io.FileUtils;
 import org.dawnsci.marketplace.Catalog;
 import org.dawnsci.marketplace.Catalogs;
@@ -56,6 +58,9 @@ public class HibernateService {
 
 	@Autowired
 	private FileService fileService;
+	
+	@Inject
+	private Boolean initializeData;
 
 	@Bean
 	public SessionFactory sessionFactory() {
@@ -64,9 +69,8 @@ public class HibernateService {
 		props.setProperty(Environment.DRIVER, "org.hsqldb.jdbcDriver");
 		props.setProperty(Environment.USER, "sa");
 		// close database when all connections are lost.
-		// props.setProperty(Environment.URL,
-		// "jdbc:hsqldb:file:database/Marketplace;shutdown=true;hsqldb.default_table_type=cached");
-		props.setProperty(Environment.URL, "jdbc:hsqldb:mem:database/Marketplace");
+		props.setProperty(Environment.URL,"jdbc:hsqldb:file:database/Marketplace;shutdown=true;hsqldb.default_table_type=cached");
+//		props.setProperty(Environment.URL, "jdbc:hsqldb:mem:database/Marketplace");
 		props.setProperty(Environment.PASS, "");
 		props.setProperty(Environment.DIALECT, org.hibernate.dialect.HSQLDialect.class.getName());
 		props.setProperty(Environment.ENABLE_LAZY_LOAD_NO_TRANS, "true");
@@ -82,7 +86,9 @@ public class HibernateService {
 			hbds.initialize();
 		} finally {
 		}
-		prepopulate();
+		if (initializeData){
+			prepopulate();
+		}
 		return hbds.getSessionFactory();
 	}
 

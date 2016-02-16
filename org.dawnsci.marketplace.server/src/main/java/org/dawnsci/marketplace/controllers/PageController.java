@@ -48,6 +48,9 @@ public class PageController {
 	}
 
 	static String parse(Path path) {
+		if (!path.toFile().exists()){
+			return "";
+		}
 		StringWriter sw = new StringWriter();
 		MarkupParser parser = new MarkupParser();
 		parser.setMarkupLanguage(new MarkdownLanguage());
