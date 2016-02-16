@@ -12,7 +12,7 @@ When doing development on this code, you should start the server from within Ecl
 
 When running the standalone server you need to start it from the command line. E.g. `java -jar org.dawnsci.marketplace.server-1.0-SNAPSHOT.war --init`.
 
-See the [notes for the server](eclipse-marketplace-server/org.dawnsci.marketplace.server/README.md) for more details.
+See the [notes for the server](org.dawnsci.marketplace.server/README.md) for more details.
 
 ### Using the marketplace client
 
