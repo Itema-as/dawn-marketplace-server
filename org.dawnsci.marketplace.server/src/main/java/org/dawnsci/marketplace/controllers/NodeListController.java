@@ -36,6 +36,7 @@ import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.ConnectionFactoryLocator;
 import org.springframework.social.connect.ConnectionRepository;
 import org.springframework.social.facebook.api.Facebook;
+import org.springframework.social.google.api.Google;
 import org.springframework.social.twitter.api.Twitter;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -98,10 +99,15 @@ public class NodeListController {
 
 	private void addProfile(ModelMap map, Principal principal) {
 		if (principal!=null){
-			Connection<Twitter> connection = connectionRepository.findPrimaryConnection(Twitter.class);
-			if (connection != null) {
-				map.addAttribute("profileImage",connection.getImageUrl());
-				//map.addAttribute("profile", connection.getApi().userOperations().getUserProfile());
+			Connection<Twitter> tc = connectionRepository.findPrimaryConnection(Twitter.class);
+			if (tc != null) {
+				map.addAttribute("profileImage",tc.getImageUrl());
+				map.addAttribute("profile",tc.getProfileUrl());
+			}
+			Connection<Google> gc = connectionRepository.findPrimaryConnection(Google.class);
+			if (gc != null) {
+				map.addAttribute("profileImage",gc.getImageUrl());
+				map.addAttribute("profile",gc.getProfileUrl());
 			}
 			Account findAccountByUsername = accountRepository.findAccountByUsername(principal.getName());
 			map.addAttribute(findAccountByUsername);

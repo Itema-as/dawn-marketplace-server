@@ -10,3 +10,6 @@ spring:
     twitter:
       app-id: XHYkM7qaRCEpgAcS7OesQfSuC
       app-secret: WiWkeFOCbhPkCqvGEMVdY01yMTZ12tZys3RuJQYmOGSkuUPSeE
+    google:
+      app-id: 755195282704-qirggod5kig0q3u0p1ic8e4p3hp586ql.apps.googleusercontent.com
+      app-secret: rYMUytK8ZIQR8gA9o37c1JYt
