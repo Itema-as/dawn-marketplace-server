@@ -167,10 +167,6 @@
 		    <groupId>org.springframework.social</groupId>
 		    <artifactId>spring-social-web</artifactId>
 		</dependency>
-       	<dependency>
-            <groupId>org.springframework.social</groupId>
-            <artifactId>spring-social-facebook</artifactId>
-        </dependency>
         <dependency>
             <groupId>org.springframework.social</groupId>
             <artifactId>spring-social-twitter</artifactId>
@@ -179,6 +175,11 @@
 		  <groupId>org.springframework.social</groupId>
 		  <artifactId>spring-social-google</artifactId>
 		  <version>1.0.0.RELEASE</version>
+		</dependency>
+		<dependency>
+		  <groupId>org.springframework.social</groupId>
+		  <artifactId>spring-social-github</artifactId>
+		  <version>1.0.0.BUILD-SNAPSHOT</version>		  
 		</dependency>
         <dependency>
         	<groupId>org.springframework</groupId>
@@ -192,6 +193,7 @@
         	<groupId>org.aspectj</groupId>
         	<artifactId>aspectjweaver</artifactId>
         </dependency>
+        <!-- Markdown -->
 		<dependency>
 			<groupId>org.eclipse.mylyn.docs</groupId>
 			<artifactId>org.eclipse.mylyn.wikitext.core</artifactId>
@@ -224,13 +226,6 @@
 	<repositories>
 	<!-- Add Spring repositories -->
 		<repository>
-			<id>spring-snapshots</id>
-			<url>http://repo.spring.io/snapshot</url>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-		</repository>
-		<repository>
 		    <id>spring-repo</id>
 		    <name>Spring Repository</name>
 		    <url>http://repo.spring.io/release</url>
@@ -240,16 +235,19 @@
 	        <name>Spring Milestones</name>
 	        <url>http://repo.spring.io/milestone</url>
 	        <snapshots>
-	            <enabled>false</enabled>
+	            <enabled>true</enabled>
 	        </snapshots>
 	    </repository>
    		<repository>
-		    <id>spring-snapshot</id>
+		    <id>spring-snapshots</id>
 		    <name>Spring Snapshot Repository</name>
 		    <url>http://repo.spring.io/snapshot</url>
 			<snapshots>
         		<enabled>true</enabled>
     		</snapshots>
+			<releases>
+        		<enabled>false</enabled>
+    		</releases>
 		</repository>
 		<!-- We need these for Mylyn Docs artifacts -->
 		<repository>

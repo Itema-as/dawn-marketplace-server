@@ -71,6 +71,12 @@
 							<i class="fa fa-google-plus"></i>&nbsp;Google+
 						</button>
 					</form>
+					<form id="github_signin" th:action="@{/signin/github}" method="POST" style="width: 100px;display: inline-block;">
+						<input type="hidden" name="_csrf" th:value="${_csrf.token}"></input>
+						<button class="ml btn btn-block btn-social btn-sm btn-github" type="submit">
+							<i class="fa fa-github"></i>&nbsp;GitHub
+						</button>
+					</form>
 				</div>
 			</div>
 		</div>
