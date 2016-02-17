@@ -58,19 +58,20 @@
 						</div>
 					</div>
 				</form>
-
-				<!-- TWITTER SIGNIN -->
-				<form id="tw_signin" th:action="@{/signin/twitter}" method="POST"
-					class="form-horizontal">
-					<input type="hidden" name="_csrf" th:value="${_csrf.token}"></input>
-					<div class="form-group">
-						<div class="col-sm-offset-2 col-sm-10">
-							<button class="btn btn-default" type="submit">
-								<i class="fa fa-twitter"></i>&nbsp;Sign in with Twitter
-							</button>
-						</div>
-					</div>
-				</form>
+				<div class="col-sm-offset-2 col-sm-10">
+					<form id="tw_signin" th:action="@{/signin/twitter}" method="POST" style="width: 100px;display: inline-block;">
+						<input type="hidden" name="_csrf" th:value="${_csrf.token}"></input>									
+						<button class="ml btn btn-block btn-social btn-sm btn-twitter" type="submit">
+							<i class="fa fa-twitter"></i>&nbsp;Twitter
+						</button>
+					</form>
+					<form id="google_signin" th:action="@{/signin/google(scope='profile')}" method="POST" style="width: 100px;display: inline-block;">
+						<input type="hidden" name="_csrf" th:value="${_csrf.token}"></input>
+						<button class="ml btn btn-block btn-social btn-sm btn-google-plus" type="submit">
+							<i class="fa fa-google-plus"></i>&nbsp;Google+
+						</button>
+					</form>
+				</div>
 			</div>
 		</div>
 	</div>

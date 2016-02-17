@@ -21,7 +21,7 @@
 					<a th:href="@{/signin}" sec:authorize="!isAuthenticated()" class="btn btn-default">Sign In</a>
 				</div>
 				<form class="navbar-form navbar-right" method="POST" th:action="@{/signout}" sec:authorize="isAuthenticated()">
-					<a th:href="@{/twitter}" th:if="${null != account}">
+					<a th:href="${profile}" th:if="${null != account}">
 						<span th:if="${null != profileImage}">
 							<img th:src="${profileImage}" height="32px"/>
 						</span>
