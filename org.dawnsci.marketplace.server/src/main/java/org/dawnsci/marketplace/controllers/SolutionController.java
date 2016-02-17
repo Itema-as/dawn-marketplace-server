@@ -45,6 +45,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.HandlerMapping;
 
 /**
@@ -54,7 +55,7 @@ import org.springframework.web.servlet.HandlerMapping;
  */
 @SuppressWarnings("unused")
 @Controller
-public class NodeListController {
+public class SolutionController {
 
 	public static class TypeUtilities {
 
@@ -92,7 +93,7 @@ public class NodeListController {
 	private FileService fileService;
 
 	@Inject
-	public NodeListController(Provider<ConnectionRepository> connectionRepositoryProvider,
+	public SolutionController(Provider<ConnectionRepository> connectionRepositoryProvider,
 			AccountRepository accountRepository) {
 		this.connectionRepositoryProvider = connectionRepositoryProvider;
 		this.accountRepository = accountRepository;
@@ -129,6 +130,15 @@ public class NodeListController {
 		map.addAttribute("text", PageController.parse(path));
 		addProfile(map, principal);
 		return "main";
+	}
+	
+	@RequestMapping(value = "/search", method = RequestMethod.GET)
+	public String showSearchView(ModelMap map, Principal principal, @RequestParam(value = "term", required = true) String term) {
+		map.addAttribute("connectionsToProviders", getConnectionRepository().findAllConnections());
+		map.addAttribute("solutions", dataService.getSearchResult(term));
+		map.addAttribute("typeUtilities", DATE_UTILS);
+		addProfile(map, principal);
+		return "list";
 	}
 
 	@RequestMapping(value = "/content/{identifier}", method = RequestMethod.GET)
