@@ -23,6 +23,7 @@ import org.springframework.social.config.annotation.SocialConfigurer;
 import org.springframework.social.connect.ConnectionFactoryLocator;
 import org.springframework.social.connect.UsersConnectionRepository;
 import org.springframework.social.connect.jdbc.JdbcUsersConnectionRepository;
+import org.springframework.social.github.connect.GitHubConnectionFactory;
 import org.springframework.social.google.connect.GoogleConnectionFactory;
 import org.springframework.social.security.AuthenticationNameUserIdSource;
 
@@ -49,6 +50,9 @@ public class SocialConfiguration implements SocialConfigurer {
         connectionFactoryConfigurer.addConnectionFactory(new GoogleConnectionFactory(
             environment.getProperty("spring.social.google.app-id"),
             environment.getProperty("spring.social.google.app-secret")));
+        connectionFactoryConfigurer.addConnectionFactory(new GitHubConnectionFactory(
+                environment.getProperty("spring.social.github.app-id"),
+                environment.getProperty("spring.social.github.app-secret")));
 	}
 
 	@Override

@@ -13,3 +13,6 @@ spring:
     google:
       app-id: 755195282704-qirggod5kig0q3u0p1ic8e4p3hp586ql.apps.googleusercontent.com
       app-secret: rYMUytK8ZIQR8gA9o37c1JYt
+    github:
+      app-id: 922a8751a6251b43e03a
+      app-secret: 83e7c1b55dfce9d4f4aa05845ed2d4859bf6cbfe

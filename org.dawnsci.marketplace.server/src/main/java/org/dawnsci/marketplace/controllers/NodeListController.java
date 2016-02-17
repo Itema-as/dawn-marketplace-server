@@ -31,11 +31,12 @@ import org.eclipse.emf.ecore.util.FeatureMapUtil.FeatureEList;
 import org.eclipse.emf.ecore.xml.type.XMLTypePackage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.actuate.autoconfigure.EndpointAutoConfiguration.GitInfo;
 import org.springframework.boot.autoconfigure.social.FacebookProperties;
 import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.ConnectionFactoryLocator;
 import org.springframework.social.connect.ConnectionRepository;
-import org.springframework.social.facebook.api.Facebook;
+import org.springframework.social.github.api.GitHub;
 import org.springframework.social.google.api.Google;
 import org.springframework.social.twitter.api.Twitter;
 import org.springframework.stereotype.Controller;
@@ -99,15 +100,15 @@ public class NodeListController {
 
 	private void addProfile(ModelMap map, Principal principal) {
 		if (principal!=null){
-			Connection<Twitter> tc = connectionRepository.findPrimaryConnection(Twitter.class);
-			if (tc != null) {
-				map.addAttribute("profileImage",tc.getImageUrl());
-				map.addAttribute("profile",tc.getProfileUrl());
-			}
-			Connection<Google> gc = connectionRepository.findPrimaryConnection(Google.class);
-			if (gc != null) {
-				map.addAttribute("profileImage",gc.getImageUrl());
-				map.addAttribute("profile",gc.getProfileUrl());
+			Connection<?> connection = null;
+			connection = connectionRepository.findPrimaryConnection(Twitter.class);
+			if (connection == null)
+				connection = connectionRepository.findPrimaryConnection(Google.class);
+			if (connection == null)
+				connection = connectionRepository.findPrimaryConnection(GitHub.class);
+			if (connection != null) {
+				map.addAttribute("profileImage",connection.getImageUrl());
+				map.addAttribute("profile",connection.getProfileUrl());
 			}
 			Account findAccountByUsername = accountRepository.findAccountByUsername(principal.getName());
 			map.addAttribute(findAccountByUsername);

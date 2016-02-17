@@ -26,16 +26,15 @@ When running the standalone server you need to start it from the command line. E
 
 If the server is started with the `--init` argument it will create a number of items for testing. A folder named _solutions_ will be created next to the *.jar file, or in the project root when running from the IDE. This contains all file resources for the sample solutions, including one plug-in that can be installed. Another folder called _pages_ will be created with some sample static documents.
 
-### Twitter integration
+### Social integration
 
-It is possible to sign in using a Twitter account. However an application must first be created. One exists already for testing. In order to use it, the server must be started with some additional parameters.
-
-	-Dtwitter.consumerKey=XHYkM7qaRCEpgAcS7OesQfSuC 
-	-Dtwitter.consumerSecret=WiWkeFOCbhPkCqvGEMVdY01yMTZ12tZys3RuJQYmOGSkuUPSeE
+It is possible to sign in using a Twitter, Google or Github account. For testing purposes one application of each type has been created and configured on the server.
 	
-Since the Twitter application registration requires a fully qualified DNS you must in addition add an entry to `/etc/hosts`:
+Since the Twitter application registration requires a fully qualified DNS you must in addition add an entry to `/etc/hosts` when testing:
 
 	127.0.0.1       localhost.com
+	
+See [the server configuration](src/main/resources/application.yml) for OAuth secrets and identifiers.	
 
 ## The REST API
 
