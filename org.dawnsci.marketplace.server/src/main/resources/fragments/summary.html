@@ -22,38 +22,34 @@
 			<a role="button"
 				th:href="@{~/mpc/marketplace-client-intro(mpc_install=${node.id})}">
 				<button class="btn btn-success"
-					title="Drag to your running Eclipse workspace to install Red Hat JBoss Developer Studio Integration Stack (Luna)">
+					title="Drag to your running Eclipse workbench to install">
 					<span class="glyphicon glyphicon-cloud-download" aria-hidden="true"></span>&nbsp;Install
 				</button>
 			</a>
 		</div>
 	</div>
-	<!-- 
-					<div class="row">
-						<div th:each="node: ${updated.featured.nodes}">
-							<div class="col-md-4">
-								<h4>
-									<a th:href="@{/content/}+${node.id}"><span
-										th:text="${node.name}"></span></a>
-								</h4>
-								<p th:utext="${#strings.abbreviate(node.shortdescription,300)}"></p>
-								<p class="text-muted">
-									<i>Last updated&nbsp;<span
-										th:text="${dateUtils.create(node.changed)}"></span>&nbsp;by&nbsp;<span
-										th:text="${node.owner}"></span></i>
-								</p>
-								<a role="button"
-									th:href="@{~/mpc/marketplace-client-intro(mpc_install=${node.id})}">
-									<button class="btn"
-										title="Drag to your running Eclipse workspace to install Red Hat JBoss Developer Studio Integration Stack (Luna)">
-										<span class="glyphicon glyphicon-cloud-download"
-											aria-hidden="true"></span>&nbsp;Install
-									</button>
-								</a>
-								<hr />
-							</div>
-						</div>
-					</div>
-					 -->
+
+	<div th:fragment="short-summary" class="thumbnail">
+		<div class="row">
+			<div class="col-md-4 text-center">
+				<img th:src="${node.image}"></img>
+				<br/><br/>
+				<a role="button"
+					th:href="@{~/mpc/marketplace-client-intro(mpc_install=${node.id})}">
+					<button class="btn btn-default" 
+						title="Drag to your running Eclipse workbench to install">
+						<span class="glyphicon glyphicon-cloud-download" aria-hidden="true"></span>&nbsp;Install
+					</button>
+				</a>
+			</div>
+			<div class="col-md-8">
+				<h3>
+					<a th:href="@{/content/}+${node.id}"><span
+						th:text="${node.name}"></span></a>
+				</h3>
+				<p th:utext="${#strings.abbreviate(node.shortdescription,300)}"></p>
+			</div>
+		</div>
+	</div>
 </body>
 </html>
