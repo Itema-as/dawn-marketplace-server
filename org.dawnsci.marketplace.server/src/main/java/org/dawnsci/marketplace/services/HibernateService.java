@@ -11,7 +11,6 @@
 package org.dawnsci.marketplace.services;
 
 import java.io.File;
-import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
@@ -19,6 +18,8 @@ import java.util.Properties;
 
 import javax.inject.Inject;
 
+import org.zeroturnaround.zip.ZipUtil;
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.io.FileUtils;
 import org.dawnsci.marketplace.Catalog;
 import org.dawnsci.marketplace.Catalogs;
@@ -43,10 +44,8 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Environment;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
-import org.zeroturnaround.zip.ZipUtil;
 
 /**
  * @author Torkild U. Resheim, Itema AS
@@ -56,11 +55,14 @@ public class HibernateService {
 
 	private HbDataStore hbds;
 
-	@Autowired
-	private FileService fileService;
-	
 	@Inject
 	private Boolean initializeData;
+	
+	@Inject
+	private FileService fileService;
+
+	@Inject
+	private org.springframework.core.env.Environment environment;
 
 	@Bean
 	public SessionFactory sessionFactory() {
@@ -69,16 +71,14 @@ public class HibernateService {
 		props.setProperty(Environment.DRIVER, "org.hsqldb.jdbcDriver");
 		props.setProperty(Environment.USER, "sa");
 		// close database when all connections are lost.
-		props.setProperty(Environment.URL,"jdbc:hsqldb:file:database/Marketplace;shutdown=true;hsqldb.default_table_type=cached");
-//		props.setProperty(Environment.URL, "jdbc:hsqldb:mem:database/Marketplace");
+		props.setProperty(Environment.URL, environment.getProperty("marketplace.marketplace-db"));
 		props.setProperty(Environment.PASS, "");
 		props.setProperty(Environment.DIALECT, org.hibernate.dialect.HSQLDialect.class.getName());
 		props.setProperty(Environment.ENABLE_LAZY_LOAD_NO_TRANS, "true");
 		// http://wiki.eclipse.org/Teneo/Hibernate/Configuration_Options
 		props.setProperty(PersistenceOptions.CASCADE_POLICY_ON_NON_CONTAINMENT, "REFRESH,PERSIST,MERGE");
 
-		String hbName = "Marketplace";
-		hbds = HbHelper.INSTANCE.createRegisterDataStore(hbName);
+		hbds = HbHelper.INSTANCE.createRegisterDataStore("marketplace");
 		hbds.setDataStoreProperties(props);
 		hbds.setEPackages(new EPackage[] { MarketplacePackage.eINSTANCE });
 
@@ -86,52 +86,51 @@ public class HibernateService {
 			hbds.initialize();
 		} finally {
 		}
-		if (initializeData){
-			prepopulate();
+		if (initializeData) {
+			populate();
 		}
 		return hbds.getSessionFactory();
 	}
 
-	/**
-	 * Populate the database with some initial data.
-	 */
-	void prepopulate() {
+	public void populate() {
 		Session session = hbds.getSessionFactory().openSession();
 		Transaction tx = session.beginTransaction();
 		try {
-			// EcoreUtil.copy is used here to avoid having Hibernate
-			// persisting container objects, such as "Marketplace".
-			Node node = loadSerialized("data/sample.xml").getNode();
-			// create 50 sample plug-ins
-			for (int i = 1; i <= 10; i++) {
-				Node copy = EcoreUtil.copy(node);
-				copy.setId(Long.valueOf(i));
-				copy.setName("Sample plug-in #" + i);
-				copy.setImage("default_2.png");
-				copy.setScreenshot("screenshot.png");
-				copy.setUpdateurl("http://localhost:8080/files/"+i+"/p2-repo/");
-				copy.setChanged(System.currentTimeMillis());
-				session.saveOrUpdate(copy);
-
-				File file = fileService.getFile(String.valueOf(copy.getId()), "default_2.png");
-				FileUtils.copyInputStreamToFile(getInputStream("data/default_2.png"), file);
-
-				File file2 = fileService.getFile(String.valueOf(copy.getId()), "screenshot.png");
-				FileUtils.copyInputStreamToFile(getInputStream("data/screenshot.png"), file2);
-				
-				File file3 = fileService.getSolutionFile(String.valueOf(copy.getId()));
-				ZipUtil.unpack(getInputStream("data/p2-repo.zip"), file3);
+			// load catalogs from test or sample data 
+			Catalogs catalogs = loadSerialized("data/catalogs.xml").getCatalogs();
+			EList<Catalog> catalogList = catalogs.getItems();
+			for (Catalog catalog : catalogList) {
+				session.saveOrUpdate(EcoreUtil.copy(catalog));
 			}
-			// create the markets
+			// load markets from test or sample data 
 			EList<Market> markets = loadSerialized("data/markets.xml").getMarkets();
 			for (Market market : markets) {
 				session.saveOrUpdate(EcoreUtil.copy(market));
 			}
-			// create the catalogs list
-			Catalogs catalogs = loadSerialized("data/catalogs.xml").getCatalogs();
-			EList<Catalog> items = catalogs.getItems();
-			for (Catalog catalog : items) {
-				session.saveOrUpdate(EcoreUtil.copy(catalog));
+			// load solutions from test or sample data 
+			EList<Node> solutions = loadSerialized("data/solutions.xml").getFeatured().getNodes();
+			for (Node node : solutions) {
+				Node copy = EcoreUtil.copy(node);
+				session.saveOrUpdate(copy);
+				// copy the screenshot image
+				if (StringUtils.isNotEmpty(copy.getScreenshot())){
+					FileUtils.copyInputStreamToFile(
+							getSolutionsInputStream(copy.getScreenshot()),
+							fileService.getFile(Long.toString(copy.getId()),
+									copy.getScreenshot()));
+				}
+				// copy the icon image
+				if (StringUtils.isNotEmpty(copy.getImage())){
+					FileUtils.copyInputStreamToFile(
+							getSolutionsInputStream(copy.getImage()),
+							fileService.getFile(Long.toString(copy.getId()),
+									copy.getImage()));
+				}
+				// unzip the p2-repository
+				if (StringUtils.isNotEmpty(copy.getUpdateurl())){
+					File p2repo = fileService.getSolutionFile(String.valueOf(copy.getId()));
+					ZipUtil.unpack(getSolutionsInputStream(copy.getUpdateurl()+".zip"), p2repo);
+				}
 			}
 			session.flush();
 			session.getTransaction().commit();
@@ -141,18 +140,19 @@ public class HibernateService {
 		} finally {
 			session.close();
 		}
-		try {
-			// create static pages
-			File file2 = fileService.getPageFile("eclipse.png");
-			FileUtils.copyInputStreamToFile(getInputStream("data/pages/eclipse.png"), file2);
-			file2 = fileService.getPageFile("welcome.md");
-			FileUtils.copyInputStreamToFile(getInputStream("data/pages/welcome.md"), file2);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
+
 	}
 
+	private InputStream getSolutionsInputStream(String filename) {
+		try {
+			InputStream is = DataService.class.getClassLoader().getResource("data/solutions/"+filename).openStream();
+			return is;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
 	/**
 	 * Loads a marketplace resource from XML. The file requested must be present
 	 * in the classpath.
@@ -169,16 +169,6 @@ public class HibernateService {
 			InputStream is = DataService.class.getClassLoader().getResource(filename).openStream();
 			resource.load(is, rs.getLoadOptions());
 			return (Marketplace) resource.getContents().get(0);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
-
-	private InputStream getInputStream(String filename) {
-		try {
-			InputStream is = DataService.class.getClassLoader().getResource(filename).openStream();
-			return is;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

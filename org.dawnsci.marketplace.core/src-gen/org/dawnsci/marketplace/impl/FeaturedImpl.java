@@ -41,7 +41,7 @@ public class FeaturedImpl extends MinimalEObjectImpl.Container implements Featur
 	 * @generated
 	 * @ordered
 	 */
-	protected static final Integer COUNT_EDEFAULT = new Integer(0);
+	protected static final int COUNT_EDEFAULT = 0;
 
 	/**
 	 * The cached value of the '{@link #getCount() <em>Count</em>}' attribute.
@@ -51,7 +51,7 @@ public class FeaturedImpl extends MinimalEObjectImpl.Container implements Featur
 	 * @generated
 	 * @ordered
 	 */
-	protected Integer count = COUNT_EDEFAULT;
+	protected int count = COUNT_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getNodes() <em>Nodes</em>}' containment reference list.
@@ -87,7 +87,7 @@ public class FeaturedImpl extends MinimalEObjectImpl.Container implements Featur
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Integer getCount() {
+	public int getCount() {
 		return count;
 	}
 
@@ -96,8 +96,8 @@ public class FeaturedImpl extends MinimalEObjectImpl.Container implements Featur
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setCount(Integer newCount) {
-		Integer oldCount = count;
+	public void setCount(int newCount) {
+		int oldCount = count;
 		count = newCount;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, MarketplacePackage.FEATURED__COUNT, oldCount, count));
@@ -192,7 +192,7 @@ public class FeaturedImpl extends MinimalEObjectImpl.Container implements Featur
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case MarketplacePackage.FEATURED__COUNT:
-				return COUNT_EDEFAULT == null ? count != null : !COUNT_EDEFAULT.equals(count);
+				return count != COUNT_EDEFAULT;
 			case MarketplacePackage.FEATURED__NODES:
 				return nodes != null && !nodes.isEmpty();
 		}

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<marketplace>
+  <market name="DAWN Plug-ins" id="1" url="http://localhost:8080/mpc/category/markets/dawn_plug-ins">
+    <category id="1" count="1" url="http://marketplace.eclipse.org/taxonomy/term/1964%2C31" name="Category A"/>
+    <category id="2" count="1" url="http://marketplace.eclipse.org/taxonomy/term/28%2C31" name="Category B"/>
+  </market>
+</marketplace>

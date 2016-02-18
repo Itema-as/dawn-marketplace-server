@@ -202,6 +202,15 @@ public interface MarketplaceFactory extends EFactory {
 	Search createSearch();
 
 	/**
+	 * Returns a new object of class '<em>Recent</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Recent</em>'.
+	 * @generated
+	 */
+	Recent createRecent();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

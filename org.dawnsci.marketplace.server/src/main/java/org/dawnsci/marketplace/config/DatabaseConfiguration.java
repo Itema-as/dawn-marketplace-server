@@ -10,8 +10,10 @@
  ****************************************************************************/
 package org.dawnsci.marketplace.config;
 
+import javax.inject.Inject;
 import javax.sql.DataSource;
 
+import org.springframework.core.env.Environment;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
@@ -27,6 +29,9 @@ import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
  */
 @Configuration
 public class DatabaseConfiguration {
+	
+	@Inject
+	private Environment environment;
 	
 	@Bean(name = "dataSource")
 	public DataSource getDataSource() {
@@ -46,7 +51,7 @@ public class DatabaseConfiguration {
 	private SimpleDriverDataSource createDataSource() {
 		SimpleDriverDataSource simpleDriverDataSource = new SimpleDriverDataSource();
 		simpleDriverDataSource.setDriverClass(org.hsqldb.jdbcDriver.class);
-		simpleDriverDataSource.setUrl("jdbc:hsqldb:file:database/system;shutdown=true;hsqldb.default_table_type=cached");
+		simpleDriverDataSource.setUrl(environment.getProperty("marketplace.system-db"));
 		simpleDriverDataSource.setUsername("");
 		simpleDriverDataSource.setPassword("");
 		return simpleDriverDataSource;

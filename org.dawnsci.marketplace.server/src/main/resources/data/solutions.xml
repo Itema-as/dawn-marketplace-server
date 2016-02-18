@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<marketplace>
+	<featured>
+	<node id="123" name="Sample Solution" url="">
+		<type>resource</type>
+		<categories>
+			<category id="1972" name="General Purpose Tools"
+				url="http://marketplace.eclipse.org/category/categories/general-purpose-tools" />
+		</categories>
+		<tags>
+			<tag id="1371" name="workspace"
+				url="http://marketplace.eclipse.org/category/free-tagging/workspace" />
+			<tag id="2760" name="OS X"
+				url="http://marketplace.eclipse.org/category/free-tagging/os-x" />
+			<tag id="2761" name="Badge"
+				url="http://marketplace.eclipse.org/category/free-tagging/badge" />
+		</tags>
+		<owner>Nomen Nescio</owner>
+		<favorited>0</favorited>
+		<installstotal>0</installstotal>
+		<installsrecent>0</installsrecent>
+		<shortdescription><![CDATA[<p><strong>Pellentesque habitant morbi tristique</strong> senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. <em>Aenean ultricies mi vitae est.</em> Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, <code>commodo vitae</code>, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. <a href="#">Donec non enim</a> in turpis pulvinar facilisis. Ut felis.</p>]]></shortdescription>
+		<body><![CDATA[<h4>HTML Ipsum Presents</h4><p><strong>Pellentesque habitant morbi tristique</strong> senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. <em>Aenean ultricies mi vitae est.</em> Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, <code>commodo vitae</code>, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. <a href="#">Donec non enim</a> in turpis pulvinar facilisis. Ut felis.</p>]]></body>
+		<created>1344281325</created>
+		<changed>1443473531</changed>
+		<foundationmember>0</foundationmember>
+		<homepageurl>https://github.com/turesheim/eclipse-utilities</homepageurl>
+		<image><![CDATA[image.png]]></image>
+		<screenshot><![CDATA[screenshot.png]]></screenshot>
+		<license>EPL</license>
+		<companyname><![CDATA[Nomen Nescio]]></companyname>
+		<status>Production/Stable</status>
+		<supporturl><![CDATA[https://github.com/turesheim/eclipse-launcher/issues]]></supporturl>
+		<version>1.0.0</version>
+		<eclipseversion>4.5, 4.4, 4.3, 4.2, 4.1</eclipseversion>
+		<updateurl><![CDATA[p2-repo]]></updateurl>
+		<ius>
+			<iu required="TRUE">org.dawnsci.example.welcome.feature</iu>
+		</ius>
+		<platforms>
+			<platform>Mac</platform>
+			<platform>Windows</platform>
+			<platform>Linux</platform>
+		</platforms>
+	</node>
+	</featured>
+</marketplace>

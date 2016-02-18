@@ -762,6 +762,9 @@ public interface Node extends EObject {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * The name of the listing owner.
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Owner</em>' attribute.
 	 * @see #setOwner(String)
 	 * @see org.dawnsci.marketplace.MarketplacePackage#getNode_Owner()
