@@ -1,0 +1,73 @@
+{"properties": [
+  {
+    "name": "spring.social.google.app-id",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.social.google.app-id'"
+  },
+  {
+    "name": "spring.social.github.app-id",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.social.github.app-id'"
+  },
+  {
+    "name": "spring.social.google.app-secret",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.social.google.app-secret'"
+  },
+  {
+    "name": "spring.social.github.app-secret",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.social.github.app-secret'"
+  },
+  {
+    "name": "marketplace.base-url",
+    "type": "java.lang.String",
+    "defaultValue": "http://localhost:8080",
+    "description": "Base URL to use when constructing URL's pointing to the marketplace from external services."
+  },
+  {
+    "name": "marketplace.marketplace-db",
+    "type": "java.lang.String",
+    "description": "JDBC connection string for the marketplace database'"
+  },
+  {
+    "name": "marketplace.system-db",
+    "type": "java.lang.String",
+    "description": "JDBC connection string for the system database'"
+  },
+  {
+    "name": "marketplace.title",
+    "type": "java.lang.String",
+    "description": "A description for 'marketplace.title'"
+  },
+  {
+    "name": "marketplace.icon",
+    "type": "java.lang.String",
+    "description": "A description for 'marketplace.icon'"
+  },
+  {
+    "name": "marketplace.description",
+    "type": "java.lang.String",
+    "description": "A description for 'marketplace.description'"
+  },
+  {
+    "name": "marketplace.wizard-title",
+    "type": "java.lang.String",
+    "description": "A description for 'marketplace.wizard-title'"
+  },
+  {
+    "name": "marketplace.wizard-icon",
+    "type": "java.lang.String",
+    "description": "A description for 'marketplace.wizard-icon'"
+  },
+  {
+    "name": "marketplace.recent-items",
+    "type": "java.lang.String",
+    "description": "The maximum number of items to return when queried for last updated"
+  },
+  {
+    "name": "marketplace.featured-items",
+    "type": "java.lang.String",
+    "description": "The maximum number of items to return when queried for featured items"
+  }
+]}

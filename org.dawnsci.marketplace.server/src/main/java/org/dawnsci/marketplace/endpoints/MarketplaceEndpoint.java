@@ -37,83 +37,49 @@ public class MarketplaceEndpoint {
 	@Autowired
 	private DataService dataService;
 	
-	/**
-	 * http://marketplace.eclipse.org/api/p
-	 * 
-	 * @return
-	 */
 	@GET
 	@Path("api/p")
 	public String getMarkets() throws Exception {
 		return serialize(dataService.getMarkets());
 	}
 
-	/**
-	 * http://marketplace.eclipse.org/api/p
-	 * 
-	 * @return
-	 */
 	@GET
 	@Path("api/p/search/apachesolr_search/{term}")
 	public String getSearchResult(@PathParam("term") String term) throws Exception {
 		return serialize(dataService.getSearchResult(term));
 	}
 
-	/**
-	 * http://marketplace.eclipse.org/catalogs/api/p
-	 * 
-	 * @return
-	 */
 	@GET
 	@Path("catalogs/api/p")
 	public String getCatalogs() throws Exception {
 		return serialize(dataService.getCatalogs());
 	}
 
-	/**
-	 * http://marketplace.eclipse.org/featured/api/p
-	 * 
-	 * @return
-	 */
 	@GET
 	@Path("featured/api/p")
 	public String getFeatured() throws Exception {
 		return serialize(dataService.getFeatured());
 	}
 
-	/**
-	 * http://marketplace.eclipse.org/node/[node id]/api/p
-	 * 
-	 * @param id
-	 *            content identifier
-	 * @return
-	 */
+
 	@GET
 	@Path("node/{id}/api/p")
 	public String getNode(@PathParam("id") int id) throws Exception {
 		return serialize(dataService.getContent(id));
 	}
 
-	/**
-	 * http://marketplace.eclipse.org/content/[node id]/api/p
-	 * 
-	 * @param id
-	 *            content identifier
-	 * @return
-	 */
 	@GET
 	@Path("content/{id}/api/p")
 	public String getContent(@PathParam("id") int id) throws Exception {
 		return serialize(dataService.getContent(id));
 	}
 
-	/**
-	 * http://marketplace.eclipse.org/content/[node id]/api/p
-	 * 
-	 * @param id
-	 *            content identifier
-	 * @return
-	 */
+	@GET
+	@Path("recent/api/p")
+	public String getRecent() throws Exception {
+		return serialize(dataService.getRecent());
+	}
+
 	@GET
 	@Path("marketplace-client-intro?mpc_install={id}")
 	public String getInstall(@PathParam("id") String id) throws Exception {

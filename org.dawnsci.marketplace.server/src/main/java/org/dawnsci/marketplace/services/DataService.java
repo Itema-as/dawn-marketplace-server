@@ -11,16 +11,23 @@
 package org.dawnsci.marketplace.services;
 import java.util.List;
 
+import javax.inject.Inject;
+
+import org.dawnsci.marketplace.Catalog;
 import org.dawnsci.marketplace.Catalogs;
 import org.dawnsci.marketplace.Featured;
 import org.dawnsci.marketplace.Marketplace;
 import org.dawnsci.marketplace.MarketplaceFactory;
 import org.dawnsci.marketplace.Node;
+import org.dawnsci.marketplace.Recent;
 import org.dawnsci.marketplace.Search;
+import org.dawnsci.marketplace.SearchTab;
+import org.dawnsci.marketplace.Wizard;
+import org.eclipse.emf.ecore.util.FeatureMapUtil;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 
 /**
@@ -40,14 +47,32 @@ public class DataService {
 			"lower(str(node.body)) like :term " +
 			"order by node.changed desc";
 
-	@Autowired
+	@Inject
 	private SessionFactory sessionFactory;
 	
-	private String baseUrl = "http://localhost:8080";
+	@Inject
+	Environment environment;
+	
+	public Catalog getCatalog(){
+		Catalog catalog = MarketplaceFactory.eINSTANCE.createCatalog();
+		catalog.setTitle(environment.getProperty("marketplace.title"));
+		catalog.setUrl(environment.getProperty("marketplace.base-url")+"/mpc");
+		catalog.setIcon(environment.getProperty("marketplace.icon"));
+		catalog.setDescription(environment.getProperty("marketplace.description"));
+		Wizard wizard = MarketplaceFactory.eINSTANCE.createWizard();
+		wizard.setTitle(environment.getProperty("marketplace.wizard-title"));
+		wizard.setIcon(environment.getProperty("marketplace.wizard-icon"));
+		SearchTab st = MarketplaceFactory.eINSTANCE.createSearchTab();
+		FeatureMapUtil.addText(st.getMixed(), "Search");
+		st.setEnabled(1);
+		wizard.setSearchtab(st);
+		catalog.setWizard(wizard);
+		return catalog;
+	}
 
 	public Marketplace getContent(int identifier) {
 		Marketplace marketplace = MarketplaceFactory.eINSTANCE.createMarketplace();
-		marketplace.setBaseUrl(baseUrl);
+		marketplace.setBaseUrl(environment.getProperty("marketplace.base-url"));
 		Session session = sessionFactory.openSession();
 		try {
 			Query query = session.createQuery("SELECT node FROM Node node WHERE node.id='" + identifier + "'");
@@ -67,10 +92,11 @@ public class DataService {
 	@SuppressWarnings("unchecked")
 	public Marketplace getCatalogs() {
 		Marketplace marketplace = MarketplaceFactory.eINSTANCE.createMarketplace();
-		marketplace.setBaseUrl(baseUrl);
+		marketplace.setBaseUrl(environment.getProperty("marketplace.base-url"));
 		Catalogs catalogs = MarketplaceFactory.eINSTANCE.createCatalogs();
 		marketplace.setCatalogs(catalogs);
 		Session session = sessionFactory.openSession();
+		catalogs.getItems().add(getCatalog());
 		Query query = session.createQuery("SELECT catalog FROM Catalog catalog");
 		catalogs.getItems().addAll(query.list());
 		session.close();
@@ -80,7 +106,7 @@ public class DataService {
 	@SuppressWarnings("unchecked")
 	public Marketplace getMarkets() {
 		Marketplace marketplace = MarketplaceFactory.eINSTANCE.createMarketplace();
-		marketplace.setBaseUrl(baseUrl);
+		marketplace.setBaseUrl(environment.getProperty("marketplace.base-url"));
 		Session session = sessionFactory.openSession();
 		Query query = session.createQuery("SELECT market FROM Market market");
 		marketplace.getMarkets().addAll(query.list());
@@ -89,39 +115,39 @@ public class DataService {
 	}
 
 	/**
-	 * Returns the three features that was last updated.
+	 * Returns the features that was last updated.
 	 * 
-	 * @return
+	 * TODO: Add a featured flag to "node" and use this
 	 */
 	@SuppressWarnings("unchecked")
 	public Marketplace getFeatured() {
 		Marketplace marketplace = MarketplaceFactory.eINSTANCE.createMarketplace();
-		marketplace.setBaseUrl(baseUrl);
+		marketplace.setBaseUrl(environment.getProperty("marketplace.base-url"));
 		Featured featured = MarketplaceFactory.eINSTANCE.createFeatured();
 		marketplace.setFeatured(featured);
 		Session session = sessionFactory.openSession();
-		Query query = session.createQuery("SELECT node FROM Node node ORDER BY node.changed ASC");
-		query.setMaxResults(3);
+		Query query = session.createQuery("SELECT node FROM Node node ORDER BY node.changed DESC");
+		query.setMaxResults(Integer.parseInt(environment.getProperty("marketplace.featured-items")));
 		featured.getNodes().addAll(query.list());
+		featured.setCount(featured.getNodes().size());
 		session.close();
 		return marketplace;
 	}
 
 	/**
-	 * Returns the 50 most recent updated solutions
-	 * 
-	 * @return
+	 * Returns the most recent updated solutions.
 	 */
 	@SuppressWarnings("unchecked")
-	public Marketplace getUpdated() {
+	public Marketplace getRecent() {
 		Marketplace marketplace = MarketplaceFactory.eINSTANCE.createMarketplace();
-		marketplace.setBaseUrl(baseUrl);
-		Featured featured = MarketplaceFactory.eINSTANCE.createFeatured();
-		marketplace.setFeatured(featured);
+		marketplace.setBaseUrl(environment.getProperty("marketplace.base-url"));
+		Recent recent = MarketplaceFactory.eINSTANCE.createRecent();
+		marketplace.setRecent(recent);
 		Session session = sessionFactory.openSession();
-		Query query = session.createQuery("SELECT node FROM Node node ORDER BY node.changed ASC");
-		query.setMaxResults(50);
-		featured.getNodes().addAll(query.list());
+		Query query = session.createQuery("SELECT node FROM Node node ORDER BY node.changed DESC");
+		query.setMaxResults(Integer.parseInt(environment.getProperty("marketplace.recent-items")));
+		recent.getNodes().addAll(query.list());
+		recent.setCount(recent.getNodes().size());
 		session.close();
 		return marketplace;
 	}
@@ -129,11 +155,12 @@ public class DataService {
 	@SuppressWarnings("unchecked")
 	public Marketplace getSearchResult(String term) {
 		Marketplace marketplace = MarketplaceFactory.eINSTANCE.createMarketplace();
-		marketplace.setBaseUrl(baseUrl);
+		marketplace.setBaseUrl(environment.getProperty("marketplace.base-url"));
 		Search search = MarketplaceFactory.eINSTANCE.createSearch();
-		marketplace.setSearch(search);
 		term = term.toLowerCase();
 		search.setTerm(term);
+		search.setUrl(environment.getProperty("marketplace.base-url")+"/search?term="+term);
+		marketplace.setSearch(search);
 		Session session = sessionFactory.openSession();
 		try {
 			Query query = session.createQuery(HQL_SEARCH).setString("term", "%"+term+"%");

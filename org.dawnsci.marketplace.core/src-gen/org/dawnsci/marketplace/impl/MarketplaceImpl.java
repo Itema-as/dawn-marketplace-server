@@ -10,6 +10,7 @@ import org.dawnsci.marketplace.Market;
 import org.dawnsci.marketplace.Marketplace;
 import org.dawnsci.marketplace.MarketplacePackage;
 import org.dawnsci.marketplace.Node;
+import org.dawnsci.marketplace.Recent;
 import org.dawnsci.marketplace.Search;
 import org.eclipse.emf.common.notify.Notification;
 
@@ -37,6 +38,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link org.dawnsci.marketplace.impl.MarketplaceImpl#getFeatured <em>Featured</em>}</li>
  *   <li>{@link org.dawnsci.marketplace.impl.MarketplaceImpl#getBaseUrl <em>Base Url</em>}</li>
  *   <li>{@link org.dawnsci.marketplace.impl.MarketplaceImpl#getSearch <em>Search</em>}</li>
+ *   <li>{@link org.dawnsci.marketplace.impl.MarketplaceImpl#getRecent <em>Recent</em>}</li>
  * </ul>
  *
  * @generated
@@ -111,6 +113,16 @@ public class MarketplaceImpl extends MinimalEObjectImpl.Container implements Mar
 	 * @ordered
 	 */
 	protected Search search;
+
+	/**
+	 * The cached value of the '{@link #getRecent() <em>Recent</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getRecent()
+	 * @generated
+	 * @ordered
+	 */
+	protected Recent recent;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -341,6 +353,49 @@ public class MarketplaceImpl extends MinimalEObjectImpl.Container implements Mar
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public Recent getRecent() {
+		return recent;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetRecent(Recent newRecent, NotificationChain msgs) {
+		Recent oldRecent = recent;
+		recent = newRecent;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, MarketplacePackage.MARKETPLACE__RECENT, oldRecent, newRecent);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setRecent(Recent newRecent) {
+		if (newRecent != recent) {
+			NotificationChain msgs = null;
+			if (recent != null)
+				msgs = ((InternalEObject)recent).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - MarketplacePackage.MARKETPLACE__RECENT, null, msgs);
+			if (newRecent != null)
+				msgs = ((InternalEObject)newRecent).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - MarketplacePackage.MARKETPLACE__RECENT, null, msgs);
+			msgs = basicSetRecent(newRecent, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, MarketplacePackage.MARKETPLACE__RECENT, newRecent, newRecent));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -354,6 +409,8 @@ public class MarketplaceImpl extends MinimalEObjectImpl.Container implements Mar
 				return basicSetFeatured(null, msgs);
 			case MarketplacePackage.MARKETPLACE__SEARCH:
 				return basicSetSearch(null, msgs);
+			case MarketplacePackage.MARKETPLACE__RECENT:
+				return basicSetRecent(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -378,6 +435,8 @@ public class MarketplaceImpl extends MinimalEObjectImpl.Container implements Mar
 				return getBaseUrl();
 			case MarketplacePackage.MARKETPLACE__SEARCH:
 				return getSearch();
+			case MarketplacePackage.MARKETPLACE__RECENT:
+				return getRecent();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -410,6 +469,9 @@ public class MarketplaceImpl extends MinimalEObjectImpl.Container implements Mar
 			case MarketplacePackage.MARKETPLACE__SEARCH:
 				setSearch((Search)newValue);
 				return;
+			case MarketplacePackage.MARKETPLACE__RECENT:
+				setRecent((Recent)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -440,6 +502,9 @@ public class MarketplaceImpl extends MinimalEObjectImpl.Container implements Mar
 			case MarketplacePackage.MARKETPLACE__SEARCH:
 				setSearch((Search)null);
 				return;
+			case MarketplacePackage.MARKETPLACE__RECENT:
+				setRecent((Recent)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -464,6 +529,8 @@ public class MarketplaceImpl extends MinimalEObjectImpl.Container implements Mar
 				return BASE_URL_EDEFAULT == null ? baseUrl != null : !BASE_URL_EDEFAULT.equals(baseUrl);
 			case MarketplacePackage.MARKETPLACE__SEARCH:
 				return search != null;
+			case MarketplacePackage.MARKETPLACE__RECENT:
+				return recent != null;
 		}
 		return super.eIsSet(featureID);
 	}

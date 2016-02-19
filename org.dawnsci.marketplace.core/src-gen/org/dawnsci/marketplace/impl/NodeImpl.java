@@ -831,10 +831,13 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @generated
+	 * @generated Not
 	 */
 	public String getUpdateurl() {
-		return updateurl;
+		if (getBaseUrl() == null) {
+			return updateurl;
+		}
+		return getBaseUrl()+"/files/" + getId() + "/" + updateurl;
 	}
 
 	/**

@@ -1,15 +1,15 @@
 # Marketplace specific settings
 marketplace:
   base-url: http://localhost:8080
-  marketplace-db: jdbc:hsqldb:file:database/marketplace;shutdown=true;hsqldb.default_table_type=cached
-  system-db: jdbc:hsqldb:file:database/system;shutdown=true;hsqldb.default_table_type=cached
+  marketplace-db: jdbc:hsqldb:mem:marketplace
+  system-db: jdbc:hsqldb:mem:system
   title: DAWN Plug-in Marketplace
-  icon: http://localhost:8080/pages/marketplace-icon.png
+  icon: http://localhost:8080/pages/eclipse.png
   description: The DAWN Plug-in Marketplace
   wizard-title: DAWN Plug-in Catalog
   wizard-icon: http://localhost:8080/pages/catalog-icon.png
-  recent-items: 4
-  featured-items: 4
+  recent-items: 1
+  featured-items: 1
 
 # Integration with social networks
 spring:

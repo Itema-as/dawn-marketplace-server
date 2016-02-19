@@ -63,7 +63,7 @@ public interface Search extends EObject {
 	 * @return the value of the '<em>Url</em>' attribute.
 	 * @see #setUrl(String)
 	 * @see org.dawnsci.marketplace.MarketplacePackage#getSearch_Url()
-	 * @model required="true" volatile="true" derived="true"
+	 * @model required="true"
 	 * @generated
 	 */
 	String getUrl();

@@ -20,6 +20,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.dawnsci.marketplace.Marketplace#getFeatured <em>Featured</em>}</li>
  *   <li>{@link org.dawnsci.marketplace.Marketplace#getBaseUrl <em>Base Url</em>}</li>
  *   <li>{@link org.dawnsci.marketplace.Marketplace#getSearch <em>Search</em>}</li>
+ *   <li>{@link org.dawnsci.marketplace.Marketplace#getRecent <em>Recent</em>}</li>
  * </ul>
  *
  * @see org.dawnsci.marketplace.MarketplacePackage#getMarketplace()
@@ -172,5 +173,31 @@ public interface Marketplace extends EObject {
 	 * @generated
 	 */
 	void setSearch(Search value);
+
+	/**
+	 * Returns the value of the '<em><b>Recent</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Recent</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Recent</em>' containment reference.
+	 * @see #setRecent(Recent)
+	 * @see org.dawnsci.marketplace.MarketplacePackage#getMarketplace_Recent()
+	 * @model containment="true"
+	 * @generated
+	 */
+	Recent getRecent();
+
+	/**
+	 * Sets the value of the '{@link org.dawnsci.marketplace.Marketplace#getRecent <em>Recent</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Recent</em>' containment reference.
+	 * @see #getRecent()
+	 * @generated
+	 */
+	void setRecent(Recent value);
 
 } // Marketplace

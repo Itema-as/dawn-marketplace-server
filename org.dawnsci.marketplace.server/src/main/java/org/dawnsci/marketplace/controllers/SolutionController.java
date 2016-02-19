@@ -122,9 +122,8 @@ public class SolutionController {
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String showMainView(ModelMap map, Principal principal) {
-		map.addAttribute("connectionsToProviders", getConnectionRepository().findAllConnections());
 		map.addAttribute("featured", dataService.getFeatured());
-		map.addAttribute("updated", dataService.getUpdated());
+		map.addAttribute("updated", dataService.getRecent());
 		map.addAttribute("typeUtilities", DATE_UTILS);
 		Path path = fileService.getPageFile("welcome.md").toPath();			
 		map.addAttribute("text", PageController.parse(path));
@@ -134,7 +133,6 @@ public class SolutionController {
 	
 	@RequestMapping(value = "/search", method = RequestMethod.GET)
 	public String showSearchView(ModelMap map, Principal principal, @RequestParam(value = "term", required = true) String term) {
-		map.addAttribute("connectionsToProviders", getConnectionRepository().findAllConnections());
 		map.addAttribute("solutions", dataService.getSearchResult(term));
 		map.addAttribute("typeUtilities", DATE_UTILS);
 		addProfile(map, principal);

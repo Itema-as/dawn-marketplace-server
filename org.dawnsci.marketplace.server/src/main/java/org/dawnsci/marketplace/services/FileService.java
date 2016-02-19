@@ -11,8 +11,11 @@
 package org.dawnsci.marketplace.services;
 
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Path;
 
+import org.apache.commons.io.FileUtils;
 import org.springframework.stereotype.Service;
 
 /**
@@ -28,35 +31,62 @@ public class FileService {
 	private static Path pagesRoot;
 
 	public FileService() {
-		solutionsRoot = new File(System.getProperty("user.dir"),"solutions").toPath();
+		solutionsRoot = new File(System.getProperty("user.dir"), "solutions").toPath();
 		if (!solutionsRoot.toFile().exists()) {
 			solutionsRoot.toFile().mkdirs();
 		}
-		pagesRoot = new File(System.getProperty("user.dir"),"pages").toPath();
+		pagesRoot = new File(System.getProperty("user.dir"), "pages").toPath();
 		if (!pagesRoot.toFile().exists()) {
 			pagesRoot.toFile().mkdirs();
 		}
+		// make sure that the required file resources are present
+		try {
+			copyRequiredFile("welcome.md");
+			copyRequiredFile("marketplace-icon.png");
+			copyRequiredFile("catalog-icon.png");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
 	}
 	
-	public File getPageFile(String path){
-		if (path.startsWith("pages/")){
-			path = path.substring(path.indexOf("/")+1);
+	private void copyRequiredFile(String filename) throws IOException{
+		File file = getPageFile(filename);
+		if (file.exists()){
+			return;
+		}
+		FileUtils.copyInputStreamToFile(getInputStream("data/pages/"+filename), file);
+	}
+
+	private InputStream getInputStream(String filename) {
+		try {
+			InputStream is = DataService.class.getClassLoader().getResource(filename).openStream();
+			return is;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	public File getPageFile(String path) {
+		if (path.startsWith("pages/")) {
+			path = path.substring(path.indexOf("/") + 1);
 		}
 		return pagesRoot.resolve(path).toFile();
 	}
-	
-	public File getSolutionFile(String path){
+
+	public File getSolutionFile(String path) {
 		// TODO: make sure solution exists
 		// TODO: filename must only be one segment
 		return solutionsRoot.resolve(path).toFile();
 	}
 
-	public File getFile(String solution, String filename){
+	public File getFile(String solution, String filename) {
 		// TODO: make sure solution exists
 		// TODO: filename must only be one segment
 		File file = solutionsRoot.resolve(solution).resolve(filename).toFile();
 		// some safety measures
-		if (file.isDirectory()){
+		if (file.isDirectory()) {
 			return null;
 		}
 		return file;
