@@ -10,9 +10,15 @@ marketplace:
   wizard-icon: http://localhost:8080/pages/catalog-icon.png
   recent-items: 4
   featured-items: 4
+  solutions-folder: solutions
+  pages-folder: pages
 
-# Integration with social networks
 spring:
+# Enable ANSI logging if possible
+  output:
+    ansi:
+      enabled: detect
+# Integration with social networks
   social:
     twitter:
       app-id: XHYkM7qaRCEpgAcS7OesQfSuC

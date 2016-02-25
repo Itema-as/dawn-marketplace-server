@@ -22,7 +22,7 @@ import org.eclipse.emf.ecore.EObject;
  * </ul>
  *
  * @see org.dawnsci.marketplace.MarketplacePackage#getMarket()
- * @model
+ * @model extendedMetaData="name='market'"
  * @generated
  */
 public interface Market extends EObject {
@@ -37,7 +37,7 @@ public interface Market extends EObject {
 	 * @return the value of the '<em>Name</em>' attribute.
 	 * @see #setName(String)
 	 * @see org.dawnsci.marketplace.MarketplacePackage#getMarket_Name()
-	 * @model
+	 * @model annotation="teneo.jpa value='@Lob'"
 	 * @generated
 	 */
 	String getName();
@@ -64,6 +64,7 @@ public interface Market extends EObject {
 	 * @see #setId(Long)
 	 * @see org.dawnsci.marketplace.MarketplacePackage#getMarket_Id()
 	 * @model id="true"
+	 *        annotation="teneo.jpa value='@Id\n@GeneratedValue(strategy=GenerationType.IDENTITY)'"
 	 * @generated
 	 */
 	Long getId();
@@ -89,7 +90,7 @@ public interface Market extends EObject {
 	 * @return the value of the '<em>Url</em>' attribute.
 	 * @see #setUrl(String)
 	 * @see org.dawnsci.marketplace.MarketplacePackage#getMarket_Url()
-	 * @model
+	 * @model annotation="teneo.jpa value='@Lob'"
 	 * @generated
 	 */
 	String getUrl();

@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<marketplace>
-	<catalogs>
-		<!-- put additional catalogs here -->
-	</catalogs>
-</marketplace>
+<catalogs>
+	<!-- put additional catalogs here -->
+</catalogs>

@@ -18,7 +18,11 @@ package org.dawnsci.marketplace.social.account;
 public interface AccountRepository {
 	
 	void createAccount(Account account) throws UsernameAlreadyInUseException;
+	
+	void createAccountSolutionMapping(Account account, Long id);
 
 	Account findAccountByUsername(String username);
+	
+	Account findAccountBySolutionId(Long id);
 	
 }

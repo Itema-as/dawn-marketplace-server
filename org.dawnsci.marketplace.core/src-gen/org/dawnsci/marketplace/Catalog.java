@@ -24,7 +24,7 @@ import org.eclipse.emf.ecore.EObject;
  * </ul>
  *
  * @see org.dawnsci.marketplace.MarketplacePackage#getCatalog()
- * @model
+ * @model extendedMetaData="name='catalog'"
  * @generated
  */
 public interface Catalog extends EObject {
@@ -40,6 +40,7 @@ public interface Catalog extends EObject {
 	 * @see #setId(Long)
 	 * @see org.dawnsci.marketplace.MarketplacePackage#getCatalog_Id()
 	 * @model id="true"
+	 *        annotation="teneo.jpa value='@Id\n@GeneratedValue(strategy=GenerationType.IDENTITY)'"
 	 * @generated
 	 */
 	Long getId();

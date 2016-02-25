@@ -12,11 +12,11 @@
 	<div class="container-fluid" style="margin-top: 20px">
 		<div class="row">
 			<!-- side bar -->
-			<div class="col-md-4">
+			<div class="col-md-3">
 				<div th:replace="../fragments/sidebar :: sidebar"></div>
 			</div>
 			<!-- content -->			
-			<div class="col-md-8">
+			<div class="col-md-9">
 				<h2>Sign into the marketplace</h2>
 
 				<form id="signin" th:action="@{/signin/authenticate}" method="post"
@@ -62,19 +62,19 @@
 					<form id="tw_signin" th:action="@{/signin/twitter}" method="POST" style="width: 100px;display: inline-block;">
 						<input type="hidden" name="_csrf" th:value="${_csrf.token}"></input>									
 						<button class="ml btn btn-block btn-social btn-sm btn-twitter" type="submit">
-							<i class="fa fa-twitter"></i>&nbsp;Twitter
+							<i class="fa fa-twitter"></i> Twitter
 						</button>
 					</form>
 					<form id="google_signin" th:action="@{/signin/google(scope='profile')}" method="POST" style="width: 100px;display: inline-block;">
 						<input type="hidden" name="_csrf" th:value="${_csrf.token}"></input>
 						<button class="ml btn btn-block btn-social btn-sm btn-google-plus" type="submit">
-							<i class="fa fa-google-plus"></i>&nbsp;Google+
+							<i class="fa fa-google-plus"></i> Google+
 						</button>
 					</form>
 					<form id="github_signin" th:action="@{/signin/github}" method="POST" style="width: 100px;display: inline-block;">
 						<input type="hidden" name="_csrf" th:value="${_csrf.token}"></input>
 						<button class="ml btn btn-block btn-social btn-sm btn-github" type="submit">
-							<i class="fa fa-github"></i>&nbsp;GitHub
+							<i class="fa fa-github"></i> GitHub
 						</button>
 					</form>
 				</div>

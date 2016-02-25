@@ -1,0 +1,47 @@
+target "Eclipse Marketplace Server Target Platform" with source requirements
+
+// Base dependencies. MARS.2
+location "http://download.eclipse.org/eclipse/updates/4.5/R-4.5.2-201602121500/" {
+    org.eclipse.equinox.p2.sdk.feature.group
+    org.eclipse.sdk.feature.group
+    org.eclipse.pde.core
+    org.eclipse.emf.ecore
+    org.eclipse.emf.ecore.xmi
+    org.eclipse.emf.ecore.change
+    org.eclipse.emf.common
+}
+location "http://download.eclipse.org/modeling/emf/updates/releases/" {    
+	org.eclipse.emf.databinding
+ 	org.eclipse.emf.databinding.edit
+}
+
+location "http://download.eclipse.org/tools/orbit/downloads/drops/R20160221192158/repository/" {
+    org.apache.log4j
+    org.apache.commons.collections	
+	org.apache.httpcomponents.httpclient
+ 	org.apache.httpcomponents.httpcore
+}
+
+// UI Testing
+location "http://download.eclipse.org/technology/swtbot/releases/2.2.1/" {
+    org.eclipse.swtbot.forms.source.feature.group
+    org.eclipse.swtbot.eclipse.source.feature.group
+    org.eclipse.swtbot.source.feature.group
+    org.hamcrest.library
+    org.hamcrest.core
+}
+
+// SWT Debugging
+location "http://download.eclipse.org/eclipse/updates/4.5" {
+    org.eclipse.swt.tools
+}
+
+// Markdown support
+location "http://download.eclipse.org/mylyn/releases/latest" {
+ org.eclipse.mylyn.wikitext.core
+ org.eclipse.mylyn.wikitext.markdown.core
+ org.eclipse.mylyn.wikitext.markdown.ui
+ org.eclipse.mylyn.wikitext.ui
+ org.eclipse.mylyn.commons.workbench
+}
+

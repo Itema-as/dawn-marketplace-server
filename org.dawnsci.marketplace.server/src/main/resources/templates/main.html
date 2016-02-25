@@ -28,15 +28,15 @@
 	<div class="container-fluid">
 		<div class="row">
 			<!-- side bar -->
-			<div class="col-md-4">
+			<div class="col-md-3">
 				<div th:replace="../fragments/sidebar :: sidebar"></div>
 			</div>
 			<!-- content -->
-			<div class="col-md-8">
+			<div class="col-md-9">
 				<!-- featured solutions max 3-->
 				<div class="row">
 					<div th:each="node: ${featured.featured.nodes}">
-						<div class="col-md-6">
+						<div class="col-md-4">
 							<div th:replace="../fragments/summary :: summary"></div>
 						</div>
 					</div>

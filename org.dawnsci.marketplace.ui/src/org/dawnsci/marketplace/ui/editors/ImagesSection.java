@@ -97,9 +97,9 @@ public class ImagesSection extends SectionPart {
 			public void widgetSelected(SelectionEvent e) {
 				FileDialog fd = new FileDialog(getSection().getShell(), SWT.OPEN);
 				fd.setText("Please select an image file");
-				fd.setFilterExtensions(new String[] { "png", "jpg", "jpeg" });
+				fd.setFilterExtensions(new String[] { "png", "jpg" });
 				String open = fd.open();
-				if (!open.isEmpty()) {
+				if (!(open == null || open.isEmpty())) {
 					txtScreenshotFilePath.setText(open);
 					screenshot = new Image(canvas.getDisplay(), open);
 				}
@@ -144,7 +144,7 @@ public class ImagesSection extends SectionPart {
 				fd.setText("Please select an image file");
 				fd.setFilterExtensions(new String[] { "png", "jpg", "jpeg" });
 				String open = fd.open();
-				if (!open.isEmpty()) {
+				if (!(open == null || open.isEmpty())) {
 					txtLogoFilePath.setText(open);
 					logo = new Image(canvas.getDisplay(), open);
 					if (logo!=null){

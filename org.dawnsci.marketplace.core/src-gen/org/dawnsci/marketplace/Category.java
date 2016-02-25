@@ -35,7 +35,8 @@ public interface Category extends EObject {
 	 * @return the value of the '<em>Id</em>' attribute.
 	 * @see #setId(Long)
 	 * @see org.dawnsci.marketplace.MarketplacePackage#getCategory_Id()
-	 * @model id="true" required="true"
+	 * @model id="true"
+	 *        annotation="teneo.jpa value='@Id\n@GeneratedValue(strategy=GenerationType.IDENTITY)'"
 	 * @generated
 	 */
 	Long getId();

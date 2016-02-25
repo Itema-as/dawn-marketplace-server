@@ -11,19 +11,17 @@
 package org.dawnsci.marketplace.services;
 
 import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
 import javax.inject.Inject;
+import javax.transaction.Transactional;
 
-import org.zeroturnaround.zip.ZipUtil;
-import org.apache.commons.lang.StringUtils;
 import org.apache.commons.io.FileUtils;
-import org.dawnsci.marketplace.Catalog;
-import org.dawnsci.marketplace.Catalogs;
-import org.dawnsci.marketplace.Market;
+import org.apache.commons.lang.StringUtils;
 import org.dawnsci.marketplace.Marketplace;
 import org.dawnsci.marketplace.MarketplacePackage;
 import org.dawnsci.marketplace.Node;
@@ -31,6 +29,7 @@ import org.dawnsci.marketplace.util.MarketplaceResourceFactoryImpl;
 import org.dawnsci.marketplace.util.MarketplaceResourceImpl;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -40,14 +39,17 @@ import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.emf.teneo.PersistenceOptions;
 import org.eclipse.emf.teneo.hibernate.HbDataStore;
 import org.eclipse.emf.teneo.hibernate.HbHelper;
-import org.hibernate.Session;
+import org.hibernate.Query;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import org.hibernate.cfg.Environment;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
+import org.zeroturnaround.zip.ZipUtil;
 
 /**
+ * Instantiates Hibernate and Teneo for use as the persistence store for
+ * marketplace EMF object.
+ * 
  * @author Torkild U. Resheim, Itema AS
  */
 @Service
@@ -75,9 +77,28 @@ public class HibernateService {
 		props.setProperty(Environment.PASS, "");
 		props.setProperty(Environment.DIALECT, org.hibernate.dialect.HSQLDialect.class.getName());
 		props.setProperty(Environment.ENABLE_LAZY_LOAD_NO_TRANS, "true");
+		// for debugging
+		//props.setProperty(Environment.SHOW_SQL, "true");
 		// http://wiki.eclipse.org/Teneo/Hibernate/Configuration_Options
-		props.setProperty(PersistenceOptions.CASCADE_POLICY_ON_NON_CONTAINMENT, "REFRESH,PERSIST,MERGE");
+		props.setProperty(PersistenceOptions.CASCADE_POLICY_ON_CONTAINMENT, "ALL");
+		props.setProperty(PersistenceOptions.CASCADE_POLICY_ON_NON_CONTAINMENT, "ALL");
+		
+		// configure synthetic version column (hsqldb no like e_version)
+		props.setProperty(PersistenceOptions.VERSION_COLUMN_NAME, "pversion");
+		props.setProperty(PersistenceOptions.ALWAYS_VERSION, "true");
+		
+		// enable the thread-bound strategy for obtaining currentSession
+		// see https://developer.jboss.org/wiki/Sessionsandtransactions#jive_content_id_Transaction_demarcation_with_plain_JDBC
+		props.setProperty("hibernate.current_session_context_class", "thread");
+		props.setProperty("hibernate.transaction.factory_class", "org.hibernate.transaction.JDBCTransactionFactory");
 
+		// make sure the "id" feature of each EClass is used as identifier.
+		// when an "id" feature does not exist, an "e_id" column will be created
+		props.setProperty(PersistenceOptions.DEFAULT_ID_FEATURE_NAME, "id");
+
+		// we have specified these using annotations
+		props.setProperty(PersistenceOptions.ID_FEATURE_AS_PRIMARY_KEY, "false");
+		props.setProperty(PersistenceOptions.SET_GENERATED_VALUE_ON_ID_FEATURE, "false");
 		hbds = HbHelper.INSTANCE.createRegisterDataStore("marketplace");
 		hbds.setDataStoreProperties(props);
 		hbds.setEPackages(new EPackage[] { MarketplacePackage.eINSTANCE });
@@ -87,65 +108,85 @@ public class HibernateService {
 		} finally {
 		}
 		if (initializeData) {
-			populate();
+			try {
+				loadMarkets();
+				loadSolutions();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 		return hbds.getSessionFactory();
 	}
 
-	public void populate() {
-		Session session = hbds.getSessionFactory().openSession();
-		Transaction tx = session.beginTransaction();
+	public void loadMarkets() {
 		try {
+			hbds.getSessionFactory().getCurrentSession().beginTransaction();
 			// load catalogs from test or sample data 
-			Catalogs catalogs = loadSerialized("data/catalogs.xml").getCatalogs();
-			EList<Catalog> catalogList = catalogs.getItems();
-			for (Catalog catalog : catalogList) {
-				session.saveOrUpdate(EcoreUtil.copy(catalog));
-			}
+			// TODO: Enable when we do have some catalogs
+//			EList<EObject> catalogList = loadSerialized("data/catalogs.xml");
+//			for (EObject catalog : catalogList) {
+//				session.saveOrUpdate(catalog);
+//			}
+			// remove old data
+			Query query = hbds.getSessionFactory().getCurrentSession().createQuery("delete from Market");
+			query.executeUpdate();
 			// load markets from test or sample data 
-			EList<Market> markets = loadSerialized("data/markets.xml").getMarkets();
-			for (Market market : markets) {
-				session.saveOrUpdate(EcoreUtil.copy(market));
+			EList<EObject> markets = loadSerialized("data/markets.xml");
+			for (EObject market : markets) {
+				hbds.getSessionFactory().getCurrentSession().saveOrUpdate(market);
 			}
+			hbds.getSessionFactory().getCurrentSession().getTransaction().commit();
+		} catch (Exception e) {
+			hbds.getSessionFactory().getCurrentSession().getTransaction().rollback();
+			e.printStackTrace();
+		}
+
+	}
+
+	@Transactional
+	public void loadSolutions() throws IOException {
+			// remove old data
+//			Query query = hbds.getSessionFactory().getCurrentSession().createQuery("delete from Node");
+//			query.executeUpdate();
 			// load solutions from test or sample data 
-			EList<Node> solutions = loadSerialized("data/solutions.xml").getFeatured().getNodes();
-			for (Node node : solutions) {
+			EList<EObject> solutions = loadSerialized("data/solutions.xml");
+			EList<Node> nodes = ((Marketplace)solutions.get(0)).getFeatured().getNodes();
+			for (Node node : nodes) {
 				Node copy = EcoreUtil.copy(node);
-				session.saveOrUpdate(copy);
+			try {
+				hbds.getSessionFactory().getCurrentSession().beginTransaction();
+				hbds.getSessionFactory().getCurrentSession().saveOrUpdate(copy);
+				hbds.getSessionFactory().getCurrentSession().getTransaction().commit();
+			} catch (Exception e) {
+				hbds.getSessionFactory().getCurrentSession().getTransaction().rollback();
+				e.printStackTrace();
+			}
 				// copy the screenshot image
-				if (StringUtils.isNotEmpty(copy.getScreenshot())){
+				if (StringUtils.isNotEmpty(node.getScreenshot())){
 					FileUtils.copyInputStreamToFile(
-							getSolutionsInputStream(copy.getScreenshot()),
-							fileService.getFile(Long.toString(copy.getId()),
-									copy.getScreenshot()));
+							getSolutionsInputStream(node.getScreenshot()),
+							fileService.getFile(Long.toString(node.getId()),
+									node.getScreenshot()));
 				}
 				// copy the icon image
-				if (StringUtils.isNotEmpty(copy.getImage())){
+				if (StringUtils.isNotEmpty(node.getImage())){
 					FileUtils.copyInputStreamToFile(
-							getSolutionsInputStream(copy.getImage()),
-							fileService.getFile(Long.toString(copy.getId()),
-									copy.getImage()));
+							getSolutionsInputStream(node.getImage()),
+							fileService.getFile(Long.toString(node.getId()),
+									node.getImage()));
 				}
 				// unzip the p2-repository
-				if (StringUtils.isNotEmpty(copy.getUpdateurl())){
-					File p2repo = fileService.getSolutionFile(String.valueOf(copy.getId()));
-					ZipUtil.unpack(getSolutionsInputStream(copy.getUpdateurl()+".zip"), p2repo);
+				if (StringUtils.isNotEmpty(node.getUpdateurl())){
+					File p2repo = fileService.getSolutionFile(String.valueOf(node.getId()));
+					ZipUtil.unpack(getSolutionsInputStream(node.getUpdateurl()+".zip"), p2repo);
 				}
 			}
-			session.flush();
-			session.getTransaction().commit();
-		} catch (Exception e) {
-			tx.rollback();
-			e.printStackTrace();
-		} finally {
-			session.close();
-		}
 
 	}
 
 	private InputStream getSolutionsInputStream(String filename) {
 		try {
-			InputStream is = DataService.class.getClassLoader().getResource("data/solutions/"+filename).openStream();
+			InputStream is = MarketplaceDAO.class.getClassLoader().getResource("data/solutions/"+filename).openStream();
 			return is;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -161,14 +202,14 @@ public class HibernateService {
 	 *            the filename to load
 	 * @return
 	 */
-	private Marketplace loadSerialized(String filename) {
+	private EList<EObject> loadSerialized(String filename) {
 		ResourceSet rs = new ResourceSetImpl();
 		rs.getPackageRegistry().put(null, MarketplacePackage.eINSTANCE);
 		try {
 			Resource resource = rs.createResource(URI.createFileURI(filename));
-			InputStream is = DataService.class.getClassLoader().getResource(filename).openStream();
+			InputStream is = MarketplaceDAO.class.getClassLoader().getResource(filename).openStream();
 			resource.load(is, rs.getLoadOptions());
-			return (Marketplace) resource.getContents().get(0);
+			return resource.getContents();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

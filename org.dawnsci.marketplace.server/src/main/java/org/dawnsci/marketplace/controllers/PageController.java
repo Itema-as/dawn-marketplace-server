@@ -17,6 +17,7 @@ import java.io.StringWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
+import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.tika.Tika;
@@ -25,6 +26,7 @@ import org.eclipse.mylyn.wikitext.core.parser.MarkupParser;
 import org.eclipse.mylyn.wikitext.core.parser.builder.HtmlDocumentBuilder;
 import org.eclipse.mylyn.wikitext.markdown.core.MarkdownLanguage;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -38,6 +40,9 @@ import org.springframework.web.servlet.HandlerMapping;
 @Controller
 public class PageController {
 
+	@Inject
+	private Environment environment;
+
 	@Autowired
 	private FileService fileService;
 
@@ -49,7 +54,7 @@ public class PageController {
 
 	@RequestMapping(value = {"/pages/*.md"}, method = RequestMethod.GET)
 	public String markdown(HttpServletRequest request, ModelMap map) {
-
+		map.addAttribute("title", environment.getProperty("marketplace.title"));
 		String resource = ((String) request.getAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE)).substring(1);
 		Path path = fileService.getPageFile(resource).toPath();			
 		map.addAttribute("text", parse(path));

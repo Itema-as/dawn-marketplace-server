@@ -35,6 +35,7 @@ public interface Tag extends EObject {
 	 * @see #setId(Long)
 	 * @see org.dawnsci.marketplace.MarketplacePackage#getTag_Id()
 	 * @model id="true"
+	 *        annotation="teneo.jpa value='@Id\n@GeneratedValue(strategy=GenerationType.IDENTITY)'"
 	 * @generated
 	 */
 	Long getId();

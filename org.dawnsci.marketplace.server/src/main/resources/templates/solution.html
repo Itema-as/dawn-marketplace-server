@@ -10,43 +10,53 @@
 		<div class="row">
 
 			<!-- side bar -->
-			<div class="col-md-4">
+			<div class="col-md-3">
 				<div th:replace="../fragments/sidebar :: sidebar"></div>
 			</div>
 
 			<!-- content -->
-			<div class="col-md-8">
+			<div class="col-md-9" th:id="'solution-'+${content.node.id}">
 				<h2 style="margin-top: 0px;">
-					<img height="48px" th:src="${content.node.image}"></img><span
-						th:text="${content.node.name}"></span>
+					<span th:if="${content.node.image != null}">
+						<img height="48px" th:src="${content.node.image}"></img>
+					</span>
+					<span th:text="${content.node.name}">
+					</span>
 				</h2>
 				<div class="row">
 					<div class="col-md-11">
 						<img class="img-responsive thumbnail"
 							th:src="${content.node.screenshot}"></img>
-					</div>
-					<div class="col-md-1 text-center">
-						<a role="button" th:href="@{~/mpc/marketplace-client-intro(mpc_install=${content.node.id})}"
-							title="Drag to install">
-							<span class="glyphicon glyphicon-cloud-download" aria-hidden="true" style="font-size: 17pt;"></span>
-						</a>
-						<a role="button" th:href="${content.node.homepageurl}" title="Home">
-							<span class="glyphicon glyphicon-home" aria-hidden="true" style="font-size: 17pt;"></span>
-						</a> 
-						<a role="button" th:href="${content.node.supporturl}" title="Support">
-							<span class="glyphicon glyphicon-info-sign" aria-hidden="true" style="font-size: 17pt;"></span>
-						</a>
+						<div style="text-align: center; padding: 5px; background: #fff; float: right; z-index: 10; position: absolute; right: 5px; top: -10px; box-shadow: 0px 0px 5px #888888;">
+							<a role="button" th:href="@{~/mpc/marketplace-client-intro(mpc_install=${content.node.id})}"
+								title="Drag to install">
+								<span class="glyphicon glyphicon-cloud-download" aria-hidden="true" style="font-size: 17pt;"></span>
+							</a><br/>
+							<a role="button" th:href="${content.node.homepageurl}" title="Home">
+								<span class="glyphicon glyphicon-home" aria-hidden="true" style="font-size: 17pt;"></span>
+							</a><br/> 
+							<a role="button" th:href="${content.node.supporturl}" title="Support">
+								<span class="glyphicon glyphicon-info-sign" aria-hidden="true" style="font-size: 17pt;"></span>
+							</a><br/>
+						</div>
 					</div>
 				</div>
 				<div th:utext="${content.node.body}"></div>
 				<!-- categories and tags-->
-				<p>
+				<!-- Not using categories yet
+				<p>				
 					<strong>Categories:</strong> <span th:each="category: ${content.node.categories.items}"
 							class="label label-success" th:text="${category.name}"></span>
 				</p>
+				-->
 				<p>
-					<strong>Tags:</strong> <span th:each="tag: ${content.node.tags.items}"
-							class="label label-info" th:text="${tag.name}"></span>
+					<strong>Tags:</strong>
+					<span th:if="${null != content.node.tags}">
+						<a  
+						th:href="@{~/search(tag=${tag.name})}" 
+						th:each="tag: ${content.node.tags.items}" 
+						class="label label-info" th:text="${tag.name}"></a>
+					</span>
 				</p>
 				<!-- additional details -->
 				<div th:replace="../fragments/solution :: additional"></div>

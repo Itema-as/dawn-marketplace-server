@@ -1,39 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.4"?>
 <plugin>
-
-   <extension
-         point="org.eclipse.ui.editors">
-      <editor
+	<extension
+		point="org.eclipse.ui.editors">
+		<editor
             class="org.dawnsci.marketplace.ui.editors.SolutionEditor"
             contributorClass="org.dawnsci.marketplace.ui.editors.SolutionEditorContributor"
-            filenames="marketplace.xml"
-            icon="icons/sample.gif"
+            extensions="mps"
+            icon="icons/icon.png"
             id="org.dawnsci.marketplace.ui.editors.SolutionEditor"
-            name="Marketplace Solution Editor">
-      </editor>
-   </extension>
+			name="Marketplace Solution Editor">
+		</editor>
+	</extension>
    <extension
          point="org.eclipse.ui.newWizards">
-      <category
-            name="Sample Wizards"
-            id="org.dawnsci.marketplace.ui">
-      </category>
       <wizard
-            name="DAWN Marketplace Solution"
-            icon="icons/sample.gif"
-            category="org.dawnsci.marketplace.ui"
-            class="org.dawnsci.marketplace.ui.wizards.MarketplaceSolutionWizard"
-            id="org.dawnsci.marketplace.ui.wizards.MarketplaceSolutionWizard">
+            name="Marketplace Solution"
+            id="org.dawnsci.marketplace.ui.NewMarketplaceSolution"
+            category="org.dawnsci.dde.ui.category"
+            canFinishEarly="false"
+            class="org.dawnsci.marketplace.ui.NewMarketplaceSolutionWizard"
+            hasPages="true"
+            icon="icons/icon.png"
+            project="false">
       </wizard>
    </extension>
    <extension
-         point="org.eclipse.ui.views">
-      <view
-            class="org.dawnsci.marketplace.ui.editors.DescriptionSection"
-            id="org.dawnsci.marketplace.ui.editors.DescriptionSection"
-            name="New ViewPart">
-      </view>
+         point="org.eclipse.ui.perspectiveExtensions">
+      <perspectiveExtension
+            targetID="org.eclipse.pde.ui.PDEPerspective">
+         <newWizardShortcut
+               id="org.dawnsci.marketplace.ui.NewMarketplaceSolution">
+         </newWizardShortcut>
+      </perspectiveExtension>
    </extension>
-
 </plugin>

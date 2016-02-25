@@ -68,7 +68,7 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final long ID_EDEFAULT = 0L;
+	protected static final Long ID_EDEFAULT = null;
 	/**
 	 * The cached value of the '{@link #getId() <em>Id</em>}' attribute. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
@@ -77,7 +77,7 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 	 * @generated
 	 * @ordered
 	 */
-	protected long id = ID_EDEFAULT;
+	protected Long id = ID_EDEFAULT;
 	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -149,7 +149,7 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final int FAVORITED_EDEFAULT = 0;
+	protected static final Integer FAVORITED_EDEFAULT = null;
 	/**
 	 * The cached value of the '{@link #getFavorited() <em>Favorited</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -157,7 +157,7 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 	 * @generated
 	 * @ordered
 	 */
-	protected int favorited = FAVORITED_EDEFAULT;
+	protected Integer favorited = FAVORITED_EDEFAULT;
 	/**
 	 * The default value of the '{@link #getInstallstotal() <em>Installstotal</em>}' attribute.
 	 * <!-- begin-user-doc --> <!--
@@ -166,7 +166,7 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final int INSTALLSTOTAL_EDEFAULT = 0;
+	protected static final Integer INSTALLSTOTAL_EDEFAULT = null;
 	/**
 	 * The cached value of the '{@link #getInstallstotal() <em>Installstotal</em>}' attribute.
 	 * <!-- begin-user-doc --> <!--
@@ -175,7 +175,7 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 	 * @generated
 	 * @ordered
 	 */
-	protected int installstotal = INSTALLSTOTAL_EDEFAULT;
+	protected Integer installstotal = INSTALLSTOTAL_EDEFAULT;
 	/**
 	 * The default value of the '{@link #getInstallsrecent() <em>Installsrecent</em>}' attribute.
 	 * <!-- begin-user-doc --> <!--
@@ -184,7 +184,7 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final int INSTALLSRECENT_EDEFAULT = 0;
+	protected static final Integer INSTALLSRECENT_EDEFAULT = null;
 	/**
 	 * The cached value of the '{@link #getInstallsrecent() <em>Installsrecent</em>}' attribute.
 	 * <!-- begin-user-doc --> <!--
@@ -193,7 +193,7 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 	 * @generated
 	 * @ordered
 	 */
-	protected int installsrecent = INSTALLSRECENT_EDEFAULT;
+	protected Integer installsrecent = INSTALLSRECENT_EDEFAULT;
 	/**
 	 * The default value of the '{@link #getShortdescription() <em>Shortdescription</em>}' attribute.
 	 * <!-- begin-user-doc --> <!--
@@ -235,7 +235,7 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final long CREATED_EDEFAULT = 0L;
+	protected static final Long CREATED_EDEFAULT = null;
 	/**
 	 * The cached value of the '{@link #getCreated() <em>Created</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -243,7 +243,7 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 	 * @generated
 	 * @ordered
 	 */
-	protected long created = CREATED_EDEFAULT;
+	protected Long created = CREATED_EDEFAULT;
 	/**
 	 * The default value of the '{@link #getChanged() <em>Changed</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -251,7 +251,7 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final long CHANGED_EDEFAULT = 0L;
+	protected static final Long CHANGED_EDEFAULT = null;
 	/**
 	 * The cached value of the '{@link #getChanged() <em>Changed</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -259,7 +259,7 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 	 * @generated
 	 * @ordered
 	 */
-	protected long changed = CHANGED_EDEFAULT;
+	protected Long changed = CHANGED_EDEFAULT;
 	/**
 	 * The default value of the '{@link #getFoundationmember() <em>Foundationmember</em>}' attribute.
 	 * <!-- begin-user-doc --> <!--
@@ -268,7 +268,7 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final int FOUNDATIONMEMBER_EDEFAULT = 0;
+	protected static final Integer FOUNDATIONMEMBER_EDEFAULT = null;
 	/**
 	 * The cached value of the '{@link #getFoundationmember() <em>Foundationmember</em>}' attribute.
 	 * <!-- begin-user-doc --> <!--
@@ -277,7 +277,7 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 	 * @generated
 	 * @ordered
 	 */
-	protected int foundationmember = FOUNDATIONMEMBER_EDEFAULT;
+	protected Integer foundationmember = FOUNDATIONMEMBER_EDEFAULT;
 	/**
 	 * The default value of the '{@link #getHomepageurl() <em>Homepageurl</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -487,16 +487,17 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setId(long newId) {
-		long oldId = id;
+	public void setId(Long newId) {
+		Long oldId = id;
 		id = newId;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, MarketplacePackage.NODE__ID, oldId, id));
@@ -525,16 +526,17 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
-	public int getFavorited() {
+	public Integer getFavorited() {
 		return favorited;
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setFavorited(int newFavorited) {
-		int oldFavorited = favorited;
+	public void setFavorited(Integer newFavorited) {
+		Integer oldFavorited = favorited;
 		favorited = newFavorited;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, MarketplacePackage.NODE__FAVORITED, oldFavorited, favorited));
@@ -544,16 +546,17 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
-	public int getInstallstotal() {
+	public Integer getInstallstotal() {
 		return installstotal;
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setInstallstotal(int newInstallstotal) {
-		int oldInstallstotal = installstotal;
+	public void setInstallstotal(Integer newInstallstotal) {
+		Integer oldInstallstotal = installstotal;
 		installstotal = newInstallstotal;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, MarketplacePackage.NODE__INSTALLSTOTAL, oldInstallstotal, installstotal));
@@ -563,16 +566,17 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
-	public int getInstallsrecent() {
+	public Integer getInstallsrecent() {
 		return installsrecent;
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setInstallsrecent(int newInstallsrecent) {
-		int oldInstallsrecent = installsrecent;
+	public void setInstallsrecent(Integer newInstallsrecent) {
+		Integer oldInstallsrecent = installsrecent;
 		installsrecent = newInstallsrecent;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, MarketplacePackage.NODE__INSTALLSRECENT, oldInstallsrecent, installsrecent));
@@ -620,16 +624,17 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
-	public long getCreated() {
+	public Long getCreated() {
 		return created;
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setCreated(long newCreated) {
-		long oldCreated = created;
+	public void setCreated(Long newCreated) {
+		Long oldCreated = created;
 		created = newCreated;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, MarketplacePackage.NODE__CREATED, oldCreated, created));
@@ -639,16 +644,17 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
-	public long getChanged() {
+	public Long getChanged() {
 		return changed;
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setChanged(long newChanged) {
-		long oldChanged = changed;
+	public void setChanged(Long newChanged) {
+		Long oldChanged = changed;
 		changed = newChanged;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, MarketplacePackage.NODE__CHANGED, oldChanged, changed));
@@ -658,16 +664,17 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
-	public int getFoundationmember() {
+	public Integer getFoundationmember() {
 		return foundationmember;
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setFoundationmember(int newFoundationmember) {
-		int oldFoundationmember = foundationmember;
+	public void setFoundationmember(Integer newFoundationmember) {
+		Integer oldFoundationmember = foundationmember;
 		foundationmember = newFoundationmember;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, MarketplacePackage.NODE__FOUNDATIONMEMBER, oldFoundationmember, foundationmember));
@@ -1039,7 +1046,8 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public NotificationChain basicSetCategories(Categories newCategories, NotificationChain msgs) {
@@ -1079,7 +1087,8 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public NotificationChain basicSetTags(Tags newTags, NotificationChain msgs) {
@@ -1386,7 +1395,7 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case MarketplacePackage.NODE__ID:
-				return id != ID_EDEFAULT;
+				return ID_EDEFAULT == null ? id != null : !ID_EDEFAULT.equals(id);
 			case MarketplacePackage.NODE__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case MarketplacePackage.NODE__TYPE:
@@ -1398,21 +1407,21 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 			case MarketplacePackage.NODE__OWNER:
 				return OWNER_EDEFAULT == null ? owner != null : !OWNER_EDEFAULT.equals(owner);
 			case MarketplacePackage.NODE__FAVORITED:
-				return favorited != FAVORITED_EDEFAULT;
+				return FAVORITED_EDEFAULT == null ? favorited != null : !FAVORITED_EDEFAULT.equals(favorited);
 			case MarketplacePackage.NODE__INSTALLSTOTAL:
-				return installstotal != INSTALLSTOTAL_EDEFAULT;
+				return INSTALLSTOTAL_EDEFAULT == null ? installstotal != null : !INSTALLSTOTAL_EDEFAULT.equals(installstotal);
 			case MarketplacePackage.NODE__INSTALLSRECENT:
-				return installsrecent != INSTALLSRECENT_EDEFAULT;
+				return INSTALLSRECENT_EDEFAULT == null ? installsrecent != null : !INSTALLSRECENT_EDEFAULT.equals(installsrecent);
 			case MarketplacePackage.NODE__SHORTDESCRIPTION:
 				return SHORTDESCRIPTION_EDEFAULT == null ? shortdescription != null : !SHORTDESCRIPTION_EDEFAULT.equals(shortdescription);
 			case MarketplacePackage.NODE__BODY:
 				return BODY_EDEFAULT == null ? body != null : !BODY_EDEFAULT.equals(body);
 			case MarketplacePackage.NODE__CREATED:
-				return created != CREATED_EDEFAULT;
+				return CREATED_EDEFAULT == null ? created != null : !CREATED_EDEFAULT.equals(created);
 			case MarketplacePackage.NODE__CHANGED:
-				return changed != CHANGED_EDEFAULT;
+				return CHANGED_EDEFAULT == null ? changed != null : !CHANGED_EDEFAULT.equals(changed);
 			case MarketplacePackage.NODE__FOUNDATIONMEMBER:
-				return foundationmember != FOUNDATIONMEMBER_EDEFAULT;
+				return FOUNDATIONMEMBER_EDEFAULT == null ? foundationmember != null : !FOUNDATIONMEMBER_EDEFAULT.equals(foundationmember);
 			case MarketplacePackage.NODE__HOMEPAGEURL:
 				return HOMEPAGEURL_EDEFAULT == null ? homepageurl != null : !HOMEPAGEURL_EDEFAULT.equals(homepageurl);
 			case MarketplacePackage.NODE__IMAGE:
