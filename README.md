@@ -2,7 +2,12 @@
 
 An open source Eclipse marketplace server based on the [marketplace client REST API](https://wiki.eclipse.org/Marketplace/REST).
 
-This server is built on [Spring Boot](http://projects.spring.io/spring-boot/), [Eclipse EMF](https://eclipse.org/modeling/emf/), [HyperSQL DB](http://hsqldb.org), [Hibernate](http://hibernate.org) and [Eclipse Teneo](https://wiki.eclipse.org/Teneo). It is self-contained, so there is no need to install anything for deployment except for Java 8. While it is created for serving [DAWN](http://www.dawnsci.org) plug-ins, it can be used for distributing any Eclipse plug-ins as it is compatible with the [Eclipse Marketplace client](https://www.eclipse.org/mpc/).
+This server is built on [Spring Boot](http://projects.spring.io/spring-boot/), [Eclipse EMF](https://eclipse.org/modeling/emf/), [HyperSQL DB](http://hsqldb.org), [Hibernate](http://hibernate.org) and [Eclipse Teneo](https://wiki.eclipse.org/Teneo). It is self-contained, so there is no need to install anything for deployment except for Java 8. While it is created for serving [DAWN](http://www.dawnsci.org) plug-ins, it can be used for distributing plug-ins for any Eclipse based product as it is compatible with the [Eclipse Marketplace client](https://www.eclipse.org/mpc/).
+
+This server implementation differs from the Eclipse Foundation's server some key areas:
+* The Equinox p2 repositores along with all other data are hosted on the server.
+* User accounts are optionally integrated with GitHub, Twitter or Google accounts.
+* Solution metadata can be edited using a form from within Eclipse.
 
 ## Usage
 
