@@ -7,12 +7,7 @@
       <xsd:element maxOccurs="1" minOccurs="0" name="ius" type="org.dawnsci:Ius"/>
       <xsd:element maxOccurs="1" minOccurs="0" name="platforms" type="org.dawnsci:Platforms"/>
     </xsd:sequence>
-    <xsd:attribute name="id" type="xsd:long">
-      <xsd:annotation>
-        <xsd:documentation>Unique identifier
-</xsd:documentation>
-      </xsd:annotation>
-    </xsd:attribute>
+    <xsd:attribute name="id" type="xsd:long"/>
     <xsd:attribute name="name" type="xsd:string">
       <xsd:annotation>
         <xsd:documentation>Listing title</xsd:documentation>
@@ -70,7 +65,7 @@
   </xsd:complexType>
   <xsd:element name="Node" type="org.dawnsci:Node"/>
   <xsd:complexType name="Category">
-    <xsd:attribute name="id" type="xsd:long" use="required"/>
+    <xsd:attribute name="id" type="xsd:long"/>
     <xsd:attribute name="name" type="xsd:string" use="required"/>
     <xsd:attribute name="url" type="xsd:string" use="required"/>
     <xsd:attribute name="count" type="xsd:int"/>

@@ -1,5 +1,2 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<marketplace>
-  <market name="DAWN Plug-ins" id="1" url="http://localhost:8080/mpc/category/markets/dawn_plug-ins">
-  </market>
-</marketplace>
+<market name="DAWN Plug-ins" id="1" url="http://localhost:8080/mpc/category/markets/dawn_plug-ins"></market>

@@ -11,36 +11,19 @@
 package org.dawnsci.marketplace.ui.editors;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.StringWriter;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
 
 import org.dawnsci.marketplace.MarketplaceFactory;
-import org.dawnsci.marketplace.MarketplacePackage;
 import org.dawnsci.marketplace.Node;
-import org.dawnsci.marketplace.util.MarketplaceResourceFactoryImpl;
-import org.dawnsci.marketplace.util.MarketplaceResourceImpl;
+import org.dawnsci.marketplace.core.MarketplaceSerializer;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResourceChangeEvent;
 import org.eclipse.core.resources.IResourceChangeListener;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.emf.common.util.Diagnostic;
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.URIConverter;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.emf.ecore.util.Diagnostician;
 import org.eclipse.emf.ecore.util.EContentAdapter;
-import org.eclipse.emf.ecore.xmi.XMLResource;
-import org.eclipse.emf.ecore.xmi.impl.XMLResourceImpl;
 import org.eclipse.swt.custom.CTabFolder;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.IEditorInput;
@@ -90,61 +73,10 @@ public class SolutionEditor extends FormEditor implements IResourceChangeListene
 		}
 	}
 
-	private Node loadSerialized(File file) {
-		ResourceSet rs = new ResourceSetImpl();
-		rs.getPackageRegistry().put(null, MarketplacePackage.eINSTANCE);
-		try {
-			Resource resource = rs.createResource(URI.createFileURI(file.getName()));
-			resource.load(new FileInputStream(file), rs.getLoadOptions());
-			return (Node) resource.getContents().get(0);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
-
-	/**
-	 * Registers a new resource factory for the data structures. This is
-	 * normally done through Eclipse extension points but we also need to be
-	 * able to create this factory without the Eclipse runtime.
-	 */
-	static {
-		// register package so that it is available even without the Eclipse
-		// runtime
-		@SuppressWarnings("unused")
-		MarketplacePackage packageInstance = MarketplacePackage.eINSTANCE;
-		// register the resource factory
-		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("*", new MarketplaceResourceFactoryImpl() {
-			@Override
-			public Resource createResource(URI uri) {
-				// create the new resource implementation
-				MarketplaceResourceImpl xmiResource = new MarketplaceResourceImpl(uri);
-				// obtain options
-				Map<Object, Object> loadOptions = xmiResource.getDefaultLoadOptions();
-				Map<Object, Object> saveOptions = xmiResource.getDefaultSaveOptions();
-				// use extended metadata for both loading and saving
-				saveOptions.put(XMLResource.OPTION_EXTENDED_META_DATA, Boolean.TRUE);
-				loadOptions.put(XMLResource.OPTION_EXTENDED_META_DATA, Boolean.TRUE);
-				// Treat "href" attributes as features
-				loadOptions.put(XMLResource.OPTION_USE_ENCODED_ATTRIBUTE_STYLE, Boolean.TRUE);
-				// required in order to correctly read in attributes
-				loadOptions.put(XMLResource.OPTION_LAX_FEATURE_PROCESSING, Boolean.TRUE);
-				// We UTF-8 encoding
-				loadOptions.put(XMLResource.OPTION_ENCODING, "UTF-8");
-				saveOptions.put(XMLResource.OPTION_ENCODING, "UTF-8");
-				// do not download any external DTDs.
-				Map<String, Object> parserFeatures = new HashMap<String, Object>();
-				parserFeatures.put("http://xml.org/sax/features/validation", Boolean.FALSE); //$NON-NLS-1$
-				parserFeatures.put("http://apache.org/xml/features/nonvalidating/load-external-dtd", //$NON-NLS-1$
-						Boolean.FALSE);
-				loadOptions.put(XMLResource.OPTION_PARSER_FEATURES, parserFeatures);
-				return xmiResource;
-			}
-		});
-	}
 
 	@Override
 	public boolean isDirty() {
+		// TODO: Do another attempt on getting FormEditor.isDirty() to work properly
 		return dirty;
 	}
 
@@ -156,9 +88,8 @@ public class SolutionEditor extends FormEditor implements IResourceChangeListene
 	public void doSave(IProgressMonitor monitor) {
 		FileEditorInput i = (FileEditorInput) getEditorInput();
 		File file = i.getPath().toFile();
-		validateObject(node);
 		try (FileWriter fw = new FileWriter(file)) {
-			fw.write(serialize(node));
+			fw.write(MarketplaceSerializer.serialize(node));
 			i.getFile().refreshLocal(IFile.DEPTH_ZERO, monitor);
 			dirty = false;
 			firePropertyChange(IEditorPart.PROP_DIRTY);
@@ -169,21 +100,6 @@ public class SolutionEditor extends FormEditor implements IResourceChangeListene
 
 	@Override
 	public void doSaveAs() {
-		try {
-			System.out.println(serialize(node));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-
-	private String serialize(Node rootElement) throws IOException {
-		Map<String, Object> saveOptions = new HashMap<String, Object>();
-		saveOptions.put(XMLResource.OPTION_EXTENDED_META_DATA, Boolean.TRUE);
-		XMLResource resource = new XMLResourceImpl();
-		resource.getContents().add(rootElement);
-		StringWriter stringWriter = new StringWriter();
-		resource.save(new URIConverter.WriteableOutputStream(stringWriter, resource.getEncoding()), saveOptions);
-		return stringWriter.getBuffer().toString();
 	}
 
 	@Override
@@ -197,7 +113,7 @@ public class SolutionEditor extends FormEditor implements IResourceChangeListene
 		
 		FileEditorInput i = (FileEditorInput) input;
 		try {
-			node = loadSerialized(i.getPath().toFile());
+			node = MarketplaceSerializer.loadNode(i.getPath().toFile());
 		} catch (Exception e) {
 			// TODO: Notify about error loading
 		}
@@ -211,35 +127,25 @@ public class SolutionEditor extends FormEditor implements IResourceChangeListene
 				super.notifyChanged(notification);				
 				dirty = true;
 				SolutionEditor.this.firePropertyChange(IEditorPart.PROP_DIRTY);
-				SolutionEditor.this.setPartName(node.getName());
+				SolutionEditor.this.setPartName(getSolutionTitle());
 			}
 		};
 		node.eAdapters().add(adapter);
 		adapter.setTarget(node);
-		// use the plug-in title as the part title
-		setPartName(node.getName());
+		setPartName(getSolutionTitle());
 		firePropertyChange(IEditorPart.PROP_DIRTY);
+	}
+
+	private String getSolutionTitle() {
+		String name = node.getName();
+		if (node.getId()!=null) {
+			name = "#"+node.getId()+" - "+node.getName();
+		}
+		return name;
 	}
 
 	@Override
 	public boolean isSaveAsAllowed() {
-		return true;
-	}
-
-	public static boolean validateObject(EObject eObject) {
-		Diagnostic diagnostic = Diagnostician.INSTANCE.validate(eObject);
-		if (diagnostic.getSeverity() == Diagnostic.ERROR || diagnostic.getSeverity() == Diagnostic.WARNING) {
-			System.err.println(diagnostic.getMessage());
-			for (Iterator<Diagnostic> i = diagnostic.getChildren().iterator();; i.hasNext()) {
-				Diagnostic childDiagnostic = (Diagnostic) i.next();
-				switch (childDiagnostic.getSeverity()) {
-				case Diagnostic.ERROR:
-				case Diagnostic.WARNING:
-					System.err.println("\t" + childDiagnostic.getMessage());
-				}
-			}
-			//return false;
-		}
 		return true;
 	}
 

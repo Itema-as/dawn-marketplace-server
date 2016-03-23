@@ -69,5 +69,15 @@
     "name": "marketplace.featured-items",
     "type": "java.lang.String",
     "description": "The maximum number of items to return when queried for featured items"
+  },
+  {
+    "name": "marketplace.solutions-folder",
+    "type": "java.lang.String",
+    "description": "Server relative path for storing solution data"
+  },
+  {
+    "name": "marketplace.pages-folder",
+    "type": "java.lang.String",
+    "description": "Server relative path for storing server pages"
   }
 ]}

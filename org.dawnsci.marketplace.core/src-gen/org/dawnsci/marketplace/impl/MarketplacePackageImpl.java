@@ -1385,20 +1385,20 @@ public class MarketplacePackageImpl extends EPackageImpl implements MarketplaceP
 
 		// Initialize classes, features, and operations; add parameters
 		initEClass(nodeEClass, Node.class, "Node", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getNode_Id(), ecorePackage.getELong(), "id", null, 0, 1, Node.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getNode_Id(), ecorePackage.getELongObject(), "id", null, 0, 1, Node.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getNode_Name(), ecorePackage.getEString(), "name", null, 0, 1, Node.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getNode_Type(), ecorePackage.getEString(), "type", null, 0, 1, Node.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getNode_Categories(), this.getCategories(), null, "categories", null, 0, 1, Node.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getNode_Tags(), this.getTags(), null, "tags", null, 0, 1, Node.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getNode_Owner(), ecorePackage.getEString(), "owner", null, 0, 1, Node.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getNode_Favorited(), ecorePackage.getEInt(), "favorited", null, 0, 1, Node.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getNode_Installstotal(), ecorePackage.getEInt(), "installstotal", null, 0, 1, Node.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getNode_Installsrecent(), ecorePackage.getEInt(), "installsrecent", null, 0, 1, Node.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getNode_Favorited(), ecorePackage.getEIntegerObject(), "favorited", null, 0, 1, Node.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getNode_Installstotal(), ecorePackage.getEIntegerObject(), "installstotal", null, 0, 1, Node.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getNode_Installsrecent(), ecorePackage.getEIntegerObject(), "installsrecent", null, 0, 1, Node.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getNode_Shortdescription(), ecorePackage.getEString(), "shortdescription", null, 0, 1, Node.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getNode_Body(), ecorePackage.getEString(), "body", null, 0, 1, Node.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getNode_Created(), ecorePackage.getELong(), "created", null, 0, 1, Node.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getNode_Changed(), ecorePackage.getELong(), "changed", null, 0, 1, Node.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getNode_Foundationmember(), ecorePackage.getEInt(), "foundationmember", null, 0, 1, Node.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getNode_Created(), ecorePackage.getELongObject(), "created", null, 0, 1, Node.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getNode_Changed(), ecorePackage.getELongObject(), "changed", null, 0, 1, Node.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getNode_Foundationmember(), ecorePackage.getEIntegerObject(), "foundationmember", null, 0, 1, Node.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getNode_Homepageurl(), ecorePackage.getEString(), "homepageurl", null, 0, 1, Node.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getNode_Image(), ecorePackage.getEString(), "image", null, 0, 1, Node.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getNode_License(), ecorePackage.getEString(), "license", null, 0, 1, Node.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1414,7 +1414,7 @@ public class MarketplacePackageImpl extends EPackageImpl implements MarketplaceP
 		initEAttribute(getNode_Screenshot(), ecorePackage.getEString(), "screenshot", null, 0, 1, Node.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(categoryEClass, Category.class, "Category", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getCategory_Id(), ecorePackage.getELongObject(), "id", null, 1, 1, Category.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getCategory_Id(), ecorePackage.getELongObject(), "id", null, 0, 1, Category.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getCategory_Name(), ecorePackage.getEString(), "name", null, 1, 1, Category.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getCategory_Url(), ecorePackage.getEString(), "url", null, 1, 1, Category.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getCategory_Count(), ecorePackage.getEIntegerObject(), "count", null, 0, 1, Category.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1749,6 +1749,12 @@ public class MarketplacePackageImpl extends EPackageImpl implements MarketplaceP
 			 "name", "catalog"
 		   });	
 		addAnnotation
+		  (catalogEClass, 
+		   source, 
+		   new String[] {
+			 "name", "catalog"
+		   });	
+		addAnnotation
 		  (getCatalog_Description(), 
 		   source, 
 		   new String[] {
@@ -1819,6 +1825,12 @@ public class MarketplacePackageImpl extends EPackageImpl implements MarketplaceP
 			 "name", ":mixed"
 		   });	
 		addAnnotation
+		  (marketEClass, 
+		   source, 
+		   new String[] {
+			 "name", "market"
+		   });	
+		addAnnotation
 		  (getMarket_Category(), 
 		   source, 
 		   new String[] {
@@ -1853,6 +1865,12 @@ public class MarketplacePackageImpl extends EPackageImpl implements MarketplaceP
 	protected void createTeneoAnnotations() {
 		String source = "teneo.jpa";	
 		addAnnotation
+		  (getNode_Id(), 
+		   source, 
+		   new String[] {
+			 "value", "@Id\n@GeneratedValue(strategy=GenerationType.IDENTITY)"
+		   });	
+		addAnnotation
 		  (getNode_Shortdescription(), 
 		   source, 
 		   new String[] {
@@ -1860,6 +1878,48 @@ public class MarketplacePackageImpl extends EPackageImpl implements MarketplaceP
 		   });	
 		addAnnotation
 		  (getNode_Body(), 
+		   source, 
+		   new String[] {
+			 "value", "@Lob"
+		   });	
+		addAnnotation
+		  (getNode_Created(), 
+		   source, 
+		   new String[] {
+			 "value", "@Version"
+		   });	
+		addAnnotation
+		  (getCategory_Id(), 
+		   source, 
+		   new String[] {
+			 "value", "@Id\n@GeneratedValue(strategy=GenerationType.IDENTITY)"
+		   });	
+		addAnnotation
+		  (getTag_Id(), 
+		   source, 
+		   new String[] {
+			 "value", "@Id\n@GeneratedValue(strategy=GenerationType.IDENTITY)"
+		   });	
+		addAnnotation
+		  (getCatalog_Id(), 
+		   source, 
+		   new String[] {
+			 "value", "@Id\n@GeneratedValue(strategy=GenerationType.IDENTITY)"
+		   });	
+		addAnnotation
+		  (getMarket_Name(), 
+		   source, 
+		   new String[] {
+			 "value", "@Lob"
+		   });	
+		addAnnotation
+		  (getMarket_Id(), 
+		   source, 
+		   new String[] {
+			 "value", "@Id\n@GeneratedValue(strategy=GenerationType.IDENTITY)"
+		   });	
+		addAnnotation
+		  (getMarket_Url(), 
 		   source, 
 		   new String[] {
 			 "value", "@Lob"

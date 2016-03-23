@@ -16,43 +16,49 @@
 				<td>Eclipse Versions:</td>
 				<td style="padding-left: 1em;"
 					th:text="${content.node.eclipseversion}"></td>
-			</tr>
-			<tr>
+			</tr>			
+			<tr th:if="${content.node.platforms !=null}">
 				<td>Platform Support:</td>
 				<td style="padding-left: 1em;">
-					<span th:each="platform: ${content.node.platforms.items}" 
+					<span th:each="platform: ${content.node.platforms.items}"
 						th:text="${typeUtilities.getText(platform)}"></span>
 				</td>
 			</tr>
 			<tr>
 				<td>Organisation Name:</td>
 				<td style="padding-left: 1em;" 
-					th:text="${content.node.companyname}"></td>
+					th:text="${content.node.companyname}" 
+					th:if="${null != content.node.companyname}"></td>
 			</tr>
 			<tr>
 				<td>Development Status:</td>
 				<td style="padding-left: 1em;"
-					th:text="${content.node.status}"></td>
+					th:text="${content.node.status}"
+					th:if="${null != content.node.status}"></td>
 			</tr>
 			<tr>
 				<td>License:</td>
 				<td style="padding-left: 1em;"
-					th:text="${content.node.license}"></td>
+					th:text="${content.node.license}"
+					th:if="${null != content.node.license}"></td>
 			</tr>
 			<tr>
 				<td>Date Updated:</td>
 				<td style="padding-left: 1em;"
-					th:text="${typeUtilities.getDate(content.node.changed)}"></td>
+					th:text="${typeUtilities.getDate(content.node.changed)}"
+					th:if="${null != content.node.changed}"></td>
 			</tr>
 			<tr>
 				<td>Date Created:</td>
 				<td style="padding-left: 1em;"
-					th:text="${typeUtilities.getDate(content.node.created)}"></td>
+					th:text="${typeUtilities.getDate(content.node.created)}"
+					th:if="${null != content.node.created}"></td>
 			</tr>
 			<tr>
 				<td>Owner:</td>
 				<td style="padding-left: 1em;"
-					th:text="${content.node.owner}"></td>
+					th:text="${content.node.owner}"
+					th:if="${null != content.node.owner}"></td>
 			</tr>
 			</table>
 		</div>

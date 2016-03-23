@@ -11,12 +11,15 @@
 package org.dawnsci.marketplace.services;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Path;
 
 import org.apache.commons.io.FileUtils;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * Keeps track of files belonging to the various solutions on the marketplace.
@@ -29,13 +32,13 @@ public class FileService {
 	private static Path solutionsRoot;
 
 	private static Path pagesRoot;
-
-	public FileService() {
-		solutionsRoot = new File(System.getProperty("user.dir"), "solutions").toPath();
+	
+	public FileService(Environment environment) {
+		solutionsRoot = new File(System.getProperty("user.dir"), environment.getProperty("marketplace.solutions-folder")).toPath();
 		if (!solutionsRoot.toFile().exists()) {
 			solutionsRoot.toFile().mkdirs();
 		}
-		pagesRoot = new File(System.getProperty("user.dir"), "pages").toPath();
+		pagesRoot = new File(System.getProperty("user.dir"), environment.getProperty("marketplace.pages-folder")).toPath();
 		if (!pagesRoot.toFile().exists()) {
 			pagesRoot.toFile().mkdirs();
 		}
@@ -49,18 +52,18 @@ public class FileService {
 		}
 
 	}
-	
-	private void copyRequiredFile(String filename) throws IOException{
+
+	private void copyRequiredFile(String filename) throws IOException {
 		File file = getPageFile(filename);
-		if (file.exists()){
+		if (file.exists()) {
 			return;
 		}
-		FileUtils.copyInputStreamToFile(getInputStream("data/pages/"+filename), file);
+		FileUtils.copyInputStreamToFile(getInputStream("data/pages/" + filename), file);
 	}
 
 	private InputStream getInputStream(String filename) {
 		try {
-			InputStream is = DataService.class.getClassLoader().getResource(filename).openStream();
+			InputStream is = MarketplaceDAO.class.getClassLoader().getResource(filename).openStream();
 			return is;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -75,15 +78,30 @@ public class FileService {
 		return pagesRoot.resolve(path).toFile();
 	}
 
+	public File saveSolutionFile(Long solution, MultipartFile file) {
+		String fileName = file.getOriginalFilename();
+		byte[] buffer = new byte[1000];
+		File outputFile = getFile(solution.toString(), fileName);
+		outputFile.getParentFile().mkdirs();
+
+		try (InputStream reader = file.getInputStream();
+				FileOutputStream writer = new FileOutputStream(outputFile)) {
+			outputFile.createNewFile();
+			while ((reader.read(buffer)) != -1) {
+				writer.write(buffer);
+			}
+			return outputFile;
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
 	public File getSolutionFile(String path) {
-		// TODO: make sure solution exists
-		// TODO: filename must only be one segment
 		return solutionsRoot.resolve(path).toFile();
 	}
 
 	public File getFile(String solution, String filename) {
-		// TODO: make sure solution exists
-		// TODO: filename must only be one segment
 		File file = solutionsRoot.resolve(solution).resolve(filename).toFile();
 		// some safety measures
 		if (file.isDirectory()) {

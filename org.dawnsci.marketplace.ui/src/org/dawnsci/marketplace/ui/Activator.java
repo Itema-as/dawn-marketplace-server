@@ -1,5 +1,8 @@
 package org.dawnsci.marketplace.ui;
 
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
@@ -58,4 +61,15 @@ public class Activator extends AbstractUIPlugin {
 	public static ImageDescriptor getImageDescriptor(String path) {
 		return imageDescriptorFromPlugin(PLUGIN_ID, path);
 	}
+
+	public static void log(IStatus status) {
+		plugin.getLog().log(status);
+	}
+
+	public static void log(Exception e) {
+		if (e instanceof CoreException)
+			log(((CoreException) e).getStatus());
+		plugin.getLog().log(new Status(IStatus.ERROR, PLUGIN_ID, e.getLocalizedMessage(), e));
+	}
+
 }

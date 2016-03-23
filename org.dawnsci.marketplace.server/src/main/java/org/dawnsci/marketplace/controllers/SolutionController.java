@@ -20,7 +20,7 @@ import javax.inject.Provider;
 
 import org.dawnsci.marketplace.MarketplaceFactory;
 import org.dawnsci.marketplace.Platform;
-import org.dawnsci.marketplace.services.DataService;
+import org.dawnsci.marketplace.services.MarketplaceDAO;
 import org.dawnsci.marketplace.services.FileService;
 import org.dawnsci.marketplace.social.account.Account;
 import org.dawnsci.marketplace.social.account.AccountRepository;
@@ -33,6 +33,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.actuate.autoconfigure.EndpointAutoConfiguration.GitInfo;
 import org.springframework.boot.autoconfigure.social.FacebookProperties;
+import org.springframework.core.env.Environment;
 import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.ConnectionFactoryLocator;
 import org.springframework.social.connect.ConnectionRepository;
@@ -56,6 +57,9 @@ import org.springframework.web.servlet.HandlerMapping;
 @SuppressWarnings("unused")
 @Controller
 public class SolutionController {
+
+	@Inject
+	private Environment environment;
 
 	public static class TypeUtilities {
 
@@ -87,7 +91,7 @@ public class SolutionController {
 	private final Provider<ConnectionRepository> connectionRepositoryProvider;
 
 	@Autowired
-	private DataService dataService;
+	private MarketplaceDAO marketplaceDAO;
 
 	@Autowired
 	private FileService fileService;
@@ -122,8 +126,9 @@ public class SolutionController {
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String showMainView(ModelMap map, Principal principal) {
-		map.addAttribute("featured", dataService.getFeatured());
-		map.addAttribute("updated", dataService.getRecent());
+		map.addAttribute("title", environment.getProperty("marketplace.title"));
+		map.addAttribute("featured", marketplaceDAO.getFeatured());
+		map.addAttribute("updated", marketplaceDAO.getRecent());
 		map.addAttribute("typeUtilities", DATE_UTILS);
 		Path path = fileService.getPageFile("welcome.md").toPath();			
 		map.addAttribute("text", PageController.parse(path));
@@ -131,9 +136,24 @@ public class SolutionController {
 		return "main";
 	}
 	
+	/**
+	 * Performs a search for solutions which the matching parameters. Note 
+	 * that that only the <b>term</b> tag is defined and used by the Eclipse
+	 * marketplace implementation.
+	 */
 	@RequestMapping(value = "/search", method = RequestMethod.GET)
-	public String showSearchView(ModelMap map, Principal principal, @RequestParam(value = "term", required = true) String term) {
-		map.addAttribute("solutions", dataService.getSearchResult(term));
+	public String showSearchView(ModelMap map, Principal principal, 
+			@RequestParam(value = "term", required = false) String term,
+			@RequestParam(value = "tag", required = false) String tag) {
+		map.addAttribute("title", environment.getProperty("marketplace.title"));
+		if (term != null) {
+			map.addAttribute("solutions", marketplaceDAO.getSearchResult(term));
+			map.addAttribute("query", "term \""+term+"\".");
+		}
+		if (tag != null) {
+			map.addAttribute("solutions", marketplaceDAO.getSolutionsWithTag(tag));
+			map.addAttribute("query", "tag \""+tag+"\".");
+		}
 		map.addAttribute("typeUtilities", DATE_UTILS);
 		addProfile(map, principal);
 		return "list";
@@ -141,7 +161,8 @@ public class SolutionController {
 
 	@RequestMapping(value = "/content/{identifier}", method = RequestMethod.GET)
 	public String showSolution(ModelMap map, Principal principal, @PathVariable int identifier) {
-		map.addAttribute("content", dataService.getContent(identifier));
+		map.addAttribute("title", environment.getProperty("marketplace.title"));
+		map.addAttribute("content", marketplaceDAO.getContent(identifier));
 		map.addAttribute("typeUtilities", DATE_UTILS);
 		addProfile(map, principal);
 		return "solution";

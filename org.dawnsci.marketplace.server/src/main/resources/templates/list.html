@@ -12,16 +12,16 @@
 		<div class="row">
 
 			<!-- side bar -->
-			<div class="col-md-4">
+			<div class="col-md-3">
 				<div th:replace="../fragments/sidebar :: sidebar"></div>
 			</div>
 
 			<!-- content -->
-			<div class="col-md-8">
-				<h2 style="margin-top: 0px;">Search Results</h2>
+			<div class="col-md-9">
+				<h2 style="margin-top: 0px;">Search results for <span th:text="${query}"></span></h2>
 				<div class="row">
 					<div th:each="node: ${solutions.search.nodes}">
-						<div class="col-md-6">
+						<div class="col-md-4">
 							<div th:replace="../fragments/summary :: short-summary"></div>
 						</div>
 					</div>

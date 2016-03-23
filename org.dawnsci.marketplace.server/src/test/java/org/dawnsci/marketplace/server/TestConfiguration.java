@@ -16,12 +16,13 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.Profile;
+import org.springframework.security.crypto.encrypt.Encryptors;
+import org.springframework.security.crypto.encrypt.TextEncryptor;
+import org.springframework.security.crypto.password.NoOpPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 /**
- * Special configuration that keeps the marketplace data in XML files so
- * that tests can be executed without access to a persistence layer. The data
- * files are created using output from the official marketplace server at
- * http://marketplace.eclipse.org
+ * Special configuration for the test set-up.
  * 
  * @author Torkild U. Resheim
  */
@@ -37,4 +38,15 @@ public class TestConfiguration {
 		return Boolean.TRUE; 
 	}
 	
+	@Bean
+	@Primary
+	public PasswordEncoder passwordEncoder() {
+		return NoOpPasswordEncoder.getInstance();
+	}
+
+	@Bean
+	@Primary
+	public TextEncryptor textEncryptor() {
+		return Encryptors.noOpText();
+	}
 }

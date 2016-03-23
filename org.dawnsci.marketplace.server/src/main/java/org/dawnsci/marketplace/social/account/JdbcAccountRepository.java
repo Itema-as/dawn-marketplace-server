@@ -52,6 +52,13 @@ public class JdbcAccountRepository implements AccountRepository {
 		}
 	}
 
+	@Transactional
+	public void createAccountSolutionMapping(Account user, Long solution){
+		jdbcTemplate.update(
+				"insert into SolutionConnection (username, solution) values (?, ?)",
+				user.getUsername(), solution);
+	}
+
 	public Account findAccountByUsername(String username) {
 		return jdbcTemplate.queryForObject("select username, firstName, lastName from Account where username = ?",
 				new RowMapper<Account>() {
@@ -60,6 +67,17 @@ public class JdbcAccountRepository implements AccountRepository {
 								.getString("lastName"));
 					}
 				}, username);
+	}
+
+	@Override
+	public Account findAccountBySolutionId(Long id) {
+		String username = jdbcTemplate.queryForObject("select username, solution from SolutionConnection where solution = ?",
+				new RowMapper<String>() {
+					public String mapRow(ResultSet rs, int rowNum) throws SQLException {
+						return  rs.getString("username");
+					}
+				}, id);
+		return findAccountByUsername(username);
 	}
 
 }

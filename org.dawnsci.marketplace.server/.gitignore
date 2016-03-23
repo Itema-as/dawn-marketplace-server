@@ -1,6 +1,7 @@
 /target/
 /database/
 /solutions/
+/test/
 .DS_Store
 /.apt_generated/
 /pages/

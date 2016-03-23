@@ -4,9 +4,10 @@
 <body>
 	<!-- 	
 		presents a longer solution summary with a thumbnail image of the 
-		screenshot, the short description and the install button. 
+		screenshot, the short description and the install button. The 
+		identifier of the root element is used mainly for testing.
 	-->
-	<div th:fragment="summary" class="thumbnail">
+	<div th:fragment="summary" class="thumbnail" th:id="'solution-'+${node.id}">
 		<img th:src="${node.screenshot}"></img>
 		<div class="caption">
 			<h3>
@@ -14,31 +15,36 @@
 					th:text="${node.name}"></span></a>
 			</h3>
 			<p th:utext="${node.shortdescription}"></p>
-			<p class="text-muted">
-				<i>Last updated&nbsp;<span
-					th:text="${typeUtilities.getDate(node.changed)}"></span>&nbsp;by&nbsp;<span
+			<p class="text-muted" th:if="${null != node.changed}">
+				<i>Last updated <span
+					th:text="${typeUtilities.getDate(node.changed)}"></span> by <span
 					th:text="${node.owner}"></span></i>
 			</p>
 			<a role="button"
 				th:href="@{~/mpc/marketplace-client-intro(mpc_install=${node.id})}">
 				<button class="btn btn-success"
 					title="Drag to your running Eclipse workbench to install">
-					<span class="glyphicon glyphicon-cloud-download" aria-hidden="true"></span>&nbsp;Install
+					<span class="glyphicon glyphicon-cloud-download" aria-hidden="true"></span> Install
 				</button>
 			</a>
 		</div>
 	</div>
 
-	<div th:fragment="short-summary" class="thumbnail">
+	<!-- 	
+		presents a short solution summary with the logo image the short 
+		description and the install button. The identifier of the root element
+		is used mainly for testing.
+	-->
+	<div th:fragment="short-summary" class="thumbnail" th:id="'solution-'+${node.id}">
 		<div class="row">
 			<div class="col-md-4 text-center">
-				<img th:src="${node.image}"></img>
+				<img class="img-responsive" th:src="${node.image}"></img>
 				<br/><br/>
 				<a role="button"
 					th:href="@{~/mpc/marketplace-client-intro(mpc_install=${node.id})}">
 					<button class="btn btn-default" 
 						title="Drag to your running Eclipse workbench to install">
-						<span class="glyphicon glyphicon-cloud-download" aria-hidden="true"></span>&nbsp;Install
+						<span class="glyphicon glyphicon-cloud-download" aria-hidden="true"></span> Install
 					</button>
 				</a>
 			</div>

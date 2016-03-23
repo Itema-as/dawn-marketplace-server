@@ -20,3 +20,8 @@ create table if not exists Account (id identity,
 	password varchar(256) not null,
 	firstName varchar(256) not null, 
 	lastName varchar(256) not null);
+
+create table if not exists SolutionConnection (
+	username varchar(256) not null,
+	solution varchar(256) not null,
+	primary key (username, solution));

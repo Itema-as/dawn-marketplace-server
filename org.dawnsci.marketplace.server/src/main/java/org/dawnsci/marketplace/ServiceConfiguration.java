@@ -10,10 +10,13 @@
  ****************************************************************************/
 package org.dawnsci.marketplace;
 
-import org.dawnsci.marketplace.services.DataService;
+import javax.inject.Inject;
+
+import org.dawnsci.marketplace.services.MarketplaceDAO;
 import org.dawnsci.marketplace.services.FileService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.env.Environment;
 
 /**
  * @author Torkild U. Resheim, Itema AS
@@ -21,14 +24,17 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class ServiceConfiguration {
 		
+	@Inject
+	private Environment environment;
+
 	@Bean
-	public DataService catalogService() {
-		return new DataService();
+	public MarketplaceDAO catalogService() {
+		return new MarketplaceDAO();
 	}
 	
 	@Bean
 	public FileService fileService() {
-		return new FileService();
+		return new FileService(environment);
 	}
 
 }
