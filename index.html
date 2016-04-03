@@ -40,28 +40,9 @@
 <p>This server is built on <a href="http://projects.spring.io/spring-boot/">Spring Boot</a>, <a href="https://eclipse.org/modeling/emf/">Eclipse EMF</a>, <a href="http://hsqldb.org">HyperSQL DB</a>, <a href="http://hibernate.org">Hibernate</a> and <a href="https://wiki.eclipse.org/Teneo">Eclipse Teneo</a>. It is self-contained, so there is no need to install anything for deployment except for Java 8. While it is created for serving <a href="http://www.dawnsci.org">DAWN</a> plug-ins, it can be used for distributing plug-ins for any Eclipse based product as it is compatible with the <a href="https://www.eclipse.org/mpc/">Eclipse Marketplace client</a>.</p>
 
 <h2>
-<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Usage</h2>
+<a id="screenshots" class="anchor" href="#screenshots" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Screenshots</h2>
 
-<h3>
-<a id="starting-the-server" class="anchor" href="#starting-the-server" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Starting the server</h3>
-
-<p>When running the standalone server you need to start it from the command line. E.g. <code>java -jar org.dawnsci.marketplace.server-1.0-SNAPSHOT.war --init</code>.</p>
-
-<p>See the <a href="org.dawnsci.marketplace.server/README.md">notes for the server</a> for more details.</p>
-
-<h3>
-<a id="using-the-marketplace-client" class="anchor" href="#using-the-marketplace-client" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Using the marketplace client</h3>
-
-<p>Start Eclipse with required parameters for connecting to the server, e.g. <code>/Eclipse.app/Contents/MacOS/eclipse -vmargs -Dorg.eclipse.epp.internal.mpc.core.service.DefaultMarketplaceService.url=http://localhost:8080/mpc -Dorg.eclipse.epp.internal.mpc.core.service.DefaultCatalogService.url=http://localhost:8080/mpc</code></p>
-
-<p>Replace http://localhost:8080 with whatever you have the server running on.</p>
-
-<h2>
-<a id="development-and-building" class="anchor" href="#development-and-building" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Development and Building</h2>
-
-<p>When doing development on this code, you should start the server from within Eclipse. That will allow you to do normal debugging. Make sure the <a href="https://marketplace.eclipse.org/content/spring-ide">Spring tool suite</a> is installed and launch the <strong>org.dawnsci.marketplace.server</strong> project as a <em>Spring Boot App</em>. Add <code>--init</code> to create an initial data set for testing.</p>
-
-<p>The server is built using Maven so it is sufficient to execute <code>mvn clean package</code> from the project root.</p>
+<p><a href="http://imgur.com/Q9q4DZT"><img src="http://i.imgur.com/Q9q4DZTl.png" title="source: imgur.com"></a></p>
 
       <footer class="site-footer">
         <span class="site-footer-owner"><a href="https://github.com/Itema-as/dawn-marketplace-server">Dawn-marketplace-server</a> is maintained by <a href="https://github.com/Itema-as">Itema-as</a>.</span>
