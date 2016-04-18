@@ -9,3 +9,24 @@ body {
 	padding-left: 32px;
 	float: right;
 }
+
+/* list of featured items */
+#featured > .row {
+    display: table;
+}
+
+#featured > [class*="col-"] {
+    float: none;
+    display: table-cell;
+    vertical-align: top;
+}
+
+.action-bar {
+	float: none;
+    vertical-align: bottom;
+}
+
+.clickable > a {
+  color:inherit;
+  text-decoration: none;
+ }

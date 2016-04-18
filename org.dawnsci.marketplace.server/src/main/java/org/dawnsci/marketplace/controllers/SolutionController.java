@@ -17,122 +17,74 @@ import java.util.Locale;
 
 import javax.inject.Inject;
 import javax.inject.Provider;
+import javax.naming.NamingException;
 
+import org.dawnsci.marketplace.ForbiddenException;
+import org.dawnsci.marketplace.Marketplace;
+import org.dawnsci.marketplace.impl.MarketplaceImpl;
 import org.dawnsci.marketplace.MarketplaceFactory;
+import org.dawnsci.marketplace.Node;
+import org.dawnsci.marketplace.NodeProxy;
+import org.dawnsci.marketplace.NotFoundException;
 import org.dawnsci.marketplace.Platform;
 import org.dawnsci.marketplace.services.MarketplaceDAO;
+import org.dawnsci.marketplace.core.MarketplaceSerializer;
+import org.dawnsci.marketplace.core.MarketplaceUtility;
 import org.dawnsci.marketplace.services.FileService;
 import org.dawnsci.marketplace.social.account.Account;
 import org.dawnsci.marketplace.social.account.AccountRepository;
-import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.util.FeatureMap;
 import org.eclipse.emf.ecore.util.FeatureMapUtil;
 import org.eclipse.emf.ecore.util.FeatureMapUtil.FeatureEList;
-import org.eclipse.emf.ecore.xml.type.XMLTypePackage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.actuate.autoconfigure.EndpointAutoConfiguration.GitInfo;
 import org.springframework.boot.autoconfigure.social.FacebookProperties;
-import org.springframework.core.env.Environment;
-import org.springframework.social.connect.Connection;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.social.connect.ConnectionFactoryLocator;
 import org.springframework.social.connect.ConnectionRepository;
-import org.springframework.social.github.api.GitHub;
-import org.springframework.social.google.api.Google;
-import org.springframework.social.twitter.api.Twitter;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.HandlerMapping;
 
 /**
- * Controller for viewing public marketplace information.
+ * CRUD controller for solutions a.k.a. plug-ins and features.
  * 
  * @author Torkild U. Resheim, Itema AS
  */
 @SuppressWarnings("unused")
 @Controller
-public class SolutionController {
-
-	@Inject
-	private Environment environment;
-
-	public static class TypeUtilities {
-
-		public static Date getDate(long timestamp) {
-			return new Date(timestamp);
-		}
-
-		@SuppressWarnings("rawtypes")
-		public static String getText(Platform p) {
-			Object o = p.getMixed().get(TEXT, false);
-			if (o instanceof FeatureEList) {
-				if (((FeatureEList) o).size() > 0) {
-					return ((FeatureEList) o).get(0).toString();
-				}
-			}
-			return null;
-		}
-
-	}
-	
-	private static final TypeUtilities DATE_UTILS = new TypeUtilities();
-	private static final EStructuralFeature TEXT = XMLTypePackage.eINSTANCE.getXMLTypeDocumentRoot_Text();
-
-	private final AccountRepository accountRepository;
-
-	@Inject
-	private ConnectionRepository connectionRepository;
-
-	private final Provider<ConnectionRepository> connectionRepositoryProvider;
+public class SolutionController extends AbstractController {
 
 	@Autowired
 	private MarketplaceDAO marketplaceDAO;
 
 	@Autowired
 	private FileService fileService;
-
+	
 	@Inject
-	public SolutionController(Provider<ConnectionRepository> connectionRepositoryProvider,
-			AccountRepository accountRepository) {
-		this.connectionRepositoryProvider = connectionRepositoryProvider;
-		this.accountRepository = accountRepository;
-	}
-
-	private void addProfile(ModelMap map, Principal principal) {
-		if (principal!=null){
-			Connection<?> connection = null;
-			connection = connectionRepository.findPrimaryConnection(Twitter.class);
-			if (connection == null)
-				connection = connectionRepository.findPrimaryConnection(Google.class);
-			if (connection == null)
-				connection = connectionRepository.findPrimaryConnection(GitHub.class);
-			if (connection != null) {
-				map.addAttribute("profileImage",connection.getImageUrl());
-				map.addAttribute("profile",connection.getProfileUrl());
-			}
-			Account findAccountByUsername = accountRepository.findAccountByUsername(principal.getName());
-			map.addAttribute(findAccountByUsername);
-		}
-	}
-
-	private ConnectionRepository getConnectionRepository() {
-		return connectionRepositoryProvider.get();
+	public SolutionController(AccountRepository accountRepository) {
+		super(accountRepository);
 	}
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String showMainView(ModelMap map, Principal principal) {
-		map.addAttribute("title", environment.getProperty("marketplace.title"));
+		addCommonItems(map, principal);
 		map.addAttribute("featured", marketplaceDAO.getFeatured());
-		map.addAttribute("updated", marketplaceDAO.getRecent());
-		map.addAttribute("typeUtilities", DATE_UTILS);
+		map.addAttribute("recent", marketplaceDAO.getRecent());
 		Path path = fileService.getPageFile("welcome.md").toPath();			
 		map.addAttribute("text", PageController.parse(path));
-		addProfile(map, principal);
 		return "main";
 	}
 	
@@ -145,7 +97,7 @@ public class SolutionController {
 	public String showSearchView(ModelMap map, Principal principal, 
 			@RequestParam(value = "term", required = false) String term,
 			@RequestParam(value = "tag", required = false) String tag) {
-		map.addAttribute("title", environment.getProperty("marketplace.title"));
+		addCommonItems(map, principal);
 		if (term != null) {
 			map.addAttribute("solutions", marketplaceDAO.getSearchResult(term));
 			map.addAttribute("query", "term \""+term+"\".");
@@ -154,17 +106,104 @@ public class SolutionController {
 			map.addAttribute("solutions", marketplaceDAO.getSolutionsWithTag(tag));
 			map.addAttribute("query", "tag \""+tag+"\".");
 		}
-		map.addAttribute("typeUtilities", DATE_UTILS);
-		addProfile(map, principal);
 		return "list";
 	}
 
+	/**
+	 * Shows the solution with the given identifier. If it does not exist a 404
+	 * error will be returned.
+	 */
 	@RequestMapping(value = "/content/{identifier}", method = RequestMethod.GET)
 	public String showSolution(ModelMap map, Principal principal, @PathVariable int identifier) {
-		map.addAttribute("title", environment.getProperty("marketplace.title"));
-		map.addAttribute("content", marketplaceDAO.getContent(identifier));
-		map.addAttribute("typeUtilities", DATE_UTILS);
-		addProfile(map, principal);
+		addCommonItems(map, principal);
+		Marketplace content = marketplaceDAO.getContent(identifier);
+		if (content.getNode()==null) {
+			throw new NotFoundException();
+		}
+		map.addAttribute("content", content);
 		return "solution";
+	}
+
+	/**
+	 * Deletes the solution from the database. The logged in user must be the
+	 * owner or an 403 error will be returned. 
+	 */
+	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
+	@RequestMapping(value = "/delete-solution/{identifier}", method = RequestMethod.GET)
+	public String deleteSolution(ModelMap map, Principal principal, @PathVariable int identifier) {
+		Account account = accountRepository.findAccountByUsername(principal.getName());
+		marketplaceDAO.deleteSolution(account, Long.valueOf(identifier));
+		return "redirect:/";
+	}
+	/**
+	 * Open the solution editing form for creating a new instance. 
+	 */
+	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
+	@RequestMapping(value = "/edit-solution", method = RequestMethod.GET)
+	public String showNewSolutionForm(ModelMap map, Principal principal) {
+		addCommonItems(map, principal);
+		Node node = MarketplaceFactory.eINSTANCE.createNode();
+		map.addAttribute("content", new NodeProxy(node));
+		// add list of available licenses and statuses
+		map.addAttribute("licenses", MarketplaceUtility.LICENSES);
+		map.addAttribute("status", MarketplaceUtility.STATUS);
+		return "edit-solution";
+	}
+
+	/**
+	 * Open the solution editing form for modifying an existing instance. 
+	 */
+	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
+	@RequestMapping(value = "/edit-solution/{identifier}", method = RequestMethod.GET)
+	public String showEditSolutionForm(ModelMap map, Principal principal, @PathVariable int identifier) {
+		addCommonItems(map, principal);
+		// block access if the user does not own the solution
+		Account account = accountRepository.findAccountByUsername(principal.getName());
+		Account a = accountRepository.findAccountBySolutionId(Long.valueOf(identifier));
+		if (!account.getUsername().equals(a.getUsername())) {
+			throw new ForbiddenException();
+		}
+		map.addAttribute("content", new NodeProxy(marketplaceDAO.getContent(identifier).getNode()));
+		// add list of available licenses and statuses
+		map.addAttribute("licenses", MarketplaceUtility.LICENSES);
+		map.addAttribute("status", MarketplaceUtility.STATUS);
+		return "edit-solution";
+	}
+
+	/**
+	 * Store changes 
+	 */
+	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
+	@RequestMapping(value = "/edit-solution", method = RequestMethod.POST)
+	public String postSolution(ModelMap map, Principal principal, 
+			@ModelAttribute NodeProxy content) {
+		addCommonItems(map, principal);
+		// try to store the node
+		Account account = accountRepository.findAccountByUsername(principal.getName());
+		Node node = content.getNode();
+		Object result = marketplaceDAO.saveOrUpdateSolution(node, account);
+		if (result instanceof Node) {
+			node = (Node) result;
+			content.setNode(node);
+			Long id = node.getId();
+			if (!content.getScreenshotfile().isEmpty()) {
+				fileService.saveSolutionFile(id, content.getScreenshotfile());
+				node.setScreenshot(content.getScreenshotfile().getOriginalFilename());
+				Object o = marketplaceDAO.saveOrUpdateSolution(node, account);
+				if (o instanceof Node) node = (Node) o;
+			}
+			if (!content.getImagefile().isEmpty()) {
+				fileService.saveSolutionFile(id, content.getImagefile());
+				node.setImage(content.getImagefile().getOriginalFilename());
+				Object o = marketplaceDAO.saveOrUpdateSolution(node, account);
+				if (o instanceof Node) node = (Node) o;
+			}
+			if (!content.getRepositoryfile().isEmpty()) {
+				// there should be no need to update the object with more 
+				// information the default location should suffice
+				fileService.uploadRepository(id, content.getRepositoryfile());
+			}
+		}
+		return "redirect:/content/"+content.getNode().getId();
 	}
 }

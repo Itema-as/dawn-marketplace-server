@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title>Footer</title>
+</head>
+<body>
+	<div th:fragment="footer">
+		<footer>
+			<p style="text-align: center; border-top: #eee solid 1px;margin-top: 1em;">
+				<span th:text="${footer}">footer text</span>
+			</p>
+		</footer>
+		<!-- JQuery -->
+		<script th:src="@{/js/jquery.min.js}"></script>	
+		<!-- Bootstrap -->
+		<script th:src="@{/js/bootstrap.min.js}"></script>	
+		<!-- Bootstrap Markdown -->
+		<script th:src="@{/js/markdown.js}" type="text/javascript"></script>
+		<script th:src="@{/js/to-markdown.js}" type="text/javascript"></script>
+		<script th:src="@{/js/bootstrap-markdown.js}" type="text/javascript"></script>
+		<script>
+		$(document).ready(function(){
+		    $('[data-toggle="tooltip"]').tooltip(); 
+		});
+		</script>
+	</div>
+</body>
+</html>

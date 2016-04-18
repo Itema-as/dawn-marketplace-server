@@ -3,11 +3,15 @@
 	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
 	xmlns:social="http://spring.io/springsocial">
 <head th:replace="../fragments/header :: header"></head>
-	<body>
-		
-		<div class="container-fluid" style="margin-top: 20px">
-			<h2>Rate limit exceeded</h2>
-			<p>Sorry, but the rate limit for accessing <span th:text="${providerId}"></span> has been exceeded. Please try again later.</p>
-		</div>		
-	</body>
+<body>
+
+	<div class="container-fluid" style="margin-top: 20px">
+		<h2>Rate limit exceeded</h2>
+		<p>
+			Sorry, but the rate limit for accessing <span th:text="${providerId}"></span>
+			has been exceeded. Please try again later.
+		</p>
+	</div>
+	<div th:replace="../fragments/footer :: footer"></div>
+</body>
 </html>

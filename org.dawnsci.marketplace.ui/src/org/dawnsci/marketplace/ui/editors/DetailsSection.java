@@ -17,6 +17,7 @@ import org.dawnsci.marketplace.MarketplacePackage.Literals;
 import org.dawnsci.marketplace.Node;
 import org.dawnsci.marketplace.Tag;
 import org.dawnsci.marketplace.Tags;
+import org.dawnsci.marketplace.core.MarketplaceUtility;
 import org.eclipse.core.databinding.DataBindingContext;
 import org.eclipse.core.databinding.UpdateValueStrategy;
 import org.eclipse.core.databinding.conversion.Converter;
@@ -40,7 +41,6 @@ public class DetailsSection extends SectionPart {
 	private Text name;
 	private Text organization;
 	private Text owner;
-
 	private Text websiteUrl;
 	private Text supportUrl;
 	private Text tags;
@@ -147,16 +147,7 @@ public class DetailsSection extends SectionPart {
 		lblLicense.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
 		
 		license = new Combo(container, SWT.READ_ONLY);
-		license.setItems(new String[] {
-			"Commercial",
-			"Commercial - free",
-			"EPL",
-			"GPL",
-			"LGPL",
-			"Apache 2.0",								
-			"BSD",								
-			"MIT"								
-		});		
+		license.setItems(MarketplaceUtility.LICENSES);		
 		
 		license.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 		toolkit.adapt(license);
@@ -168,7 +159,7 @@ public class DetailsSection extends SectionPart {
 		lblStatus.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
 		
 		status = new Combo(container, SWT.READ_ONLY);
-		status.setItems(new String[] {"Alpha", "Beta", "Production/Stable", "Mature"});
+		status.setItems(MarketplaceUtility.STATUS);
 		status.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 		toolkit.adapt(status);
 		toolkit.paintBordersFor(status);

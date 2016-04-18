@@ -17,9 +17,11 @@ package org.dawnsci.marketplace.social.account;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 import javax.inject.Inject;
 
+import org.dawnsci.marketplace.InternalErrorException;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -71,13 +73,17 @@ public class JdbcAccountRepository implements AccountRepository {
 
 	@Override
 	public Account findAccountBySolutionId(Long id) {
-		String username = jdbcTemplate.queryForObject("select username, solution from SolutionConnection where solution = ?",
+		List<String> query = jdbcTemplate.query("select username, solution from SolutionConnection where solution = ?",
 				new RowMapper<String>() {
 					public String mapRow(ResultSet rs, int rowNum) throws SQLException {
 						return  rs.getString("username");
 					}
 				}, id);
-		return findAccountByUsername(username);
+		// this solution does not have an existing owner
+		if (query.isEmpty()) {
+			throw new InternalErrorException("Found no owner for solution");
+		}
+		return findAccountByUsername(query.get(0));
 	}
 
 }

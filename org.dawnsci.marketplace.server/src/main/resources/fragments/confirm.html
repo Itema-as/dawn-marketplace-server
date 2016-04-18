@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+	<meta charset="UTF-8"/>
+	<title>Confirmation Dialog</title>
+</head>
+<body>
+	<div th:fragment="confirm(header, body)">
+		<div class="modal fade" id="confirm-dialog" tabindex="-1" role="dialog">
+  			<div class="modal-dialog">
+    			<div class="modal-content">
+	    			<div class="modal-header modal-header-primary">
+	                	<h3 th:text="${header}"></h3>
+	            	</div>
+		            <div class="modal-body">
+		              <p th:utext="${body}"></p> 		            	
+		            </div>    		
+	    			<div class="modal-footer">
+	                	<div class="checkbox pull-left">
+  							<label><input type="checkbox" value="1" id="confirm-check"></input>I understand</label>
+						</div>
+	                	<button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Cancel</button>
+	                	<a id="confirm-ok">
+	                		<button class="btn btn-sm btn-primary" disabled="disabled">Continue</button>
+	                	</a>
+	            	</div>
+            	</div>
+  			</div> 			 
+		</div>
+    </div>
+</body>
+</html>

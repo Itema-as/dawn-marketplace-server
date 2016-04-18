@@ -18,6 +18,8 @@ import javax.naming.NamingException;
 import org.dawnsci.marketplace.Catalog;
 import org.dawnsci.marketplace.Catalogs;
 import org.dawnsci.marketplace.Featured;
+import org.dawnsci.marketplace.ForbiddenException;
+import org.dawnsci.marketplace.InternalErrorException;
 import org.dawnsci.marketplace.Marketplace;
 import org.dawnsci.marketplace.MarketplaceFactory;
 import org.dawnsci.marketplace.Node;
@@ -50,6 +52,9 @@ public class MarketplaceDAO {
 	@Inject
 	private Environment environment;
 	
+	@Inject
+	private FileService fileService;
+	
 	/**
 	 * HQL query to use when searching for a solution using a simple substring
 	 * search.
@@ -62,7 +67,7 @@ public class MarketplaceDAO {
 			"lower(str(node.body)) like :term " +
 			"order by node.changed desc";
 	
-	public Catalog getCatalog(){
+	public Catalog getCatalog() {
 		Catalog catalog = MarketplaceFactory.eINSTANCE.createCatalog();
 		catalog.setTitle(environment.getProperty("marketplace.title"));
 		catalog.setUrl(environment.getProperty("marketplace.base-url")+"/mpc");
@@ -82,8 +87,8 @@ public class MarketplaceDAO {
 	public Marketplace getContent(int identifier) {
 		Marketplace marketplace = MarketplaceFactory.eINSTANCE.createMarketplace();
 		marketplace.setBaseUrl(environment.getProperty("marketplace.base-url"));
+		sessionFactory.getCurrentSession().beginTransaction();
 		try {
-			sessionFactory.getCurrentSession().beginTransaction();
 			Query query = sessionFactory.getCurrentSession()
 					.createQuery("SELECT node FROM Node node WHERE node.id='" + identifier + "'");
 			query.setMaxResults(1);
@@ -92,9 +97,9 @@ public class MarketplaceDAO {
 			}
 			marketplace.setNode((EcoreUtil.copy((Node)query.list().get(0))));
 			sessionFactory.getCurrentSession().getTransaction().commit();
-		} catch (Exception e) {
+		} catch (Exception e) {			
 			sessionFactory.getCurrentSession().getTransaction().rollback();
-			e.printStackTrace();
+			throw new InternalErrorException(e);
 		}
 		return marketplace;
 	}
@@ -113,7 +118,7 @@ public class MarketplaceDAO {
 			sessionFactory.getCurrentSession().getTransaction().commit();
 		} catch (Exception e) {
 			sessionFactory.getCurrentSession().getTransaction().rollback();
-			e.printStackTrace();
+			throw new InternalErrorException(e);
 		}
 		return marketplace;
 	}
@@ -129,7 +134,7 @@ public class MarketplaceDAO {
 			sessionFactory.getCurrentSession().getTransaction().commit();
 		} catch (Exception e) {
 			sessionFactory.getCurrentSession().getTransaction().rollback();
-			e.printStackTrace();
+			throw new InternalErrorException(e);
 		}
 		return marketplace;
 	}
@@ -150,7 +155,7 @@ public class MarketplaceDAO {
 			sessionFactory.getCurrentSession().getTransaction().commit();
 		} catch (Exception e) {
 			sessionFactory.getCurrentSession().getTransaction().rollback();
-			e.printStackTrace();
+			throw new InternalErrorException(e);
 		}
 		return marketplace;
 	}
@@ -170,7 +175,7 @@ public class MarketplaceDAO {
 			sessionFactory.getCurrentSession().getTransaction().commit();
 		} catch (Exception e) {
 			sessionFactory.getCurrentSession().getTransaction().rollback();
-			e.printStackTrace();
+			throw new InternalErrorException(e);
 		}
 		return marketplace;
 	}
@@ -193,7 +198,7 @@ public class MarketplaceDAO {
 			sessionFactory.getCurrentSession().getTransaction().commit();
 		} catch (Exception e) {
 			sessionFactory.getCurrentSession().getTransaction().rollback();
-			e.printStackTrace();
+			throw new InternalErrorException(e);
 		}
 		return marketplace;
 	}
@@ -209,7 +214,7 @@ public class MarketplaceDAO {
 			sessionFactory.getCurrentSession().getTransaction().commit();
 		} catch (Exception e) {
 			sessionFactory.getCurrentSession().getTransaction().rollback();
-			e.printStackTrace();
+			throw new InternalErrorException(e);
 		}
 		return tags;
 	}
@@ -233,25 +238,60 @@ public class MarketplaceDAO {
 			sessionFactory.getCurrentSession().getTransaction().commit();
 		} catch (Exception e) {
 			sessionFactory.getCurrentSession().getTransaction().rollback();
-			e.printStackTrace();
+			throw new InternalErrorException(e);
 		}
 		return marketplace;
 	}
 	
+	/**
+	 * Returns a <b>detached</b> copy of the solution with the specified
+	 * identifier.
+	 * 
+	 * @param identifier
+	 *            the solution identifier
+	 * @return a detached {@link Node} instance
+	 */
 	public Node getSolution(Long identifier) {
-		Node node = null;
 		try {
+			Node node = null;
 			sessionFactory.getCurrentSession().beginTransaction();
 			Query query = sessionFactory.getCurrentSession().createQuery("SELECT node FROM Node node WHERE node.id='" + identifier + "'");
 			if (!query.list().isEmpty()) {
 				node = EcoreUtil.copy((Node) query.list().get(0));
 			}
 			sessionFactory.getCurrentSession().getTransaction().commit();
+			return node;
 		} catch (Exception e) {
 			sessionFactory.getCurrentSession().getTransaction().rollback();
-			e.printStackTrace();
+			throw new InternalErrorException(e);			
 		}
-		return node;
+	}
+
+	/**
+	 * Deletes the specified solution from the marketplace or throws a
+	 * {@link ForbiddenException} if the solution does not belong to the
+	 * specified account.
+	 * 
+	 * @param account
+	 *            the account that executes the operation
+	 * @param id
+	 *            identifier of the solution
+	 */
+	public synchronized void deleteSolution(Account account, Long id) {
+		sessionFactory.getCurrentSession().beginTransaction();
+		try {
+			Account a = accountRepository.findAccountBySolutionId(id);
+			if (!account.getUsername().equals(a.getUsername())) {
+				throw new ForbiddenException();
+			}
+			Object object = sessionFactory.getCurrentSession().get("Node", id);
+			sessionFactory.getCurrentSession().delete(object);
+			sessionFactory.getCurrentSession().getTransaction().commit();
+			fileService.deleteSolution(id);
+		} catch (Exception e) {
+			sessionFactory.getCurrentSession().getTransaction().rollback();
+			throw new InternalErrorException(e);			
+		}
 	}
 	
 	/**
@@ -269,12 +309,11 @@ public class MarketplaceDAO {
 	 * @throws NamingException 
 	 * @see https://docs.jboss.org/hibernate/core/3.3/reference/en/html/objectstate.html#objectstate-detached
 	 */
-	public synchronized Object saveOrUpdateSolution(Node s, Account account) throws NamingException{
+	public synchronized Object saveOrUpdateSolution(Node s, Account account) {
 		
 		try {			
 			sessionFactory.getCurrentSession().beginTransaction();
 			boolean isNewSolution = s.getId() == null ? true : false;
-			
 			// if the solution has an assigned identifier, but does not exist
 			// we'll clear the identifier and create a fresh instance. The new
 			// identifier will be returned so that the client can update it's
@@ -306,7 +345,7 @@ public class MarketplaceDAO {
 			if (!isNewSolution) {
 				Account a = accountRepository.findAccountBySolutionId(s.getId()); 
 				if (!account.getUsername().equals(a.getUsername())) {
-					return "Invalid solution owner";
+					throw new ForbiddenException();
 				}
 				logger.info("Updating solution #"+s.getId());
 			}
@@ -318,10 +357,22 @@ public class MarketplaceDAO {
 			}
 			logger.info("Saved solution #" + s.getId() + " - " + s.getName());
 			return s;
-		} catch (Exception e) {			
+		} catch (Exception e) {
 			sessionFactory.getCurrentSession().getTransaction().rollback();
-			return e;
+			throw new InternalErrorException(e);			
 		}
+	}
+	/**
+	 * Creates a new node or solution, ready for editing.
+	 * 
+	 * @return the new node
+	 */
+	public Marketplace getNewNode() {
+		Marketplace marketplace = MarketplaceFactory.eINSTANCE.createMarketplace();
+		marketplace.setBaseUrl(environment.getProperty("marketplace.base-url"));
+		Node node = MarketplaceFactory.eINSTANCE.createNode();
+		marketplace.setNode(node);
+		return marketplace;
 	}
 
 }

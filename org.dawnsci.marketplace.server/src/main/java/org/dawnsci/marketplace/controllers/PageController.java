@@ -16,17 +16,18 @@ import java.io.StringReader;
 import java.io.StringWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.security.Principal;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.tika.Tika;
 import org.dawnsci.marketplace.services.FileService;
+import org.dawnsci.marketplace.social.account.AccountRepository;
 import org.eclipse.mylyn.wikitext.core.parser.MarkupParser;
 import org.eclipse.mylyn.wikitext.core.parser.builder.HtmlDocumentBuilder;
 import org.eclipse.mylyn.wikitext.markdown.core.MarkdownLanguage;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.env.Environment;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -38,23 +39,22 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.HandlerMapping;
 
 @Controller
-public class PageController {
-
-	@Inject
-	private Environment environment;
+public class PageController extends AbstractController {
 
 	@Autowired
 	private FileService fileService;
 
 	private Tika tika;
 
-	public PageController() {
+	@Inject
+	public PageController(AccountRepository accountRepository) {
+		super(accountRepository);
 		tika = new Tika();
 	}
 
 	@RequestMapping(value = {"/pages/*.md"}, method = RequestMethod.GET)
-	public String markdown(HttpServletRequest request, ModelMap map) {
-		map.addAttribute("title", environment.getProperty("marketplace.title"));
+	public String markdown(HttpServletRequest request, ModelMap map,  Principal principal) {
+		addCommonItems(map, principal);
 		String resource = ((String) request.getAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE)).substring(1);
 		Path path = fileService.getPageFile(resource).toPath();			
 		map.addAttribute("text", parse(path));
