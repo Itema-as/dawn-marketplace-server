@@ -25,21 +25,27 @@
 				</h2>
 				<div class="row">
 					<div class="col-md-11">
-						<img class="img-responsive thumbnail"
-							th:src="${content.node.screenshot}"></img>
-						<div style="text-align: center; padding: 5px; background: #fff; float: right; z-index: 10; position: absolute; right: 5px; top: -10px; box-shadow: 0px 0px 5px #888888;">
-							<a role="button" th:href="@{~/mpc/marketplace-client-intro(mpc_install=${content.node.id})}"
-								title="Drag to install">
-								<span class="glyphicon glyphicon-cloud-download" aria-hidden="true" style="font-size: 17pt;"></span>
-							</a><br/>
-							<a role="button" th:href="${content.node.homepageurl}" title="Home">
-								<span class="glyphicon glyphicon-home" aria-hidden="true" style="font-size: 17pt;"></span>
-							</a><br/> 
-							<a role="button" th:href="${content.node.supporturl}" title="Support">
-								<span class="glyphicon glyphicon-info-sign" aria-hidden="true" style="font-size: 17pt;"></span>
-							</a><br/>
-						</div>
+						<img class="img-responsive thumbnail" th:src="${content.node.screenshot}"></img>
 					</div>
+				</div>
+				<!-- action menu -->
+				<div style="text-align: left; background: #fff;">
+					<a role="button" th:href="@{~/mpc/marketplace-client-intro(mpc_install=${content.node.id})}"
+						data-toggle="tooltip" data-placement="top" title="Drag to install">
+						<span class="glyphicon glyphicon-cloud-download" aria-hidden="true" style="font-size: 17pt;"></span>
+					</a>
+					<a role="button" th:href="${content.node.homepageurl}" 
+						data-toggle="tooltip" data-placement="top" title="Go to home page">
+						<span class="glyphicon glyphicon-home" aria-hidden="true" style="font-size: 17pt;"></span>
+					</a> 
+					<a role="button" th:href="${content.node.supporturl}" 
+						data-toggle="tooltip" data-placement="top" title="Go to support">
+						<span class="glyphicon glyphicon-info-sign" aria-hidden="true" style="font-size: 17pt;"></span>
+					</a>
+					<a role="button" th:href="@{'/edit-solution/'+${content.node.id}}" 
+						data-toggle="tooltip" data-placement="top" title="Edit entry">
+						<span class="glyphicon glyphicon-edit" aria-hidden="true" style="font-size: 17pt;"></span>
+					</a>
 				</div>
 				<div th:utext="${content.node.body}"></div>
 				<!-- categories and tags-->
@@ -61,7 +67,9 @@
 				<!-- additional details -->
 				<div th:replace="../fragments/solution :: additional"></div>
 			</div>
-		</div>
+			
+		</div> <!-- end row -->
 	</div>
+	<div th:replace="../fragments/footer :: footer"></div>
 </body>
 </html>

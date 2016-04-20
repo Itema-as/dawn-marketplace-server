@@ -3,22 +3,20 @@
 	xmlns:th="http://www.thymeleaf.org"
 	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head th:fragment="header">
-	<!-- latest compiled and minified JQuery -->
-	<script th:src="@{/js/jquery-2.2.0.min.js}"></script>	
 	<!-- ensure proper rendering and touch zooming -->
 	<meta name="viewport" content="width=device-width, initial-scale=1"></meta>
 	<!-- latest compiled and minified CSS -->
 	<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"></link>
-	<!-- custom styles for this template -->
-	<link th:href="@{/css/jumbotron.css}" rel="stylesheet"></link>
 	<!-- optional theme -->
 	<link rel="stylesheet" th:href="@{/css/bootstrap-theme.min.css}"></link>
 	<!-- font awesome -->
 	<link rel="stylesheet" th:href="@{/css/font-awesome.min.css}"></link>
 	<!-- social buttons -->
 	<link rel="stylesheet" th:href="@{/css/bootstrap-social.css}"></link>
-	<!-- latest compiled and minified Bootstrap -->
-	<script th:src="@{/js/bootstrap.min.js}"></script>	
+	<!-- markdown editing -->
+	<link rel="stylesheet" th:href="@{/css/bootstrap-markdown.min.css}"></link>
+	<!-- custom styles for this template -->
+	<link th:href="@{/css/jumbotron.css}" rel="stylesheet"></link>
 	<title th:text="${title}"></title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>

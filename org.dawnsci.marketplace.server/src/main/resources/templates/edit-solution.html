@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="../fragments/header :: header"></head>
+<body>
+	<!-- navigation bar -->
+	<div th:replace="../fragments/navbar :: navbar"></div>
+
+	<!-- main content -->
+	<div class="container-fluid" style="margin-top: 20px">
+		<div class="row">
+
+			<!-- side bar -->
+			<div class="col-md-3">
+				<div th:replace="../fragments/sidebar :: sidebar"></div>
+			</div>
+
+			<!-- content -->
+			<div class="col-md-9">
+				<div th:replace="../fragments/confirm :: confirm('Really delete?', 'This action is irreversible. If you delete this entry from the marketplace it will disappear forever and you will not get it back.')">...</div>
+				<h2 th:if="${content.id == null}">Add new plug-in</h2>
+				<h2 th:if="${content.id != null}" th:text="'Modify solution #'+${content.id}+' - '+${content.name}">Modify solution #1 - Test</h2>
+  				<form class="form-horizontal" th:object="${content}" th:action="@{/edit-solution}" method="post" enctype="multipart/form-data">
+					<ul class="nav nav-tabs" role="tablist">
+					    <li role="presentation" class="active"><a href="#details" aria-controls="details" role="tab" data-toggle="tab">Details</a></li>
+					    <li role="presentation"><a href="#images" aria-controls="images" role="tab" data-toggle="tab">Images/repository</a></li>
+					    <li role="presentation"><a href="#description" aria-controls="description" role="tab" data-toggle="tab">Description</a></li>
+					    <!-- action buttons -->
+					    <li class="pull-right"><button type="submit" class="btn btn-success">Submit changes</button></li>					    
+					    <li class="pull-right" style="margin-right: 1em;" th:if="${content.id != null}">
+					    	<button th:attr="data-href=@{'/delete-solution/'+${content.id}}" type="button" 
+					    		data-toggle="modal" data-target="#confirm-dialog" class="btn btn-danger">Delete</button>
+					    </li>					    
+					 </ul>
+					<input th:field="*{id}" hidden="hidden"></input>
+					<div class="tab-content">				
+						<!-- Details section -->
+						<div role="tabpanel" class="tab-pane active fade in" id="details">
+							<div class="panel-body">
+								<div class="form-group">
+									<label for="solution-name" class="col-sm-2 control-label">Name</label>
+									<div class="col-sm-10">
+										<input class="form-control" id="solution-name" th:field="*{name}"
+											placeholder="Solution name"></input>
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="owner-name" class="col-sm-2 control-label">Owner</label>
+									<div class="col-sm-10">
+										<input class="form-control" id="owner-name" th:field="*{owner}"
+											placeholder="Owner name"></input>
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="organization-name" class="col-sm-2 control-label">Organization</label>
+									<div class="col-sm-10">
+										<input class="form-control" id="organization-name" th:field="*{companyname}"
+											placeholder="Organization name"></input>
+									</div>
+								</div>
+								<!-- 
+								<div class="form-group">
+									<label for="tags" class="col-sm-2 control-label">Featured</label>
+									<div class="col-sm-10">
+										<input class="form-control" id="tags" placeholder="Tags" th:field="*{featured}" type="checkbox"></input>
+										<p class="help-block">Enter a comma separated list of tag associated with the solution.</p>
+									</div>
+								</div>
+								-->
+								<div class="form-group">
+									<label for="tags" class="col-sm-2 control-label">Tags</label>
+									<div class="col-sm-10">
+										<input class="form-control" id="tags" placeholder="Tags" th:field="*{tags}"></input>
+										<p class="help-block">Enter a comma separated list of tag associated with the solution.</p>
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="license" class="col-sm-2 control-label">License</label>
+									<div class="col-sm-10">
+										<select class="form-control" id="license" th:field="*{license}">
+	 										<option th:each="license : ${licenses}"
+	           									th:value="${license}" th:text="${license}"></option>
+										</select>
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="status" class="col-sm-2 control-label">Status</label>
+									<div class="col-sm-10">
+										<select class="form-control" id="status" th:field="*{status}">
+	 										<option th:each="st : ${status}" 
+	           									th:value="${st}" th:text="${st}"></option>
+										</select>
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="website-url" class="col-sm-2 control-label">Website
+										URL</label>
+									<div class="col-sm-10">
+										<input class="form-control" id="website-url" th:field="*{url}"
+											placeholder="Website URL"></input>
+										<p class="help-block">Enter the URL for the solution web site. Can be left empty.</p>
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="support-url" class="col-sm-2 control-label">Support
+										URL</label>
+									<div class="col-sm-10">
+										<input class="form-control" id="support-url" th:field="*{supporturl}"
+											placeholder="Support URL"></input>
+										<p class="help-block">Enter the URL for support requests and issue reports. Can be left empty.</p>
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="short-description" class="col-sm-2 control-label">Summary</label>
+									<div class="col-sm-10">
+										<textarea id="short-description" name="short-description" data-provide="markdown" rows="8"  th:field="*{shortdescription}"></textarea>
+										<p class="help-block">Enter a short description of the features this plug-in provides. <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">MarkDown syntax</a> is allowed.</p>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- Images section -->
+						<div role="tabpanel" class="tab-pane fade" id="images">
+							<div class="panel-body">
+								<div class="form-group">
+									<label for="screenshot" class="col-sm-2 control-label">Screenshot</label>
+									<div class="col-sm-10">
+										<div th:if="${content.screenshot!=null}">
+											<img th:src="${content.screenshot}" height="320px"></img>
+										</div>
+										<input id="screenshot" th:field="*{screenshot}" hidden="hidden"></input>
+										<input id="screenshot" type="file" th:field="*{screenshotfile}"></input>
+										<p class="help-block">Select a file to use for screenshot. Please use a 16:10 ratio image.</p>
+									</div>
+								</div>						
+								<div class="form-group">
+									<label for="logo" class="col-sm-2 control-label">Logo</label>
+									<div class="col-sm-10">
+										<div th:if="${content.image!=null}">
+											<img th:src="${content.image}" height="80px"></img>
+										</div>
+										<input id="logo" th:field="*{image}" hidden="hidden"></input>
+										<input id="logo" type="file" th:field="*{imagefile}"></input>
+										<p class="help-block">Select a file to use for logo. Please use an image that is 110x80 pixels in size.</p>
+									</div>
+								</div>						
+								<div class="form-group">
+									<label for="logo" class="col-sm-2 control-label">Repository</label>
+									<div class="col-sm-10">
+										<input id="repository" type="file" th:field="*{repositoryfile}"></input>
+										<p class="help-block">Select a compressed p2 repository.</p>
+									</div>
+								</div>						
+							</div>
+						</div>
+						<!-- Long description section -->
+						<div role="tabpanel" class="tab-pane fade" id="description">
+							<div class="panel-body">
+								<textarea name="long-description" data-provide="markdown" rows="20"  th:field="*{body}"></textarea>
+								<p class="help-block">Enter a detailed description of the features this plug-in provides. <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">MarkDown syntax</a> is allowed.</p>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<div th:replace="../fragments/footer :: footer"></div>
+</body>
+<script>			
+	$(document).ready( function() {	    
+	    //confirm download dialog fragment
+	    function activateConfirmBtn(e){
+	    	$('#confirm-dialog #confirm-ok .btn').prop('disabled', !e.currentTarget.checked);
+	    	if(e.currentTarget.checked)
+	    		$('#confirm-dialog #confirm-ok').unbind('click', disableDownloadLink);
+	    	else
+	    		$('#confirm-dialog #confirm-ok').bind('click', disableDownloadLink);
+	    }
+	    function hideDialog(e){
+	    	$('#confirm-dialog').modal('hide');
+	    }
+	    function disableDownloadLink(e){
+	    	//ie fix
+	    	e.preventDefault();
+	    }
+	  	//on show - bind event handlers
+	    $('#confirm-dialog').bind('show.bs.modal', function(e) {	    	
+	    	$(this).find('#confirm-check').bind('change', activateConfirmBtn);
+		    $(this).find('#confirm-ok').attr('href', $(e.relatedTarget).data('href'));
+		    $(this).find('#confirm-ok').bind('click', disableDownloadLink);
+		    $(this).find('#confirm-ok .btn').bind('click', hideDialog);
+		});
+	    
+	    //on hide - unbind event handlers - reset checkbox and button state.
+		    $('#confirm-dialog').bind('hide.bs.modal', function(e) {
+		    	var confirmCheck = $(this).find('#confirm-check');
+		    	confirmCheck.prop('checked', false);
+		    	confirmCheck.unbind('change', activateConfirmBtn);
+		    	
+		    	var confirmBtn = $(this).find('#confirm-ok .btn'); 		    	
+		    	confirmBtn.prop('disabled', true);
+	    	confirmBtn.unbind('click', hideDialog);		    	
+		});
+	});
+</script>
+
+</html>

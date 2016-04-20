@@ -17,9 +17,11 @@ import java.io.InputStream;
 import java.nio.file.Path;
 
 import org.apache.commons.io.FileUtils;
+import org.dawnsci.marketplace.InternalErrorException;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import org.zeroturnaround.zip.ZipUtil;
 
 /**
  * Keeps track of files belonging to the various solutions on the marketplace.
@@ -108,6 +110,34 @@ public class FileService {
 			return null;
 		}
 		return file;
+	}
+
+	public void deleteSolution(Long id) {
+		 File file = solutionsRoot.resolve(id.toString()).toFile();
+		 try {
+			FileUtils.forceDelete(file);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+	}
+	public void uploadRepository(Long id, MultipartFile file) {
+		try {
+			File saveSolutionFile = saveSolutionFile(id, file);
+			// the p2-repository will be unpacked into the solution root folder
+			File p2repo = getSolutionFile(id.toString());
+			// delete the old stuff
+			FileUtils.deleteDirectory(new File(p2repo, "features"));
+			FileUtils.deleteDirectory(new File(p2repo, "plugins"));
+			FileUtils.deleteQuietly(new File(p2repo, "content.jar"));
+			FileUtils.deleteQuietly(new File(p2repo, "artifacts.jar"));
+			// unpack to root folder
+			ZipUtil.unpack(saveSolutionFile, p2repo);
+			// and delete the uploaded zip-file
+			FileUtils.deleteQuietly(saveSolutionFile);
+		} catch (Exception e) {
+			throw new InternalErrorException(e);
+		}
 	}
 
 }

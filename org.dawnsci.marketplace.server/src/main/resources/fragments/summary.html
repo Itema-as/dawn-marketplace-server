@@ -7,26 +7,19 @@
 		screenshot, the short description and the install button. The 
 		identifier of the root element is used mainly for testing.
 	-->
-	<div th:fragment="summary" class="thumbnail" th:id="'solution-'+${node.id}">
-		<img th:src="${node.screenshot}"></img>
-		<div class="caption">
-			<h3>
-				<a th:href="@{/content/}+${node.id}"><span
-					th:text="${node.name}"></span></a>
-			</h3>
-			<p th:utext="${node.shortdescription}"></p>
-			<p class="text-muted" th:if="${null != node.changed}">
-				<i>Last updated <span
-					th:text="${typeUtilities.getDate(node.changed)}"></span> by <span
-					th:text="${node.owner}"></span></i>
-			</p>
-			<a role="button"
-				th:href="@{~/mpc/marketplace-client-intro(mpc_install=${node.id})}">
-				<button class="btn btn-success"
-					title="Drag to your running Eclipse workbench to install">
-					<span class="glyphicon glyphicon-cloud-download" aria-hidden="true"></span> Install
-				</button>
-			</a>
+	<div th:fragment="summary" th:id="'solution-'+${node.id}">
+		<div class="">
+			<div class="clickable">
+				<a th:href="@{/content/}+${node.id}">					
+					<span style="font-size: 1.5em;">
+						<img th:src="${node.image}" height="24px"></img>
+						<span th:text="${node.name}"></span>
+					</span>
+					<img th:src="${node.screenshot}" height="180px" class="img-responsive"></img>
+					<span th:utext="${#strings.abbreviate(node.shortdescription,300)}"></span>
+					</a>
+			</div>
+			<div th:replace="../fragments/summary :: action-menu"></div>
 		</div>
 	</div>
 
@@ -36,26 +29,41 @@
 		is used mainly for testing.
 	-->
 	<div th:fragment="short-summary" class="thumbnail" th:id="'solution-'+${node.id}">
-		<div class="row">
-			<div class="col-md-4 text-center">
-				<img class="img-responsive" th:src="${node.image}"></img>
-				<br/><br/>
-				<a role="button"
-					th:href="@{~/mpc/marketplace-client-intro(mpc_install=${node.id})}">
-					<button class="btn btn-default" 
-						title="Drag to your running Eclipse workbench to install">
-						<span class="glyphicon glyphicon-cloud-download" aria-hidden="true"></span> Install
-					</button>
-				</a>
-			</div>
-			<div class="col-md-8">
-				<h3>
-					<a th:href="@{/content/}+${node.id}"><span
-						th:text="${node.name}"></span></a>
-				</h3>
-				<p th:utext="${#strings.abbreviate(node.shortdescription,300)}"></p>
-			</div>
-		</div>
+		<h4>
+			<img th:src="${node.image}" height="18px"></img>
+			<a th:href="@{/content/}+${node.id}"><span
+				th:text="${node.name}"></span></a>
+		</h4>
+		<p th:utext="${#strings.abbreviate(node.shortdescription,300)}"></p>
+		<div th:replace="../fragments/summary :: action-menu"></div>
 	</div>
+	<!-- action menu -->
+	<div th:fragment="action-menu" class="action-bar">
+		<a role="button" th:href="@{~/mpc/marketplace-client-intro(mpc_install=${node.id})}"
+			style="font-size: 1.3em;"
+			data-toggle="tooltip" data-placement="top" title="Drag to install">
+			<span class="glyphicon glyphicon-cloud-download" aria-hidden="true"></span>
+		</a>
+		<a role="button" th:href="${node.homepageurl}" 
+			style="font-size: 1.3em"
+			data-toggle="tooltip" data-placement="top" title="Go to home page">
+			<span class="glyphicon glyphicon-home" aria-hidden="true" ></span>
+		</a> 
+		<a role="button" th:href="${node.supporturl}" 
+			style="font-size: 1.3em"
+			data-toggle="tooltip" data-placement="top" title="Go to support">
+			<span class="glyphicon glyphicon-info-sign" aria-hidden="true" ></span>
+		</a>
+		<a role="button" th:href="@{'/edit-solution/'+${node.id}}"
+			style="font-size: 1.3em"
+			data-toggle="tooltip" data-placement="top" title="Edit entry">
+			<span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+		</a>
+		<span th:if="${null != node.tags}">
+			<a th:each="tag: ${node.tags.items}" th:href="@{~/search(tag=${tag.name})}" 
+				class="label label-info" th:text="${tag.name}"></a>
+		</span>
+	</div>
+	
 </body>
 </html>

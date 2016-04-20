@@ -10,17 +10,15 @@
  ****************************************************************************/
 package org.dawnsci.marketplace.controllers;
 
-import java.io.File;
 import java.security.Principal;
 
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.commons.io.FileUtils;
 import org.dawnsci.marketplace.Node;
 import org.dawnsci.marketplace.core.MarketplaceSerializer;
-import org.dawnsci.marketplace.services.MarketplaceDAO;
 import org.dawnsci.marketplace.services.FileService;
+import org.dawnsci.marketplace.services.MarketplaceDAO;
 import org.dawnsci.marketplace.social.account.Account;
 import org.dawnsci.marketplace.social.account.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +34,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
-import org.zeroturnaround.zip.ZipUtil;
 
 /**
  * This controller handles the extended REST API. 
@@ -48,13 +45,13 @@ public class ExtendedRestApiController {
 	
 	@Autowired 
 	private MarketplaceDAO marketplaceDAO;
-
-	@Autowired
-	private FileService fileService;
-
+	
 	@Autowired
 	private AccountRepository accountRepository;
 	
+	@Autowired 
+	protected FileService fileService;
+
 	/**
 	 * Used by the client software to obtain a CSRF token to use in further
 	 * communication with the server.
@@ -95,23 +92,12 @@ public class ExtendedRestApiController {
 		if (!account.getUsername().equals(a.getUsername())) {
 			return new ResponseEntity<String>("Logged in user is not the owner of the solution", HttpStatus.FORBIDDEN);
 		}
-		File saveSolutionFile = fileService.saveSolutionFile(id, file);
-		// the p2-repository will be unpacked into the solution root folder
-		File p2repo = fileService.getSolutionFile(id.toString());
-		// delete the old stuff
-		FileUtils.deleteDirectory(new File(p2repo, "features"));
-		FileUtils.deleteDirectory(new File(p2repo, "plugins"));
-		FileUtils.deleteQuietly(new File(p2repo, "content.jar"));
-		FileUtils.deleteQuietly(new File(p2repo, "artifacts.jar"));
-		// unpack to root folder
-		ZipUtil.unpack(saveSolutionFile, p2repo);
-		// and delete the uploaded zip-file
-		FileUtils.deleteQuietly(saveSolutionFile);
+		fileService.uploadRepository(id, file);
 		// return the solution, the default value for update site will work just fine
 		Node node = marketplaceDAO.getSolution(id);
 		return new ResponseEntity<String>(MarketplaceSerializer.serialize((Node) node),HttpStatus.OK);
 	}
-	
+
 	/**
 	 * Uploads a screenshot to the solution and updates the solution data with
 	 * the name of the file being uploaded. returns a <b>403 Forbidden</b> if

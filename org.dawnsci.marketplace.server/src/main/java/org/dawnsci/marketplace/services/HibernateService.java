@@ -80,8 +80,8 @@ public class HibernateService {
 		// for debugging
 		//props.setProperty(Environment.SHOW_SQL, "true");
 		// http://wiki.eclipse.org/Teneo/Hibernate/Configuration_Options
-		props.setProperty(PersistenceOptions.CASCADE_POLICY_ON_CONTAINMENT, "ALL");
-		props.setProperty(PersistenceOptions.CASCADE_POLICY_ON_NON_CONTAINMENT, "ALL");
+		props.setProperty(PersistenceOptions.CASCADE_POLICY_ON_CONTAINMENT, "all");
+		props.setProperty(PersistenceOptions.CASCADE_POLICY_ON_NON_CONTAINMENT, "all");
 		
 		// configure synthetic version column (hsqldb no like e_version)
 		props.setProperty(PersistenceOptions.VERSION_COLUMN_NAME, "pversion");

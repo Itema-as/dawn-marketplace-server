@@ -705,6 +705,9 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 	 * @generated Not
 	 */
 	public String getImage() {
+		if (image == null) {
+			return null;
+		}
 		if (getBaseUrl() == null) {
 			return image;
 		}
@@ -982,6 +985,9 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 	 * @generated Not
 	 */
 	public String getScreenshot() {
+		if (screenshot == null) {
+			return null;
+		}
 		if (getBaseUrl() == null) {
 			return screenshot;
 		}
