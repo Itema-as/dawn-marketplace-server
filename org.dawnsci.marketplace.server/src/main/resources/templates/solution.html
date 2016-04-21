@@ -23,11 +23,7 @@
 					<span th:text="${content.node.name}">
 					</span>
 				</h2>
-				<div class="row">
-					<div class="col-md-11">
-						<img class="img-responsive thumbnail" th:src="${content.node.screenshot}"></img>
-					</div>
-				</div>
+				<img th:if="${content.node.screenshot != null}" class="img-responsive thumbnail" th:src="${content.node.screenshot}"></img>
 				<!-- action menu -->
 				<div style="text-align: left; background: #fff;">
 					<a role="button" th:href="@{~/mpc/marketplace-client-intro(mpc_install=${content.node.id})}"

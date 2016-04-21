@@ -19,7 +19,9 @@
 					<span th:utext="${#strings.abbreviate(node.shortdescription,300)}"></span>
 					</a>
 			</div>
-			<div th:replace="../fragments/summary :: action-menu"></div>
+			<!-- too noisy
+				<div th:replace="../fragments/summary :: action-menu"></div>
+			 -->
 		</div>
 	</div>
 
@@ -35,7 +37,9 @@
 				th:text="${node.name}"></span></a>
 		</h4>
 		<p th:utext="${#strings.abbreviate(node.shortdescription,300)}"></p>
-		<div th:replace="../fragments/summary :: action-menu"></div>
+		<!-- too noisy
+			<div th:replace="../fragments/summary :: action-menu"></div>
+		-->
 	</div>
 	<!-- action menu -->
 	<div th:fragment="action-menu" class="action-bar">
