@@ -31,8 +31,9 @@ import org.springframework.social.connect.web.SignInAdapter;
 public class MarketplaceApplication {
 
 	public static void main(String[] args) {
-		CommandLinePropertySource<?> ps = new SimpleCommandLinePropertySource(args);
 		AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext();
+		// convert the command line argument to properties
+		CommandLinePropertySource<?> ps = new SimpleCommandLinePropertySource(args);
 		ctx.getEnvironment().getPropertySources().addFirst(ps);
 		ctx.register(ApplicationConfiguration.class);
 		ctx.refresh();

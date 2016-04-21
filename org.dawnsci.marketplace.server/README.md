@@ -38,7 +38,13 @@ marketplace:
 	description: The DAWN Plug-in Marketplace
 	wizard-title: DAWN Plug-in Catalog
 	wizard-icon: http://localhost:8080/pages/catalog-icon.png
+	featured:
+		maximum: 3
+		solutions: 1, 2, 3	
 ```
+
+All configuration parameters can be controlled from the command line, for example `--marketplace.featured.solutions=1,10,12` will specify the list of featured solutions.
+
 	  
 There is a [separate set of properties used when testing](src/test/resources/application.yml).	  
 

@@ -11,11 +11,10 @@
 		<div class="">
 			<div class="clickable">
 				<a th:href="@{/content/}+${node.id}">					
-					<span style="font-size: 1.5em;">
-						<img th:src="${node.image}" height="24px"></img>
-						<span th:text="${node.name}"></span>
+					<span style="font-size: 1.3em;">
+						<img th:src="${node.image}" height="24px"></img><span th:text="${node.name}"></span>
 					</span>
-					<img th:src="${node.screenshot}" height="180px" class="img-responsive"></img>
+					<img th:src="${node.screenshot}" height="180px" class="img-responsive solution-thumbnail"></img>
 					<span th:utext="${#strings.abbreviate(node.shortdescription,300)}"></span>
 					</a>
 			</div>
@@ -35,27 +34,29 @@
 				th:text="${node.name}"></span></a>
 		</h4>
 		<p th:utext="${#strings.abbreviate(node.shortdescription,300)}"></p>
-		<div th:replace="../fragments/summary :: action-menu"></div>
+		<!-- too noisy
+			<div th:replace="../fragments/summary :: action-menu"></div>
+		-->
 	</div>
 	<!-- action menu -->
 	<div th:fragment="action-menu" class="action-bar">
 		<a role="button" th:href="@{~/mpc/marketplace-client-intro(mpc_install=${node.id})}"
-			style="font-size: 1.3em;"
+			style="font-size: 1.1em;"
 			data-toggle="tooltip" data-placement="top" title="Drag to install">
 			<span class="glyphicon glyphicon-cloud-download" aria-hidden="true"></span>
 		</a>
 		<a role="button" th:href="${node.homepageurl}" 
-			style="font-size: 1.3em"
+			style="font-size: 1.1em"
 			data-toggle="tooltip" data-placement="top" title="Go to home page">
 			<span class="glyphicon glyphicon-home" aria-hidden="true" ></span>
 		</a> 
 		<a role="button" th:href="${node.supporturl}" 
-			style="font-size: 1.3em"
+			style="font-size: 1.1em"
 			data-toggle="tooltip" data-placement="top" title="Go to support">
 			<span class="glyphicon glyphicon-info-sign" aria-hidden="true" ></span>
 		</a>
 		<a role="button" th:href="@{'/edit-solution/'+${node.id}}"
-			style="font-size: 1.3em"
+			style="font-size: 1.1em"
 			data-toggle="tooltip" data-placement="top" title="Edit entry">
 			<span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
 		</a>

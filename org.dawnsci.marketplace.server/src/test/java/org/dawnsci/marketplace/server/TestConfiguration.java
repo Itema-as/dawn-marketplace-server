@@ -16,6 +16,8 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.Profile;
+import org.springframework.core.convert.ConversionService;
+import org.springframework.core.convert.support.DefaultConversionService;
 import org.springframework.security.crypto.encrypt.Encryptors;
 import org.springframework.security.crypto.encrypt.TextEncryptor;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
@@ -32,6 +34,11 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Profile("test")
 public class TestConfiguration {
 	
+	@Bean 
+	public ConversionService conversionService() {
+	    return new DefaultConversionService();
+	}
+
 	@Bean
 	@Primary
 	public Boolean initinitializeData(){

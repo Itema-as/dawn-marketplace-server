@@ -8,10 +8,12 @@ marketplace:
   description: The DAWN Plug-in Marketplace
   wizard-title: DAWN Plug-in Catalog
   wizard-icon: http://localhost:8080/pages/catalog-icon.png
-  recent-items: 5
-  featured-items: 5
   solutions-folder: test/solutions
   pages-folder: test/pages
+  max-recent-solutions: 5
+  featured:
+    maximum: 5
+    solutions: 1, 2
 
 spring:
 # Enable ANSI logging if possible

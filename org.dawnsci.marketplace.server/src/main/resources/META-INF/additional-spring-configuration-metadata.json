@@ -61,13 +61,13 @@
     "description": "A description for 'marketplace.wizard-icon'"
   },
   {
-    "name": "marketplace.recent-items",
-    "type": "java.lang.String",
+    "name": "marketplace.max-recent-solutions",
+    "type": "java.lang.Integer",
     "description": "The maximum number of items to return when queried for last updated"
   },
   {
-    "name": "marketplace.featured-items",
-    "type": "java.lang.String",
+    "name": "marketplace.max-featured-solutions",
+    "type": "java.lang.Integer",
     "description": "The maximum number of items to return when queried for featured items"
   },
   {
@@ -83,6 +83,16 @@
   {
     "name": "marketplace.footer",
     "type": "java.lang.String",
-    "description": "A description for 'marketplace.footer'"
+    "description": "A string used as the footer text on all pages"
+  },
+  {
+    "name": "marketplace.featured.maximum",
+    "type": "java.lang.Integer",
+    "description": "The maximum number of featured solutions to show"
+  },
+  {
+    "name": "marketplace.featured.solutions",
+    "type": "java.util.List<java.lang.Long>",
+    "description": "A comma separated list of solution identifiers"
   }
 ]}
