@@ -14,13 +14,20 @@ import javax.inject.Inject;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.convert.ConversionService;
+import org.springframework.core.convert.support.DefaultConversionService;
 import org.springframework.core.env.Environment;
 
 @Configuration
 public class ApplicationConfiguration {
-
+	
 	@Inject
 	Environment env;
+
+	@Bean 
+	public ConversionService conversionService() {
+	    return new DefaultConversionService();
+	}
 
 	/**
 	 * Whether or not to populate the server with some initial data.
@@ -34,5 +41,5 @@ public class ApplicationConfiguration {
 		}
 
 	}
-
+	
 }

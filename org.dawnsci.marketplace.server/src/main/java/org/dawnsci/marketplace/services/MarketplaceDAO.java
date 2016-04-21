@@ -35,6 +35,7 @@ import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 
@@ -55,6 +56,15 @@ public class MarketplaceDAO {
 	@Inject
 	private FileService fileService;
 	
+	@Value("${marketplace.featured.solutions:1}")
+	List<Long> featuredItems;
+	
+	@Value("${marketplace.featured.maximum:3}")
+	private int maxFeaturedItems;
+	
+	@Value("${marketplace.max-recent-solutions:12}")
+	private int maxRecentItems;
+
 	/**
 	 * HQL query to use when searching for a solution using a simple substring
 	 * search.
@@ -84,11 +94,11 @@ public class MarketplaceDAO {
 		return catalog;
 	}
 
-	public Marketplace getContent(int identifier) {
+	public synchronized Marketplace getContent(int identifier) {
 		Marketplace marketplace = MarketplaceFactory.eINSTANCE.createMarketplace();
 		marketplace.setBaseUrl(environment.getProperty("marketplace.base-url"));
-		sessionFactory.getCurrentSession().beginTransaction();
 		try {
+			sessionFactory.getCurrentSession().beginTransaction();
 			Query query = sessionFactory.getCurrentSession()
 					.createQuery("SELECT node FROM Node node WHERE node.id='" + identifier + "'");
 			query.setMaxResults(1);
@@ -105,7 +115,7 @@ public class MarketplaceDAO {
 	}
 
 	@SuppressWarnings("unchecked")
-	public Marketplace getCatalogs() {
+	public synchronized Marketplace getCatalogs() {
 		Marketplace marketplace = MarketplaceFactory.eINSTANCE.createMarketplace();
 		marketplace.setBaseUrl(environment.getProperty("marketplace.base-url"));
 		Catalogs catalogs = MarketplaceFactory.eINSTANCE.createCatalogs();
@@ -124,7 +134,7 @@ public class MarketplaceDAO {
 	}
 
 	@SuppressWarnings("unchecked")
-	public Marketplace getMarkets() {
+	public synchronized Marketplace getMarkets() {
 		Marketplace marketplace = MarketplaceFactory.eINSTANCE.createMarketplace();
 		marketplace.setBaseUrl(environment.getProperty("marketplace.base-url"));
 		try {
@@ -140,7 +150,7 @@ public class MarketplaceDAO {
 	}
 
 	@SuppressWarnings("unchecked")
-	public Marketplace getFeatured() {
+	public synchronized Marketplace getFeatured() {
 		Marketplace marketplace = MarketplaceFactory.eINSTANCE.createMarketplace();
 		marketplace.setBaseUrl(environment.getProperty("marketplace.base-url"));
 		Featured featured = MarketplaceFactory.eINSTANCE.createFeatured();
@@ -148,12 +158,14 @@ public class MarketplaceDAO {
 		try {
 			sessionFactory.getCurrentSession().beginTransaction();
 			Query query = sessionFactory.getCurrentSession()
-					.createQuery("SELECT node FROM Node node ORDER BY node.changed DESC");
-			query.setMaxResults(Integer.parseInt(environment.getProperty("marketplace.featured-items")));
+					.createQuery("SELECT node FROM Node node WHERE node.id IN (:f)");
+			query.setParameterList("f", featuredItems);
+			query.setMaxResults(maxFeaturedItems);
 			featured.getNodes().addAll(EcoreUtil.copyAll(query.list()));
 			featured.setCount(featured.getNodes().size());
 			sessionFactory.getCurrentSession().getTransaction().commit();
 		} catch (Exception e) {
+			e.printStackTrace();
 			sessionFactory.getCurrentSession().getTransaction().rollback();
 			throw new InternalErrorException(e);
 		}
@@ -161,7 +173,7 @@ public class MarketplaceDAO {
 	}
 
 	@SuppressWarnings("unchecked")
-	public Marketplace getRecent() {
+	public synchronized Marketplace getRecent() {
 		Marketplace marketplace = MarketplaceFactory.eINSTANCE.createMarketplace();
 		marketplace.setBaseUrl(environment.getProperty("marketplace.base-url"));
 		Recent recent = MarketplaceFactory.eINSTANCE.createRecent();
@@ -169,7 +181,7 @@ public class MarketplaceDAO {
 		try {
 			sessionFactory.getCurrentSession().beginTransaction();
 			Query query = sessionFactory.getCurrentSession().createQuery("SELECT node FROM Node node ORDER BY node.changed DESC");
-			query.setMaxResults(Integer.parseInt(environment.getProperty("marketplace.recent-items")));
+			query.setMaxResults(maxRecentItems);
 			recent.getNodes().addAll(EcoreUtil.copyAll(query.list()));
 			recent.setCount(recent.getNodes().size());
 			sessionFactory.getCurrentSession().getTransaction().commit();
@@ -181,7 +193,7 @@ public class MarketplaceDAO {
 	}
 
 	@SuppressWarnings("unchecked")
-	public Marketplace getSearchResult(String term) {
+	public synchronized Marketplace getSearchResult(String term) {
 		Marketplace marketplace = MarketplaceFactory.eINSTANCE.createMarketplace();
 		marketplace.setBaseUrl(environment.getProperty("marketplace.base-url"));
 		Search search = MarketplaceFactory.eINSTANCE.createSearch();
@@ -204,7 +216,7 @@ public class MarketplaceDAO {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<String> getTags() {
+	public synchronized List<String> getTags() {
 		List<String> tags = Collections.EMPTY_LIST;
 		try {
 			sessionFactory.getCurrentSession().beginTransaction();
@@ -220,7 +232,7 @@ public class MarketplaceDAO {
 	}
 		
 	@SuppressWarnings("unchecked")
-	public Marketplace getSolutionsWithTag(String tag) {
+	public synchronized Marketplace getSolutionsWithTag(String tag) {
 		Marketplace marketplace = MarketplaceFactory.eINSTANCE.createMarketplace();
 		marketplace.setBaseUrl(environment.getProperty("marketplace.base-url"));
 		Search search = MarketplaceFactory.eINSTANCE.createSearch();
@@ -251,7 +263,7 @@ public class MarketplaceDAO {
 	 *            the solution identifier
 	 * @return a detached {@link Node} instance
 	 */
-	public Node getSolution(Long identifier) {
+	public synchronized Node getSolution(Long identifier) {
 		try {
 			Node node = null;
 			sessionFactory.getCurrentSession().beginTransaction();
@@ -278,8 +290,8 @@ public class MarketplaceDAO {
 	 *            identifier of the solution
 	 */
 	public synchronized void deleteSolution(Account account, Long id) {
-		sessionFactory.getCurrentSession().beginTransaction();
 		try {
+			sessionFactory.getCurrentSession().beginTransaction();
 			Account a = accountRepository.findAccountBySolutionId(id);
 			if (!account.getUsername().equals(a.getUsername())) {
 				throw new ForbiddenException();

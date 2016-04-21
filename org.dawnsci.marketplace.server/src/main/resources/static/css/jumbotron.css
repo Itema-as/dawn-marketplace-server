@@ -22,8 +22,12 @@ body {
 }
 
 .action-bar {
-	float: none;
-    vertical-align: bottom;
+	margin-top: 8px;
+}
+
+.solution-thumbnail {
+	margin-top: 8px;
+	margin-bottom: 8px;
 }
 
 .clickable > a {
