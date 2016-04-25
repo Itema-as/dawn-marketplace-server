@@ -10,12 +10,17 @@
  ****************************************************************************/
 package org.dawnsci.marketplace.config;
 
+import java.util.UUID;
+
 import javax.inject.Inject;
 import javax.sql.DataSource;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -25,29 +30,50 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.encrypt.Encryptors;
 import org.springframework.security.crypto.encrypt.TextEncryptor;
-import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.crypto.password.StandardPasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	
+	private static final Logger logger = LoggerFactory.getLogger(SecurityConfiguration.class);
+
+	@Inject
+	private Environment environment;
+
 	@Inject
 	private DataSource dataSource;
 	
+	public static final String ADMINISTRATOR_ID = "admin";
+		
 	@Autowired
 	public void registerAuthentication(AuthenticationManagerBuilder auth) throws Exception {
-		auth.jdbcAuthentication()
+		String password = UUID.randomUUID().toString();
+		if (environment.containsProperty("marketplace.admin-password")) {
+			password = environment.getProperty("marketplace.admin-password");
+		} else {
+			logger.info("Using generated administrator password: "+password);
+		}
+		auth	
+			.inMemoryAuthentication()
+				.withUser(ADMINISTRATOR_ID)
+				.password(password)
+				.roles("USER", "ADMIN")
+			.and()
+			.and()
+			.jdbcAuthentication()
 				.dataSource(dataSource)
-				.usersByUsernameQuery("select username, password, true from Account where username = ?")
-				.authoritiesByUsernameQuery("select username, 'ROLE_USER' from Account where username = ?")
-				.passwordEncoder(passwordEncoder());
+					.usersByUsernameQuery("select username, password, true from Account where username = ?")
+					.authoritiesByUsernameQuery("select username, authority from Authorities where username = ?")
+					.passwordEncoder(passwordEncoder());
 	}
+	
 	
 	@Bean
 	public PasswordEncoder passwordEncoder() {
-		return NoOpPasswordEncoder.getInstance();
+		return new StandardPasswordEncoder();
 	}
 
 	@Bean

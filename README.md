@@ -2,11 +2,13 @@
 
 An open source Eclipse marketplace server based on the [marketplace client REST API](https://wiki.eclipse.org/Marketplace/REST).
 
-This server implementation differs from the Eclipse Foundation's server some key areas:
+This server implementation differs from the Eclipse Foundation's server in some key areas:
 * The Equinox p2 repositores along with all other data are hosted on the server.
 * User accounts are optionally integrated with GitHub, Twitter or Google accounts.
 * Feature metadata can be edited and published using a form from within Eclipse.
+  * Publishing also builds the feature using PDE build. 
 * Designed as a lightweight solution for organizations that require an in-house service for distributing Eclipse features.
+* This code is open source and released under the Eclipse Public License.
 
 ## Technology stack
 

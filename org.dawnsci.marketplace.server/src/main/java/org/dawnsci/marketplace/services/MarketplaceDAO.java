@@ -38,6 +38,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class MarketplaceDAO {
@@ -94,7 +95,8 @@ public class MarketplaceDAO {
 		return catalog;
 	}
 
-	public synchronized Marketplace getContent(int identifier) {
+	@Transactional
+	public Marketplace getContent(int identifier) {
 		Marketplace marketplace = MarketplaceFactory.eINSTANCE.createMarketplace();
 		marketplace.setBaseUrl(environment.getProperty("marketplace.base-url"));
 		try {
@@ -115,7 +117,8 @@ public class MarketplaceDAO {
 	}
 
 	@SuppressWarnings("unchecked")
-	public synchronized Marketplace getCatalogs() {
+	@Transactional
+	public Marketplace getCatalogs() {
 		Marketplace marketplace = MarketplaceFactory.eINSTANCE.createMarketplace();
 		marketplace.setBaseUrl(environment.getProperty("marketplace.base-url"));
 		Catalogs catalogs = MarketplaceFactory.eINSTANCE.createCatalogs();
@@ -134,7 +137,8 @@ public class MarketplaceDAO {
 	}
 
 	@SuppressWarnings("unchecked")
-	public synchronized Marketplace getMarkets() {
+	@Transactional
+	public Marketplace getMarkets() {
 		Marketplace marketplace = MarketplaceFactory.eINSTANCE.createMarketplace();
 		marketplace.setBaseUrl(environment.getProperty("marketplace.base-url"));
 		try {
@@ -150,7 +154,8 @@ public class MarketplaceDAO {
 	}
 
 	@SuppressWarnings("unchecked")
-	public synchronized Marketplace getFeatured() {
+	@Transactional
+	public Marketplace getFeatured() {
 		Marketplace marketplace = MarketplaceFactory.eINSTANCE.createMarketplace();
 		marketplace.setBaseUrl(environment.getProperty("marketplace.base-url"));
 		Featured featured = MarketplaceFactory.eINSTANCE.createFeatured();
@@ -173,7 +178,8 @@ public class MarketplaceDAO {
 	}
 
 	@SuppressWarnings("unchecked")
-	public synchronized Marketplace getRecent() {
+	@Transactional
+	public Marketplace getRecent() {
 		Marketplace marketplace = MarketplaceFactory.eINSTANCE.createMarketplace();
 		marketplace.setBaseUrl(environment.getProperty("marketplace.base-url"));
 		Recent recent = MarketplaceFactory.eINSTANCE.createRecent();
@@ -193,7 +199,8 @@ public class MarketplaceDAO {
 	}
 
 	@SuppressWarnings("unchecked")
-	public synchronized Marketplace getSearchResult(String term) {
+	@Transactional
+	public Marketplace getSearchResult(String term) {
 		Marketplace marketplace = MarketplaceFactory.eINSTANCE.createMarketplace();
 		marketplace.setBaseUrl(environment.getProperty("marketplace.base-url"));
 		Search search = MarketplaceFactory.eINSTANCE.createSearch();
@@ -216,7 +223,8 @@ public class MarketplaceDAO {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public synchronized List<String> getTags() {
+	@Transactional
+	public List<String> getTags() {
 		List<String> tags = Collections.EMPTY_LIST;
 		try {
 			sessionFactory.getCurrentSession().beginTransaction();
@@ -232,7 +240,8 @@ public class MarketplaceDAO {
 	}
 		
 	@SuppressWarnings("unchecked")
-	public synchronized Marketplace getSolutionsWithTag(String tag) {
+	@Transactional
+	public Marketplace getSolutionsWithTag(String tag) {
 		Marketplace marketplace = MarketplaceFactory.eINSTANCE.createMarketplace();
 		marketplace.setBaseUrl(environment.getProperty("marketplace.base-url"));
 		Search search = MarketplaceFactory.eINSTANCE.createSearch();
@@ -263,7 +272,8 @@ public class MarketplaceDAO {
 	 *            the solution identifier
 	 * @return a detached {@link Node} instance
 	 */
-	public synchronized Node getSolution(Long identifier) {
+	@Transactional
+	public Node getSolution(Long identifier) {
 		try {
 			Node node = null;
 			sessionFactory.getCurrentSession().beginTransaction();
@@ -289,7 +299,8 @@ public class MarketplaceDAO {
 	 * @param id
 	 *            identifier of the solution
 	 */
-	public synchronized void deleteSolution(Account account, Long id) {
+	@Transactional
+	public void deleteSolution(Account account, Long id) {
 		try {
 			sessionFactory.getCurrentSession().beginTransaction();
 			Account a = accountRepository.findAccountBySolutionId(id);
@@ -321,7 +332,8 @@ public class MarketplaceDAO {
 	 * @throws NamingException 
 	 * @see https://docs.jboss.org/hibernate/core/3.3/reference/en/html/objectstate.html#objectstate-detached
 	 */
-	public synchronized Object saveOrUpdateSolution(Node s, Account account) {
+	@Transactional
+	public Object saveOrUpdateSolution(Node s, Account account) {
 		
 		try {			
 			sessionFactory.getCurrentSession().beginTransaction();

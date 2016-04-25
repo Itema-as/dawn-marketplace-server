@@ -34,7 +34,7 @@ public class ApplicationConfiguration {
 	 */
 	@Bean
 	public Boolean initializeData() {
-		if (env.getProperty("init") == null) {
+		if (env!=null && env.getProperty("init") == null) {
 			return Boolean.FALSE;
 		} else {
 			return Boolean.TRUE;

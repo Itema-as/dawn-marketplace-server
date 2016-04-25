@@ -94,5 +94,10 @@
     "name": "marketplace.featured.solutions",
     "type": "java.util.List<java.lang.Long>",
     "description": "A comma separated list of solution identifiers"
+  },
+  {
+    "name": "marketplace.admin-password",
+    "type": "java.lang.String",
+    "description": "The password for the 'admin' user. If not specified one will be generated on each start."
   }
 ]}
