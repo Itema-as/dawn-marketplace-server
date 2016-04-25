@@ -21,7 +21,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import org.dawnsci.marketplace.InternalErrorException;
+import org.dawnsci.marketplace.config.SecurityConfiguration;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -49,6 +49,9 @@ public class JdbcAccountRepository implements AccountRepository {
 					"insert into Account (firstName, lastName, username, password) values (?, ?, ?, ?)",
 					user.getFirstName(), user.getLastName(), user.getUsername(),
 					passwordEncoder.encode(user.getPassword()));
+			jdbcTemplate.update(
+					"insert into Authorities (username, authority) values (?, ?)",
+					user.getUsername(), "ROLE_USER");
 		} catch (DuplicateKeyException e) {
 			throw new UsernameAlreadyInUseException(user.getUsername());
 		}
@@ -62,6 +65,9 @@ public class JdbcAccountRepository implements AccountRepository {
 	}
 
 	public Account findAccountByUsername(String username) {
+		if (username.equals(SecurityConfiguration.ADMINISTRATOR_ID)) {
+			return new Account(SecurityConfiguration.ADMINISTRATOR_ID, null, "Administrator", "");
+		}
 		return jdbcTemplate.queryForObject("select username, firstName, lastName from Account where username = ?",
 				new RowMapper<Account>() {
 					public Account mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -79,9 +85,10 @@ public class JdbcAccountRepository implements AccountRepository {
 						return  rs.getString("username");
 					}
 				}, id);
-		// this solution does not have an existing owner
+		// this solution does not have an specified owner so we're doing a fallback and assign it to the default
+		// administrative user
 		if (query.isEmpty()) {
-			throw new InternalErrorException("Found no owner for solution");
+			return findAccountByUsername(SecurityConfiguration.ADMINISTRATOR_ID);
 		}
 		return findAccountByUsername(query.get(0));
 	}

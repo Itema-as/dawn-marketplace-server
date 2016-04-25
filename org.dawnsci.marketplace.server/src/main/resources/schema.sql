@@ -25,3 +25,8 @@ create table if not exists SolutionConnection (
 	username varchar(256) not null,
 	solution varchar(256) not null,
 	primary key (username, solution));
+
+create table if not exists Authorities (
+	username varchar(256) not null,
+	authority varchar(256) not null,
+	primary key (username));

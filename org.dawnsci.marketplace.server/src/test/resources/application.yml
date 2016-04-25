@@ -6,6 +6,7 @@ marketplace:
   title: DAWN Plug-in Marketplace
   icon: http://localhost:8080/pages/eclipse.png
   description: The DAWN Plug-in Marketplace
+  admin-password: s3cret!
   wizard-title: DAWN Plug-in Catalog
   wizard-icon: http://localhost:8080/pages/catalog-icon.png
   solutions-folder: test/solutions
