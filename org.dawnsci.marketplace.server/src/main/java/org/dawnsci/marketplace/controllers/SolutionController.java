@@ -12,6 +12,7 @@ package org.dawnsci.marketplace.controllers;
 
 import java.nio.file.Path;
 import java.security.Principal;
+import java.util.Collection;
 import java.util.Date;
 import java.util.Locale;
 
@@ -42,8 +43,12 @@ import org.springframework.boot.actuate.autoconfigure.EndpointAutoConfiguration.
 import org.springframework.boot.autoconfigure.social.FacebookProperties;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.AccessDecisionManager;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.social.connect.ConnectionFactoryLocator;
 import org.springframework.social.connect.ConnectionRepository;
 import org.springframework.stereotype.Controller;
@@ -114,13 +119,14 @@ public class SolutionController extends AbstractController {
 	 * error will be returned.
 	 */
 	@RequestMapping(value = "/content/{identifier}", method = RequestMethod.GET)
-	public String showSolution(ModelMap map, Principal principal, @PathVariable int identifier) {
+	public String showSolution(ModelMap map, Principal principal, @PathVariable Long identifier) {
 		addCommonItems(map, principal);
 		Marketplace content = marketplaceDAO.getContent(identifier);
 		if (content.getNode()==null) {
 			throw new NotFoundException();
 		}
 		map.addAttribute("content", content);
+		map.addAttribute("editable", marketplaceDAO.canEdit(identifier));
 		return "solution";
 	}
 
@@ -147,6 +153,7 @@ public class SolutionController extends AbstractController {
 		// add list of available licenses and statuses
 		map.addAttribute("licenses", MarketplaceUtility.LICENSES);
 		map.addAttribute("status", MarketplaceUtility.STATUS);
+		map.addAttribute("editable", marketplaceDAO.canEdit(node.getId()));
 		return "edit-solution";
 	}
 
@@ -155,18 +162,13 @@ public class SolutionController extends AbstractController {
 	 */
 	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
 	@RequestMapping(value = "/edit-solution/{identifier}", method = RequestMethod.GET)
-	public String showEditSolutionForm(ModelMap map, Principal principal, @PathVariable int identifier) {
+	public String showEditSolutionForm(ModelMap map, Principal principal, @PathVariable Long identifier) {
 		addCommonItems(map, principal);
-		// block access if the user does not own the solution
-		Account account = accountRepository.findAccountByUsername(principal.getName());
-		Account a = accountRepository.findAccountBySolutionId(Long.valueOf(identifier));
-		if (!account.getUsername().equals(a.getUsername())) {
-			throw new ForbiddenException();
-		}
 		map.addAttribute("content", new NodeProxy(marketplaceDAO.getContent(identifier).getNode()));
 		// add list of available licenses and statuses
 		map.addAttribute("licenses", MarketplaceUtility.LICENSES);
 		map.addAttribute("status", MarketplaceUtility.STATUS);
+		map.addAttribute("editable" ,marketplaceDAO.canEdit(identifier));
 		return "edit-solution";
 	}
 
@@ -206,4 +208,5 @@ public class SolutionController extends AbstractController {
 		}
 		return "redirect:/content/"+content.getNode().getId();
 	}
+	
 }
