@@ -55,11 +55,13 @@
 			data-toggle="tooltip" data-placement="top" title="Go to support">
 			<span class="glyphicon glyphicon-info-sign" aria-hidden="true" ></span>
 		</a>
+		<!-- 
 		<a role="button" th:href="@{'/edit-solution/'+${node.id}}"
 			style="font-size: 1.1em"
 			data-toggle="tooltip" data-placement="top" title="Edit entry">
 			<span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
 		</a>
+		 -->
 		<span th:if="${null != node.tags}">
 			<a th:each="tag: ${node.tags.items}" th:href="@{~/search(tag=${tag.name})}" 
 				class="label label-info" th:text="${tag.name}"></a>

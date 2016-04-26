@@ -9,6 +9,7 @@
  *    Torkild U. Resheim - initial API and implementation
  ****************************************************************************/
 package org.dawnsci.marketplace.services;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -37,6 +38,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.env.Environment;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -96,7 +101,7 @@ public class MarketplaceDAO {
 	}
 
 	@Transactional
-	public Marketplace getContent(int identifier) {
+	public Marketplace getContent(Long identifier) {
 		Marketplace marketplace = MarketplaceFactory.eINSTANCE.createMarketplace();
 		marketplace.setBaseUrl(environment.getProperty("marketplace.base-url"));
 		try {
@@ -303,8 +308,7 @@ public class MarketplaceDAO {
 	public void deleteSolution(Account account, Long id) {
 		try {
 			sessionFactory.getCurrentSession().beginTransaction();
-			Account a = accountRepository.findAccountBySolutionId(id);
-			if (!account.getUsername().equals(a.getUsername())) {
+			if (!canEdit(id)) {
 				throw new ForbiddenException();
 			}
 			Object object = sessionFactory.getCurrentSession().get("Node", id);
@@ -333,8 +337,7 @@ public class MarketplaceDAO {
 	 * @see https://docs.jboss.org/hibernate/core/3.3/reference/en/html/objectstate.html#objectstate-detached
 	 */
 	@Transactional
-	public Object saveOrUpdateSolution(Node s, Account account) {
-		
+	public Object saveOrUpdateSolution(Node s, Account account) {		
 		try {			
 			sessionFactory.getCurrentSession().beginTransaction();
 			boolean isNewSolution = s.getId() == null ? true : false;
@@ -367,8 +370,7 @@ public class MarketplaceDAO {
 			}
 			// verify that we have the correct owner
 			if (!isNewSolution) {
-				Account a = accountRepository.findAccountBySolutionId(s.getId()); 
-				if (!account.getUsername().equals(a.getUsername())) {
+				if (!canEdit(s.getId())) {
 					throw new ForbiddenException();
 				}
 				logger.info("Updating solution #"+s.getId());
@@ -397,6 +399,38 @@ public class MarketplaceDAO {
 		Node node = MarketplaceFactory.eINSTANCE.createNode();
 		marketplace.setNode(node);
 		return marketplace;
+	}
+	
+	/**
+	 * Tests whether or not the current user have access to edit the solution
+	 * with the given identifier. The user must be an administrator or own the
+	 * solution.
+	 * 
+	 * @param identifier
+	 *            the identifier of the solution
+	 * @return <code>true</code> if editable
+	 */
+	public boolean canEdit(Long identifier) {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		if (authentication == null || authentication instanceof AnonymousAuthenticationToken) {
+			return false;
+		}
+		Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
+		for (GrantedAuthority grantedAuthority : authorities) {
+			if (grantedAuthority.getAuthority().equals("ROLE_ADMIN")) {
+				return true;
+			}
+		}
+		// new solution
+		if (identifier == null) {
+			return true;
+		}
+		Account account = accountRepository.findAccountByUsername(authentication.getName());
+		Account a = accountRepository.findAccountBySolutionId(identifier);
+		if (account.getUsername().equals(a.getUsername())) {
+			return true;
+		}
+		return false;		
 	}
 
 }

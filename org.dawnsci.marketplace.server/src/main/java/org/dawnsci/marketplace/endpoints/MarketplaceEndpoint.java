@@ -67,13 +67,13 @@ public class MarketplaceEndpoint {
 
 	@GET
 	@Path("node/{id}/api/p")
-	public String getNode(@PathParam("id") int id) throws Exception {
+	public String getNode(@PathParam("id") Long id) throws Exception {
 		return serialize(marketplaceDAO.getContent(id));
 	}
 
 	@GET
 	@Path("content/{id}/api/p")
-	public String getContent(@PathParam("id") int id) throws Exception {
+	public String getContent(@PathParam("id") Long id) throws Exception {
 		return serialize(marketplaceDAO.getContent(id));
 	}
 

@@ -38,7 +38,7 @@
 						data-toggle="tooltip" data-placement="top" title="Go to support">
 						<span class="glyphicon glyphicon-info-sign" aria-hidden="true" style="font-size: 17pt;"></span>
 					</a>
-					<a role="button" th:href="@{'/edit-solution/'+${content.node.id}}" 
+					<a role="button" th:href="@{'/edit-solution/'+${content.node.id}}" th:if="${editable == true}" 
 						data-toggle="tooltip" data-placement="top" title="Edit entry">
 						<span class="glyphicon glyphicon-edit" aria-hidden="true" style="font-size: 17pt;"></span>
 					</a>

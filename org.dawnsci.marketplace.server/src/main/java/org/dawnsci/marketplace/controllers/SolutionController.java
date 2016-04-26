@@ -119,13 +119,14 @@ public class SolutionController extends AbstractController {
 	 * error will be returned.
 	 */
 	@RequestMapping(value = "/content/{identifier}", method = RequestMethod.GET)
-	public String showSolution(ModelMap map, Principal principal, @PathVariable int identifier) {
+	public String showSolution(ModelMap map, Principal principal, @PathVariable Long identifier) {
 		addCommonItems(map, principal);
 		Marketplace content = marketplaceDAO.getContent(identifier);
 		if (content.getNode()==null) {
 			throw new NotFoundException();
 		}
 		map.addAttribute("content", content);
+		map.addAttribute("editable", marketplaceDAO.canEdit(identifier));
 		return "solution";
 	}
 
@@ -152,6 +153,7 @@ public class SolutionController extends AbstractController {
 		// add list of available licenses and statuses
 		map.addAttribute("licenses", MarketplaceUtility.LICENSES);
 		map.addAttribute("status", MarketplaceUtility.STATUS);
+		map.addAttribute("editable", marketplaceDAO.canEdit(node.getId()));
 		return "edit-solution";
 	}
 
@@ -160,16 +162,13 @@ public class SolutionController extends AbstractController {
 	 */
 	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
 	@RequestMapping(value = "/edit-solution/{identifier}", method = RequestMethod.GET)
-	public String showEditSolutionForm(ModelMap map, Principal principal, @PathVariable int identifier) {
+	public String showEditSolutionForm(ModelMap map, Principal principal, @PathVariable Long identifier) {
 		addCommonItems(map, principal);
-		// block access if the user does not own the solution
-		if (!canEdit(principal, Long.valueOf(identifier))) {
-			throw new ForbiddenException();
-		}
 		map.addAttribute("content", new NodeProxy(marketplaceDAO.getContent(identifier).getNode()));
 		// add list of available licenses and statuses
 		map.addAttribute("licenses", MarketplaceUtility.LICENSES);
 		map.addAttribute("status", MarketplaceUtility.STATUS);
+		map.addAttribute("editable" ,marketplaceDAO.canEdit(identifier));
 		return "edit-solution";
 	}
 
@@ -210,20 +209,4 @@ public class SolutionController extends AbstractController {
 		return "redirect:/content/"+content.getNode().getId();
 	}
 	
-	private boolean canEdit(Principal principal, Long identifier) {
-		if (principal instanceof UserDetails) {
-			Collection<? extends GrantedAuthority> authorities = ((UserDetails)principal).getAuthorities();
-			for (GrantedAuthority grantedAuthority : authorities) {
-				if (grantedAuthority.getAuthority().equals("ROLE_ADMIN")) {
-					return true;
-				}
-			}
-		}
-		Account account = accountRepository.findAccountByUsername(principal.getName());
-		Account a = accountRepository.findAccountBySolutionId(identifier);
-		if (account.getUsername().equals(a.getUsername())) {
-			return true;
-		}
-		return false;		
-	}
 }
