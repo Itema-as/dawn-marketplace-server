@@ -109,10 +109,9 @@ public class MarketplaceDAO {
 			Query query = sessionFactory.getCurrentSession()
 					.createQuery("SELECT node FROM Node node WHERE node.id='" + identifier + "'");
 			query.setMaxResults(1);
-			if (query.list().isEmpty()) {
-				return marketplace;
+			if (!query.list().isEmpty()) {
+				marketplace.setNode((EcoreUtil.copy((Node)query.list().get(0))));
 			}
-			marketplace.setNode((EcoreUtil.copy((Node)query.list().get(0))));
 			sessionFactory.getCurrentSession().getTransaction().commit();
 		} catch (Exception e) {			
 			sessionFactory.getCurrentSession().getTransaction().rollback();
@@ -279,19 +278,19 @@ public class MarketplaceDAO {
 	 */
 	@Transactional
 	public Node getSolution(Long identifier) {
+		Node node = null;
 		try {
-			Node node = null;
 			sessionFactory.getCurrentSession().beginTransaction();
 			Query query = sessionFactory.getCurrentSession().createQuery("SELECT node FROM Node node WHERE node.id='" + identifier + "'");
 			if (!query.list().isEmpty()) {
 				node = EcoreUtil.copy((Node) query.list().get(0));
 			}
 			sessionFactory.getCurrentSession().getTransaction().commit();
-			return node;
 		} catch (Exception e) {
 			sessionFactory.getCurrentSession().getTransaction().rollback();
 			throw new InternalErrorException(e);			
 		}
+		return node;
 	}
 
 	/**

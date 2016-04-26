@@ -22,7 +22,7 @@ If the following files are not in place, they will be created. The folder named 
 
 ### Creating an initial data set
 
-If the server is started with the `--init` argument it will create a number of items for testing. A folder named _solutions_ will be created next to the *.jar file, or in the project root when running from the IDE. This contains all file resources for the sample solutions, including one plug-in that can be installed.
+When starting the server a folder named _solutions_ will be created next to the *.jar file, or in the project root when running from the IDE. This contains all file resources for a sample solution, including one plug-in that can be installed.
 
 The data that is loaded can be found in [src/main/resources/data](src/main/resources/data). A similar set is found in [src/test/resources/data](src/test/resources/data).
 

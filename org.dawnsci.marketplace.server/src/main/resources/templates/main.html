@@ -22,18 +22,24 @@
 			<!-- content -->
 			<div class="col-md-9" id="main-view">
 				<!-- featured solutions (max 3) -->
-				<h2>Featured</h2>
-				<div class="row" id="featured">
-					<div th:each="node: ${featured.featured.nodes}" class="col-md-4">
-						<div th:replace="../fragments/summary :: summary"></div>
+				<div th:if="${featured.featured.count>0}">
+					<h2>Featured</h2>
+					<div class="row" id="featured">
+						<div th:each="node: ${featured.featured.nodes}" class="col-md-4">
+							<div th:replace="../fragments/summary :: summary"></div>
+						</div>
 					</div>
 				</div>
-				<h2>Recently updated</h2>
-				<div class="row" id="recently-updated">
-					<div th:each="node: ${recent.recent.nodes}" class="col-md-4">
-						<div th:replace="../fragments/summary :: short-summary"></div>
+				<div th:if="${recent.recent.count>0}">
+					<h2>Recently updated</h2>
+					<div class="row" id="recently-updated">
+						<div th:each="node: ${recent.recent.nodes}" class="col-md-4">
+							<div th:replace="../fragments/summary :: short-summary"></div>
+						</div>
 					</div>
 				</div>
+				<div th:if="${featured.featured.count==0 and recent.recent.count==0}" 
+					class="alert alert-warning" role="alert"><strong>Nothing to see here.</strong> Sign in and add some content!</div>
 			</div>
 		</div>
 	</div>
