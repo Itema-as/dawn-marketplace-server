@@ -52,13 +52,6 @@ public class DescriptionSection extends SectionPart {
 	private IEditorSite site;
 	private Node solution;
 
-	/**
-	 * Create the SectionPart.
-	 * @param parent
-	 * @param toolkit
-	 * @param style
-	 * @param site 
-	 */
 	public DescriptionSection(Composite parent, FormToolkit toolkit, int style, IEditorSite site) {
 		super(parent, toolkit, style);
 		this.site = site;
@@ -138,7 +131,7 @@ public class DescriptionSection extends SectionPart {
 		DataBindingContext bindingContext = new DataBindingContext();
 		//
 		IObservableValue observeTextTxtLogoFilePathObserveWidget = WidgetProperties.text(SWT.Modify).observe(markupViewer.getTextWidget());
-		IObservableValue solutionImageObserveValue = EMFObservables.observeValue(solution, Literals.NODE__BODY);
+		IObservableValue solutionImageObserveValue = EMFObservables.observeValue(solution, Literals.NODE__RAW_BODY);
 		bindingContext.bindValue(observeTextTxtLogoFilePathObserveWidget, solutionImageObserveValue, null, null);
 		//
 		return bindingContext;

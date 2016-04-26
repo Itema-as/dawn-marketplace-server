@@ -61,7 +61,7 @@ public class ShortDescriptionSection extends SectionPart {
 		DataBindingContext bindingContext = new DataBindingContext();
 		//
 		IObservableValue observeTextTextObserveWidget = WidgetProperties.text(SWT.Modify).observe(txtShortDescription);
-		IObservableValue solutionShortdescriptionObserveValue = EMFObservables.observeValue(solution, Literals.NODE__SHORTDESCRIPTION);
+		IObservableValue solutionShortdescriptionObserveValue = EMFObservables.observeValue(solution, Literals.NODE__RAW_SHORTDESCRIPTION);
 		bindingContext.bindValue(observeTextTextObserveWidget, solutionShortdescriptionObserveValue, null, null);
 		//
 		return bindingContext;

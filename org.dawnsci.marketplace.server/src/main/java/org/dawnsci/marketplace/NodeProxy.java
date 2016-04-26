@@ -10,9 +10,15 @@
  ****************************************************************************/
 package org.dawnsci.marketplace;
 
+import java.io.IOException;
+import java.io.StringReader;
+import java.io.StringWriter;
 import java.util.Iterator;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.mylyn.wikitext.core.parser.MarkupParser;
+import org.eclipse.mylyn.wikitext.core.parser.builder.HtmlDocumentBuilder;
+import org.eclipse.mylyn.wikitext.markdown.core.MarkdownLanguage;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
@@ -319,4 +325,47 @@ public class NodeProxy {
 	public void setRepositoryfile(MultipartFile repositoryfile) {
 		this.repositoryfile = repositoryfile;
 	}
+	
+	public String getRawBody() {
+		if (node.getRawBody() == null) {
+			return node.getBody();
+		}
+		return node.getRawBody();
+	}
+
+	public void setRawBody(String value) {
+		node.setRawBody(value);
+		node.setBody(toHtml(value));
+	}
+
+	public String getRawShortdescription() {
+		if (node.getRawShortdescription() == null) {
+			return node.getShortdescription();
+		}
+		return node.getRawShortdescription();
+	}
+
+	public void setRawShortdescription(String value) {
+		node.setRawShortdescription(value);
+		node.setShortdescription(toHtml(value));
+	}
+
+	static String toHtml(String markdown) {
+		if (markdown == null) {
+			return "";
+		}
+		StringWriter sw = new StringWriter();
+		MarkupParser parser = new MarkupParser();
+		parser.setMarkupLanguage(new MarkdownLanguage());
+		HtmlDocumentBuilder builder = new HtmlDocumentBuilder(sw);
+		builder.setEmitAsDocument(false);
+		parser.setBuilder(builder);
+		try {
+			parser.parse(new StringReader(markdown));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return sw.toString();
+	}
+		
 }

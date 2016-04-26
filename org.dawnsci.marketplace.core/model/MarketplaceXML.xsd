@@ -62,6 +62,8 @@
         <xsd:documentation>Screenshot URL.</xsd:documentation>
       </xsd:annotation>
     </xsd:attribute>
+    <xsd:attribute name="rawBody" type="xsd:string"/>
+    <xsd:attribute name="rawShortdescription" type="xsd:string"/>
   </xsd:complexType>
   <xsd:element name="Node" type="org.dawnsci:Node"/>
   <xsd:complexType name="Category">
