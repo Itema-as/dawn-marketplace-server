@@ -112,7 +112,7 @@
 								<div class="form-group">
 									<label for="short-description" class="col-sm-2 control-label">Summary</label>
 									<div class="col-sm-10">
-										<textarea id="short-description" name="short-description" data-provide="markdown" rows="8"  th:field="*{shortdescription}"></textarea>
+										<textarea id="short-description" name="short-description" data-provide="markdown" rows="8"  th:field="*{rawShortdescription}"></textarea>
 										<p class="help-block">Enter a short description of the features this plug-in provides. <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">MarkDown syntax</a> is allowed.</p>
 									</div>
 								</div>
@@ -155,7 +155,7 @@
 						<!-- Long description section -->
 						<div role="tabpanel" class="tab-pane fade" id="description">
 							<div class="panel-body">
-								<textarea name="long-description" data-provide="markdown" rows="20"  th:field="*{body}"></textarea>
+								<textarea name="long-description" data-provide="markdown" rows="20"  th:field="*{rawBody}"></textarea>
 								<p class="help-block">Enter a detailed description of the features this plug-in provides. <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">MarkDown syntax</a> is allowed.</p>
 							</div>
 						</div>

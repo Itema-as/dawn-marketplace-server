@@ -40,6 +40,8 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.dawnsci.marketplace.Node#getPlatforms <em>Platforms</em>}</li>
  *   <li>{@link org.dawnsci.marketplace.Node#getUrl <em>Url</em>}</li>
  *   <li>{@link org.dawnsci.marketplace.Node#getScreenshot <em>Screenshot</em>}</li>
+ *   <li>{@link org.dawnsci.marketplace.Node#getRawBody <em>Raw Body</em>}</li>
+ *   <li>{@link org.dawnsci.marketplace.Node#getRawShortdescription <em>Raw Shortdescription</em>}</li>
  * </ul>
  *
  * @see org.dawnsci.marketplace.MarketplacePackage#getNode()
@@ -673,6 +675,60 @@ public interface Node extends EObject {
 	 * @generated
 	 */
 	void setScreenshot(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Raw Body</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Raw Body</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Raw Body</em>' attribute.
+	 * @see #setRawBody(String)
+	 * @see org.dawnsci.marketplace.MarketplacePackage#getNode_RawBody()
+	 * @model extendedMetaData="kind='element'"
+	 *        annotation="teneo.jpa value='@Lob'"
+	 * @generated
+	 */
+	String getRawBody();
+
+	/**
+	 * Sets the value of the '{@link org.dawnsci.marketplace.Node#getRawBody <em>Raw Body</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Raw Body</em>' attribute.
+	 * @see #getRawBody()
+	 * @generated
+	 */
+	void setRawBody(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Raw Shortdescription</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Raw Shortdescription</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Raw Shortdescription</em>' attribute.
+	 * @see #setRawShortdescription(String)
+	 * @see org.dawnsci.marketplace.MarketplacePackage#getNode_RawShortdescription()
+	 * @model extendedMetaData="kind='element'"
+	 *        annotation="teneo.jpa value='@Lob'"
+	 * @generated
+	 */
+	String getRawShortdescription();
+
+	/**
+	 * Sets the value of the '{@link org.dawnsci.marketplace.Node#getRawShortdescription <em>Raw Shortdescription</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Raw Shortdescription</em>' attribute.
+	 * @see #getRawShortdescription()
+	 * @generated
+	 */
+	void setRawShortdescription(String value);
 
 	/**
 	 * Returns the value of the '<em><b>Type</b></em>' attribute.

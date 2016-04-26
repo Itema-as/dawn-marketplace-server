@@ -13,6 +13,8 @@ package org.dawnsci.marketplace.ui.editors;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.StringReader;
+import java.io.StringWriter;
 
 import org.dawnsci.marketplace.MarketplaceFactory;
 import org.dawnsci.marketplace.Node;
@@ -24,6 +26,9 @@ import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.ecore.util.EContentAdapter;
+import org.eclipse.mylyn.wikitext.core.parser.MarkupParser;
+import org.eclipse.mylyn.wikitext.core.parser.builder.HtmlDocumentBuilder;
+import org.eclipse.mylyn.wikitext.markdown.core.MarkdownLanguage;
 import org.eclipse.swt.custom.CTabFolder;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.IEditorInput;
@@ -89,6 +94,10 @@ public class SolutionEditor extends FormEditor implements IResourceChangeListene
 		FileEditorInput i = (FileEditorInput) getEditorInput();
 		File file = i.getPath().toFile();
 		try (FileWriter fw = new FileWriter(file)) {
+			// first convert the Markdown code to HTML
+			node.setBody(toHtml(node.getRawBody()));
+			node.setShortdescription(toHtml(node.getRawShortdescription()));
+			// serialize to XML
 			fw.write(MarketplaceSerializer.serialize(node));
 			i.getFile().refreshLocal(IFile.DEPTH_ZERO, monitor);
 			dirty = false;
@@ -165,6 +174,24 @@ public class SolutionEditor extends FormEditor implements IResourceChangeListene
 		if (getPageCount() == 1 && getContainer() instanceof CTabFolder) {
 			((CTabFolder) getContainer()).setTabHeight(0);
 		}
+	}
+	
+	private static String toHtml(String markdown) {
+		if (markdown == null) {
+			return "";
+		}
+		StringWriter sw = new StringWriter();
+		MarkupParser parser = new MarkupParser();
+		parser.setMarkupLanguage(new MarkdownLanguage());
+		HtmlDocumentBuilder builder = new HtmlDocumentBuilder(sw);
+		builder.setEmitAsDocument(false);
+		parser.setBuilder(builder);
+		try {
+			parser.parse(new StringReader(markdown));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return sw.toString();
 	}
 
 }

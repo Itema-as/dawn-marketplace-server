@@ -310,13 +310,31 @@ public interface MarketplacePackage extends EPackage {
 	int NODE__SCREENSHOT = 26;
 
 	/**
+	 * The feature id for the '<em><b>Raw Body</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NODE__RAW_BODY = 27;
+
+	/**
+	 * The feature id for the '<em><b>Raw Shortdescription</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NODE__RAW_SHORTDESCRIPTION = 28;
+
+	/**
 	 * The number of structural features of the '<em>Node</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int NODE_FEATURE_COUNT = 27;
+	int NODE_FEATURE_COUNT = 29;
 
 	/**
 	 * The number of operations of the '<em>Node</em>' class.
@@ -1682,6 +1700,28 @@ public interface MarketplacePackage extends EPackage {
 	EAttribute getNode_Screenshot();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.dawnsci.marketplace.Node#getRawBody <em>Raw Body</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Raw Body</em>'.
+	 * @see org.dawnsci.marketplace.Node#getRawBody()
+	 * @see #getNode()
+	 * @generated
+	 */
+	EAttribute getNode_RawBody();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.dawnsci.marketplace.Node#getRawShortdescription <em>Raw Shortdescription</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Raw Shortdescription</em>'.
+	 * @see org.dawnsci.marketplace.Node#getRawShortdescription()
+	 * @see #getNode()
+	 * @generated
+	 */
+	EAttribute getNode_RawShortdescription();
+
+	/**
 	 * Returns the meta object for class '{@link org.dawnsci.marketplace.Category <em>Category</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2756,6 +2796,20 @@ public interface MarketplacePackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute NODE__SCREENSHOT = eINSTANCE.getNode_Screenshot();
+		/**
+		 * The meta object literal for the '<em><b>Raw Body</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute NODE__RAW_BODY = eINSTANCE.getNode_RawBody();
+		/**
+		 * The meta object literal for the '<em><b>Raw Shortdescription</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute NODE__RAW_SHORTDESCRIPTION = eINSTANCE.getNode_RawShortdescription();
 		/**
 		 * The meta object literal for the '{@link org.dawnsci.marketplace.impl.CategoryImpl <em>Category</em>}' class.
 		 * <!-- begin-user-doc -->
