@@ -12,6 +12,7 @@ package org.dawnsci.marketplace.controllers;
 
 import java.nio.file.Path;
 import java.security.Principal;
+import java.util.Collection;
 import java.util.Date;
 import java.util.Locale;
 
@@ -42,8 +43,12 @@ import org.springframework.boot.actuate.autoconfigure.EndpointAutoConfiguration.
 import org.springframework.boot.autoconfigure.social.FacebookProperties;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.AccessDecisionManager;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.social.connect.ConnectionFactoryLocator;
 import org.springframework.social.connect.ConnectionRepository;
 import org.springframework.stereotype.Controller;
@@ -158,9 +163,7 @@ public class SolutionController extends AbstractController {
 	public String showEditSolutionForm(ModelMap map, Principal principal, @PathVariable int identifier) {
 		addCommonItems(map, principal);
 		// block access if the user does not own the solution
-		Account account = accountRepository.findAccountByUsername(principal.getName());
-		Account a = accountRepository.findAccountBySolutionId(Long.valueOf(identifier));
-		if (!account.getUsername().equals(a.getUsername())) {
+		if (!canEdit(principal, Long.valueOf(identifier))) {
 			throw new ForbiddenException();
 		}
 		map.addAttribute("content", new NodeProxy(marketplaceDAO.getContent(identifier).getNode()));
@@ -205,5 +208,22 @@ public class SolutionController extends AbstractController {
 			}
 		}
 		return "redirect:/content/"+content.getNode().getId();
+	}
+	
+	private boolean canEdit(Principal principal, Long identifier) {
+		if (principal instanceof UserDetails) {
+			Collection<? extends GrantedAuthority> authorities = ((UserDetails)principal).getAuthorities();
+			for (GrantedAuthority grantedAuthority : authorities) {
+				if (grantedAuthority.getAuthority().equals("ROLE_ADMIN")) {
+					return true;
+				}
+			}
+		}
+		Account account = accountRepository.findAccountByUsername(principal.getName());
+		Account a = accountRepository.findAccountBySolutionId(identifier);
+		if (account.getUsername().equals(a.getUsername())) {
+			return true;
+		}
+		return false;		
 	}
 }

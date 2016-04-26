@@ -36,7 +36,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
- * This controller handles the extended REST API. 
+ * This controller handles the extended REST API.
+ * XXX: Ensure no administrator access through this API. 
  */
 @Controller
 @RestController

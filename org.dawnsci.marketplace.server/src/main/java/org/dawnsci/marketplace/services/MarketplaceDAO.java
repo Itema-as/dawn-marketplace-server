@@ -357,13 +357,13 @@ public class MarketplaceDAO {
 			}
 			
 			s.setChanged(System.currentTimeMillis());
-			s.setOwner(account.getFirstName()+" "+account.getLastName());
 
 			// set a few values for new entities
 			if (isNewSolution) {
 				logger.info("Creating a new solution instance in database");
-				s.setCreated(null);
+				s.setCreated(null); // will be set automatically
 				s.setUpdateurl(""); // http://localhost:8080/files/1 for solution #1
+				s.setOwner(account.getFirstName()+" "+account.getLastName());
 			}
 			// verify that we have the correct owner
 			if (!isNewSolution) {
