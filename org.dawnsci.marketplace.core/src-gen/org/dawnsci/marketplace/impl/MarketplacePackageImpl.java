@@ -474,15 +474,6 @@ public class MarketplacePackageImpl extends EPackageImpl implements MarketplaceP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getNode_RawShortdescription() {
-		return (EAttribute)nodeEClass.getEStructuralFeatures().get(28);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getCategory() {
 		return categoryEClass;
 	}
@@ -1273,7 +1264,6 @@ public class MarketplacePackageImpl extends EPackageImpl implements MarketplaceP
 		createEAttribute(nodeEClass, NODE__URL);
 		createEAttribute(nodeEClass, NODE__SCREENSHOT);
 		createEAttribute(nodeEClass, NODE__RAW_BODY);
-		createEAttribute(nodeEClass, NODE__RAW_SHORTDESCRIPTION);
 
 		categoryEClass = createEClass(CATEGORY);
 		createEAttribute(categoryEClass, CATEGORY__ID);
@@ -1433,7 +1423,6 @@ public class MarketplacePackageImpl extends EPackageImpl implements MarketplaceP
 		initEAttribute(getNode_Url(), ecorePackage.getEString(), "url", "", 0, 1, Node.class, !IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEAttribute(getNode_Screenshot(), ecorePackage.getEString(), "screenshot", null, 0, 1, Node.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getNode_RawBody(), ecorePackage.getEString(), "rawBody", null, 0, 1, Node.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getNode_RawShortdescription(), ecorePackage.getEString(), "rawShortdescription", null, 0, 1, Node.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(categoryEClass, Category.class, "Category", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getCategory_Id(), ecorePackage.getELongObject(), "id", null, 0, 1, Category.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1696,12 +1685,6 @@ public class MarketplacePackageImpl extends EPackageImpl implements MarketplaceP
 			 "kind", "element"
 		   });	
 		addAnnotation
-		  (getNode_RawShortdescription(), 
-		   source, 
-		   new String[] {
-			 "kind", "element"
-		   });	
-		addAnnotation
 		  (categoryEClass, 
 		   source, 
 		   new String[] {
@@ -1924,12 +1907,6 @@ public class MarketplacePackageImpl extends EPackageImpl implements MarketplaceP
 		   });	
 		addAnnotation
 		  (getNode_RawBody(), 
-		   source, 
-		   new String[] {
-			 "value", "@Lob"
-		   });	
-		addAnnotation
-		  (getNode_RawShortdescription(), 
 		   source, 
 		   new String[] {
 			 "value", "@Lob"

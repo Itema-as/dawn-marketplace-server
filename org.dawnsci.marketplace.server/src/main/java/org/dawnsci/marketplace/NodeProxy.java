@@ -338,18 +338,6 @@ public class NodeProxy {
 		node.setBody(toHtml(value));
 	}
 
-	public String getRawShortdescription() {
-		if (node.getRawShortdescription() == null) {
-			return node.getShortdescription();
-		}
-		return node.getRawShortdescription();
-	}
-
-	public void setRawShortdescription(String value) {
-		node.setRawShortdescription(value);
-		node.setShortdescription(toHtml(value));
-	}
-
 	static String toHtml(String markdown) {
 		if (markdown == null) {
 			return "";

@@ -55,7 +55,6 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
  *   <li>{@link org.dawnsci.marketplace.impl.NodeImpl#getUrl <em>Url</em>}</li>
  *   <li>{@link org.dawnsci.marketplace.impl.NodeImpl#getScreenshot <em>Screenshot</em>}</li>
  *   <li>{@link org.dawnsci.marketplace.impl.NodeImpl#getRawBody <em>Raw Body</em>}</li>
- *   <li>{@link org.dawnsci.marketplace.impl.NodeImpl#getRawShortdescription <em>Raw Shortdescription</em>}</li>
  * </ul>
  *
  * @generated
@@ -486,25 +485,6 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 	 * @ordered
 	 */
 	protected String rawBody = RAW_BODY_EDEFAULT;
-	/**
-	 * The default value of the '{@link #getRawShortdescription() <em>Raw Shortdescription</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getRawShortdescription()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String RAW_SHORTDESCRIPTION_EDEFAULT = null;
-	/**
-	 * The cached value of the '{@link #getRawShortdescription() <em>Raw Shortdescription</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getRawShortdescription()
-	 * @generated
-	 * @ordered
-	 */
-	protected String rawShortdescription = RAW_SHORTDESCRIPTION_EDEFAULT;
-
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
@@ -1066,27 +1046,6 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String getRawShortdescription() {
-		return rawShortdescription;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setRawShortdescription(String newRawShortdescription) {
-		String oldRawShortdescription = rawShortdescription;
-		rawShortdescription = newRawShortdescription;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, MarketplacePackage.NODE__RAW_SHORTDESCRIPTION, oldRawShortdescription, rawShortdescription));
-	}
-
-	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -1288,8 +1247,6 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 				return getScreenshot();
 			case MarketplacePackage.NODE__RAW_BODY:
 				return getRawBody();
-			case MarketplacePackage.NODE__RAW_SHORTDESCRIPTION:
-				return getRawShortdescription();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -1384,9 +1341,6 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 				return;
 			case MarketplacePackage.NODE__RAW_BODY:
 				setRawBody((String)newValue);
-				return;
-			case MarketplacePackage.NODE__RAW_SHORTDESCRIPTION:
-				setRawShortdescription((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -1483,9 +1437,6 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 			case MarketplacePackage.NODE__RAW_BODY:
 				setRawBody(RAW_BODY_EDEFAULT);
 				return;
-			case MarketplacePackage.NODE__RAW_SHORTDESCRIPTION:
-				setRawShortdescription(RAW_SHORTDESCRIPTION_EDEFAULT);
-				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -1553,8 +1504,6 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 				return SCREENSHOT_EDEFAULT == null ? screenshot != null : !SCREENSHOT_EDEFAULT.equals(screenshot);
 			case MarketplacePackage.NODE__RAW_BODY:
 				return RAW_BODY_EDEFAULT == null ? rawBody != null : !RAW_BODY_EDEFAULT.equals(rawBody);
-			case MarketplacePackage.NODE__RAW_SHORTDESCRIPTION:
-				return RAW_SHORTDESCRIPTION_EDEFAULT == null ? rawShortdescription != null : !RAW_SHORTDESCRIPTION_EDEFAULT.equals(rawShortdescription);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -1614,8 +1563,6 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 		result.append(screenshot);
 		result.append(", rawBody: ");
 		result.append(rawBody);
-		result.append(", rawShortdescription: ");
-		result.append(rawShortdescription);
 		result.append(')');
 		return result.toString();
 	}
