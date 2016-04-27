@@ -15,14 +15,27 @@
  */
 package org.dawnsci.marketplace.social.account;
 
-public interface AccountRepository {
+import java.util.List;
+
+import org.springframework.data.repository.NoRepositoryBean;
+import org.springframework.data.repository.PagingAndSortingRepository;
+
+@NoRepositoryBean
+public interface AccountRepository extends PagingAndSortingRepository<Account, String> {
 	
 	void createAccount(Account account) throws UsernameAlreadyInUseException;
 	
 	void createAccountSolutionMapping(Account account, Long id);
-
-	Account findAccountByUsername(String username);
 	
 	Account findAccountBySolutionId(Long id);
 	
+	boolean isAdministrator(String id);
+	
+	boolean isUser(String id);
+
+	void setAdministrator(String username, boolean administrator);
+
+	void setUser(String username, boolean user);
+
+	List<Long> findSolutionIdsByUsername(String id);
 }

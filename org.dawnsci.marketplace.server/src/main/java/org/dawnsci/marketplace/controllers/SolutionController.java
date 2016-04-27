@@ -137,7 +137,7 @@ public class SolutionController extends AbstractController {
 	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
 	@RequestMapping(value = "/delete-solution/{identifier}", method = RequestMethod.GET)
 	public String deleteSolution(ModelMap map, Principal principal, @PathVariable int identifier) {
-		Account account = accountRepository.findAccountByUsername(principal.getName());
+		Account account = accountRepository.findOne(principal.getName());
 		marketplaceDAO.deleteSolution(account, Long.valueOf(identifier));
 		return "redirect:/";
 	}
@@ -181,7 +181,7 @@ public class SolutionController extends AbstractController {
 			@ModelAttribute NodeProxy content) {
 		addCommonItems(map, principal);
 		// try to store the node
-		Account account = accountRepository.findAccountByUsername(principal.getName());
+		Account account = accountRepository.findOne(principal.getName());
 		Node node = content.getNode();
 		Object result = marketplaceDAO.saveOrUpdateSolution(node, account);
 		if (result instanceof Node) {
