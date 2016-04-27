@@ -18,7 +18,7 @@ This server is built on [Spring Boot](http://projects.spring.io/spring-boot/), [
 
 ### Starting the server
 
-When running the standalone server you need to start it from the command line. E.g. `java -jar org.dawnsci.marketplace.server-1.0-SNAPSHOT.war --init`.
+When running the standalone server you need to start it from the command line. E.g. `java -jar org.dawnsci.marketplace.server-1.0-SNAPSHOT.war`.
 
 See the [notes for the server](org.dawnsci.marketplace.server/README.md) for more details.
 
@@ -30,6 +30,6 @@ Replace http://localhost:8080 with whatever you have the server running on.
 
 ## Development and Building
 
-When doing development on this code, you should start the server from within Eclipse. That will allow you to do normal debugging. Make sure the [Spring tool suite](https://marketplace.eclipse.org/content/spring-ide) is installed and launch the __org.dawnsci.marketplace.server__ project as a _Spring Boot App_. Add `--init` to create an initial data set for testing.
+When doing development on this code, you should start the server from within Eclipse. That will allow you to do normal debugging. Make sure the [Spring tool suite](https://marketplace.eclipse.org/content/spring-ide) is installed and launch the __org.dawnsci.marketplace.server__ project as a _Spring Boot App_.
 
 The server is built using Maven so it is sufficient to execute `mvn clean package` from the project root.

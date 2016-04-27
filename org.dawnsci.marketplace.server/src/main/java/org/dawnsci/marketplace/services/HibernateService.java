@@ -58,9 +58,6 @@ public class HibernateService {
 	private HbDataStore hbds;
 
 	@Inject
-	private Boolean initializeData;
-	
-	@Inject
 	private FileService fileService;
 
 	@Inject
@@ -103,18 +100,10 @@ public class HibernateService {
 		hbds.setDataStoreProperties(props);
 		hbds.setEPackages(new EPackage[] { MarketplacePackage.eINSTANCE });
 
-		try {
-			hbds.initialize();
-		} finally {
-		}
-		if (initializeData) {
-			try {
-				loadMarkets();
-				loadSolutions();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
+		hbds.initialize();
+		loadMarkets();
+		loadSolutions();
+		
 		return hbds.getSessionFactory();
 	}
 
@@ -144,41 +133,52 @@ public class HibernateService {
 	}
 
 	@Transactional
-	public void loadSolutions() throws IOException {
-			// remove old data
-//			Query query = hbds.getSessionFactory().getCurrentSession().createQuery("delete from Node");
-//			query.executeUpdate();
-			// load solutions from test or sample data 
+	public void loadSolutions() {
+			// load solutions from file 
 			EList<EObject> solutions = loadSerialized("data/solutions.xml");
 			EList<Node> nodes = ((Marketplace)solutions.get(0)).getFeatured().getNodes();
 			for (Node node : nodes) {
 				Node copy = EcoreUtil.copy(node);
 			try {
 				hbds.getSessionFactory().getCurrentSession().beginTransaction();
-				hbds.getSessionFactory().getCurrentSession().saveOrUpdate(copy);
+				// remove the old node, and replace it with a version loaded from file
+				Query createQuery = hbds.getSessionFactory().getCurrentSession().createQuery("SELECT node FROM Node node WHERE node.id='" + copy.getId() + "'");
+				if (createQuery.list().isEmpty()) {				
+					hbds.getSessionFactory().getCurrentSession().saveOrUpdate(copy);
+				}
 				hbds.getSessionFactory().getCurrentSession().getTransaction().commit();
 			} catch (Exception e) {
 				hbds.getSessionFactory().getCurrentSession().getTransaction().rollback();
 				e.printStackTrace();
 			}
 				// copy the screenshot image
-				if (StringUtils.isNotEmpty(node.getScreenshot())){
-					FileUtils.copyInputStreamToFile(
-							getSolutionsInputStream(node.getScreenshot()),
-							fileService.getFile(Long.toString(node.getId()),
-									node.getScreenshot()));
+				if (StringUtils.isNotEmpty(copy.getScreenshot())){
+					try {
+						FileUtils.copyInputStreamToFile(
+								getSolutionsInputStream(copy.getScreenshot()),
+								fileService.getFile(Long.toString(copy.getId()),
+										copy.getScreenshot()));
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 				}
 				// copy the icon image
-				if (StringUtils.isNotEmpty(node.getImage())){
-					FileUtils.copyInputStreamToFile(
-							getSolutionsInputStream(node.getImage()),
-							fileService.getFile(Long.toString(node.getId()),
-									node.getImage()));
+				if (StringUtils.isNotEmpty(copy.getImage())){
+					try {
+						FileUtils.copyInputStreamToFile(
+								getSolutionsInputStream(copy.getImage()),
+								fileService.getFile(Long.toString(copy.getId()),
+										copy.getImage()));
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 				}
 				// unzip the p2-repository
-				if (StringUtils.isNotEmpty(node.getUpdateurl())){
-					File p2repo = fileService.getSolutionFile(String.valueOf(node.getId()));
-					ZipUtil.unpack(getSolutionsInputStream(node.getUpdateurl()+".zip"), p2repo);
+				if (StringUtils.isNotEmpty(copy.getUpdateurl())){
+					File p2repo = fileService.getSolutionFile(String.valueOf(copy.getId()));
+					ZipUtil.unpack(getSolutionsInputStream(copy.getUpdateurl()+".zip"), p2repo);
 				}
 			}
 
