@@ -112,8 +112,8 @@
 								<div class="form-group">
 									<label for="short-description" class="col-sm-2 control-label">Summary</label>
 									<div class="col-sm-10">
-										<textarea id="short-description" name="short-description" data-provide="markdown" rows="8"  th:field="*{rawShortdescription}"></textarea>
-										<p class="help-block">Enter a short description of the features this plug-in provides. <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">MarkDown syntax</a> is allowed.</p>
+										<textarea id="short-description" name="short-description" rows="8" class="form-control" th:field="*{shortdescription}"></textarea>
+										<p class="help-block">Enter a short description of the features this plug-in provides. Only plain text is allowed. Note that the Eclipse marketplace client will truncate text over 160 characters.</p>
 									</div>
 								</div>
 							</div>

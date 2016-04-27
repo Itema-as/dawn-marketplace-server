@@ -24,26 +24,7 @@
 					</span>
 				</h2>
 				<img th:if="${content.node.screenshot != null}" class="img-responsive thumbnail" th:src="${content.node.screenshot}"></img>
-				<!-- action menu -->
-				<div style="text-align: left; background: #fff;">
-					<a role="button" th:href="@{~/mpc/marketplace-client-intro(mpc_install=${content.node.id})}"
-						data-toggle="tooltip" data-placement="top" title="Drag to install">
-						<span class="glyphicon glyphicon-cloud-download" aria-hidden="true" style="font-size: 17pt;"></span>
-					</a>
-					<a role="button" th:href="${content.node.homepageurl}" 
-						data-toggle="tooltip" data-placement="top" title="Go to home page">
-						<span class="glyphicon glyphicon-home" aria-hidden="true" style="font-size: 17pt;"></span>
-					</a> 
-					<a role="button" th:href="${content.node.supporturl}" 
-						data-toggle="tooltip" data-placement="top" title="Go to support">
-						<span class="glyphicon glyphicon-info-sign" aria-hidden="true" style="font-size: 17pt;"></span>
-					</a>
-					<a role="button" th:href="@{'/edit-solution/'+${content.node.id}}" th:if="${editable == true}" 
-						data-toggle="tooltip" data-placement="top" title="Edit entry">
-						<span class="glyphicon glyphicon-edit" aria-hidden="true" style="font-size: 17pt;"></span>
-					</a>
-				</div>
-				<p th:utext="${content.node.shortdescription}"></p>
+				<p th:text="${content.node.shortdescription}"></p>
 				<p th:utext="${content.node.body}"></p>
 				<!-- categories and tags-->
 				<!-- Not using categories yet
@@ -52,8 +33,24 @@
 							class="label label-success" th:text="${category.name}"></span>
 				</p>
 				-->
-				<p>
-					<strong>Tags:</strong>
+				<!-- action menu -->
+				<p style="font-size: 1.1em;">
+					<a role="button" th:href="@{~/mpc/marketplace-client-intro(mpc_install=${content.node.id})}"
+						data-toggle="tooltip" data-placement="top" title="Drag to install">
+						<span class="glyphicon glyphicon-cloud-download" aria-hidden="true"></span>
+					</a>
+					<a role="button" th:href="${content.node.homepageurl}" 
+						data-toggle="tooltip" data-placement="top" title="Go to home page">
+						<span class="glyphicon glyphicon-home" aria-hidden="true"></span>
+					</a> 
+					<a role="button" th:href="${content.node.supporturl}" 
+						data-toggle="tooltip" data-placement="top" title="Go to support">
+						<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+					</a>
+					<a role="button" th:href="@{'/edit-solution/'+${content.node.id}}" th:if="${editable == true}" 
+						data-toggle="tooltip" data-placement="top" title="Edit entry">
+						<span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+					</a>
 					<span th:if="${null != content.node.tags}">
 						<a  
 						th:href="@{~/search(tag=${tag.name})}" 

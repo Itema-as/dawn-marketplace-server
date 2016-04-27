@@ -38,12 +38,6 @@ public class TestConfiguration {
 	public ConversionService conversionService() {
 	    return new DefaultConversionService();
 	}
-
-	@Bean
-	@Primary
-	public Boolean initinitializeData(){
-		return Boolean.TRUE; 
-	}
 	
 	@Bean
 	@Primary

@@ -96,7 +96,6 @@ public class SolutionEditor extends FormEditor implements IResourceChangeListene
 		try (FileWriter fw = new FileWriter(file)) {
 			// first convert the Markdown code to HTML
 			node.setBody(toHtml(node.getRawBody()));
-			node.setShortdescription(toHtml(node.getRawShortdescription()));
 			// serialize to XML
 			fw.write(MarketplaceSerializer.serialize(node));
 			i.getFile().refreshLocal(IFile.DEPTH_ZERO, monitor);
