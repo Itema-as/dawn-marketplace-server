@@ -969,9 +969,9 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 		if (getBaseUrl() == null) {
 			return "";
 		}
-		return getBaseUrl() + "/" + getId();
+		return getBaseUrl() + "/content/" + getId();
 	}
-
+	
 	/**
 	 * Used to calculate the base URL of URL's relative to the marketplace 
 	 * server. This can only be found if this instance is contained within an
