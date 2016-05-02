@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html 
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head th:replace="../fragments/header :: header"></head>
+<body>
+	<!-- navigation bar -->
+	<div th:replace="../fragments/navbar :: navbar"></div>
+	
+	<!-- main content -->
+	<div class="container-fluid" style="margin-top: 20px">
+		<div class="row">
+
+			<!-- side bar -->
+			<div class="col-md-3">
+				<div th:replace="../fragments/sidebar :: sidebar"></div>
+			</div>
+
+			<!-- content -->
+			<div class="col-md-9">
+				<h2 style="margin-top: 0px;">User accounts</h2>
+				<table class="table table-striped">
+					<tr>
+						<th>Username</th>
+						<th>First name</th>
+						<th>Last name</th>
+					</tr>
+					<tr th:each="account: ${page.content}">
+						<td><a th:href="'/account/'+${account.username}"><span th:text="${account.username}"></span></a></td>
+						<td th:text="${account.firstName}"></td>
+						<td th:text="${account.lastName}"></td>
+					</tr>
+				</table>
+				<nav>
+					<ul class="pagination">
+						<li th:with="previous=${page.number}"
+							th:class="${page.number > 0}? enabled : disabled">
+							<a th:href="'/accounts/'+${previous}" aria-label="Previous"> <span aria-hidden="true">&laquo;</span></a>
+						</li>
+						<li th:each="i : ${#numbers.sequence(1, page.totalPages)}"
+							th:class="${i == page.number+1}? active : inactive" >
+							<a th:href="'/accounts/'+${i}" th:text="${i}"></a>
+						</li>
+						<li th:with="next=${page.number}+2"
+							th:class="${page.number &lt; page.totalPages-1}? enabled : disabled">
+							<a th:href="'/accounts/'+${next}" aria-label="Next"> <span aria-hidden="true">&raquo;</span></a>
+						</li>
+					</ul>
+				</nav>
+			</div>
+		</div>
+	</div>
+	<div th:replace="../fragments/footer :: footer"></div>
+</body>
+</html>

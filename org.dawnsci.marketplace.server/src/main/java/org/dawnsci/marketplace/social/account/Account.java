@@ -17,13 +17,17 @@ package org.dawnsci.marketplace.social.account;
 
 public class Account {
 
-	private final String username;
+	private String firstName;
 
-	private final String password;
+	private String lastName;
 
-	private final String firstName;
-
-	private final String lastName;
+	private String password;
+		
+	private String username;
+	
+	public Account() {
+		super();
+	}
 
 	public Account(String username, String password, String firstName, String lastName) {
 		this.username = username;
@@ -32,19 +36,35 @@ public class Account {
 		this.lastName = lastName;
 	}
 
-	public String getUsername() {
-		return username;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
 	public String getFirstName() {
 		return firstName;
 	}
 
 	public String getLastName() {
 		return lastName;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
 	}
 }

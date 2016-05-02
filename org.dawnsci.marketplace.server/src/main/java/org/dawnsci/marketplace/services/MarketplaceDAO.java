@@ -424,7 +424,7 @@ public class MarketplaceDAO {
 		if (identifier == null) {
 			return true;
 		}
-		Account account = accountRepository.findAccountByUsername(authentication.getName());
+		Account account = accountRepository.findOne(authentication.getName());
 		Account a = accountRepository.findAccountBySolutionId(identifier);
 		if (account.getUsername().equals(a.getUsername())) {
 			return true;

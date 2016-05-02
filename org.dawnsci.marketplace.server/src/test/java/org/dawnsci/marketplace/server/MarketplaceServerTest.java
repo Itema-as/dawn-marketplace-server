@@ -12,11 +12,12 @@ package org.dawnsci.marketplace.server;
 
 import static org.junit.Assert.assertEquals;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestBuilders.*;
 import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
+import static org.springframework.security.test.web.servlet.response.SecurityMockMvcResultMatchers.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.xpath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.*;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -56,7 +57,9 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.context.WebApplicationContext;
 
@@ -470,28 +473,45 @@ public class MarketplaceServerTest {
 		
 	@Test
 	@Sql("/system-test-data.sql")
-	public void testLogin_GoodCredentials() throws Exception {
+	public void testLoginWithGoodCredentials() throws Exception {
 		this.mocMvc.perform(post("/signin/authenticate")
 				.with(csrf())
 				.param("username", "user")
 				.param("password", "password"))
+				.andExpect(authenticated().withRoles("USER"))
 				.andExpect(status().is(302))
 				.andExpect(redirectedUrl("/"));					
 	}
 
 	@Test
 	@Sql("/system-test-data.sql")
-	public void testLogin_BadCredentials() throws Exception {
+	public void testLoginWithBadCredentials() throws Exception {
 		this.mocMvc.perform(post("/signin/authenticate")
 				.with(csrf())
 				.param("username", "user")
 				.param("password", "bad_password"))
+				.andExpect(unauthenticated())
 				.andExpect(status().is(302))
 				.andExpect(redirectedUrl("/signin?param.error=bad_credentials"));					
 	}
 	
 	@Test
-	public void testMvcRoot() throws Exception{
+	@Sql("/system-test-data.sql")
+	public void testLoginWithAdminCredentials() throws Exception {
+		this.mocMvc.perform(
+				formLogin("/signin/authenticate")
+					.user("admin")
+					.password("s3cret!"))
+				.andExpect(authenticated().withRoles("USER","ADMIN"))
+				.andExpect(status().is(302))
+				.andExpect(redirectedUrl("/"));
+
+		this.mocMvc.perform(logout())
+			.andExpect(unauthenticated());
+	}
+
+	@Test
+	public void testMvcGetRoot() throws Exception{
 		this.mocMvc.perform(get("/")
 			.accept(MediaType.APPLICATION_XHTML_XML))
 			.andExpect(status().isOk())
@@ -527,8 +547,13 @@ public class MarketplaceServerTest {
 			.andExpect(xpath("//div[@id='solution-2']").doesNotExist());
 	}
 
+	
+	public void testMvcCreateSolution() {
+		// TODO: Write the test
+	}
+
 	@Test
-	public void testMvcSolution() throws Exception{
+	public void testMvcReadSolution() throws Exception{
 		this.mocMvc.perform(get("/content/1")
 			.accept(MediaType.APPLICATION_XHTML_XML))
 			.andExpect(status().isOk())
@@ -540,4 +565,133 @@ public class MarketplaceServerTest {
 			.andExpect(xpath("//div[@id='solution-2']").exists());
 	}
 
+	public void testMvcUpdateSolution() {
+		// TODO: Write the test
+	}
+
+	public void testMvcDeleteSolution() {
+		// TODO: Write the test
+	}
+	
+	/**
+	 * Use the regular sign up form to create a new user.
+	 * 
+	 * @throws Exception
+	 */
+	@Test
+	public void testMvcCreateUser() throws Exception {
+		this.mocMvc.perform(post("/signup")
+				.with(csrf())
+				.param("firstName", "Nomen")
+				.param("lastName", "Nescio")
+				.param("username", "signedup")
+				.param("password", "password"))
+			.andExpect(authenticated())
+			.andExpect(status().is(302))
+			.andExpect(redirectedUrl("/"));					
+	}
+	
+	@Test
+	@Ignore
+	@Sql("/system-test-data.sql")
+	public void testMvcUpdateUser() throws Exception {
+		this.mocMvc.perform(
+				formLogin("/signin/authenticate")
+					.user("admin")
+					.password("s3cret!"))
+				.andExpect(authenticated().withRoles("USER","ADMIN"))
+				.andExpect(status().is(302))
+				.andExpect(redirectedUrl("/"))
+				.andReturn()
+				.getRequest()
+				.getSession();						
+		
+		this.mocMvc.perform(post("/account/update-user")
+				.with(csrf())
+				// .with(account) // MocMvc does not support @ModelAttribute - need a different way
+				.param("firstName", "Test")
+				.param("lastName", "Test"))
+				.andExpect(status().is(200))
+				.andExpect(redirectedUrl("/accounts"));					
+
+		this.mocMvc.perform(logout())
+			.andExpect(unauthenticated());
+	}
+
+	/**
+	 * Verifies that we can open the user details form when logged in as the
+	 * administrator user and that no access is granted when logged in as a
+	 * regular user.
+	 */
+	@Test
+	@Sql("/system-test-data.sql")
+	public void testMvcReadUser() throws Exception {
+		// administrator user
+		HttpSession session = this.mocMvc.perform(post("/signin/authenticate")
+				.with(csrf())
+				.param("username", "admin")
+				.param("password", "s3cret!"))
+				.andExpect(authenticated().withRoles("USER","ADMIN"))
+				.andExpect(status().is(302))
+				.andExpect(redirectedUrl("/"))
+				.andReturn()
+				.getRequest()
+				.getSession();
+		
+		this.mocMvc.perform(get("/account/user")
+				.session((MockHttpSession)session)
+				.with(csrf())
+				.accept(MediaType.APPLICATION_XHTML_XML))
+				.andExpect(status().isOk())
+				.andExpect(xpath("//form[@id='user']").exists());
+
+		// regular user
+		HttpSession session2 = this.mocMvc.perform(post("/signin/authenticate")
+				.with(csrf())
+				.param("username", "user")
+				.param("password", "password"))
+				.andExpect(authenticated().withRoles("USER"))
+				.andExpect(status().is(302))
+				.andExpect(redirectedUrl("/"))
+				.andReturn()
+				.getRequest()
+				.getSession();
+		
+		this.mocMvc.perform(get("/account/user")
+				.session((MockHttpSession)session2)
+				.with(csrf())
+				.accept(MediaType.APPLICATION_XHTML_XML))
+				.andExpect(status().isForbidden());
+	}
+
+	@Test
+	@Sql("/system-test-data.sql")
+	public void testMvcDeleteUser() throws Exception {
+		// administrator user
+		HttpSession session = this.mocMvc.perform(post("/signin/authenticate")
+				.with(csrf())
+				.param("username", "admin")
+				.param("password", "s3cret!"))
+				.andExpect(authenticated().withRoles("USER","ADMIN"))
+				.andExpect(status().is(302))
+				.andExpect(redirectedUrl("/"))
+				.andReturn()
+				.getRequest()
+				.getSession();
+		
+		this.mocMvc.perform(get("/delete-account/user")
+				.session((MockHttpSession)session)
+				.with(csrf())
+				.accept(MediaType.APPLICATION_XHTML_XML))
+				.andExpect(status().is(302))
+				.andExpect(redirectedUrl("/accounts"));
+
+		// this user should no longer be able to log in
+		this.mocMvc.perform(post("/signin/authenticate")
+				.with(csrf())
+				.param("username", "user")
+				.param("password", "password"))
+				.andExpect(unauthenticated());
+		
+	}
 }

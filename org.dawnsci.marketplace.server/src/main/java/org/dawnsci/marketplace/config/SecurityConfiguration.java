@@ -56,13 +56,15 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		} else {
 			logger.info("Using generated administrator password: "+password);
 		}
+		// create a default administrator account
 		auth	
 			.inMemoryAuthentication()
 				.withUser(ADMINISTRATOR_ID)
 				.password(password)
 				.roles("USER", "ADMIN")
-			.and()
-			.and()
+		.and()
+		// and use accounts stored in the database for the rest
+		.and()
 			.jdbcAuthentication()
 				.dataSource(dataSource)
 					.usersByUsernameQuery("select username, password, true from Account where username = ?")

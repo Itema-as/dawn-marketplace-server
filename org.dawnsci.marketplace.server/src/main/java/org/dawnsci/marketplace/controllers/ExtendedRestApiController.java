@@ -72,7 +72,7 @@ public class ExtendedRestApiController {
 	@PreAuthorize("hasRole('USER')")
 	@RequestMapping(value = "/upload", method = RequestMethod.POST)
 	public ResponseEntity<String> postSolution(Principal principal, @RequestBody String solution) throws Exception {
-		Account account = accountRepository.findAccountByUsername(principal.getName());
+		Account account = accountRepository.findOne(principal.getName());
 		Node node = MarketplaceSerializer.deSerializeSolution(solution);
 		Object result = marketplaceDAO.saveOrUpdateSolution(node, account);
 		if (result instanceof Node) {
@@ -93,7 +93,7 @@ public class ExtendedRestApiController {
 			@RequestParam("id") Long id,
 			@RequestParam("file") MultipartFile file) throws Exception {
 		// verify that we have the correct owner
-		Account account = accountRepository.findAccountByUsername(principal.getName());
+		Account account = accountRepository.findOne(principal.getName());
 		Account a = accountRepository.findAccountBySolutionId(id); 
 		if (!account.getUsername().equals(a.getUsername())) {
 			return new ResponseEntity<String>("Logged in user is not the owner of the solution", HttpStatus.FORBIDDEN);
@@ -116,7 +116,7 @@ public class ExtendedRestApiController {
 			@RequestParam("id") Long id,
 			@RequestParam("file") MultipartFile file) throws Exception {
 		// verify that we have the correct owner
-		Account account = accountRepository.findAccountByUsername(principal.getName());
+		Account account = accountRepository.findOne(principal.getName());
 		if (!canEdit(principal, id)) {
 			return new ResponseEntity<String>("Logged in user is not the owner of the solution", HttpStatus.FORBIDDEN);
 		}
@@ -144,7 +144,7 @@ public class ExtendedRestApiController {
 			@RequestParam("id") Long id,
 			@RequestParam("file") MultipartFile file) throws Exception {
 		// verify that we have the correct owner
-		Account account = accountRepository.findAccountByUsername(principal.getName());
+		Account account = accountRepository.findOne(principal.getName());
 		if (!canEdit(principal, id)) {
 			return new ResponseEntity<String>("Logged in user is not the owner of the solution", HttpStatus.FORBIDDEN);
 		}
@@ -161,7 +161,7 @@ public class ExtendedRestApiController {
 	}
 	
 	private boolean canEdit(Principal principal, Long identifier) {
-		Account account = accountRepository.findAccountByUsername(principal.getName());
+		Account account = accountRepository.findOne(principal.getName());
 		Account a = accountRepository.findAccountBySolutionId(identifier);
 		if (account.getUsername().equals(a.getUsername())) {
 			return true;

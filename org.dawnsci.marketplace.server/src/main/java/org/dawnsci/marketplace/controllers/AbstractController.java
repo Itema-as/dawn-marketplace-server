@@ -82,7 +82,7 @@ public abstract class AbstractController {
 				map.addAttribute("profileImage", connection.getImageUrl());
 				map.addAttribute("profile", connection.getProfileUrl());
 			}
-			Account findAccountByUsername = accountRepository.findAccountByUsername(principal.getName());
+			Account findAccountByUsername = accountRepository.findOne(principal.getName());
 			map.addAttribute(findAccountByUsername);
 		}
 	}

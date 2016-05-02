@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html 
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head th:replace="../fragments/header :: header"></head>
+<body>
+	<!-- navigation bar -->
+	<div th:replace="../fragments/navbar :: navbar"></div>
+	
+	<!-- main content -->
+	<div class="container-fluid" style="margin-top: 20px">
+		<div class="row">
+
+			<!-- side bar -->
+			<div class="col-md-3">
+				<div th:replace="../fragments/sidebar :: sidebar"></div>
+			</div>
+
+			<!-- content -->
+			<div class="col-md-9">
+				<div th:replace="../fragments/confirm :: confirm('Really delete?', 'This action is irreversible. If you delete this account from the marketplace it will disappear forever and you will not get it back. Solutions belonging to the account will not be removed.')">...</div>
+				<h2 style="margin-top: 0px;" th:text="${content.firstName + ' ' + content.lastName}"></h2>
+  				<form class="form-horizontal" th:object="${content}" th:action="@{/account}" method="post" enctype="multipart/form-data" th:id="${content.username}">
+					<ul class="nav nav-tabs" role="tablist">
+					    <li role="presentation" class="active"><a href="#details" aria-controls="details" role="tab" data-toggle="tab">Details</a></li>
+					    <li role="presentation"><a href="#solutions" aria-controls="solutions" role="tab" data-toggle="tab">Solutions</a></li>
+					    <!-- action buttons -->
+					    <li class="pull-right"><button type="submit" class="btn btn-success">Submit changes</button></li>					    
+					    <li class="pull-right" style="margin-right: 1em;" th:if="${account.username != content.username}">
+					    	<button th:attr="data-href=@{'/delete-account/'+${content.username}}" type="button"
+					    		data-toggle="modal" data-target="#confirm-dialog" class="btn btn-danger">Delete</button>
+					    </li>					    
+					 </ul>
+					<input th:field="*{username}" hidden="hidden"></input>
+					<div class="tab-content">				
+						<!-- Details section -->
+						<div role="tabpanel" class="tab-pane active fade in" id="details">
+							<div class="panel-body">
+								<div class="form-group">
+									<label for="firstName" class="col-sm-2 control-label">Username</label>
+									<div class="col-sm-10">
+										<input class="form-control" id="username" th:field="*{username}"
+											placeholder="Username" disabled="disabled"></input>
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="firstName" class="col-sm-2 control-label">First name</label>
+									<div class="col-sm-10">
+										<input class="form-control" id="firstName" th:field="*{firstName}"
+											placeholder="First name"></input>
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="lastName" class="col-sm-2 control-label">Last name</label>
+									<div class="col-sm-10">
+										<input class="form-control" id="lastName" th:field="*{lastName}"
+											placeholder="Last name"></input>
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="lastName" class="col-sm-2 control-label">Roles</label>
+									<div class="checkbox col-sm-10">
+										<label>
+											<input id="role_administrator" name="role_administrator" required="required"
+												th:checked="${role_administrator}" th:value="true" 
+												type="checkbox"></input>Administrator
+										</label>
+										<label>
+											<input id="role_user" name="role_user" required="required"
+												th:checked="${role_user}" th:value="true" 
+												type="checkbox" ></input>User
+										</label>
+										<p class="help-block">Removing all roles will disable the account, and stop the owner from being able to sign in.</p>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- Solutions section -->
+						<div role="tabpanel" class="tab-pane fade" id="solutions">
+							<div class="panel-body">
+								<table class="table table-striped">
+									<tr>
+										<th>id</th>
+										<th>name</th>
+									</tr>
+									<tr th:each="node :${solutions}">
+										<td><a th:href="'/content/'+${node.id}"><span th:text="${node.id}"></span></a></td>
+										<td><span th:text="${node.name}"></span></td>
+									</tr>
+								</table>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<div th:replace="../fragments/footer :: footer"></div>
+</body>
+<script>			
+	$(document).ready( function() {	    
+	    //confirm download dialog fragment
+	    function activateConfirmBtn(e){
+	    	$('#confirm-dialog #confirm-ok .btn').prop('disabled', !e.currentTarget.checked);
+	    	if(e.currentTarget.checked)
+	    		$('#confirm-dialog #confirm-ok').unbind('click', disableDownloadLink);
+	    	else
+	    		$('#confirm-dialog #confirm-ok').bind('click', disableDownloadLink);
+	    }
+	    function hideDialog(e){
+	    	$('#confirm-dialog').modal('hide');
+	    }
+	    function disableDownloadLink(e){
+	    	//ie fix
+	    	e.preventDefault();
+	    }
+	  	//on show - bind event handlers
+	    $('#confirm-dialog').bind('show.bs.modal', function(e) {	    	
+	    	$(this).find('#confirm-check').bind('change', activateConfirmBtn);
+		    $(this).find('#confirm-ok').attr('href', $(e.relatedTarget).data('href'));
+		    $(this).find('#confirm-ok').bind('click', disableDownloadLink);
+		    $(this).find('#confirm-ok .btn').bind('click', hideDialog);
+		});
+	    
+	    //on hide - unbind event handlers - reset checkbox and button state.
+		    $('#confirm-dialog').bind('hide.bs.modal', function(e) {
+		    	var confirmCheck = $(this).find('#confirm-check');
+		    	confirmCheck.prop('checked', false);
+		    	confirmCheck.unbind('change', activateConfirmBtn);
+		    	
+		    	var confirmBtn = $(this).find('#confirm-ok .btn'); 		    	
+		    	confirmBtn.prop('disabled', true);
+	    	confirmBtn.unbind('click', hideDialog);		    	
+		});
+	});
+</script>
+</html>

@@ -22,12 +22,27 @@
 		        <div id="navbar" class="navbar-collapse collapse" sec:authorize="isAuthenticated()">
 					<ul class="nav navbar-nav">
 		            	<li class="active"><a th:href="@{/}">Home</a></li>
+		            	<!-- 
 		            	<li><a th:href="@{/pages/about.md}">About</a></li>
 		            	<li><a th:href="@{/pages/contact.md}">Contact</a></li>
+		            	 -->
 		            	<li class="dropdown">
 			              	<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">My Marketplace <span class="caret"></span></a>
 			              	<ul class="dropdown-menu">
 			                	<li><a th:href="@{/edit-solution}">Add solution</a></li>
+			                	<!--
+				                	<li><a th:href="@{/my-solutions}">My solutions</a></li>
+				                	<li role="separator" class="divider"></li>
+				                	<li class="dropdown-header">Administrator menu</li>
+				                	<li><a href="#">Separated link</a></li>
+				                	<li><a href="#">One more separated link</a></li>
+				                -->
+			              	</ul>
+		            	</li>
+		            	<li class="dropdown" sec:authorize="hasAuthority('ROLE_ADMIN')">
+			              	<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Administration <span class="caret"></span></a>
+			              	<ul class="dropdown-menu">
+			                	<li><a th:href="@{/accounts}">List accounts</a></li>
 			                	<!--
 				                	<li><a th:href="@{/my-solutions}">My solutions</a></li>
 				                	<li role="separator" class="divider"></li>
