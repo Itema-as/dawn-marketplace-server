@@ -119,6 +119,7 @@ public class AccountController extends AbstractController {
 		map.addAttribute("solutions", solutions);
 		map.addAttribute("role_administrator", accountRepository.isAdministrator(username));
 		map.addAttribute("role_user", accountRepository.isUser(username));
+		map.addAttribute("role_upload", accountRepository.isUpload(username));
 		return "account";
 	}
 
@@ -127,10 +128,12 @@ public class AccountController extends AbstractController {
 	public String updateAccount(ModelMap map, Principal principal, 
 			@ModelAttribute Account account,
 			@RequestParam(value="role_administrator", required=false) boolean administrator,
-			@RequestParam(value="role_user", required=false) boolean user) {
+			@RequestParam(value="role_user", required=false) boolean user,
+			@RequestParam(value="role_upload", required=false) boolean upload) {
 		accountRepository.save(account);
 		accountRepository.setAdministrator(account.getUsername(), administrator);
 		accountRepository.setUser(account.getUsername(), user);
+		accountRepository.setUpload(account.getUsername(), upload);
 		return "redirect:/account/"+account.getUsername();
 	}
 

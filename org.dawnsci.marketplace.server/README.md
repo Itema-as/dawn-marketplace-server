@@ -66,7 +66,7 @@ Note that this implementation of the server currently prefix all REST calls with
 
 ### Supported REST calls
 
-This provisional API will be identified by /api/p at the end of most urls. Those that are checked have been fully implemented.
+The Eclipse reference implementation provisional API will be identified by /api/p at the end of most urls. Those that are checked have been fully implemented.
 
 - [x]	`/api/p` - Returns Markets + Categories
 - [x] `/catalogs/api/p` - Returns a listing of all catalogs that are browsable with the MPC.

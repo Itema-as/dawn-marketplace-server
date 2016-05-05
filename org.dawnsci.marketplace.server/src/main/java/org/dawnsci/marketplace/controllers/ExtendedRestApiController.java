@@ -69,7 +69,7 @@ public class ExtendedRestApiController {
 		return new ResponseEntity<>("you got your token", headers, HttpStatus.OK);
 	}
 	
-	@PreAuthorize("hasRole('USER')")
+	@PreAuthorize("hasRole('UPLOAD')")
 	@RequestMapping(value = "/upload", method = RequestMethod.POST)
 	public ResponseEntity<String> postSolution(Principal principal, @RequestBody String solution) throws Exception {
 		Account account = accountRepository.findOne(principal.getName());
@@ -86,7 +86,7 @@ public class ExtendedRestApiController {
 		}
 	}
 	
-	@PreAuthorize("hasRole('USER')")
+	@PreAuthorize("hasRole('UPLOAD')")
 	@RequestMapping(value = "/upload-p2repo")
 	public ResponseEntity<String> uploadRepository(
 			Principal principal,
@@ -109,7 +109,7 @@ public class ExtendedRestApiController {
 	 * the name of the file being uploaded. returns a <b>403 Forbidden</b> if
 	 * the logged in user is not the owner of the solution.
 	 */
-	@PreAuthorize("hasRole('USER')")
+	@PreAuthorize("hasRole('UPLOAD')")
 	@RequestMapping(value = "/upload-screenshot")
 	public ResponseEntity<String> uploadScreenshot(
 			Principal principal,
@@ -137,7 +137,7 @@ public class ExtendedRestApiController {
 	 * the name of the file being uploaded. returns a <b>403 Forbidden</b> if
 	 * the logged in user is not the owner of the solution.
 	 */
-	@PreAuthorize("hasRole('USER')")
+	@PreAuthorize("hasRole('UPLOAD')")
 	@RequestMapping(value = "/upload-image")
 	public ResponseEntity<String> uploadImage (
 			Principal principal,

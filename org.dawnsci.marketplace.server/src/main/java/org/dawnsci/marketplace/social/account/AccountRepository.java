@@ -33,9 +33,13 @@ public interface AccountRepository extends PagingAndSortingRepository<Account, S
 	
 	boolean isUser(String id);
 
+	boolean isUpload(String id);
+
 	void setAdministrator(String username, boolean administrator);
 
 	void setUser(String username, boolean user);
+
+	void setUpload(String username, boolean upload);
 
 	List<Long> findSolutionIdsByUsername(String id);
 }

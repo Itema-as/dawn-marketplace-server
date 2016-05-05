@@ -134,7 +134,7 @@ public class SolutionController extends AbstractController {
 	 * Deletes the solution from the database. The logged in user must be the
 	 * owner or an 403 error will be returned. 
 	 */
-	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
+	@PreAuthorize("hasRole('UPLOAD')")
 	@RequestMapping(value = "/delete-solution/{identifier}", method = RequestMethod.GET)
 	public String deleteSolution(ModelMap map, Principal principal, @PathVariable int identifier) {
 		Account account = accountRepository.findOne(principal.getName());
@@ -144,7 +144,7 @@ public class SolutionController extends AbstractController {
 	/**
 	 * Open the solution editing form for creating a new instance. 
 	 */
-	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
+	@PreAuthorize("hasRole('UPLOAD')")
 	@RequestMapping(value = "/edit-solution", method = RequestMethod.GET)
 	public String showNewSolutionForm(ModelMap map, Principal principal) {
 		addCommonItems(map, principal);
@@ -160,7 +160,7 @@ public class SolutionController extends AbstractController {
 	/**
 	 * Open the solution editing form for modifying an existing instance. 
 	 */
-	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
+	@PreAuthorize("hasRole('UPLOAD')")
 	@RequestMapping(value = "/edit-solution/{identifier}", method = RequestMethod.GET)
 	public String showEditSolutionForm(ModelMap map, Principal principal, @PathVariable Long identifier) {
 		addCommonItems(map, principal);
@@ -175,7 +175,7 @@ public class SolutionController extends AbstractController {
 	/**
 	 * Store changes 
 	 */
-	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
+	@PreAuthorize("hasRole('UPLOAD')")
 	@RequestMapping(value = "/edit-solution", method = RequestMethod.POST)
 	public String postSolution(ModelMap map, Principal principal, 
 			@ModelAttribute NodeProxy content) {
@@ -188,19 +188,19 @@ public class SolutionController extends AbstractController {
 			node = (Node) result;
 			content.setNode(node);
 			Long id = node.getId();
-			if (!content.getScreenshotfile().isEmpty()) {
+			if (content.getScreenshotfile() != null && !content.getScreenshotfile().isEmpty()) {
 				fileService.saveSolutionFile(id, content.getScreenshotfile());
 				node.setScreenshot(content.getScreenshotfile().getOriginalFilename());
 				Object o = marketplaceDAO.saveOrUpdateSolution(node, account);
 				if (o instanceof Node) node = (Node) o;
 			}
-			if (!content.getImagefile().isEmpty()) {
+			if (content.getImagefile() !=null && !content.getImagefile().isEmpty()) {
 				fileService.saveSolutionFile(id, content.getImagefile());
 				node.setImage(content.getImagefile().getOriginalFilename());
 				Object o = marketplaceDAO.saveOrUpdateSolution(node, account);
 				if (o instanceof Node) node = (Node) o;
 			}
-			if (!content.getRepositoryfile().isEmpty()) {
+			if (content.getRepositoryfile() !=null && !content.getRepositoryfile().isEmpty()) {
 				// there should be no need to update the object with more 
 				// information the default location should suffice
 				fileService.uploadRepository(id, content.getRepositoryfile());

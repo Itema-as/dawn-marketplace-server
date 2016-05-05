@@ -227,20 +227,18 @@ public class JdbcAccountRepository implements AccountRepository, PagingAndSortin
 
 	@Override
 	@Transactional
+	public boolean isUpload(String id) {
+		return jdbcTemplate.queryForObject("select count(*) from Authorities where username = ? and authority = 'ROLE_UPLOAD'", new RowMapper<Boolean>() {
+			@Override
+			public Boolean mapRow(ResultSet rs, int rowNum) throws SQLException {
+				return rs.getInt(1) == 1;
+			}			
+		},id);
+	}
+
+	@Override
+	@Transactional
 	public void setAdministrator(String username, boolean administrator) {
-		List<String> query = jdbcTemplate.query("select * from Authorities",
-				new RowMapper<String>() {
-					public String mapRow(ResultSet rs, int rowNum) throws SQLException {
-						StringBuilder sb = new StringBuilder();
-						sb.append(rs.getString("username"));
-						sb.append(" - ");
-						sb.append(rs.getString("authority"));
-						return sb.toString();
-					}
-				});
-		for (String string : query) {
-			System.out.println(string);
-		}
 		if (administrator) {
 			// only create the entry if it's not already in place
 			if (!isAdministrator(username)) {
@@ -273,4 +271,20 @@ public class JdbcAccountRepository implements AccountRepository, PagingAndSortin
 		}
 	}
 
+	@Override
+	@Transactional
+	public void setUpload(String username, boolean upload) {
+		if (upload) {
+			// only create the entry if it's not already in place
+			if (!isUpload(username)){
+				jdbcTemplate.update(
+						"insert into Authorities (username, authority) values (?, ?)",
+						username, "ROLE_UPLOAD");
+			}
+		} else {
+			jdbcTemplate.update(
+					"delete from Authorities where username = ? and authority = ?",
+					username, "ROLE_UPLOAD");
+		}
+	}
 }
