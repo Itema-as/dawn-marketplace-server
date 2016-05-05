@@ -61,7 +61,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 			.inMemoryAuthentication()
 				.withUser(ADMINISTRATOR_ID)
 				.password(password)
-				.roles("USER", "ADMIN")
+				// this particular administrator user has full access
+				.roles("USER", "ADMIN", "UPLOAD")
 		.and()
 		// and use accounts stored in the database for the rest
 		.and()

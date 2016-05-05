@@ -57,9 +57,7 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.context.WebApplicationContext;
 
@@ -223,12 +221,16 @@ public class MarketplaceServerTest {
 			"</org.dawnsci:node>\n"; 
 
 	
+	/**
+	 * This method should only be used for creating and uploading a solution 
+	 * through the REST API for further exercising of the same API.
+	 */
 	public SolutionUploadSession signInAndUploadSolution() throws Exception {
 		SolutionUploadSession session = new SolutionUploadSession();
 		// log in the user and keep the session, we need it for later
 		session.http = this.mocMvc.perform(post("/signin/authenticate")
 				.with(csrf())
-				.param("username", "user")
+				.param("username", "upload")
 				.param("password", "password"))
 				.andExpect(status().is3xxRedirection())
 				.andExpect(redirectedUrl("/"))					
@@ -376,7 +378,7 @@ public class MarketplaceServerTest {
 		// log in the user
 		HttpSession session = this.mocMvc.perform(post("/signin/authenticate")
 				.with(csrf())
-				.param("username", "user")
+				.param("username", "upload")
 				.param("password", "password"))
 				.andExpect(status().is(302))
 				.andExpect(redirectedUrl("/"))					
@@ -502,7 +504,8 @@ public class MarketplaceServerTest {
 				formLogin("/signin/authenticate")
 					.user("admin")
 					.password("s3cret!"))
-				.andExpect(authenticated().withRoles("USER","ADMIN"))
+				// this particular account should have all roles
+				.andExpect(authenticated().withRoles("USER","ADMIN","UPLOAD"))
 				.andExpect(status().is(302))
 				.andExpect(redirectedUrl("/"));
 
@@ -547,9 +550,38 @@ public class MarketplaceServerTest {
 			.andExpect(xpath("//div[@id='solution-2']").doesNotExist());
 	}
 
-	
-	public void testMvcCreateSolution() {
-		// TODO: Write the test
+	@Test
+	@Sql("/system-test-data.sql")
+	public void testMvcCreateSolution() throws Exception{
+		// log in as administrator user
+		HttpSession session = this.mocMvc.perform(
+				formLogin("/signin/authenticate")
+					.user("admin")
+					.password("s3cret!"))
+				.andExpect(status().is(302))
+				.andExpect(redirectedUrl("/"))
+				.andReturn()
+				.getRequest()
+				.getSession();
+		
+		// bring up the new solution form
+		session = this.mocMvc.perform(get("/edit-solution")
+				.session((MockHttpSession)session)
+				.accept(MediaType.APPLICATION_XHTML_XML))
+				.andExpect(status().is(200))
+				.andReturn()
+				.getRequest()
+				.getSession();
+
+		// and post it, being redirected to show the details, most values will
+		// be null.
+		this.mocMvc.perform(post("/edit-solution")
+				.with(csrf())
+				.session((MockHttpSession)session)
+				.param("name", "test name")
+				.accept(MediaType.APPLICATION_XHTML_XML))
+				.andExpect(status().is3xxRedirection())
+				.andDo(print());	
 	}
 
 	@Test
@@ -587,7 +619,7 @@ public class MarketplaceServerTest {
 				.param("username", "signedup")
 				.param("password", "password"))
 			.andExpect(authenticated())
-			.andExpect(status().is(302))
+			.andExpect(status().is3xxRedirection())
 			.andExpect(redirectedUrl("/"));					
 	}
 	
@@ -600,7 +632,7 @@ public class MarketplaceServerTest {
 					.user("admin")
 					.password("s3cret!"))
 				.andExpect(authenticated().withRoles("USER","ADMIN"))
-				.andExpect(status().is(302))
+				.andExpect(status().is3xxRedirection())
 				.andExpect(redirectedUrl("/"))
 				.andReturn()
 				.getRequest()
@@ -627,12 +659,11 @@ public class MarketplaceServerTest {
 	@Sql("/system-test-data.sql")
 	public void testMvcReadUser() throws Exception {
 		// administrator user
-		HttpSession session = this.mocMvc.perform(post("/signin/authenticate")
-				.with(csrf())
-				.param("username", "admin")
-				.param("password", "s3cret!"))
-				.andExpect(authenticated().withRoles("USER","ADMIN"))
-				.andExpect(status().is(302))
+		HttpSession session = this.mocMvc.perform(
+				formLogin("/signin/authenticate")
+					.user("admin")
+					.password("s3cret!"))
+				.andExpect(status().is3xxRedirection())
 				.andExpect(redirectedUrl("/"))
 				.andReturn()
 				.getRequest()
@@ -640,7 +671,6 @@ public class MarketplaceServerTest {
 		
 		this.mocMvc.perform(get("/account/user")
 				.session((MockHttpSession)session)
-				.with(csrf())
 				.accept(MediaType.APPLICATION_XHTML_XML))
 				.andExpect(status().isOk())
 				.andExpect(xpath("//form[@id='user']").exists());
@@ -651,7 +681,7 @@ public class MarketplaceServerTest {
 				.param("username", "user")
 				.param("password", "password"))
 				.andExpect(authenticated().withRoles("USER"))
-				.andExpect(status().is(302))
+				.andExpect(status().is3xxRedirection())
 				.andExpect(redirectedUrl("/"))
 				.andReturn()
 				.getRequest()
@@ -672,8 +702,7 @@ public class MarketplaceServerTest {
 				.with(csrf())
 				.param("username", "admin")
 				.param("password", "s3cret!"))
-				.andExpect(authenticated().withRoles("USER","ADMIN"))
-				.andExpect(status().is(302))
+				.andExpect(status().is3xxRedirection())
 				.andExpect(redirectedUrl("/"))
 				.andReturn()
 				.getRequest()
@@ -683,7 +712,7 @@ public class MarketplaceServerTest {
 				.session((MockHttpSession)session)
 				.with(csrf())
 				.accept(MediaType.APPLICATION_XHTML_XML))
-				.andExpect(status().is(302))
+				.andExpect(status().is3xxRedirection())
 				.andExpect(redirectedUrl("/accounts"));
 
 		// this user should no longer be able to log in
