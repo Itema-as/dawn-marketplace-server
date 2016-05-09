@@ -357,16 +357,6 @@ public class MarketplaceDAO {
 					sessionFactory.getCurrentSession().evict(object);
 				}
 			}
-			
-			s.setChanged(System.currentTimeMillis());
-
-			// set a few values for new entities
-			if (isNewSolution) {
-				logger.info("Creating a new solution instance in database");
-				s.setCreated(null); // will be set automatically
-				s.setUpdateurl(""); // http://localhost:8080/files/1 for solution #1
-				s.setOwner(account.getFirstName()+" "+account.getLastName());
-			}
 			// verify that we have the correct owner
 			if (!isNewSolution) {
 				if (!canEdit(s.getId())) {
@@ -374,13 +364,28 @@ public class MarketplaceDAO {
 				}
 				logger.info("Updating solution #"+s.getId());
 			}
+			
+			s.setChanged(System.currentTimeMillis());
+
+			// set a few values for new entities
+			if (isNewSolution) {
+				logger.info("Creating a new solution instance in database");
+				s.setCreated(System.currentTimeMillis());
+				s.setUpdateurl(""); // http://localhost:8080/files/1 for solution #1
+				s.setOwner(account.getFirstName()+" "+account.getLastName());
+			}
+			
+			// do the update in the databse
 			sessionFactory.getCurrentSession().saveOrUpdate(s);
 			sessionFactory.getCurrentSession().getTransaction().commit();
-			// associate the new solution with the user account
+			
 			if (isNewSolution) {
+				// associate the new solution with the user account
 				accountRepository.createAccountSolutionMapping(account, s.getId());
 			}
+			
 			logger.info("Saved solution #" + s.getId() + " - " + s.getName());
+			
 			return s;
 		} catch (Exception e) {
 			sessionFactory.getCurrentSession().getTransaction().rollback();

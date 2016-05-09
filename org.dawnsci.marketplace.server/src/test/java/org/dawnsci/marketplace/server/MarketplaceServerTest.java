@@ -575,13 +575,20 @@ public class MarketplaceServerTest {
 
 		// and post it, being redirected to show the details, most values will
 		// be null.
-		this.mocMvc.perform(post("/edit-solution")
+		String url = this.mocMvc.perform(post("/edit-solution")
 				.with(csrf())
 				.session((MockHttpSession)session)
 				.param("name", "test name")
 				.accept(MediaType.APPLICATION_XHTML_XML))
 				.andExpect(status().is3xxRedirection())
-				.andDo(print());	
+				.andReturn().getResponse().getRedirectedUrl();
+
+		// test some key values in the new product
+//		this.mocMvc.perform(get(url)
+//				.accept(MediaType.APPLICATION_XHTML_XML))
+//				.andExpect(status().isOk())
+//				.andDo(print())
+//				.andExpect(xpath("//div[@id='solution-1']").exists());
 	}
 
 	@Test
