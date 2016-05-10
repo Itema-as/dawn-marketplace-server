@@ -985,13 +985,22 @@ public interface MarketplacePackage extends EPackage {
 	int WIZARD__RECENTTAB = 4;
 
 	/**
+	 * The feature id for the '<em><b>Favoritestab</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WIZARD__FAVORITESTAB = 5;
+
+	/**
 	 * The feature id for the '<em><b>News</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int WIZARD__NEWS = 5;
+	int WIZARD__NEWS = 6;
 
 	/**
 	 * The number of structural features of the '<em>Wizard</em>' class.
@@ -1000,7 +1009,7 @@ public interface MarketplacePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int WIZARD_FEATURE_COUNT = 6;
+	int WIZARD_FEATURE_COUNT = 7;
 
 	/**
 	 * The number of operations of the '<em>Wizard</em>' class.
@@ -1159,7 +1168,102 @@ public interface MarketplacePackage extends EPackage {
 	 * @see org.dawnsci.marketplace.impl.MarketplacePackageImpl#getNews()
 	 * @generated
 	 */
-	int NEWS = 16;
+	int NEWS = 17;
+
+	/**
+	 * The meta object id for the '{@link org.dawnsci.marketplace.impl.MarketImpl <em>Market</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.dawnsci.marketplace.impl.MarketImpl
+	 * @see org.dawnsci.marketplace.impl.MarketplacePackageImpl#getMarket()
+	 * @generated
+	 */
+	int MARKET = 18;
+
+	/**
+	 * The meta object id for the '{@link org.dawnsci.marketplace.impl.FeaturedImpl <em>Featured</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.dawnsci.marketplace.impl.FeaturedImpl
+	 * @see org.dawnsci.marketplace.impl.MarketplacePackageImpl#getFeatured()
+	 * @generated
+	 */
+	int FEATURED = 19;
+
+	/**
+	 * The meta object id for the '{@link org.dawnsci.marketplace.impl.SearchImpl <em>Search</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.dawnsci.marketplace.impl.SearchImpl
+	 * @see org.dawnsci.marketplace.impl.MarketplacePackageImpl#getSearch()
+	 * @generated
+	 */
+	int SEARCH = 20;
+
+	/**
+	 * The meta object id for the '{@link org.dawnsci.marketplace.impl.RecentImpl <em>Recent</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.dawnsci.marketplace.impl.RecentImpl
+	 * @see org.dawnsci.marketplace.impl.MarketplacePackageImpl#getRecent()
+	 * @generated
+	 */
+	int RECENT = 21;
+
+	/**
+	 * The meta object id for the '{@link org.dawnsci.marketplace.impl.FavoritesTabImpl <em>Favorites Tab</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.dawnsci.marketplace.impl.FavoritesTabImpl
+	 * @see org.dawnsci.marketplace.impl.MarketplacePackageImpl#getFavoritesTab()
+	 * @generated
+	 */
+	int FAVORITES_TAB = 16;
+
+	/**
+	 * The feature id for the '<em><b>Enabled</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FAVORITES_TAB__ENABLED = 0;
+
+	/**
+	 * The feature id for the '<em><b>Mixed</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FAVORITES_TAB__MIXED = 1;
+
+	/**
+	 * The feature id for the '<em><b>Apiserver</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FAVORITES_TAB__APISERVER = 2;
+
+	/**
+	 * The number of structural features of the '<em>Favorites Tab</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FAVORITES_TAB_FEATURE_COUNT = 3;
+
+	/**
+	 * The number of operations of the '<em>Favorites Tab</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FAVORITES_TAB_OPERATION_COUNT = 0;
 
 	/**
 	 * The feature id for the '<em><b>Shorttitle</b></em>' attribute.
@@ -1205,17 +1309,6 @@ public interface MarketplacePackage extends EPackage {
 	 * @ordered
 	 */
 	int NEWS_OPERATION_COUNT = 0;
-
-
-	/**
-	 * The meta object id for the '{@link org.dawnsci.marketplace.impl.MarketImpl <em>Market</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.dawnsci.marketplace.impl.MarketImpl
-	 * @see org.dawnsci.marketplace.impl.MarketplacePackageImpl#getMarket()
-	 * @generated
-	 */
-	int MARKET = 17;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1272,16 +1365,6 @@ public interface MarketplacePackage extends EPackage {
 	int MARKET_OPERATION_COUNT = 0;
 
 	/**
-	 * The meta object id for the '{@link org.dawnsci.marketplace.impl.FeaturedImpl <em>Featured</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.dawnsci.marketplace.impl.FeaturedImpl
-	 * @see org.dawnsci.marketplace.impl.MarketplacePackageImpl#getFeatured()
-	 * @generated
-	 */
-	int FEATURED = 18;
-
-	/**
 	 * The feature id for the '<em><b>Count</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1316,16 +1399,6 @@ public interface MarketplacePackage extends EPackage {
 	 * @ordered
 	 */
 	int FEATURED_OPERATION_COUNT = 0;
-
-	/**
-	 * The meta object id for the '{@link org.dawnsci.marketplace.impl.SearchImpl <em>Search</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.dawnsci.marketplace.impl.SearchImpl
-	 * @see org.dawnsci.marketplace.impl.MarketplacePackageImpl#getSearch()
-	 * @generated
-	 */
-	int SEARCH = 19;
 
 	/**
 	 * The feature id for the '<em><b>Term</b></em>' attribute.
@@ -1380,16 +1453,6 @@ public interface MarketplacePackage extends EPackage {
 	 * @ordered
 	 */
 	int SEARCH_OPERATION_COUNT = 0;
-
-	/**
-	 * The meta object id for the '{@link org.dawnsci.marketplace.impl.RecentImpl <em>Recent</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.dawnsci.marketplace.impl.RecentImpl
-	 * @see org.dawnsci.marketplace.impl.MarketplacePackageImpl#getRecent()
-	 * @generated
-	 */
-	int RECENT = 20;
 
 	/**
 	 * The feature id for the '<em><b>Count</b></em>' attribute.
@@ -2218,6 +2281,17 @@ public interface MarketplacePackage extends EPackage {
 	EReference getWizard_Recenttab();
 
 	/**
+	 * Returns the meta object for the containment reference '{@link org.dawnsci.marketplace.Wizard#getFavoritestab <em>Favoritestab</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Favoritestab</em>'.
+	 * @see org.dawnsci.marketplace.Wizard#getFavoritestab()
+	 * @see #getWizard()
+	 * @generated
+	 */
+	EReference getWizard_Favoritestab();
+
+	/**
 	 * Returns the meta object for the containment reference '{@link org.dawnsci.marketplace.Wizard#getNews <em>News</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2538,6 +2612,49 @@ public interface MarketplacePackage extends EPackage {
 	 * @generated
 	 */
 	EReference getRecent_Nodes();
+
+	/**
+	 * Returns the meta object for class '{@link org.dawnsci.marketplace.FavoritesTab <em>Favorites Tab</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Favorites Tab</em>'.
+	 * @see org.dawnsci.marketplace.FavoritesTab
+	 * @generated
+	 */
+	EClass getFavoritesTab();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.dawnsci.marketplace.FavoritesTab#getEnabled <em>Enabled</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Enabled</em>'.
+	 * @see org.dawnsci.marketplace.FavoritesTab#getEnabled()
+	 * @see #getFavoritesTab()
+	 * @generated
+	 */
+	EAttribute getFavoritesTab_Enabled();
+
+	/**
+	 * Returns the meta object for the attribute list '{@link org.dawnsci.marketplace.FavoritesTab#getMixed <em>Mixed</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute list '<em>Mixed</em>'.
+	 * @see org.dawnsci.marketplace.FavoritesTab#getMixed()
+	 * @see #getFavoritesTab()
+	 * @generated
+	 */
+	EAttribute getFavoritesTab_Mixed();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.dawnsci.marketplace.FavoritesTab#getApiserver <em>Apiserver</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Apiserver</em>'.
+	 * @see org.dawnsci.marketplace.FavoritesTab#getApiserver()
+	 * @see #getFavoritesTab()
+	 * @generated
+	 */
+	EAttribute getFavoritesTab_Apiserver();
 
 	/**
 	 * Returns the meta object for the attribute '{@link org.dawnsci.marketplace.Node#getType <em>Type</em>}'.
@@ -3144,6 +3261,13 @@ public interface MarketplacePackage extends EPackage {
 		 */
 		EReference WIZARD__RECENTTAB = eINSTANCE.getWizard_Recenttab();
 		/**
+		 * The meta object literal for the '<em><b>Favoritestab</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference WIZARD__FAVORITESTAB = eINSTANCE.getWizard_Favoritestab();
+		/**
 		 * The meta object literal for the '<em><b>News</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -3369,6 +3493,36 @@ public interface MarketplacePackage extends EPackage {
 		 * @generated
 		 */
 		EReference RECENT__NODES = eINSTANCE.getRecent_Nodes();
+		/**
+		 * The meta object literal for the '{@link org.dawnsci.marketplace.impl.FavoritesTabImpl <em>Favorites Tab</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.dawnsci.marketplace.impl.FavoritesTabImpl
+		 * @see org.dawnsci.marketplace.impl.MarketplacePackageImpl#getFavoritesTab()
+		 * @generated
+		 */
+		EClass FAVORITES_TAB = eINSTANCE.getFavoritesTab();
+		/**
+		 * The meta object literal for the '<em><b>Enabled</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute FAVORITES_TAB__ENABLED = eINSTANCE.getFavoritesTab_Enabled();
+		/**
+		 * The meta object literal for the '<em><b>Mixed</b></em>' attribute list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute FAVORITES_TAB__MIXED = eINSTANCE.getFavoritesTab_Mixed();
+		/**
+		 * The meta object literal for the '<em><b>Apiserver</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute FAVORITES_TAB__APISERVER = eINSTANCE.getFavoritesTab_Apiserver();
 		/**
 		 * The meta object literal for the '<em><b>Type</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->

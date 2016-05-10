@@ -18,6 +18,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.dawnsci.marketplace.Wizard#getSearchtab <em>Searchtab</em>}</li>
  *   <li>{@link org.dawnsci.marketplace.Wizard#getPopulartab <em>Populartab</em>}</li>
  *   <li>{@link org.dawnsci.marketplace.Wizard#getRecenttab <em>Recenttab</em>}</li>
+ *   <li>{@link org.dawnsci.marketplace.Wizard#getFavoritestab <em>Favoritestab</em>}</li>
  *   <li>{@link org.dawnsci.marketplace.Wizard#getNews <em>News</em>}</li>
  * </ul>
  *
@@ -155,6 +156,32 @@ public interface Wizard extends EObject {
 	 * @generated
 	 */
 	void setRecenttab(RecentTab value);
+
+	/**
+	 * Returns the value of the '<em><b>Favoritestab</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Favoritestab</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Favoritestab</em>' containment reference.
+	 * @see #setFavoritestab(FavoritesTab)
+	 * @see org.dawnsci.marketplace.MarketplacePackage#getWizard_Favoritestab()
+	 * @model containment="true"
+	 * @generated
+	 */
+	FavoritesTab getFavoritestab();
+
+	/**
+	 * Sets the value of the '{@link org.dawnsci.marketplace.Wizard#getFavoritestab <em>Favoritestab</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Favoritestab</em>' containment reference.
+	 * @see #getFavoritestab()
+	 * @generated
+	 */
+	void setFavoritestab(FavoritesTab value);
 
 	/**
 	 * Returns the value of the '<em><b>News</b></em>' containment reference.

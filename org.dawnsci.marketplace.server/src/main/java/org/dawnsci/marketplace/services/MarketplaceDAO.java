@@ -9,6 +9,8 @@
  *    Torkild U. Resheim - initial API and implementation
  ****************************************************************************/
 package org.dawnsci.marketplace.services;
+import java.io.InputStream;
+import java.net.URL;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
@@ -23,6 +25,7 @@ import org.dawnsci.marketplace.ForbiddenException;
 import org.dawnsci.marketplace.InternalErrorException;
 import org.dawnsci.marketplace.Marketplace;
 import org.dawnsci.marketplace.MarketplaceFactory;
+import org.dawnsci.marketplace.MarketplacePackage;
 import org.dawnsci.marketplace.Node;
 import org.dawnsci.marketplace.Recent;
 import org.dawnsci.marketplace.Search;
@@ -30,6 +33,10 @@ import org.dawnsci.marketplace.SearchTab;
 import org.dawnsci.marketplace.Wizard;
 import org.dawnsci.marketplace.social.account.Account;
 import org.dawnsci.marketplace.social.account.AccountRepository;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.FeatureMapUtil;
 import org.hibernate.Query;
@@ -83,11 +90,17 @@ public class MarketplaceDAO {
 			"lower(str(node.body)) like :term " +
 			"order by node.changed desc";
 	
-	public Catalog getCatalog() {
+	/**
+	 * Creates and returns the catalog representing this particular marketplace
+	 * instance.
+	 * 
+	 * @return this marketplace's catalog
+	 */
+	private Catalog getCatalog() {
 		Catalog catalog = MarketplaceFactory.eINSTANCE.createCatalog();
 		catalog.setTitle(environment.getProperty("marketplace.title"));
 		catalog.setUrl(environment.getProperty("marketplace.base-url")+"/mpc");
-		catalog.setIcon(environment.getProperty("marketplace.icon"));
+		catalog.setIcon(environment.getProperty("marketplace.catalog-icon"));
 		catalog.setDescription(environment.getProperty("marketplace.description"));
 		Wizard wizard = MarketplaceFactory.eINSTANCE.createWizard();
 		wizard.setTitle(environment.getProperty("marketplace.wizard-title"));
@@ -120,6 +133,19 @@ public class MarketplaceDAO {
 		return marketplace;
 	}
 
+	private Marketplace loadSerialized(URL url) {
+		ResourceSet rs = new ResourceSetImpl();
+		rs.getPackageRegistry().put(null, MarketplacePackage.eINSTANCE);
+		try {
+			Resource resource = rs.createResource(URI.createURI(url.toExternalForm()));
+			InputStream is = url.openStream();
+			resource.load(is, rs.getLoadOptions());
+			return (Marketplace) resource.getContents().get(0);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 	@SuppressWarnings("unchecked")
 	@Transactional
 	public Marketplace getCatalogs() {
@@ -133,6 +159,15 @@ public class MarketplaceDAO {
 			Query query = sessionFactory.getCurrentSession().createQuery("SELECT catalog FROM Catalog catalog");
 			catalogs.getItems().addAll(EcoreUtil.copyAll(query.list()));
 			sessionFactory.getCurrentSession().getTransaction().commit();
+			// also obtain catalogs from the Eclipse Marketplace
+			try {
+				Marketplace em = loadSerialized(new URL("http://marketplace.eclipse.org/catalogs/api/p"));
+				catalogs.getItems().addAll(EcoreUtil.copyAll(em.getCatalogs().getItems()));
+			} catch (Exception e){
+				// it's not a big deal if we cannot reach the Eclipse Marketplace
+				// but we would like to know what happened.
+				e.printStackTrace();
+			}
 		} catch (Exception e) {
 			sessionFactory.getCurrentSession().getTransaction().rollback();
 			throw new InternalErrorException(e);

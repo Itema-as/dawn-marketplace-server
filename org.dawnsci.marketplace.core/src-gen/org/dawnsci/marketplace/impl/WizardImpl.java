@@ -2,6 +2,7 @@
  */
 package org.dawnsci.marketplace.impl;
 
+import org.dawnsci.marketplace.FavoritesTab;
 import org.dawnsci.marketplace.MarketplacePackage;
 import org.dawnsci.marketplace.News;
 import org.dawnsci.marketplace.PopularTab;
@@ -30,6 +31,7 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
  *   <li>{@link org.dawnsci.marketplace.impl.WizardImpl#getSearchtab <em>Searchtab</em>}</li>
  *   <li>{@link org.dawnsci.marketplace.impl.WizardImpl#getPopulartab <em>Populartab</em>}</li>
  *   <li>{@link org.dawnsci.marketplace.impl.WizardImpl#getRecenttab <em>Recenttab</em>}</li>
+ *   <li>{@link org.dawnsci.marketplace.impl.WizardImpl#getFavoritestab <em>Favoritestab</em>}</li>
  *   <li>{@link org.dawnsci.marketplace.impl.WizardImpl#getNews <em>News</em>}</li>
  * </ul>
  *
@@ -105,6 +107,16 @@ public class WizardImpl extends MinimalEObjectImpl.Container implements Wizard {
 	 * @ordered
 	 */
 	protected RecentTab recenttab;
+
+	/**
+	 * The cached value of the '{@link #getFavoritestab() <em>Favoritestab</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getFavoritestab()
+	 * @generated
+	 * @ordered
+	 */
+	protected FavoritesTab favoritestab;
 
 	/**
 	 * The cached value of the '{@link #getNews() <em>News</em>}' containment reference.
@@ -311,6 +323,49 @@ public class WizardImpl extends MinimalEObjectImpl.Container implements Wizard {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public FavoritesTab getFavoritestab() {
+		return favoritestab;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetFavoritestab(FavoritesTab newFavoritestab, NotificationChain msgs) {
+		FavoritesTab oldFavoritestab = favoritestab;
+		favoritestab = newFavoritestab;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, MarketplacePackage.WIZARD__FAVORITESTAB, oldFavoritestab, newFavoritestab);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setFavoritestab(FavoritesTab newFavoritestab) {
+		if (newFavoritestab != favoritestab) {
+			NotificationChain msgs = null;
+			if (favoritestab != null)
+				msgs = ((InternalEObject)favoritestab).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - MarketplacePackage.WIZARD__FAVORITESTAB, null, msgs);
+			if (newFavoritestab != null)
+				msgs = ((InternalEObject)newFavoritestab).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - MarketplacePackage.WIZARD__FAVORITESTAB, null, msgs);
+			msgs = basicSetFavoritestab(newFavoritestab, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, MarketplacePackage.WIZARD__FAVORITESTAB, newFavoritestab, newFavoritestab));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public News getNews() {
 		return news;
 	}
@@ -363,6 +418,8 @@ public class WizardImpl extends MinimalEObjectImpl.Container implements Wizard {
 				return basicSetPopulartab(null, msgs);
 			case MarketplacePackage.WIZARD__RECENTTAB:
 				return basicSetRecenttab(null, msgs);
+			case MarketplacePackage.WIZARD__FAVORITESTAB:
+				return basicSetFavoritestab(null, msgs);
 			case MarketplacePackage.WIZARD__NEWS:
 				return basicSetNews(null, msgs);
 		}
@@ -387,6 +444,8 @@ public class WizardImpl extends MinimalEObjectImpl.Container implements Wizard {
 				return getPopulartab();
 			case MarketplacePackage.WIZARD__RECENTTAB:
 				return getRecenttab();
+			case MarketplacePackage.WIZARD__FAVORITESTAB:
+				return getFavoritestab();
 			case MarketplacePackage.WIZARD__NEWS:
 				return getNews();
 		}
@@ -415,6 +474,9 @@ public class WizardImpl extends MinimalEObjectImpl.Container implements Wizard {
 				return;
 			case MarketplacePackage.WIZARD__RECENTTAB:
 				setRecenttab((RecentTab)newValue);
+				return;
+			case MarketplacePackage.WIZARD__FAVORITESTAB:
+				setFavoritestab((FavoritesTab)newValue);
 				return;
 			case MarketplacePackage.WIZARD__NEWS:
 				setNews((News)newValue);
@@ -446,6 +508,9 @@ public class WizardImpl extends MinimalEObjectImpl.Container implements Wizard {
 			case MarketplacePackage.WIZARD__RECENTTAB:
 				setRecenttab((RecentTab)null);
 				return;
+			case MarketplacePackage.WIZARD__FAVORITESTAB:
+				setFavoritestab((FavoritesTab)null);
+				return;
 			case MarketplacePackage.WIZARD__NEWS:
 				setNews((News)null);
 				return;
@@ -471,6 +536,8 @@ public class WizardImpl extends MinimalEObjectImpl.Container implements Wizard {
 				return populartab != null;
 			case MarketplacePackage.WIZARD__RECENTTAB:
 				return recenttab != null;
+			case MarketplacePackage.WIZARD__FAVORITESTAB:
+				return favoritestab != null;
 			case MarketplacePackage.WIZARD__NEWS:
 				return news != null;
 		}

@@ -161,6 +161,12 @@ public class MarketplaceSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case MarketplacePackage.FAVORITES_TAB: {
+				FavoritesTab favoritesTab = (FavoritesTab)theEObject;
+				T result = caseFavoritesTab(favoritesTab);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case MarketplacePackage.NEWS: {
 				News news = (News)theEObject;
 				T result = caseNews(news);
@@ -507,6 +513,21 @@ public class MarketplaceSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseRecent(Recent object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Favorites Tab</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Favorites Tab</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseFavoritesTab(FavoritesTab object) {
 		return null;
 	}
 

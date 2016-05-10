@@ -77,12 +77,12 @@ public interface News extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Timestamp</em>' attribute.
-	 * @see #setTimestamp(Long)
+	 * @see #setTimestamp(String)
 	 * @see org.dawnsci.marketplace.MarketplacePackage#getNews_Timestamp()
 	 * @model
 	 * @generated
 	 */
-	Long getTimestamp();
+	String getTimestamp();
 
 	/**
 	 * Sets the value of the '{@link org.dawnsci.marketplace.News#getTimestamp <em>Timestamp</em>}' attribute.
@@ -92,6 +92,6 @@ public interface News extends EObject {
 	 * @see #getTimestamp()
 	 * @generated
 	 */
-	void setTimestamp(Long value);
+	void setTimestamp(String value);
 
 } // News
