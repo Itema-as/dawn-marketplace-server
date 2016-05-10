@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<marketplace>
+  <catalogs>
+    <catalog id="38413" title="Eclipse Marketplace" url="http://marketplace.eclipse.org" selfContained="0" icon="http://marketplace.eclipse.org/sites/default/files/eclipse-catalog.png">
+      <description>Eclipse Marketplace (MP) is a place to find and keep track of Eclipse-based solutions.</description>
+      <dependenciesRepository></dependenciesRepository>
+      <wizard title="">
+        <icon>http://marketplace.eclipse.org/sites/default/files/marketplace_catalog_icon_0.png</icon>
+        <searchtab enabled="1">Search</searchtab>
+        <populartab enabled="1">Popular</populartab>
+        <recenttab enabled="1">Recent</recenttab>
+        <favoritestab enabled="1" apiserver="https://api.eclipse.org/">Favorites</favoritestab>
+        <news shorttitle="April Newsletter" timestamp="1461211200">http://www.eclipse.org/community/eclipse_newsletter/2016/april</news>
+      </wizard>
+    </catalog>
+    <catalog id="2671769" title="Obeo Marketplace" url="http://marketplace.eclipse.org/dedicated_catalog_hosting/2671769" selfContained="0" icon="http://marketplace.eclipse.org/sites/default/files/favicon.png">
+      <description>Obeo is a leading company on software modeling and modernization. Obeo Marketplace supplies code generators, designers, code parsers...</description>
+      <dependenciesRepository></dependenciesRepository>
+      <wizard title="Obeo Marketplace Catalog">
+        <icon>http://marketplace.eclipse.org/sites/default/files/icon_obeo_transparent_100x100.png</icon>
+        <searchtab enabled="1">Search</searchtab>
+        <populartab enabled="1">Popular</populartab>
+        <recenttab enabled="1">Recent</recenttab>
+        <favoritestab enabled="1" apiserver="https://api.eclipse.org/">Favorites</favoritestab>
+        <news shorttitle="News" timestamp="1452056400">http://blog.obeo.fr/en</news>
+      </wizard>
+    </catalog>
+    <catalog id="2704390" title="Red Hat" url="http://marketplace.eclipse.org/dedicated_catalog_hosting/2704390" selfContained="0" icon="http://marketplace.eclipse.org/sites/default/files/32x32.png">
+      <description></description>
+      <dependenciesRepository></dependenciesRepository>
+      <wizard title="Red Hat Catalog">
+        <icon>http://marketplace.eclipse.org/sites/default/files/76x66.png</icon>
+        <searchtab enabled="1">Search</searchtab>
+        <populartab enabled="1">Popular</populartab>
+        <recenttab enabled="1">Recent</recenttab>
+        <favoritestab enabled="1" apiserver="https://api.eclipse.org/">Favorites</favoritestab>
+        <news timestamp="" shorttitle=""></news>
+      </wizard>
+    </catalog>
+  </catalogs>
+</marketplace>

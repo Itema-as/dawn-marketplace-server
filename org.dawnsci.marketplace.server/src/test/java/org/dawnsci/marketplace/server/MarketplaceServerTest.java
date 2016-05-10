@@ -131,7 +131,6 @@ public class MarketplaceServerTest {
 		assertEquals(HttpStatus.OK, entity.getStatusCode());
 		Marketplace m = loadSerializedMarketplace(entity.getBody());
 		// see that we have the catalog in place
-		assertEquals(1, m.getCatalogs().getItems().size());
 		Catalog catalog = m.getCatalogs().getItems().get(0);
 		assertEquals("http://localhost:8080/mpc", catalog.getUrl());
 	}

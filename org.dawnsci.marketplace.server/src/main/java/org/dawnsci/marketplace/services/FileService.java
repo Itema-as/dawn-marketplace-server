@@ -49,6 +49,7 @@ public class FileService {
 			copyRequiredFile("welcome.md");
 			copyRequiredFile("marketplace-icon.png");
 			copyRequiredFile("catalog-icon.png");
+			copyRequiredFile("wizard-icon.png");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

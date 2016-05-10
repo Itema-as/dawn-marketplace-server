@@ -6,6 +6,7 @@ import org.dawnsci.marketplace.Catalog;
 import org.dawnsci.marketplace.Catalogs;
 import org.dawnsci.marketplace.Categories;
 import org.dawnsci.marketplace.Category;
+import org.dawnsci.marketplace.FavoritesTab;
 import org.dawnsci.marketplace.Featured;
 import org.dawnsci.marketplace.Iu;
 import org.dawnsci.marketplace.Ius;
@@ -182,6 +183,13 @@ public class MarketplacePackageImpl extends EPackageImpl implements MarketplaceP
 	 * @generated
 	 */
 	private EClass recentEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass favoritesTabEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -906,8 +914,17 @@ public class MarketplacePackageImpl extends EPackageImpl implements MarketplaceP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getWizard_News() {
+	public EReference getWizard_Favoritestab() {
 		return (EReference)wizardEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getWizard_News() {
+		return (EReference)wizardEClass.getEStructuralFeatures().get(6);
 	}
 
 	/**
@@ -1176,6 +1193,42 @@ public class MarketplacePackageImpl extends EPackageImpl implements MarketplaceP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getFavoritesTab() {
+		return favoritesTabEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getFavoritesTab_Enabled() {
+		return (EAttribute)favoritesTabEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getFavoritesTab_Mixed() {
+		return (EAttribute)favoritesTabEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getFavoritesTab_Apiserver() {
+		return (EAttribute)favoritesTabEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EAttribute getNode_Type() {
 		return (EAttribute)nodeEClass.getEStructuralFeatures().get(2);
 	}
@@ -1324,6 +1377,7 @@ public class MarketplacePackageImpl extends EPackageImpl implements MarketplaceP
 		createEReference(wizardEClass, WIZARD__SEARCHTAB);
 		createEReference(wizardEClass, WIZARD__POPULARTAB);
 		createEReference(wizardEClass, WIZARD__RECENTTAB);
+		createEReference(wizardEClass, WIZARD__FAVORITESTAB);
 		createEReference(wizardEClass, WIZARD__NEWS);
 
 		searchTabEClass = createEClass(SEARCH_TAB);
@@ -1337,6 +1391,11 @@ public class MarketplacePackageImpl extends EPackageImpl implements MarketplaceP
 		recentTabEClass = createEClass(RECENT_TAB);
 		createEAttribute(recentTabEClass, RECENT_TAB__ENABLED);
 		createEAttribute(recentTabEClass, RECENT_TAB__MIXED);
+
+		favoritesTabEClass = createEClass(FAVORITES_TAB);
+		createEAttribute(favoritesTabEClass, FAVORITES_TAB__ENABLED);
+		createEAttribute(favoritesTabEClass, FAVORITES_TAB__MIXED);
+		createEAttribute(favoritesTabEClass, FAVORITES_TAB__APISERVER);
 
 		newsEClass = createEClass(NEWS);
 		createEAttribute(newsEClass, NEWS__SHORTTITLE);
@@ -1483,6 +1542,7 @@ public class MarketplacePackageImpl extends EPackageImpl implements MarketplaceP
 		initEReference(getWizard_Searchtab(), this.getSearchTab(), null, "searchtab", null, 0, 1, Wizard.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getWizard_Populartab(), this.getPopularTab(), null, "populartab", null, 0, 1, Wizard.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getWizard_Recenttab(), this.getRecentTab(), null, "recenttab", null, 0, 1, Wizard.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getWizard_Favoritestab(), this.getFavoritesTab(), null, "favoritestab", null, 0, 1, Wizard.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getWizard_News(), this.getNews(), null, "news", null, 0, 1, Wizard.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(searchTabEClass, SearchTab.class, "SearchTab", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1497,10 +1557,15 @@ public class MarketplacePackageImpl extends EPackageImpl implements MarketplaceP
 		initEAttribute(getRecentTab_Enabled(), ecorePackage.getEIntegerObject(), "enabled", null, 1, 1, RecentTab.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getRecentTab_Mixed(), ecorePackage.getEFeatureMapEntry(), "mixed", null, 1, -1, RecentTab.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+		initEClass(favoritesTabEClass, FavoritesTab.class, "FavoritesTab", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getFavoritesTab_Enabled(), ecorePackage.getEIntegerObject(), "enabled", null, 1, 1, FavoritesTab.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getFavoritesTab_Mixed(), ecorePackage.getEFeatureMapEntry(), "mixed", null, 1, -1, FavoritesTab.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getFavoritesTab_Apiserver(), ecorePackage.getEString(), "apiserver", null, 0, 1, FavoritesTab.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
 		initEClass(newsEClass, News.class, "News", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getNews_Shorttitle(), ecorePackage.getEString(), "shorttitle", null, 1, 1, News.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getNews_Mixed(), ecorePackage.getEFeatureMapEntry(), "mixed", null, 1, -1, News.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getNews_Timestamp(), ecorePackage.getELongObject(), "timestamp", null, 0, 1, News.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getNews_Timestamp(), ecorePackage.getEString(), "timestamp", null, 0, 1, News.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(marketEClass, Market.class, "Market", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getMarket_Name(), ecorePackage.getEString(), "name", null, 0, 1, Market.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1823,6 +1888,19 @@ public class MarketplacePackageImpl extends EPackageImpl implements MarketplaceP
 		   });	
 		addAnnotation
 		  (getRecentTab_Mixed(), 
+		   source, 
+		   new String[] {
+			 "kind", "elementWildcard",
+			 "name", ":mixed"
+		   });	
+		addAnnotation
+		  (favoritesTabEClass, 
+		   source, 
+		   new String[] {
+			 "kind", "mixed"
+		   });	
+		addAnnotation
+		  (getFavoritesTab_Mixed(), 
 		   source, 
 		   new String[] {
 			 "kind", "elementWildcard",

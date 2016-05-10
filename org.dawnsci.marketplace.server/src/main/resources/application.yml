@@ -5,10 +5,10 @@ marketplace:
   system-db: jdbc:hsqldb:file:database/system;shutdown=true;hsqldb.default_table_type=cached
   title: DAWN Plug-in Marketplace
   footer: Copyright © 2016 Diamond Light Source
-  icon: http://localhost:8080/pages/marketplace-icon.png
+  catalog-icon: http://localhost:8080/pages/catalog-icon.png
   description: The DAWN Plug-in Marketplace
   wizard-title: DAWN Plug-in Catalog
-  wizard-icon: http://localhost:8080/pages/catalog-icon.png
+  wizard-icon: http://localhost:8080/pages/wizard-icon.png
   max-recent-solutions: 12
   solutions-folder: solutions
   pages-folder: pages

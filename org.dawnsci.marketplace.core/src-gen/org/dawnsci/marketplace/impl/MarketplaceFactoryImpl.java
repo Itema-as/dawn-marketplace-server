@@ -71,6 +71,7 @@ public class MarketplaceFactoryImpl extends EFactoryImpl implements MarketplaceF
 			case MarketplacePackage.SEARCH_TAB: return createSearchTab();
 			case MarketplacePackage.POPULAR_TAB: return createPopularTab();
 			case MarketplacePackage.RECENT_TAB: return createRecentTab();
+			case MarketplacePackage.FAVORITES_TAB: return createFavoritesTab();
 			case MarketplacePackage.NEWS: return createNews();
 			case MarketplacePackage.MARKET: return createMarket();
 			case MarketplacePackage.FEATURED: return createFeatured();
@@ -289,6 +290,16 @@ public class MarketplaceFactoryImpl extends EFactoryImpl implements MarketplaceF
 	public Recent createRecent() {
 		RecentImpl recent = new RecentImpl();
 		return recent;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public FavoritesTab createFavoritesTab() {
+		FavoritesTabImpl favoritesTab = new FavoritesTabImpl();
+		return favoritesTab;
 	}
 
 	/**

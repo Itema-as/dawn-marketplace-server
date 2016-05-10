@@ -131,6 +131,10 @@ public class MarketplaceAdapterFactory extends AdapterFactoryImpl {
 				return createRecentTabAdapter();
 			}
 			@Override
+			public Adapter caseFavoritesTab(FavoritesTab object) {
+				return createFavoritesTabAdapter();
+			}
+			@Override
 			public Adapter caseNews(News object) {
 				return createNewsAdapter();
 			}
@@ -461,6 +465,20 @@ public class MarketplaceAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createRecentAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.dawnsci.marketplace.FavoritesTab <em>Favorites Tab</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.dawnsci.marketplace.FavoritesTab
+	 * @generated
+	 */
+	public Adapter createFavoritesTabAdapter() {
 		return null;
 	}
 

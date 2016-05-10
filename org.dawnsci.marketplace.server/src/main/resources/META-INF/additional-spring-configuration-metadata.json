@@ -99,5 +99,10 @@
     "name": "marketplace.admin-password",
     "type": "java.lang.String",
     "description": "The password for the 'admin' user. If not specified one will be generated on each start."
+  },
+  {
+    "name": "marketplace.catalog-icon",
+    "type": "java.lang.String",
+    "description": "URL to the image used in when presenting the catalog."
   }
 ]}

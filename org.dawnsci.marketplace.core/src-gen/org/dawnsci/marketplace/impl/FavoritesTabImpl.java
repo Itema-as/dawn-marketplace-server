@@ -2,8 +2,9 @@
  */
 package org.dawnsci.marketplace.impl;
 
+import org.dawnsci.marketplace.FavoritesTab;
 import org.dawnsci.marketplace.MarketplacePackage;
-import org.dawnsci.marketplace.News;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
@@ -19,39 +20,39 @@ import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>News</b></em>'.
+ * An implementation of the model object '<em><b>Favorites Tab</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.dawnsci.marketplace.impl.NewsImpl#getShorttitle <em>Shorttitle</em>}</li>
- *   <li>{@link org.dawnsci.marketplace.impl.NewsImpl#getMixed <em>Mixed</em>}</li>
- *   <li>{@link org.dawnsci.marketplace.impl.NewsImpl#getTimestamp <em>Timestamp</em>}</li>
+ *   <li>{@link org.dawnsci.marketplace.impl.FavoritesTabImpl#getEnabled <em>Enabled</em>}</li>
+ *   <li>{@link org.dawnsci.marketplace.impl.FavoritesTabImpl#getMixed <em>Mixed</em>}</li>
+ *   <li>{@link org.dawnsci.marketplace.impl.FavoritesTabImpl#getApiserver <em>Apiserver</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class NewsImpl extends MinimalEObjectImpl.Container implements News {
+public class FavoritesTabImpl extends MinimalEObjectImpl.Container implements FavoritesTab {
 	/**
-	 * The default value of the '{@link #getShorttitle() <em>Shorttitle</em>}' attribute.
+	 * The default value of the '{@link #getEnabled() <em>Enabled</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getShorttitle()
+	 * @see #getEnabled()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String SHORTTITLE_EDEFAULT = null;
+	protected static final Integer ENABLED_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getShorttitle() <em>Shorttitle</em>}' attribute.
+	 * The cached value of the '{@link #getEnabled() <em>Enabled</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getShorttitle()
+	 * @see #getEnabled()
 	 * @generated
 	 * @ordered
 	 */
-	protected String shorttitle = SHORTTITLE_EDEFAULT;
+	protected Integer enabled = ENABLED_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getMixed() <em>Mixed</em>}' attribute list.
@@ -64,31 +65,31 @@ public class NewsImpl extends MinimalEObjectImpl.Container implements News {
 	protected FeatureMap mixed;
 
 	/**
-	 * The default value of the '{@link #getTimestamp() <em>Timestamp</em>}' attribute.
+	 * The default value of the '{@link #getApiserver() <em>Apiserver</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getTimestamp()
+	 * @see #getApiserver()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String TIMESTAMP_EDEFAULT = null;
+	protected static final String APISERVER_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getTimestamp() <em>Timestamp</em>}' attribute.
+	 * The cached value of the '{@link #getApiserver() <em>Apiserver</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getTimestamp()
+	 * @see #getApiserver()
 	 * @generated
 	 * @ordered
 	 */
-	protected String timestamp = TIMESTAMP_EDEFAULT;
+	protected String apiserver = APISERVER_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected NewsImpl() {
+	protected FavoritesTabImpl() {
 		super();
 	}
 
@@ -99,7 +100,7 @@ public class NewsImpl extends MinimalEObjectImpl.Container implements News {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return MarketplacePackage.Literals.NEWS;
+		return MarketplacePackage.Literals.FAVORITES_TAB;
 	}
 
 	/**
@@ -107,8 +108,8 @@ public class NewsImpl extends MinimalEObjectImpl.Container implements News {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getShorttitle() {
-		return shorttitle;
+	public Integer getEnabled() {
+		return enabled;
 	}
 
 	/**
@@ -116,11 +117,11 @@ public class NewsImpl extends MinimalEObjectImpl.Container implements News {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setShorttitle(String newShorttitle) {
-		String oldShorttitle = shorttitle;
-		shorttitle = newShorttitle;
+	public void setEnabled(Integer newEnabled) {
+		Integer oldEnabled = enabled;
+		enabled = newEnabled;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, MarketplacePackage.NEWS__SHORTTITLE, oldShorttitle, shorttitle));
+			eNotify(new ENotificationImpl(this, Notification.SET, MarketplacePackage.FAVORITES_TAB__ENABLED, oldEnabled, enabled));
 	}
 
 	/**
@@ -130,7 +131,7 @@ public class NewsImpl extends MinimalEObjectImpl.Container implements News {
 	 */
 	public FeatureMap getMixed() {
 		if (mixed == null) {
-			mixed = new BasicFeatureMap(this, MarketplacePackage.NEWS__MIXED);
+			mixed = new BasicFeatureMap(this, MarketplacePackage.FAVORITES_TAB__MIXED);
 		}
 		return mixed;
 	}
@@ -140,8 +141,8 @@ public class NewsImpl extends MinimalEObjectImpl.Container implements News {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getTimestamp() {
-		return timestamp;
+	public String getApiserver() {
+		return apiserver;
 	}
 
 	/**
@@ -149,11 +150,11 @@ public class NewsImpl extends MinimalEObjectImpl.Container implements News {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setTimestamp(String newTimestamp) {
-		String oldTimestamp = timestamp;
-		timestamp = newTimestamp;
+	public void setApiserver(String newApiserver) {
+		String oldApiserver = apiserver;
+		apiserver = newApiserver;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, MarketplacePackage.NEWS__TIMESTAMP, oldTimestamp, timestamp));
+			eNotify(new ENotificationImpl(this, Notification.SET, MarketplacePackage.FAVORITES_TAB__APISERVER, oldApiserver, apiserver));
 	}
 
 	/**
@@ -164,7 +165,7 @@ public class NewsImpl extends MinimalEObjectImpl.Container implements News {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case MarketplacePackage.NEWS__MIXED:
+			case MarketplacePackage.FAVORITES_TAB__MIXED:
 				return ((InternalEList<?>)getMixed()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -178,13 +179,13 @@ public class NewsImpl extends MinimalEObjectImpl.Container implements News {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case MarketplacePackage.NEWS__SHORTTITLE:
-				return getShorttitle();
-			case MarketplacePackage.NEWS__MIXED:
+			case MarketplacePackage.FAVORITES_TAB__ENABLED:
+				return getEnabled();
+			case MarketplacePackage.FAVORITES_TAB__MIXED:
 				if (coreType) return getMixed();
 				return ((FeatureMap.Internal)getMixed()).getWrapper();
-			case MarketplacePackage.NEWS__TIMESTAMP:
-				return getTimestamp();
+			case MarketplacePackage.FAVORITES_TAB__APISERVER:
+				return getApiserver();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -197,14 +198,14 @@ public class NewsImpl extends MinimalEObjectImpl.Container implements News {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case MarketplacePackage.NEWS__SHORTTITLE:
-				setShorttitle((String)newValue);
+			case MarketplacePackage.FAVORITES_TAB__ENABLED:
+				setEnabled((Integer)newValue);
 				return;
-			case MarketplacePackage.NEWS__MIXED:
+			case MarketplacePackage.FAVORITES_TAB__MIXED:
 				((FeatureMap.Internal)getMixed()).set(newValue);
 				return;
-			case MarketplacePackage.NEWS__TIMESTAMP:
-				setTimestamp((String)newValue);
+			case MarketplacePackage.FAVORITES_TAB__APISERVER:
+				setApiserver((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -218,14 +219,14 @@ public class NewsImpl extends MinimalEObjectImpl.Container implements News {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case MarketplacePackage.NEWS__SHORTTITLE:
-				setShorttitle(SHORTTITLE_EDEFAULT);
+			case MarketplacePackage.FAVORITES_TAB__ENABLED:
+				setEnabled(ENABLED_EDEFAULT);
 				return;
-			case MarketplacePackage.NEWS__MIXED:
+			case MarketplacePackage.FAVORITES_TAB__MIXED:
 				getMixed().clear();
 				return;
-			case MarketplacePackage.NEWS__TIMESTAMP:
-				setTimestamp(TIMESTAMP_EDEFAULT);
+			case MarketplacePackage.FAVORITES_TAB__APISERVER:
+				setApiserver(APISERVER_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -239,12 +240,12 @@ public class NewsImpl extends MinimalEObjectImpl.Container implements News {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case MarketplacePackage.NEWS__SHORTTITLE:
-				return SHORTTITLE_EDEFAULT == null ? shorttitle != null : !SHORTTITLE_EDEFAULT.equals(shorttitle);
-			case MarketplacePackage.NEWS__MIXED:
+			case MarketplacePackage.FAVORITES_TAB__ENABLED:
+				return ENABLED_EDEFAULT == null ? enabled != null : !ENABLED_EDEFAULT.equals(enabled);
+			case MarketplacePackage.FAVORITES_TAB__MIXED:
 				return mixed != null && !mixed.isEmpty();
-			case MarketplacePackage.NEWS__TIMESTAMP:
-				return TIMESTAMP_EDEFAULT == null ? timestamp != null : !TIMESTAMP_EDEFAULT.equals(timestamp);
+			case MarketplacePackage.FAVORITES_TAB__APISERVER:
+				return APISERVER_EDEFAULT == null ? apiserver != null : !APISERVER_EDEFAULT.equals(apiserver);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -259,14 +260,14 @@ public class NewsImpl extends MinimalEObjectImpl.Container implements News {
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (shorttitle: ");
-		result.append(shorttitle);
+		result.append(" (enabled: ");
+		result.append(enabled);
 		result.append(", mixed: ");
 		result.append(mixed);
-		result.append(", timestamp: ");
-		result.append(timestamp);
+		result.append(", apiserver: ");
+		result.append(apiserver);
 		result.append(')');
 		return result.toString();
 	}
 
-} //NewsImpl
+} //FavoritesTabImpl

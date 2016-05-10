@@ -144,6 +144,7 @@
       <xsd:element maxOccurs="1" minOccurs="0" name="searchtab" type="org.dawnsci:SearchTab"/>
       <xsd:element maxOccurs="1" minOccurs="0" name="populartab" type="org.dawnsci:PopularTab"/>
       <xsd:element maxOccurs="1" minOccurs="0" name="recenttab" type="org.dawnsci:RecentTab"/>
+      <xsd:element maxOccurs="1" minOccurs="0" name="favoritestab" type="org.dawnsci:FavoritesTab"/>
       <xsd:element maxOccurs="1" minOccurs="0" name="news" type="org.dawnsci:News"/>
     </xsd:sequence>
     <xsd:attribute name="title" type="xsd:string"/>
@@ -162,9 +163,14 @@
     <xsd:attribute name="enabled" type="xsd:int" use="required"/>
   </xsd:complexType>
   <xsd:element name="RecentTab" type="org.dawnsci:RecentTab"/>
+  <xsd:complexType name="FavoritesTab">
+    <xsd:attribute name="enabled" type="xsd:int" use="required"/>
+    <xsd:attribute name="apiserver" type="xsd:string"/>
+  </xsd:complexType>
+  <xsd:element name="FavoritesTab" type="org.dawnsci:FavoritesTab"/>
   <xsd:complexType name="News">
     <xsd:attribute name="shorttitle" type="xsd:string" use="required"/>
-    <xsd:attribute name="timestamp" type="xsd:long"/>
+    <xsd:attribute name="timestamp" type="xsd:string"/>
   </xsd:complexType>
   <xsd:element name="News" type="org.dawnsci:News"/>
   <xsd:complexType name="Market">
