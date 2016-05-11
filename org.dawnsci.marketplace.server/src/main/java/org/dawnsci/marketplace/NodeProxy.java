@@ -15,7 +15,13 @@ import java.io.StringReader;
 import java.io.StringWriter;
 import java.util.Iterator;
 
+import org.dawnsci.marketplace.core.MarketplaceUtility;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.util.FeatureMap;
+import org.eclipse.emf.ecore.util.FeatureMapUtil;
+import org.eclipse.emf.ecore.util.FeatureMapUtil.FeatureEList;
+import org.eclipse.emf.ecore.xml.type.XMLTypePackage;
 import org.eclipse.mylyn.wikitext.core.parser.MarkupParser;
 import org.eclipse.mylyn.wikitext.core.parser.builder.HtmlDocumentBuilder;
 import org.eclipse.mylyn.wikitext.markdown.core.MarkdownLanguage;
@@ -31,6 +37,9 @@ import org.springframework.web.multipart.MultipartFile;
  */
 public class NodeProxy {
 
+	private static final EStructuralFeature TEXT = XMLTypePackage.eINSTANCE.getXMLTypeDocumentRoot_Text(); 
+	
+	
 	private Node node;
 	private MultipartFile screenshotfile;
 	private MultipartFile imagefile;
@@ -337,7 +346,38 @@ public class NodeProxy {
 		node.setRawBody(value);
 		node.setBody(toHtml(value));
 	}
-
+	
+	@SuppressWarnings("rawtypes")
+	public String getMainFeature(){
+		if (node.getIus() == null) {
+			return null;
+		}
+		if (node.getIus().getItems().isEmpty()){
+			return null;
+		}
+		Iu iu = node.getIus().getItems().get(0);
+		FeatureMap fm = iu.getMixed();
+		Object o = fm.get(TEXT, false);
+		if (o instanceof FeatureEList) {
+			if (((FeatureEList) o).size() > 0) {
+				return ((FeatureEList) o).get(0).toString();
+			}
+		}
+		return null;
+	}
+	
+	public void setMainFeature(String id){
+		if (node.getIus() == null) {
+			Ius createIus = MarketplaceFactory.eINSTANCE.createIus();
+			node.setIus(createIus);
+		}
+		node.getIus().getItems().clear();		
+		Iu createIu = MarketplaceFactory.eINSTANCE.createIu();
+		FeatureMapUtil.addText(createIu.getMixed(), id);
+		createIu.setRequired(true);
+		node.getIus().getItems().add(createIu);
+	}
+	
 	static String toHtml(String markdown) {
 		if (markdown == null) {
 			return "";

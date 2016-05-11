@@ -176,10 +176,8 @@ public class HibernateService {
 					}
 				}
 				// unzip the p2-repository
-				if (StringUtils.isNotEmpty(copy.getUpdateurl())){
-					File p2repo = fileService.getSolutionFile(String.valueOf(copy.getId()));
-					ZipUtil.unpack(getSolutionsInputStream(copy.getUpdateurl()+".zip"), p2repo);
-				}
+				File p2repo = fileService.getSolutionFile(String.valueOf(copy.getId()));
+				ZipUtil.unpack(getSolutionsInputStream("p2-repo.zip"), p2repo);
 			}
 
 	}
