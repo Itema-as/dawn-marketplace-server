@@ -132,6 +132,8 @@ public class FileService {
 			FileUtils.deleteDirectory(new File(p2repo, "plugins"));
 			FileUtils.deleteQuietly(new File(p2repo, "content.jar"));
 			FileUtils.deleteQuietly(new File(p2repo, "artifacts.jar"));
+			FileUtils.deleteQuietly(new File(p2repo, "content.xml"));
+			FileUtils.deleteQuietly(new File(p2repo, "artifacts.xml"));
 			// unpack to root folder
 			ZipUtil.unpack(saveSolutionFile, p2repo);
 			// and delete the uploaded zip-file

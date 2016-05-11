@@ -33,9 +33,9 @@
 			<supporturl><![CDATA[https://github.com/turesheim/eclipse-launcher/issues]]></supporturl>
 			<version>1.0.0</version>
 			<eclipseversion>4.5, 4.4, 4.3, 4.2, 4.1</eclipseversion>
-			<updateurl><![CDATA[p2-repo]]></updateurl>
+			<updateurl></updateurl>
 			<ius>
-				<iu required="TRUE">org.dawnsci.example.welcome.feature</iu>
+				<iu required="true">org.dawnsci.example.welcome.feature</iu>
 			</ius>
 			<platforms>
 				<platform>Mac</platform>
