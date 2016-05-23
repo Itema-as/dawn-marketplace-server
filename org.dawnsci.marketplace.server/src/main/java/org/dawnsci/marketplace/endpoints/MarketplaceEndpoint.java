@@ -36,9 +36,9 @@ import org.springframework.stereotype.Component;
 @Produces("text/xml")
 public class MarketplaceEndpoint {
 
-	@Autowired 
+	@Autowired
 	private MarketplaceDAO marketplaceDAO;
-	
+
 	@GET
 	@Path("api/p")
 	public String getMarkets() throws Exception {
@@ -88,10 +88,12 @@ public class MarketplaceEndpoint {
 	public String getInstall(@PathParam("id") String id) throws Exception {
 		return "test";
 	}
-	
+
 	private String serialize(Marketplace rootElement) throws IOException {
 		Map<String, Object> saveOptions = new HashMap<String, Object>();
 		saveOptions.put(XMLResource.OPTION_EXTENDED_META_DATA, Boolean.TRUE);
+		// UTF-8 encoding is required per specification
+		saveOptions.put(XMLResource.OPTION_ENCODING, "UTF-8");
 		XMLResource resource = new XMLResourceImpl();
 		resource.getContents().add(rootElement);
 		StringWriter stringWriter = new StringWriter();

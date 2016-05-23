@@ -17,17 +17,17 @@ import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.junit.Test;
 
 public class SerializationTests {
-	
+
 	/**
 	 * Tests parsing the result from a REST API call to marketplace.eclipse.org
 	 * <pre>
 	 * curl http://marketplace.eclipse.org/featured/api/p
 	 * </pre>
-	 * @throws IOException 
+	 * @throws IOException
 	 */
 	@Test
-	public void testFeatured() throws IOException{		
-		registerResourceFactory();		
+	public void testFeatured() throws IOException{
+		registerResourceFactory();
 		ResourceSet resourceSet = new ResourceSetImpl();
 		resourceSet.getPackageRegistry().put(null, MarketplacePackage.eINSTANCE);
 		URL url = SerializationTests.class.getResource("featured.xml");
@@ -43,11 +43,11 @@ public class SerializationTests {
 	 * <pre>
 	 * curl http://marketplace.eclipse.org/node/364668/api/p
 	 * </pre>
-	 * @throws IOException 
+	 * @throws IOException
 	 */
 	@Test
-	public void testNode() throws IOException{		
-		registerResourceFactory();		
+	public void testNode() throws IOException{
+		registerResourceFactory();
 		ResourceSet resourceSet = new ResourceSetImpl();
 		resourceSet.getPackageRegistry().put(null, MarketplacePackage.eINSTANCE);
 		URL url = SerializationTests.class.getResource("364668.xml");
@@ -60,13 +60,13 @@ public class SerializationTests {
 	/**
 	 * Tests parsing the result from a REST API call to marketplace.eclipse.org
 	 * <pre>
-	 * curl http://marketplace.eclipse.org/catalogs/api/p 
+	 * curl http://marketplace.eclipse.org/catalogs/api/p
 	 * </pre>
-	 * @throws IOException 
+	 * @throws IOException
 	 */
 	@Test
-	public void testCatalogs() throws IOException{		
-		registerResourceFactory();		
+	public void testCatalogs() throws IOException{
+		registerResourceFactory();
 		ResourceSet resourceSet = new ResourceSetImpl();
 		resourceSet.getPackageRegistry().put(null, MarketplacePackage.eINSTANCE);
 		URL url = SerializationTests.class.getResource("catalogs.xml");
@@ -79,13 +79,13 @@ public class SerializationTests {
 	/**
 	 * Tests parsing the result from a REST API call to marketplace.eclipse.org
 	 * <pre>
-	 * curl [ ] http://marketplace.eclipse.org/api/p 
+	 * curl [ ] http://marketplace.eclipse.org/api/p
 	 * </pre>
-	 * @throws IOException 
+	 * @throws IOException
 	 */
 	@Test
-	public void testMarkets() throws IOException{		
-		registerResourceFactory();		
+	public void testMarkets() throws IOException{
+		registerResourceFactory();
 		ResourceSet resourceSet = new ResourceSetImpl();
 		resourceSet.getPackageRegistry().put(null, MarketplacePackage.eINSTANCE);
 		URL url = SerializationTests.class.getResource("markets.xml");
@@ -119,6 +119,7 @@ public class SerializationTests {
 						// required in order to correctly read in attributes
 						loadOptions.put(XMLResource.OPTION_LAX_FEATURE_PROCESSING, Boolean.TRUE);
 						// UTF-8 encoding is required per specification
+						loadOptions.put(XMLResource.OPTION_ENCODING, "UTF-8");
 						saveOptions.put(XMLResource.OPTION_ENCODING, "UTF-8");
 						// do not download any external DTDs.
 						Map<String, Object> parserFeatures = new HashMap<String, Object>();
