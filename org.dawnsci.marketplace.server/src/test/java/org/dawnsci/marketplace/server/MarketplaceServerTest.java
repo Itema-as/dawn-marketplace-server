@@ -71,7 +71,7 @@ import org.springframework.web.context.WebApplicationContext;
 
 /**
  * Basic tests exercising the REST API along with the Web UI.
- * 
+ *
  * @author Torkild U. Resheim
  */
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -88,14 +88,14 @@ public class MarketplaceServerTest {
 
 	@Autowired
 	private WebApplicationContext wac;
-		
+
 	private MockMvc mocMvc;
-	
+
 	private class SolutionUploadSession {
 		private HttpSession http;
 		private Node node;
 	}
-	    
+
     @Before
 	public void setup(){
 		this.mocMvc = MockMvcBuilders
@@ -103,7 +103,7 @@ public class MarketplaceServerTest {
 				.apply(springSecurity())
 				.build();
 	}
-        
+
 	private Marketplace loadSerializedMarketplace(String xml) throws IOException {
 		ResourceSet rs = new ResourceSetImpl();
 		rs.getPackageRegistry().put(null, MarketplacePackage.eINSTANCE);
@@ -201,27 +201,27 @@ public class MarketplaceServerTest {
 	//		assertEquals(2,recent.getCount());
 	//		assertEquals(Long.valueOf(2),recent.getNodes().get(0).getId());
 	//	}
-	
-	
-	private String SOLUTION_XML = "<?xml version=\"1.0\" encoding=\"ASCII\"?>" + 
-			"<org.dawnsci:node xmlns:org.dawnsci=\"http://org.dawnsci/marketplace\" name=\"testsolution\">" + 
-			"  <tags>" + 
-			"    <tag name=\"interesting\"/>" + 
-			"    <tag name=\"cool\"/>" + 
-			"    <tag name=\"workspace\"/>" + 
-			"  </tags>" + 
-			"  <owner>Balle Clorin</owner>" + 
-			"  <shortdescription>Short description.</shortdescription>" + 
-			"  <body>Long description</body>" + 
-			"  <license>EPL</license>" + 
-			"  <companyname>Diamond Light Source Ltd.</companyname>" + 
-			"  <status>Alpha</status>" + 
-			"  <screenshot>/Users/auser/Desktop/Screenshots/screenshot.png</screenshot>" + 
-			"</org.dawnsci:node>\n"; 
 
-	
+
+	private String SOLUTION_XML = "<?xml version=\"1.0\" encoding=\"ASCII\"?>" +
+			"<org.dawnsci:node xmlns:org.dawnsci=\"http://org.dawnsci/marketplace\" name=\"testsolution\">" +
+			"  <tags>" +
+			"    <tag name=\"interesting\"/>" +
+			"    <tag name=\"cool\"/>" +
+			"    <tag name=\"workspace\"/>" +
+			"  </tags>" +
+			"  <owner>Balle Clorin</owner>" +
+			"  <shortdescription>Short description.</shortdescription>" +
+			"  <body>Long description</body>" +
+			"  <license>EPL</license>" +
+			"  <companyname>Diamond Light Source Ltd.</companyname>" +
+			"  <status>Alpha</status>" +
+			"  <screenshot>/Users/auser/Desktop/Screenshots/screenshot.png</screenshot>" +
+			"</org.dawnsci:node>\n";
+
+
 	/**
-	 * This method should only be used for creating and uploading a solution 
+	 * This method should only be used for creating and uploading a solution
 	 * through the REST API for further exercising of the same API.
 	 */
 	public SolutionUploadSession signInAndUploadSolution() throws Exception {
@@ -232,11 +232,11 @@ public class MarketplaceServerTest {
 				.param("username", "upload")
 				.param("password", "password"))
 				.andExpect(status().is3xxRedirection())
-				.andExpect(redirectedUrl("/"))					
+				.andExpect(redirectedUrl("/"))
 				.andReturn()
 				.getRequest()
 				.getSession();
-		
+
 		// post the solution XML
 		String body = this.mocMvc.perform(post("/upload")
 				.with(csrf())
@@ -256,14 +256,14 @@ public class MarketplaceServerTest {
 	 */
 	@Test
 	@Sql("/system-test-data.sql") // creates user entry in the database
-	public void testRestPostSolution() throws Exception {		
+	public void testRestPostSolution() throws Exception {
 		// sign in and upload a new solution
 		SolutionUploadSession session = signInAndUploadSolution();
-		
+
 		InputStream is = MarketplaceServerTest.class
 				.getClassLoader().getResource("data/p2-repo.zip").openStream();
 		MockMultipartFile file = new MockMultipartFile("file", "p2-repo.zip","multipart/form-data", is);
-		
+
 		// update the newly created solution with files
 		// TODO: Move to separate test
 		String body2 = this.mocMvc.perform(fileUpload("/upload-p2repo")
@@ -282,26 +282,32 @@ public class MarketplaceServerTest {
 		this.mocMvc.perform(get("http://localhost:8080/files/"+node2.getId()+"/artifacts.jar"))
 				.andExpect(status().isOk());
 		this.mocMvc.perform(get("http://localhost:8080/files/"+node2.getId()+"/content.jar"))
-		.andExpect(status().isOk());		
+		.andExpect(status().isOk());
+
+		ResponseEntity<String> entity = this.restTemplate
+				.getForEntity("http://localhost:" + this.port + "/mpc/content/1/api/p", String.class);
+		assertEquals(HttpStatus.OK, entity.getStatusCode());
+		Marketplace m = loadSerializedMarketplace(entity.getBody());
+		assertEquals(Long.valueOf(1),m.getNode().getId());
 
 		// sign out
 		this.mocMvc.perform(post("http://localhost:8080/signout")
 				.with(csrf()))
 				.andExpect(status().is3xxRedirection());
 	}
-	
+
 	@Test
 	@Sql("/system-test-data.sql") // creates user entry in the database
 	public void testRestUploadScreenshot() throws Exception{
 		// sign in and upload a new solution
 		SolutionUploadSession session = signInAndUploadSolution();
-		
+
 		MockMultipartFile screenshot = new MockMultipartFile(
-				"file", 
-				"screenshot.png", 
+				"file",
+				"screenshot.png",
 				"multipart/form-data",
 				MarketplaceServerTest.class.getClassLoader().getResource("data/screenshot.png").openStream());
-		
+
 		// upload the screenshot
 		String body = this.mocMvc.perform(fileUpload("/upload-screenshot")
 				.file(screenshot) // upload the p2-repository
@@ -310,11 +316,11 @@ public class MarketplaceServerTest {
 				.session((MockHttpSession) session.http))
 				.andExpect(status().isOk())
 				.andReturn().getResponse().getContentAsString();
-		
+
 		Node node = loadSerializedNode(body);
 
 		// verify that we have the correct screenshot file name
-		assertEquals("screenshot.png", node.getScreenshot());		
+		assertEquals("screenshot.png", node.getScreenshot());
 
 		// then try to download the screenshot file
 		this.mocMvc.perform(get("http://localhost:8080/files/"+node.getId()+"/"+node.getScreenshot()))
@@ -325,7 +331,7 @@ public class MarketplaceServerTest {
 				.with(csrf()))
 				.andExpect(status().is3xxRedirection());
 	}
-	
+
 	/**
 	 * Tests that a user that is signing in can first upload then update the
 	 * recently updated solution. The p2-repository, screenshot and image will
@@ -345,7 +351,7 @@ public class MarketplaceServerTest {
 		t.setId((long) 99);
 		t.setName("New tag");
 		session.node.getTags().getItems().add(t);
-				
+
 		// post the solution XML and obtain the resulting node
 		String n2Xml = this.mocMvc.perform(post("/upload")
 				.with(csrf())
@@ -380,11 +386,11 @@ public class MarketplaceServerTest {
 				.param("username", "upload")
 				.param("password", "password"))
 				.andExpect(status().is(302))
-				.andExpect(redirectedUrl("/"))					
+				.andExpect(redirectedUrl("/"))
 				.andReturn()
 				.getRequest()
 				.getSession();
-		
+
 		// assign an identifier that should not exist
 		Node node = loadSerializedNode(SOLUTION_XML);
 		node.setId(Long.valueOf(666));
@@ -420,11 +426,11 @@ public class MarketplaceServerTest {
 				.param("username", "user")
 				.param("password", "password"))
 				.andExpect(status().is(302))
-				.andExpect(redirectedUrl("/"))					
+				.andExpect(redirectedUrl("/"))
 				.andReturn()
 				.getRequest()
 				.getSession();
-		
+
 		// post the solution XML and obtain the resulting node
 			String n1Xml = this.mocMvc.perform(post("/upload")
 				.with(csrf())
@@ -442,14 +448,14 @@ public class MarketplaceServerTest {
 		// change a few values in the newly created node
 		Node n1 = loadSerializedNode(n1Xml);
 		n1.setName("The new solution name");
-		
+
 		// sign in as a different user
 		HttpSession session2 = this.mocMvc.perform(post("/signin/authenticate")
 				.with(csrf())
 				.param("username", "user2")
 				.param("password", "password2"))
 				.andExpect(status().is(302))
-				.andExpect(redirectedUrl("/"))					
+				.andExpect(redirectedUrl("/"))
 				.andReturn()
 				.getRequest()
 				.getSession();
@@ -467,11 +473,11 @@ public class MarketplaceServerTest {
 				.with(csrf()))
 				.andExpect(status().is3xxRedirection());
 	}
-	
+
 	//================================================================================================================
 	// WebMvc tests
 	//================================================================================================================
-		
+
 	@Test
 	@Sql("/system-test-data.sql")
 	public void testLoginWithGoodCredentials() throws Exception {
@@ -481,7 +487,7 @@ public class MarketplaceServerTest {
 				.param("password", "password"))
 				.andExpect(authenticated().withRoles("USER"))
 				.andExpect(status().is(302))
-				.andExpect(redirectedUrl("/"));					
+				.andExpect(redirectedUrl("/"));
 	}
 
 	@Test
@@ -493,9 +499,9 @@ public class MarketplaceServerTest {
 				.param("password", "bad_password"))
 				.andExpect(unauthenticated())
 				.andExpect(status().is(302))
-				.andExpect(redirectedUrl("/signin?param.error=bad_credentials"));					
+				.andExpect(redirectedUrl("/signin?param.error=bad_credentials"));
 	}
-	
+
 	@Test
 	@Sql("/system-test-data.sql")
 	public void testLoginWithAdminCredentials() throws Exception {
@@ -527,7 +533,7 @@ public class MarketplaceServerTest {
 			.accept(MediaType.APPLICATION_XHTML_XML))
 			.andExpect(status().isOk())
 			.andExpect(xpath("//div[@id='solution-1']").exists());
-		
+
 		this.mocMvc.perform(get("/search?term=does_not_exist")
 			.accept(MediaType.APPLICATION_XHTML_XML))
 			.andExpect(status().isOk())
@@ -562,7 +568,7 @@ public class MarketplaceServerTest {
 				.andReturn()
 				.getRequest()
 				.getSession();
-		
+
 		// bring up the new solution form
 		session = this.mocMvc.perform(get("/edit-solution")
 				.session((MockHttpSession)session)
@@ -596,7 +602,7 @@ public class MarketplaceServerTest {
 			.accept(MediaType.APPLICATION_XHTML_XML))
 			.andExpect(status().isOk())
 			.andExpect(xpath("//div[@id='solution-1']").exists());
-		
+
 		this.mocMvc.perform(get("/content/2")
 			.accept(MediaType.APPLICATION_XHTML_XML))
 			.andExpect(status().isOk())
@@ -610,10 +616,10 @@ public class MarketplaceServerTest {
 	public void testMvcDeleteSolution() {
 		// TODO: Write the test
 	}
-	
+
 	/**
 	 * Use the regular sign up form to create a new user.
-	 * 
+	 *
 	 * @throws Exception
 	 */
 	@Test
@@ -626,9 +632,9 @@ public class MarketplaceServerTest {
 				.param("password", "password"))
 			.andExpect(authenticated())
 			.andExpect(status().is3xxRedirection())
-			.andExpect(redirectedUrl("/"));					
+			.andExpect(redirectedUrl("/"));
 	}
-	
+
 	@Test
 	@Ignore
 	@Sql("/system-test-data.sql")
@@ -642,15 +648,15 @@ public class MarketplaceServerTest {
 				.andExpect(redirectedUrl("/"))
 				.andReturn()
 				.getRequest()
-				.getSession();						
-		
+				.getSession();
+
 		this.mocMvc.perform(post("/account/update-user")
 				.with(csrf())
 				// .with(account) // MocMvc does not support @ModelAttribute - need a different way
 				.param("firstName", "Test")
 				.param("lastName", "Test"))
 				.andExpect(status().is(200))
-				.andExpect(redirectedUrl("/accounts"));					
+				.andExpect(redirectedUrl("/accounts"));
 
 		this.mocMvc.perform(logout())
 			.andExpect(unauthenticated());
@@ -674,7 +680,7 @@ public class MarketplaceServerTest {
 				.andReturn()
 				.getRequest()
 				.getSession();
-		
+
 		this.mocMvc.perform(get("/account/user")
 				.session((MockHttpSession)session)
 				.accept(MediaType.APPLICATION_XHTML_XML))
@@ -692,7 +698,7 @@ public class MarketplaceServerTest {
 				.andReturn()
 				.getRequest()
 				.getSession();
-		
+
 		this.mocMvc.perform(get("/account/user")
 				.session((MockHttpSession)session2)
 				.with(csrf())
@@ -713,7 +719,7 @@ public class MarketplaceServerTest {
 				.andReturn()
 				.getRequest()
 				.getSession();
-		
+
 		this.mocMvc.perform(get("/delete-account/user")
 				.session((MockHttpSession)session)
 				.with(csrf())
@@ -727,6 +733,6 @@ public class MarketplaceServerTest {
 				.param("username", "user")
 				.param("password", "password"))
 				.andExpect(unauthenticated());
-		
+
 	}
 }
