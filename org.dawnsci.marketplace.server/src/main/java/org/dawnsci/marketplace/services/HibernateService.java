@@ -49,7 +49,7 @@ import org.zeroturnaround.zip.ZipUtil;
 /**
  * Instantiates Hibernate and Teneo for use as the persistence store for
  * marketplace EMF object.
- * 
+ *
  * @author Torkild U. Resheim, Itema AS
  */
 @Service
@@ -79,11 +79,11 @@ public class HibernateService {
 		// http://wiki.eclipse.org/Teneo/Hibernate/Configuration_Options
 		props.setProperty(PersistenceOptions.CASCADE_POLICY_ON_CONTAINMENT, "all");
 		props.setProperty(PersistenceOptions.CASCADE_POLICY_ON_NON_CONTAINMENT, "all");
-		
+
 		// configure synthetic version column (hsqldb no like e_version)
 		props.setProperty(PersistenceOptions.VERSION_COLUMN_NAME, "pversion");
 		props.setProperty(PersistenceOptions.ALWAYS_VERSION, "true");
-		
+
 		// enable the thread-bound strategy for obtaining currentSession
 		// see https://developer.jboss.org/wiki/Sessionsandtransactions#jive_content_id_Transaction_demarcation_with_plain_JDBC
 		props.setProperty("hibernate.current_session_context_class", "thread");
@@ -103,14 +103,14 @@ public class HibernateService {
 		hbds.initialize();
 		loadMarkets();
 		loadSolutions();
-		
+
 		return hbds.getSessionFactory();
 	}
 
 	public void loadMarkets() {
 		try {
 			hbds.getSessionFactory().getCurrentSession().beginTransaction();
-			// load catalogs from test or sample data 
+			// load catalogs from test or sample data
 			// TODO: Enable when we do have some catalogs
 //			EList<EObject> catalogList = loadSerialized("data/catalogs.xml");
 //			for (EObject catalog : catalogList) {
@@ -119,7 +119,7 @@ public class HibernateService {
 			// remove old data
 			Query query = hbds.getSessionFactory().getCurrentSession().createQuery("delete from Market");
 			query.executeUpdate();
-			// load markets from test or sample data 
+			// load markets from test or sample data
 			EList<EObject> markets = loadSerialized("data/markets.xml");
 			for (EObject market : markets) {
 				hbds.getSessionFactory().getCurrentSession().saveOrUpdate(market);
@@ -134,7 +134,7 @@ public class HibernateService {
 
 	@Transactional
 	public void loadSolutions() {
-			// load solutions from file 
+			// load solutions from file
 			EList<EObject> solutions = loadSerialized("data/solutions.xml");
 			EList<Node> nodes = ((Marketplace)solutions.get(0)).getFeatured().getNodes();
 			for (Node node : nodes) {
@@ -143,7 +143,7 @@ public class HibernateService {
 				hbds.getSessionFactory().getCurrentSession().beginTransaction();
 				// remove the old node, and replace it with a version loaded from file
 				Query createQuery = hbds.getSessionFactory().getCurrentSession().createQuery("SELECT node FROM Node node WHERE node.id='" + copy.getId() + "'");
-				if (createQuery.list().isEmpty()) {				
+				if (createQuery.list().isEmpty()) {
 					hbds.getSessionFactory().getCurrentSession().saveOrUpdate(copy);
 				}
 				hbds.getSessionFactory().getCurrentSession().getTransaction().commit();
@@ -191,11 +191,11 @@ public class HibernateService {
 		}
 		return null;
 	}
-	
+
 	/**
 	 * Loads a marketplace resource from XML. The file requested must be present
 	 * in the classpath.
-	 * 
+	 *
 	 * @param filename
 	 *            the filename to load
 	 * @return
@@ -236,11 +236,11 @@ public class HibernateService {
 				// use extended metadata for both loading and saving
 				saveOptions.put(XMLResource.OPTION_EXTENDED_META_DATA, Boolean.TRUE);
 				loadOptions.put(XMLResource.OPTION_EXTENDED_META_DATA, Boolean.TRUE);
-				// Treat "href" attributes as features
+				// treat "href" attributes as features
 				loadOptions.put(XMLResource.OPTION_USE_ENCODED_ATTRIBUTE_STYLE, Boolean.TRUE);
 				// required in order to correctly read in attributes
 				loadOptions.put(XMLResource.OPTION_LAX_FEATURE_PROCESSING, Boolean.TRUE);
-				// We UTF-8 encoding
+				// we use UTF-8 encoding
 				loadOptions.put(XMLResource.OPTION_ENCODING, "UTF-8");
 				saveOptions.put(XMLResource.OPTION_ENCODING, "UTF-8");
 				// do not download any external DTDs.

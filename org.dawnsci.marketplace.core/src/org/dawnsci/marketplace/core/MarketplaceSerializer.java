@@ -60,7 +60,7 @@ public class MarketplaceSerializer {
 				loadOptions.put(XMLResource.OPTION_USE_ENCODED_ATTRIBUTE_STYLE, Boolean.TRUE);
 				// required in order to correctly read in attributes
 				loadOptions.put(XMLResource.OPTION_LAX_FEATURE_PROCESSING, Boolean.TRUE);
-				// We UTF-8 encoding
+				// we use UTF-8 encoding
 				loadOptions.put(XMLResource.OPTION_ENCODING, "UTF-8");
 				saveOptions.put(XMLResource.OPTION_ENCODING, "UTF-8");
 				// do not download any external DTDs.
@@ -73,14 +73,14 @@ public class MarketplaceSerializer {
 			}
 		});
 	}
-	
+
 	/**
 	 * Loads the node serialized to the specific file.
-	 * 
+	 *
 	 * @param file the file to load
 	 * @return a marketplace node or solution
-	 * @throws IOException 
-	 * @throws FileNotFoundException 
+	 * @throws IOException
+	 * @throws FileNotFoundException
 	 */
 	public static Node loadNode(File file) throws FileNotFoundException, IOException {
 		ResourceSet rs = new ResourceSetImpl();
@@ -89,10 +89,11 @@ public class MarketplaceSerializer {
 		resource.load(new FileInputStream(file), rs.getLoadOptions());
 		return (Node) resource.getContents().get(0);
 	}
-	
+
 	public static String serialize(Node rootElement) throws IOException {
 		Map<String, Object> saveOptions = new HashMap<String, Object>();
 		saveOptions.put(XMLResource.OPTION_EXTENDED_META_DATA, Boolean.TRUE);
+		saveOptions.put(XMLResource.OPTION_ENCODING, "UTF-8");
 		XMLResource resource = new XMLResourceImpl();
 		resource.getContents().add(rootElement);
 		StringWriter stringWriter = new StringWriter();
