@@ -67,6 +67,7 @@ import org.springframework.web.servlet.HandlerMapping;
  * CRUD controller for solutions a.k.a. plug-ins and features.
  *
  * @author Torkild U. Resheim, Itema AS
+ * @since 1.0
  */
 @SuppressWarnings("unused")
 @Controller
@@ -183,10 +184,6 @@ public class SolutionController extends AbstractController {
 		// try to store the node
 		Account account = accountRepository.findOne(principal.getName());
 		Node node = content.getNode();
-		// make sure it can be installed
-		if (node.getEclipseversion()==null || node.getEclipseversion().isEmpty()){
-			node.setEclipseversion("4.4, 4.5, 4.6, 4.7");
-		}
 		Object result = marketplaceDAO.saveOrUpdateSolution(node, account);
 		if (result instanceof Node) {
 			node = (Node) result;

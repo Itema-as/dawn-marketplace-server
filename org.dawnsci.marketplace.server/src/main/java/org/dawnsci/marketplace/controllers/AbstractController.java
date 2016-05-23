@@ -1,3 +1,13 @@
+/*****************************************************************************
+ * Copyright (c) 2016 Diamond Light Source Ltd.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *    Torkild U. Resheim - initial API and implementation
+ ****************************************************************************/
 package org.dawnsci.marketplace.controllers;
 
 import java.security.Principal;
@@ -19,14 +29,20 @@ import org.springframework.social.google.api.Google;
 import org.springframework.social.twitter.api.Twitter;
 import org.springframework.ui.ModelMap;
 
+/**
+ * Shared controller features.
+ *
+ * @author Torkild U. Resheim, Itema AS
+ * @since 1.0
+ */
 public abstract class AbstractController {
 
 	@Inject
 	protected Environment environment;
 
-	@Inject 
+	@Inject
 	protected ConnectionRepository connectionRepository;
-	
+
 	protected static final TypeUtilities DATE_UTILS = new TypeUtilities();
 	protected static final EStructuralFeature TEXT = XMLTypePackage.eINSTANCE.getXMLTypeDocumentRoot_Text();
 
@@ -64,7 +80,7 @@ public abstract class AbstractController {
 
 	/**
 	 * Add profile information to the model map.
-	 * 
+	 *
 	 * @param map
 	 *            the model map
 	 * @param principal

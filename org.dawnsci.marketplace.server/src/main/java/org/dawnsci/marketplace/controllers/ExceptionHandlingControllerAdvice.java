@@ -15,6 +15,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+/**
+ * @author Torkild U. Resheim, Itema AS
+ * @since 1.0
+ */
 @ControllerAdvice
 public class ExceptionHandlingControllerAdvice {
 
@@ -23,5 +27,5 @@ public class ExceptionHandlingControllerAdvice {
 		model.addAttribute("providerId", e.getProviderId());
 		return "ratelimit";
 	}
-	
+
 }

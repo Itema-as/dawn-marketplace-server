@@ -41,6 +41,9 @@ import org.springframework.web.multipart.MultipartFile;
  * solutions. Note that this API cannot be accessed by an administrator - the
  * client must be logged in as a user, and will also have to own the solution in
  * order to modify it.
+ *
+ * @author Torkild U. Resheim, Itema AS
+ * @since 1.0
  */
 @Controller
 @RestController
@@ -87,8 +90,12 @@ public class ExtendedRestApiController {
 	}
 
 	/**
-	 * If a p2-repository is uploaded for the soliution, the URL to the update
-	 * site will be overwritten with a new value pointing to this server.
+	 * Uploads a p2-repository to the solution and updates the solution data
+	 * Returns a <b>403 Forbidden</b> if the logged in user is not the owner of
+	 * the solution.
+	 *
+	 * The URL to the update site will be overwritten with a new value pointing
+	 * to this server.
 	 */
 	@PreAuthorize("hasRole('UPLOAD')")
 	@RequestMapping(value = "/upload-p2repo")
@@ -116,7 +123,7 @@ public class ExtendedRestApiController {
 
 	/**
 	 * Uploads a screenshot to the solution and updates the solution data with
-	 * the name of the file being uploaded. returns a <b>403 Forbidden</b> if
+	 * the name of the file being uploaded. Returns a <b>403 Forbidden</b> if
 	 * the logged in user is not the owner of the solution.
 	 */
 	@PreAuthorize("hasRole('UPLOAD')")
@@ -144,7 +151,7 @@ public class ExtendedRestApiController {
 
 	/**
 	 * Uploads a image to the solution and updates the solution data with
-	 * the name of the file being uploaded. returns a <b>403 Forbidden</b> if
+	 * the name of the file being uploaded. Returns a <b>403 Forbidden</b> if
 	 * the logged in user is not the owner of the solution.
 	 */
 	@PreAuthorize("hasRole('UPLOAD')")

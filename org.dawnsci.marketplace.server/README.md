@@ -19,7 +19,7 @@ additional folder for the Equinox p2-repository.
 When doing development on this code, you should start the server from within
 Eclipse. That will allow you to do normal debugging. Make sure the [Spring tool
 suite](https://marketplace.eclipse.org/content/spring-ide) is installed and
-launch the __org.dawnsci.marketplace.server__ project as a _Spring Boot App_
+launch the **org.dawnsci.marketplace.server** project as a _Spring Boot App_
 
 When running the standalone server you need to start it from the command line.
 E.g. `java -jar org.dawnsci.marketplace.server-1.0-SNAPSHOT.war`
@@ -83,24 +83,6 @@ you must in addition add an entry to `/etc/hosts` when testing:
 See [the server configuration](src/main/resources/application.yml) for OAuth
 secrets and identifiers.
 
-### Starting the server
-
-When doing development on this code, you should start the server from within
-Eclipse.  That will allow you to do normal debugging.  Make sure the [Spring
-tool suite](https://marketplace.eclipse.org/content/spring-ide) is installed
-and launch the __org.dawnsci.marketplace.server__ project as a _Spring Boot
-App_
-
-When running the standalone server you need to start it from the command
-line.  E.g.  `java -jar org.dawnsci.marketplace.server-1.0-SNAPSHOT.war`
-
-If the following files are not in place, they will be created.  The folder
-named _pages_ must contain:
-
-* `welcome.md` - The welcome text.
-* `marketplace-icon` - The marketplace icon
-* `catalog.icon` - The catalog icon
-
 ### Logging in
 
 An administrative user will be automatically created.  The login of this
@@ -111,6 +93,9 @@ password for this user in the configuration file using the property
 
 ### Adding a solution
 
+* In order to create a new solution, the logged in user must belong to the
+  **UPLOAD** group. This is not set per default when a new user is created, so
+  an administrator must assign this role to users.
 * When uploading a solution p2-repository; either using the web-interface or the
   REST-API, the update site property of the solution will be changed to point to
   `/files/&lt;solution-id&gt;`.

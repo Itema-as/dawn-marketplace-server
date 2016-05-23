@@ -409,7 +409,6 @@ public class MarketplaceDAO {
 			if (isNewSolution) {
 				logger.info("Creating a new solution instance in database");
 				s.setCreated(System.currentTimeMillis());
-				s.setUpdateurl(""); // http://localhost:8080/files/1 for solution #1
 				s.setOwner(account.getFirstName()+" "+account.getLastName());
 			}
 
@@ -427,6 +426,7 @@ public class MarketplaceDAO {
 			return s;
 		} catch (Exception e) {
 			sessionFactory.getCurrentSession().getTransaction().rollback();
+			e.printStackTrace();
 			throw new InternalErrorException(e);
 		}
 	}

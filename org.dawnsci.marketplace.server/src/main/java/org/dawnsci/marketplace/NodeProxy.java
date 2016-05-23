@@ -32,19 +32,19 @@ import org.springframework.web.multipart.MultipartFile;
  * cannot easily be used in web forms. Where possible methods map 1-1 however
  * in cases where {@link org.dawnsci.marketplace.Node} expects a list of child
  * elements we treat these differently.
- * 
+ *
  * @author Torkild U. Resheim, Itema AS
  */
 public class NodeProxy {
 
-	private static final EStructuralFeature TEXT = XMLTypePackage.eINSTANCE.getXMLTypeDocumentRoot_Text(); 
-	
-	
+	private static final EStructuralFeature TEXT = XMLTypePackage.eINSTANCE.getXMLTypeDocumentRoot_Text();
+
+
 	private Node node;
 	private MultipartFile screenshotfile;
 	private MultipartFile imagefile;
 	private MultipartFile repositoryfile;
-	
+
 	public NodeProxy(Node node) {
 		this.setNode(node);
 	}
@@ -261,7 +261,7 @@ public class NodeProxy {
 
 	/**
 	 * Returns the tags as a list of comma-separated keywords.
-	 * 
+	 *
 	 * @return a list of tags
 	 */
 	public String getTags() {
@@ -281,7 +281,7 @@ public class NodeProxy {
 
 	/**
 	 * Sets the tags, created from a list of comma-separated keywords.
-	 * 
+	 *
 	 * @param value a list of tags
 	 */
 	public void setTags(String value) {
@@ -310,11 +310,11 @@ public class NodeProxy {
 	public void setNode(Node node) {
 		this.node = node;
 	}
-	
+
 	public MultipartFile getScreenshotfile() {
 		return screenshotfile;
 	}
-	
+
 	public void setScreenshotfile(MultipartFile screenshotfile) {
 		this.screenshotfile = screenshotfile;
 	}
@@ -322,7 +322,7 @@ public class NodeProxy {
 	public MultipartFile getImagefile() {
 		return imagefile;
 	}
-	
+
 	public void setImagefile(MultipartFile imagefile) {
 		this.imagefile = imagefile;
 	}
@@ -330,11 +330,11 @@ public class NodeProxy {
 	public MultipartFile getRepositoryfile() {
 		return repositoryfile;
 	}
-	
+
 	public void setRepositoryfile(MultipartFile repositoryfile) {
 		this.repositoryfile = repositoryfile;
 	}
-	
+
 	public String getRawBody() {
 		if (node.getRawBody() == null) {
 			return node.getBody();
@@ -346,7 +346,7 @@ public class NodeProxy {
 		node.setRawBody(value);
 		node.setBody(toHtml(value));
 	}
-	
+
 	@SuppressWarnings("rawtypes")
 	public String getMainFeature(){
 		if (node.getIus() == null) {
@@ -365,19 +365,19 @@ public class NodeProxy {
 		}
 		return null;
 	}
-	
+
 	public void setMainFeature(String id){
 		if (node.getIus() == null) {
 			Ius createIus = MarketplaceFactory.eINSTANCE.createIus();
 			node.setIus(createIus);
 		}
-		node.getIus().getItems().clear();		
+		node.getIus().getItems().clear();
 		Iu createIu = MarketplaceFactory.eINSTANCE.createIu();
 		FeatureMapUtil.addText(createIu.getMixed(), id);
 		createIu.setRequired(true);
 		node.getIus().getItems().add(createIu);
 	}
-	
+
 	static String toHtml(String markdown) {
 		if (markdown == null) {
 			return "";
@@ -395,5 +395,5 @@ public class NodeProxy {
 		}
 		return sw.toString();
 	}
-		
+
 }

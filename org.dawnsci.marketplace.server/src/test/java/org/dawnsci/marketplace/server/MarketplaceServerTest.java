@@ -276,7 +276,7 @@ public class MarketplaceServerTest {
 		Node node2 = loadSerializedNode(body2);
 
 		// verify that we have the correct update site URL
-		assertEquals("", node2.getUpdateurl());
+		assertEquals("/files/"+node2.getId()+"/", node2.getUpdateurl());
 
 		// download the p2-repository index files
 		this.mocMvc.perform(get("http://localhost:8080/files/"+node2.getId()+"/artifacts.jar"))
@@ -584,16 +584,19 @@ public class MarketplaceServerTest {
 				.with(csrf())
 				.session((MockHttpSession)session)
 				.param("name", "test name")
+				.param("supporturl", "http://dawnsci.org")
+				.param("updateurl", "http://dawnsci.org")
 				.accept(MediaType.APPLICATION_XHTML_XML))
 				.andExpect(status().is3xxRedirection())
 				.andReturn().getResponse().getRedirectedUrl();
 
 		// test some key values in the new product
-//		this.mocMvc.perform(get(url)
-//				.accept(MediaType.APPLICATION_XHTML_XML))
-//				.andExpect(status().isOk())
-//				.andDo(print())
-//				.andExpect(xpath("//div[@id='solution-1']").exists());
+		Integer id = Integer.decode(url.substring(url.lastIndexOf("/")+1));
+		ResponseEntity<String> entity = this.restTemplate
+				.getForEntity("http://localhost:" + this.port + "/mpc/content/"+id+"/api/p", String.class);
+		Marketplace m = loadSerializedMarketplace(entity.getBody());
+		// make sure the update site URL has not changed
+		assertEquals("http://dawnsci.org",m.getNode().getUpdateurl());
 	}
 
 	@Test

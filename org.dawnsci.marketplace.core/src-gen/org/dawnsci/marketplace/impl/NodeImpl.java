@@ -863,7 +863,7 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 	 * @generated Not
 	 */
 	public String getUpdateurl() {
-		if (updateurl == null || screenshot.isEmpty()) {
+		if (updateurl == null || updateurl.isEmpty()) {
 			return null;
 		}
 		if (getBaseUrl() == null || !updateurl.startsWith("/")) {

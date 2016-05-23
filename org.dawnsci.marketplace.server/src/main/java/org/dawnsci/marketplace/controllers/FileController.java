@@ -31,13 +31,14 @@ import org.springframework.web.servlet.HandlerMapping;
 
 /**
  * Handles file resources under "/files/".
- * 
+ *
  * @author Torkild U. Resheim, Itema AS
+ * @since 1.0
  */
 @Controller
 @RequestMapping(value = "/files")
 public class FileController {
-	
+
 	@Autowired
 	private FileService fileService;
 
@@ -66,8 +67,8 @@ public class FileController {
 				e.printStackTrace();
 			}
 		} else {
-            throw new ResourceNotFoundException(); 
-        }		
+            throw new ResourceNotFoundException();
+        }
 		return null;
 	}
 }

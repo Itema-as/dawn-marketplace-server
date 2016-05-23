@@ -38,6 +38,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.HandlerMapping;
 
+/**
+ * @author Torkild U. Resheim, Itema AS
+ * @since 1.0
+ */
 @Controller
 public class PageController extends AbstractController {
 
@@ -56,9 +60,9 @@ public class PageController extends AbstractController {
 	public String markdown(HttpServletRequest request, ModelMap map,  Principal principal) {
 		addCommonItems(map, principal);
 		String resource = ((String) request.getAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE)).substring(1);
-		Path path = fileService.getPageFile(resource).toPath();			
+		Path path = fileService.getPageFile(resource).toPath();
 		map.addAttribute("text", parse(path));
-		
+
 		return "page";
 	}
 
@@ -85,8 +89,8 @@ public class PageController extends AbstractController {
 	public ResponseEntity<FileSystemResource> picture(HttpServletRequest request) {
 
 		String resource = ((String) request.getAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE)).substring(1);
-		Path path = fileService.getPageFile(resource).toPath();			
-		
+		Path path = fileService.getPageFile(resource).toPath();
+
 		File file = path.toAbsolutePath().toFile();
 
 		if (file.exists() && file.isFile()) {
@@ -99,8 +103,8 @@ public class PageController extends AbstractController {
 				e.printStackTrace();
 			}
 		} else {
-            throw new ResourceNotFoundException(); 
-        }		
+            throw new ResourceNotFoundException();
+        }
 		return null;
 	}
 
