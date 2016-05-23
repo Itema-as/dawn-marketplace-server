@@ -195,6 +195,16 @@ public class MarketplaceDAO {
 		return marketplace;
 	}
 
+	/**
+	 * Returns an empty news section for now.
+	 */
+	@Transactional
+	public Marketplace getNews() {
+		Marketplace marketplace = MarketplaceFactory.eINSTANCE.createMarketplace();
+		marketplace.setBaseUrl(marketplaceBaseUrl);
+		return marketplace;
+	}
+
 	@SuppressWarnings("unchecked")
 	@Transactional
 	public Marketplace getFeatured() {

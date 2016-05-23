@@ -52,6 +52,12 @@ public class MarketplaceEndpoint {
 	}
 
 	@GET
+	@Path("news/api/p")
+	public String getNews() throws Exception {
+		return serialize(marketplaceDAO.getNews());
+	}
+
+	@GET
 	@Path("catalogs/api/p")
 	public String getCatalogs() throws Exception {
 		return serialize(marketplaceDAO.getCatalogs());
