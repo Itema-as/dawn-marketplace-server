@@ -126,7 +126,7 @@ implemented.
 - [ ]	`/favorites/top/api/p` - Returns a server-defined number of top favorites
 - [ ]	`/popular/top/api/p` - Returns a server-defined number of most active results
 - [ ]	`/related/api/p` - Returns a server-defined number of recommendations based on a list of nodes provided as query parameter
-- [ ]	`/news/api/p` - Returns the news configuration details (news location/title...).
+- [x]	`/news/api/p` - Returns an empty news configuration
 
 There is one exception to adding /api/p at the end and that is for search
 results.
