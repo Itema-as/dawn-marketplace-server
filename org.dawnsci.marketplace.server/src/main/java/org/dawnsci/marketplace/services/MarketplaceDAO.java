@@ -54,52 +54,55 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class MarketplaceDAO {
-	
+
 	private static final Logger logger = LoggerFactory.getLogger(MarketplaceDAO.class);
-	
+
 	@Inject
 	private AccountRepository accountRepository;
 
 	@Inject
 	private SessionFactory sessionFactory;
-		
+
 	@Inject
 	private Environment environment;
-	
+
 	@Inject
 	private FileService fileService;
-	
+
 	@Value("${marketplace.featured.solutions:1}")
 	List<Long> featuredItems;
-	
+
 	@Value("${marketplace.featured.maximum:3}")
 	private int maxFeaturedItems;
-	
+
 	@Value("${marketplace.max-recent-solutions:12}")
 	private int maxRecentItems;
+
+	@Value("${marketplace.base-url:http://localhost:8080}")
+	private String marketplaceBaseUrl;
 
 	/**
 	 * HQL query to use when searching for a solution using a simple substring
 	 * search.
 	 */
-	private static final String HQL_SEARCH = 
+	private static final String HQL_SEARCH =
 			"select node from Node node where " +
 			"lower(node.name) like :term or " +
 			"lower(node.owner) like :term or " +
 			"lower(str(node.shortdescription)) like :term or " +
 			"lower(str(node.body)) like :term " +
 			"order by node.changed desc";
-	
+
 	/**
 	 * Creates and returns the catalog representing this particular marketplace
 	 * instance.
-	 * 
+	 *
 	 * @return this marketplace's catalog
 	 */
 	private Catalog getCatalog() {
 		Catalog catalog = MarketplaceFactory.eINSTANCE.createCatalog();
 		catalog.setTitle(environment.getProperty("marketplace.title"));
-		catalog.setUrl(environment.getProperty("marketplace.base-url")+"/mpc");
+		catalog.setUrl(marketplaceBaseUrl+"/mpc");
 		catalog.setIcon(environment.getProperty("marketplace.catalog-icon"));
 		catalog.setDescription(environment.getProperty("marketplace.description"));
 		Wizard wizard = MarketplaceFactory.eINSTANCE.createWizard();
@@ -116,7 +119,7 @@ public class MarketplaceDAO {
 	@Transactional
 	public Marketplace getContent(Long identifier) {
 		Marketplace marketplace = MarketplaceFactory.eINSTANCE.createMarketplace();
-		marketplace.setBaseUrl(environment.getProperty("marketplace.base-url"));
+		marketplace.setBaseUrl(marketplaceBaseUrl);
 		try {
 			sessionFactory.getCurrentSession().beginTransaction();
 			Query query = sessionFactory.getCurrentSession()
@@ -126,7 +129,7 @@ public class MarketplaceDAO {
 				marketplace.setNode((EcoreUtil.copy((Node)query.list().get(0))));
 			}
 			sessionFactory.getCurrentSession().getTransaction().commit();
-		} catch (Exception e) {			
+		} catch (Exception e) {
 			sessionFactory.getCurrentSession().getTransaction().rollback();
 			throw new InternalErrorException(e);
 		}
@@ -150,7 +153,7 @@ public class MarketplaceDAO {
 	@Transactional
 	public Marketplace getCatalogs() {
 		Marketplace marketplace = MarketplaceFactory.eINSTANCE.createMarketplace();
-		marketplace.setBaseUrl(environment.getProperty("marketplace.base-url"));
+		marketplace.setBaseUrl(marketplaceBaseUrl);
 		Catalogs catalogs = MarketplaceFactory.eINSTANCE.createCatalogs();
 		marketplace.setCatalogs(catalogs);
 		try {
@@ -179,7 +182,7 @@ public class MarketplaceDAO {
 	@Transactional
 	public Marketplace getMarkets() {
 		Marketplace marketplace = MarketplaceFactory.eINSTANCE.createMarketplace();
-		marketplace.setBaseUrl(environment.getProperty("marketplace.base-url"));
+		marketplace.setBaseUrl(marketplaceBaseUrl);
 		try {
 			sessionFactory.getCurrentSession().beginTransaction();
 			Query query = sessionFactory.getCurrentSession().createQuery("SELECT market FROM Market market");
@@ -196,7 +199,7 @@ public class MarketplaceDAO {
 	@Transactional
 	public Marketplace getFeatured() {
 		Marketplace marketplace = MarketplaceFactory.eINSTANCE.createMarketplace();
-		marketplace.setBaseUrl(environment.getProperty("marketplace.base-url"));
+		marketplace.setBaseUrl(marketplaceBaseUrl);
 		Featured featured = MarketplaceFactory.eINSTANCE.createFeatured();
 		marketplace.setFeatured(featured);
 		try {
@@ -220,7 +223,7 @@ public class MarketplaceDAO {
 	@Transactional
 	public Marketplace getRecent() {
 		Marketplace marketplace = MarketplaceFactory.eINSTANCE.createMarketplace();
-		marketplace.setBaseUrl(environment.getProperty("marketplace.base-url"));
+		marketplace.setBaseUrl(marketplaceBaseUrl);
 		Recent recent = MarketplaceFactory.eINSTANCE.createRecent();
 		marketplace.setRecent(recent);
 		try {
@@ -241,11 +244,11 @@ public class MarketplaceDAO {
 	@Transactional
 	public Marketplace getSearchResult(String term) {
 		Marketplace marketplace = MarketplaceFactory.eINSTANCE.createMarketplace();
-		marketplace.setBaseUrl(environment.getProperty("marketplace.base-url"));
+		marketplace.setBaseUrl(marketplaceBaseUrl);
 		Search search = MarketplaceFactory.eINSTANCE.createSearch();
 		term = term.toLowerCase();
 		search.setTerm(term);
-		search.setUrl(environment.getProperty("marketplace.base-url")+"/search?term="+term);
+		search.setUrl(marketplaceBaseUrl+"/search?term="+term);
 		marketplace.setSearch(search);
 		try {
 			sessionFactory.getCurrentSession().beginTransaction();
@@ -260,7 +263,7 @@ public class MarketplaceDAO {
 		}
 		return marketplace;
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	@Transactional
 	public List<String> getTags() {
@@ -277,15 +280,15 @@ public class MarketplaceDAO {
 		}
 		return tags;
 	}
-		
+
 	@SuppressWarnings("unchecked")
 	@Transactional
 	public Marketplace getSolutionsWithTag(String tag) {
 		Marketplace marketplace = MarketplaceFactory.eINSTANCE.createMarketplace();
-		marketplace.setBaseUrl(environment.getProperty("marketplace.base-url"));
+		marketplace.setBaseUrl(marketplaceBaseUrl);
 		Search search = MarketplaceFactory.eINSTANCE.createSearch();
 		search.setTerm(tag);
-		search.setUrl(environment.getProperty("marketplace.base-url")+"/search?tag="+tag);
+		search.setUrl(marketplaceBaseUrl+"/search?tag="+tag);
 		marketplace.setSearch(search);
 		try {
 			sessionFactory.getCurrentSession().beginTransaction();
@@ -302,11 +305,11 @@ public class MarketplaceDAO {
 		}
 		return marketplace;
 	}
-	
+
 	/**
 	 * Returns a <b>detached</b> copy of the solution with the specified
 	 * identifier.
-	 * 
+	 *
 	 * @param identifier
 	 *            the solution identifier
 	 * @return a detached {@link Node} instance
@@ -323,7 +326,7 @@ public class MarketplaceDAO {
 			sessionFactory.getCurrentSession().getTransaction().commit();
 		} catch (Exception e) {
 			sessionFactory.getCurrentSession().getTransaction().rollback();
-			throw new InternalErrorException(e);			
+			throw new InternalErrorException(e);
 		}
 		return node;
 	}
@@ -332,7 +335,7 @@ public class MarketplaceDAO {
 	 * Deletes the specified solution from the marketplace or throws a
 	 * {@link ForbiddenException} if the solution does not belong to the
 	 * specified account.
-	 * 
+	 *
 	 * @param account
 	 *            the account that executes the operation
 	 * @param id
@@ -351,34 +354,34 @@ public class MarketplaceDAO {
 			fileService.deleteSolution(id);
 		} catch (Exception e) {
 			sessionFactory.getCurrentSession().getTransaction().rollback();
-			throw new InternalErrorException(e);			
+			throw new InternalErrorException(e);
 		}
 	}
-	
+
 	/**
 	 * <p>
 	 * If clones are serialized/deserialized as different object instances then
 	 * we need to have an explicit version attribute in the model itself (which
-	 * stays with the object). Since we don't want to keep multiple version, the 
+	 * stays with the object). Since we don't want to keep multiple version, the
 	 * <i>created</i> field on <code>node</code> is annotated with "Version". Using
 	 * the <i>changed</i> field opens a can of worms.
 	 * </p>
-	 * 
+	 *
 	 * @param solution the solution as XML
 	 * @param account the user identifier
 	 * @return
-	 * @throws NamingException 
+	 * @throws NamingException
 	 * @see https://docs.jboss.org/hibernate/core/3.3/reference/en/html/objectstate.html#objectstate-detached
 	 */
 	@Transactional
-	public Object saveOrUpdateSolution(Node s, Account account) {		
-		try {			
+	public Object saveOrUpdateSolution(Node s, Account account) {
+		try {
 			sessionFactory.getCurrentSession().beginTransaction();
 			boolean isNewSolution = s.getId() == null ? true : false;
 			// if the solution has an assigned identifier, but does not exist
 			// we'll clear the identifier and create a fresh instance. The new
 			// identifier will be returned so that the client can update it's
-			// copy. Also make sure we have the same "created" value as this 
+			// copy. Also make sure we have the same "created" value as this
 			// is used for identity.
 			if (!isNewSolution) {
 				Object object = sessionFactory.getCurrentSession().get("Node", s.getId());
@@ -399,52 +402,52 @@ public class MarketplaceDAO {
 				}
 				logger.info("Updating solution #"+s.getId());
 			}
-			
+
 			s.setChanged(System.currentTimeMillis());
 
 			// set a few values for new entities
 			if (isNewSolution) {
 				logger.info("Creating a new solution instance in database");
 				s.setCreated(System.currentTimeMillis());
-				s.setUpdateurl(""); // http://localhost:8080/files/1 for solution #1
 				s.setOwner(account.getFirstName()+" "+account.getLastName());
 			}
-			
+
 			// do the update in the databse
 			sessionFactory.getCurrentSession().saveOrUpdate(s);
 			sessionFactory.getCurrentSession().getTransaction().commit();
-			
+
 			if (isNewSolution) {
 				// associate the new solution with the user account
 				accountRepository.createAccountSolutionMapping(account, s.getId());
 			}
-			
+
 			logger.info("Saved solution #" + s.getId() + " - " + s.getName());
-			
+
 			return s;
 		} catch (Exception e) {
 			sessionFactory.getCurrentSession().getTransaction().rollback();
-			throw new InternalErrorException(e);			
+			e.printStackTrace();
+			throw new InternalErrorException(e);
 		}
 	}
 	/**
 	 * Creates a new node or solution, ready for editing.
-	 * 
+	 *
 	 * @return the new node
 	 */
 	public Marketplace getNewNode() {
 		Marketplace marketplace = MarketplaceFactory.eINSTANCE.createMarketplace();
-		marketplace.setBaseUrl(environment.getProperty("marketplace.base-url"));
+		marketplace.setBaseUrl(marketplaceBaseUrl);
 		Node node = MarketplaceFactory.eINSTANCE.createNode();
 		marketplace.setNode(node);
 		return marketplace;
 	}
-	
+
 	/**
 	 * Tests whether or not the current user have access to edit the solution
 	 * with the given identifier. The user must be an administrator or own the
 	 * solution.
-	 * 
+	 *
 	 * @param identifier
 	 *            the identifier of the solution
 	 * @return <code>true</code> if editable
@@ -469,7 +472,7 @@ public class MarketplaceDAO {
 		if (account.getUsername().equals(a.getUsername())) {
 			return true;
 		}
-		return false;		
+		return false;
 	}
 
 }

@@ -25,14 +25,14 @@
 					    <li role="presentation"><a href="#images" aria-controls="images" role="tab" data-toggle="tab">Images/repository</a></li>
 					    <li role="presentation"><a href="#description" aria-controls="description" role="tab" data-toggle="tab">Description</a></li>
 					    <!-- action buttons -->
-					    <li class="pull-right"><button type="submit" class="btn btn-success">Submit changes</button></li>					    
+					    <li class="pull-right"><button type="submit" class="btn btn-success">Submit changes</button></li>
 					    <li class="pull-right" style="margin-right: 1em;" th:if="${content.id != null}">
-					    	<button th:attr="data-href=@{'/delete-solution/'+${content.id}}" type="button" 
+					    	<button th:attr="data-href=@{'/delete-solution/'+${content.id}}" type="button"
 					    		data-toggle="modal" data-target="#confirm-dialog" class="btn btn-danger">Delete</button>
-					    </li>					    
+					    </li>
 					 </ul>
 					<input th:field="*{id}" hidden="hidden"></input>
-					<div class="tab-content">				
+					<div class="tab-content">
 						<!-- Details section -->
 						<div role="tabpanel" class="tab-pane active fade in" id="details">
 							<div class="panel-body">
@@ -77,7 +77,7 @@
 									<label for="status" class="col-sm-2 control-label">Status</label>
 									<div class="col-sm-10">
 										<select class="form-control" id="status" th:field="*{status}">
-	 										<option th:each="st : ${status}" 
+	 										<option th:each="st : ${status}"
 	           									th:value="${st}" th:text="${st}"></option>
 										</select>
 									</div>
@@ -122,7 +122,7 @@
 										<input id="screenshot" type="file" th:field="*{screenshotfile}"></input>
 										<p class="help-block">Select a file to use for screenshot. Please use a 16:10 ratio image.</p>
 									</div>
-								</div>						
+								</div>
 								<div class="form-group">
 									<label for="logo" class="col-sm-2 control-label">Logo</label>
 									<div class="col-sm-10">
@@ -133,12 +133,19 @@
 										<input id="logo" type="file" th:field="*{imagefile}"></input>
 										<p class="help-block">Select a file to use for logo. Please use an image that is 110x80 pixels in size.</p>
 									</div>
-								</div>						
+								</div>
 								<div class="form-group">
-									<label for="logo" class="col-sm-2 control-label">Repository</label>
+									<label for="logo" class="col-sm-2 control-label">Repository file</label>
 									<div class="col-sm-10">
 										<input id="repository" type="file" th:field="*{repositoryfile}"></input>
 										<p class="help-block">Select a compressed p2 repository.(Note that there must not be a root folder.)</p>
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="updateurl" class="col-sm-2 control-label">Repository URL</label>
+									<div class="col-sm-10">
+										<input id="updateurl" class="form-control" th:field="*{updateurl}"></input>
+										<p class="help-block">Installation repository URL. Should not be specified if a repository file is uploaded.</p>
 									</div>
 								</div>
 								<div class="form-group">
@@ -147,7 +154,7 @@
 										<input id="feature" class="form-control" th:field="*{mainFeature}"></input>
 										<p class="help-block">Root feature identifier.</p>
 									</div>
-								</div>						
+								</div>
 							</div>
 						</div>
 						<!-- Long description section -->
@@ -164,8 +171,8 @@
 	</div>
 	<div th:replace="../fragments/footer :: footer"></div>
 </body>
-<script>			
-	$(document).ready( function() {	    
+<script>
+	$(document).ready( function() {
 	    //confirm download dialog fragment
 	    function activateConfirmBtn(e){
 	    	$('#confirm-dialog #confirm-ok .btn').prop('disabled', !e.currentTarget.checked);
@@ -182,22 +189,22 @@
 	    	e.preventDefault();
 	    }
 	  	//on show - bind event handlers
-	    $('#confirm-dialog').bind('show.bs.modal', function(e) {	    	
+	    $('#confirm-dialog').bind('show.bs.modal', function(e) {
 	    	$(this).find('#confirm-check').bind('change', activateConfirmBtn);
 		    $(this).find('#confirm-ok').attr('href', $(e.relatedTarget).data('href'));
 		    $(this).find('#confirm-ok').bind('click', disableDownloadLink);
 		    $(this).find('#confirm-ok .btn').bind('click', hideDialog);
 		});
-	    
+
 	    //on hide - unbind event handlers - reset checkbox and button state.
 		    $('#confirm-dialog').bind('hide.bs.modal', function(e) {
 		    	var confirmCheck = $(this).find('#confirm-check');
 		    	confirmCheck.prop('checked', false);
 		    	confirmCheck.unbind('change', activateConfirmBtn);
-		    	
-		    	var confirmBtn = $(this).find('#confirm-ok .btn'); 		    	
+
+		    	var confirmBtn = $(this).find('#confirm-ok .btn');
 		    	confirmBtn.prop('disabled', true);
-	    	confirmBtn.unbind('click', hideDialog);		    	
+	    	confirmBtn.unbind('click', hideDialog);
 		});
 	});
 </script>

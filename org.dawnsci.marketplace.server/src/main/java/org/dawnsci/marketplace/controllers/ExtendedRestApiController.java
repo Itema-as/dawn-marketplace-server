@@ -41,19 +41,22 @@ import org.springframework.web.multipart.MultipartFile;
  * solutions. Note that this API cannot be accessed by an administrator - the
  * client must be logged in as a user, and will also have to own the solution in
  * order to modify it.
+ *
+ * @author Torkild U. Resheim, Itema AS
+ * @since 1.0
  */
 @Controller
 @RestController
 @MultipartConfig(fileSizeThreshold = 4_194_304)
 public class ExtendedRestApiController {
-	
-	@Autowired 
+
+	@Autowired
 	private MarketplaceDAO marketplaceDAO;
-	
+
 	@Autowired
 	private AccountRepository accountRepository;
-	
-	@Autowired 
+
+	@Autowired
 	protected FileService fileService;
 
 	/**
@@ -68,7 +71,7 @@ public class ExtendedRestApiController {
 		headers.add(token.getHeaderName(), token.getToken());
 		return new ResponseEntity<>("you got your token", headers, HttpStatus.OK);
 	}
-	
+
 	@PreAuthorize("hasRole('UPLOAD')")
 	@RequestMapping(value = "/upload", method = RequestMethod.POST)
 	public ResponseEntity<String> postSolution(Principal principal, @RequestBody String solution) throws Exception {
@@ -85,7 +88,15 @@ public class ExtendedRestApiController {
 			} else return new ResponseEntity<String>(result.toString(), HttpStatus.FORBIDDEN);
 		}
 	}
-	
+
+	/**
+	 * Uploads a p2-repository to the solution and updates the solution data
+	 * Returns a <b>403 Forbidden</b> if the logged in user is not the owner of
+	 * the solution.
+	 *
+	 * The URL to the update site will be overwritten with a new value pointing
+	 * to this server.
+	 */
 	@PreAuthorize("hasRole('UPLOAD')")
 	@RequestMapping(value = "/upload-p2repo")
 	public ResponseEntity<String> uploadRepository(
@@ -94,19 +105,25 @@ public class ExtendedRestApiController {
 			@RequestParam("file") MultipartFile file) throws Exception {
 		// verify that we have the correct owner
 		Account account = accountRepository.findOne(principal.getName());
-		Account a = accountRepository.findAccountBySolutionId(id); 
+		Account a = accountRepository.findAccountBySolutionId(id);
 		if (!account.getUsername().equals(a.getUsername())) {
 			return new ResponseEntity<String>("Logged in user is not the owner of the solution", HttpStatus.FORBIDDEN);
 		}
 		fileService.uploadRepository(id, file);
-		// return the solution, the default value for update site will work just fine
+		// get solution and update with new information
 		Node node = marketplaceDAO.getSolution(id);
-		return new ResponseEntity<String>(MarketplaceSerializer.serialize((Node) node),HttpStatus.OK);
+		node.setUpdateurl("/files/"+id+"/");
+		Object result = marketplaceDAO.saveOrUpdateSolution(node,account);
+		if (result instanceof Node) {
+			return new ResponseEntity<String>(MarketplaceSerializer.serialize((Node) result),HttpStatus.OK);
+		} else {
+			return new ResponseEntity<String>((String) result,HttpStatus.INTERNAL_SERVER_ERROR);
+		}
 	}
 
 	/**
 	 * Uploads a screenshot to the solution and updates the solution data with
-	 * the name of the file being uploaded. returns a <b>403 Forbidden</b> if
+	 * the name of the file being uploaded. Returns a <b>403 Forbidden</b> if
 	 * the logged in user is not the owner of the solution.
 	 */
 	@PreAuthorize("hasRole('UPLOAD')")
@@ -129,12 +146,12 @@ public class ExtendedRestApiController {
 			return new ResponseEntity<String>(MarketplaceSerializer.serialize((Node) result),HttpStatus.OK);
 		} else {
 			return new ResponseEntity<String>((String) result,HttpStatus.INTERNAL_SERVER_ERROR);
-		}		
+		}
 	}
-	
+
 	/**
 	 * Uploads a image to the solution and updates the solution data with
-	 * the name of the file being uploaded. returns a <b>403 Forbidden</b> if
+	 * the name of the file being uploaded. Returns a <b>403 Forbidden</b> if
 	 * the logged in user is not the owner of the solution.
 	 */
 	@PreAuthorize("hasRole('UPLOAD')")
@@ -157,15 +174,15 @@ public class ExtendedRestApiController {
 			return new ResponseEntity<String>(MarketplaceSerializer.serialize((Node) result),HttpStatus.OK);
 		} else {
 			return new ResponseEntity<String>((String) result,HttpStatus.INTERNAL_SERVER_ERROR);
-		}		
+		}
 	}
-	
+
 	private boolean canEdit(Principal principal, Long identifier) {
 		Account account = accountRepository.findOne(principal.getName());
 		Account a = accountRepository.findAccountBySolutionId(identifier);
 		if (account.getUsername().equals(a.getUsername())) {
 			return true;
 		}
-		return false;		
+		return false;
 	}
 }

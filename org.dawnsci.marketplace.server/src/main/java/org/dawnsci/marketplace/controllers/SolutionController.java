@@ -65,8 +65,9 @@ import org.springframework.web.servlet.HandlerMapping;
 
 /**
  * CRUD controller for solutions a.k.a. plug-ins and features.
- * 
+ *
  * @author Torkild U. Resheim, Itema AS
+ * @since 1.0
  */
 @SuppressWarnings("unused")
 @Controller
@@ -77,7 +78,7 @@ public class SolutionController extends AbstractController {
 
 	@Autowired
 	private FileService fileService;
-	
+
 	@Inject
 	public SolutionController(AccountRepository accountRepository) {
 		super(accountRepository);
@@ -88,18 +89,18 @@ public class SolutionController extends AbstractController {
 		addCommonItems(map, principal);
 		map.addAttribute("featured", marketplaceDAO.getFeatured());
 		map.addAttribute("recent", marketplaceDAO.getRecent());
-		Path path = fileService.getPageFile("welcome.md").toPath();			
+		Path path = fileService.getPageFile("welcome.md").toPath();
 		map.addAttribute("text", PageController.parse(path));
 		return "main";
 	}
-	
+
 	/**
-	 * Performs a search for solutions which the matching parameters. Note 
+	 * Performs a search for solutions which the matching parameters. Note
 	 * that that only the <b>term</b> tag is defined and used by the Eclipse
 	 * marketplace implementation.
 	 */
 	@RequestMapping(value = "/search", method = RequestMethod.GET)
-	public String showSearchView(ModelMap map, Principal principal, 
+	public String showSearchView(ModelMap map, Principal principal,
 			@RequestParam(value = "term", required = false) String term,
 			@RequestParam(value = "tag", required = false) String tag) {
 		addCommonItems(map, principal);
@@ -132,7 +133,7 @@ public class SolutionController extends AbstractController {
 
 	/**
 	 * Deletes the solution from the database. The logged in user must be the
-	 * owner or an 403 error will be returned. 
+	 * owner or an 403 error will be returned.
 	 */
 	@PreAuthorize("hasRole('UPLOAD')")
 	@RequestMapping(value = "/delete-solution/{identifier}", method = RequestMethod.GET)
@@ -142,7 +143,7 @@ public class SolutionController extends AbstractController {
 		return "redirect:/";
 	}
 	/**
-	 * Open the solution editing form for creating a new instance. 
+	 * Open the solution editing form for creating a new instance.
 	 */
 	@PreAuthorize("hasRole('UPLOAD')")
 	@RequestMapping(value = "/edit-solution", method = RequestMethod.GET)
@@ -158,7 +159,7 @@ public class SolutionController extends AbstractController {
 	}
 
 	/**
-	 * Open the solution editing form for modifying an existing instance. 
+	 * Open the solution editing form for modifying an existing instance.
 	 */
 	@PreAuthorize("hasRole('UPLOAD')")
 	@RequestMapping(value = "/edit-solution/{identifier}", method = RequestMethod.GET)
@@ -173,11 +174,11 @@ public class SolutionController extends AbstractController {
 	}
 
 	/**
-	 * Store changes 
+	 * Store changes
 	 */
 	@PreAuthorize("hasRole('UPLOAD')")
 	@RequestMapping(value = "/edit-solution", method = RequestMethod.POST)
-	public String postSolution(ModelMap map, Principal principal, 
+	public String postSolution(ModelMap map, Principal principal,
 			@ModelAttribute NodeProxy content) {
 		addCommonItems(map, principal);
 		// try to store the node
@@ -201,12 +202,14 @@ public class SolutionController extends AbstractController {
 				if (o instanceof Node) node = (Node) o;
 			}
 			if (content.getRepositoryfile() !=null && !content.getRepositoryfile().isEmpty()) {
-				// there should be no need to update the object with more 
-				// information the default location should suffice
+				 // if a p2-repository is uploaded for the solution, the URL to the update
+				 // site will be overwritten with a new value pointing to this server.
 				fileService.uploadRepository(id, content.getRepositoryfile());
+				node.setUpdateurl("/files/"+id+"/");
+				Object o = marketplaceDAO.saveOrUpdateSolution(node, account);
 			}
 		}
 		return "redirect:/content/"+content.getNode().getId();
 	}
-	
+
 }

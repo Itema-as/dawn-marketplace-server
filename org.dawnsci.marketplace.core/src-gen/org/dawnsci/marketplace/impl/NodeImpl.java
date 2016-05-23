@@ -64,7 +64,7 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 	/**
 	 * The default value of the '{@link #getId() <em>Id</em>}' attribute. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 *
 	 * @see #getId()
 	 * @generated
 	 * @ordered
@@ -73,7 +73,7 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 	/**
 	 * The cached value of the '{@link #getId() <em>Id</em>}' attribute. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 *
 	 * @see #getId()
 	 * @generated
 	 * @ordered
@@ -444,7 +444,7 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 	/**
 	 * The default value of the '{@link #getUrl() <em>Url</em>}' attribute. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 *
 	 * @see #getUrl()
 	 * @generated
 	 * @ordered
@@ -720,7 +720,7 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated Not
 	 */
 	public String getImage() {
@@ -863,10 +863,13 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 	 * @generated Not
 	 */
 	public String getUpdateurl() {
-		if (getBaseUrl() == null) {
+		if (updateurl == null || updateurl.isEmpty()) {
+			return null;
+		}
+		if (getBaseUrl() == null || !updateurl.startsWith("/")) {
 			return updateurl;
 		}
-		return getBaseUrl()+"/files/" + getId() + "/" + updateurl;
+		return getBaseUrl()+updateurl;
 	}
 
 	/**
@@ -962,7 +965,7 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated Not
 	 */
 	public String getUrl() {
@@ -971,12 +974,12 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 		}
 		return getBaseUrl() + "/content/" + getId();
 	}
-	
+
 	/**
-	 * Used to calculate the base URL of URL's relative to the marketplace 
+	 * Used to calculate the base URL of URL's relative to the marketplace
 	 * server. This can only be found if this instance is contained within an
 	 * object which root container is a Marketplace instance.
-	 *  
+	 *
 	 * @return the base URL or <code>null</code>
 	 */
 	private String getBaseUrl() {
@@ -992,7 +995,7 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated Not
 	 */
 	public void setUrl(String newUrl) {
@@ -1000,7 +1003,7 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated Not
 	 */
 	public String getScreenshot() {

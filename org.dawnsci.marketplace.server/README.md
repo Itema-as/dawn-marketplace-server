@@ -19,7 +19,7 @@ additional folder for the Equinox p2-repository.
 When doing development on this code, you should start the server from within
 Eclipse. That will allow you to do normal debugging. Make sure the [Spring tool
 suite](https://marketplace.eclipse.org/content/spring-ide) is installed and
-launch the __org.dawnsci.marketplace.server__ project as a _Spring Boot App_
+launch the **org.dawnsci.marketplace.server** project as a _Spring Boot App_
 
 When running the standalone server you need to start it from the command line.
 E.g. `java -jar org.dawnsci.marketplace.server-1.0-SNAPSHOT.war`
@@ -33,21 +33,21 @@ _pages_ must contain:
 
 ### Creating an initial data set
 
-When starting the server a folder named _solutions_ will be created next to the
-*.jar file, or in the project root when running from the IDE. This contains all
-file resources for a sample solution, including one plug-in that can be
-installed.
+When starting the server a folder named _solutions_ will be created next to
+the *.jar file, or in the project root when running from the IDE.  This
+contains all file resources for a sample solution, including one plug-in
+that can be installed.
 
 The data that is loaded can be found in
-[src/main/resources/data](src/main/resources/data). A similar set is found in
-[src/test/resources/data](src/test/resources/data).
+[src/main/resources/data](src/main/resources/data).  A similar set is found
+in [src/test/resources/data](src/test/resources/data).
 
 ### Configuring the server
 
-The server configuration is mainly done in a file named _application.yml_. If
-the [default values](src/main/resources/application.yml) must be overridden,
-this can be done by adding it as a sibling to the _*.war_ file and specify
-properties in the YAML format. Typical values include:
+The server configuration is mainly done in a file named _application.yml_.
+If the [default values](src/main/resources/application.yml) must be
+overridden, this can be done by adding it as a sibling to the _*.war_ file
+and specify properties in the YAML format.  Typical values include:
 
 ```YAML
 marketplace:
@@ -71,32 +71,50 @@ There is a [separate set of properties used when testing](src/test/resources/app
 
 #### Social integration
 
-It is possible to sign in using a Twitter, Google or Github account. For testing
-purposes one application of each type has been created and configured on the
-server.
+It is possible to sign in using a Twitter, Google or Github account.  For
+testing purposes one application of each type has been created and
+configured on the server.
 
-Since the Twitter application registration requires a fully qualified DNS you
-must in addition add an entry to `/etc/hosts` when testing:
+Since the Twitter application registration requires a fully qualified DNS
+you must in addition add an entry to `/etc/hosts` when testing:
 
 	127.0.0.1       localhost.com
 
 See [the server configuration](src/main/resources/application.yml) for OAuth
 secrets and identifiers.
 
+### Logging in
+
+An administrative user will be automatically created.  The login of this
+user is "admin" and the password is an UUID automatically generated when
+starting.  This value can be found in the log.  It is possible to specify a
+password for this user in the configuration file using the property
+`marketplace.admin-password`.
+
+### Adding a solution
+
+* In order to create a new solution, the logged in user must belong to the
+  **UPLOAD** group. This is not set per default when a new user is created, so
+  an administrator must assign this role to users.
+* When uploading a solution p2-repository; either using the web-interface or the
+  REST-API, the update site property of the solution will be changed to point to
+  `/files/&lt;solution-id&gt;`.
+
 ## The REST API
 
-The REST API is an important part for communicating with the _marketplace client_
- that comes as a part of Eclipse. Not all of it is currently implemented, but it
- can be exercised from within Eclipse in a way that is useful.
+The REST API is an important part for communicating with the _marketplace
+client_ that comes as a part of Eclipse.  Not all of it is currently
+implemented, but it can be exercised from within Eclipse in a way that is
+useful.
 
-Note that this implementation of the server currently prefix all REST calls with
-"mpc". So for instance getting details of a particular product will look like
-this: `http://localhost:8080/mpc/node/123/api/p`.
+Note that this implementation of the server currently prefix all REST calls
+with "mpc".  So for instance getting details of a particular product will
+look like this: `http://localhost:8080/mpc/node/123/api/p`.
 
 ### Supported REST calls
 
 The Eclipse reference implementation provisional API will be identified by
-/api/p at the end of most urls. Those that are checked have been fully
+´/api/p´ at the end of most urls.  Those that are checked have been fully
 implemented.
 
 - [x]	`/api/p` - Returns Markets + Categories
@@ -133,11 +151,11 @@ for details.
 
 ## Serving Static content
 
-Static content, such as the welcome text and user guide should be placed in the
-_pages_ folder. These files must be written in the Markdown format. Links can be
-written as for example `[user guide](/pages/user_guide.md)`, which will link to
-a Markdown file that will be rendered as HTML. It is also possible to link to
-other resources:
+Static content, such as the welcome text and user guide should be placed in
+the _pages_ folder.  These files must be written in the Markdown format.
+Links can be written as for example `[user guide](/pages/user_guide.md)`,
+which will link to a Markdown file that will be rendered as HTML.  It is
+also possible to link to other resources:
 
 * `/pages/eclipse.png` an image file.
 * `/content/123` the solution with the identifier "123"
