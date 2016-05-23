@@ -61,7 +61,10 @@ public class FileController {
 			try {
 				String detect = tika.detect(file);
 				MediaType mediaType = MediaType.parseMediaType(detect);
-				return ResponseEntity.ok().contentLength(file.length()).contentType(mediaType)
+				return ResponseEntity.ok()
+						.contentLength(file.length())
+						.contentType(mediaType)
+						.lastModified(file.lastModified())
 						.body(new FileSystemResource(file));
 			} catch (IOException e) {
 				e.printStackTrace();
