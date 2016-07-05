@@ -134,52 +134,51 @@ public class HibernateService {
 
 	@Transactional
 	public void loadSolutions() {
-			// load solutions from file
-			EList<EObject> solutions = loadSerialized("data/solutions.xml");
-			EList<Node> nodes = ((Marketplace)solutions.get(0)).getFeatured().getNodes();
-			for (Node node : nodes) {
-				Node copy = EcoreUtil.copy(node);
+		// load solutions from file
+		EList<EObject> solutions = loadSerialized("data/solutions.xml");
+		EList<Node> nodes = ((Marketplace) solutions.get(0)).getFeatured().getNodes();
+		for (Node node : nodes) {
+			Node copy = EcoreUtil.copy(node);
 			try {
 				hbds.getSessionFactory().getCurrentSession().beginTransaction();
-				// remove the old node, and replace it with a version loaded from file
-				Query createQuery = hbds.getSessionFactory().getCurrentSession().createQuery("SELECT node FROM Node node WHERE node.id='" + copy.getId() + "'");
-				if (createQuery.list().isEmpty()) {
-					hbds.getSessionFactory().getCurrentSession().saveOrUpdate(copy);
+				
+				Object object = hbds.getSessionFactory().getCurrentSession().get("Node", copy.getId());
+				if (object == null) {
+					copy.setId(null);
+				} else {
+					// make sure we have the same value as the database
+					copy.setCreated(((Node)object).getCreated());
+					hbds.getSessionFactory().getCurrentSession().evict(object);
 				}
+				copy.setUpdateurl("/files/" + node.getId() + "/");				
+				hbds.getSessionFactory().getCurrentSession().saveOrUpdate(copy);
 				hbds.getSessionFactory().getCurrentSession().getTransaction().commit();
 			} catch (Exception e) {
 				hbds.getSessionFactory().getCurrentSession().getTransaction().rollback();
 				e.printStackTrace();
 			}
-				// copy the screenshot image
-				if (StringUtils.isNotEmpty(copy.getScreenshot())){
-					try {
-						FileUtils.copyInputStreamToFile(
-								getSolutionsInputStream(copy.getScreenshot()),
-								fileService.getFile(Long.toString(copy.getId()),
-										copy.getScreenshot()));
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
+			// copy the screenshot image
+			if (StringUtils.isNotEmpty(copy.getScreenshot())) {
+				try {
+					FileUtils.copyInputStreamToFile(getSolutionsInputStream(copy.getScreenshot()),
+							fileService.getFile(Long.toString(copy.getId()), copy.getScreenshot()));
+				} catch (IOException e) {
+					e.printStackTrace();
 				}
-				// copy the icon image
-				if (StringUtils.isNotEmpty(copy.getImage())){
-					try {
-						FileUtils.copyInputStreamToFile(
-								getSolutionsInputStream(copy.getImage()),
-								fileService.getFile(Long.toString(copy.getId()),
-										copy.getImage()));
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				}
-				// unzip the p2-repository
-				File p2repo = fileService.getSolutionFile(String.valueOf(copy.getId()));
-				ZipUtil.unpack(getSolutionsInputStream("p2-repo.zip"), p2repo);
 			}
-
+			// copy the icon image
+			if (StringUtils.isNotEmpty(copy.getImage())) {
+				try {
+					FileUtils.copyInputStreamToFile(getSolutionsInputStream(copy.getImage()),
+							fileService.getFile(Long.toString(copy.getId()), copy.getImage()));
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+			// unzip the p2-repository
+			File p2repo = fileService.getSolutionFile(String.valueOf(copy.getId()));
+			ZipUtil.unpack(getSolutionsInputStream("p2-repo.zip"), p2repo);
+		}
 	}
 
 	private InputStream getSolutionsInputStream(String filename) {
