@@ -70,7 +70,7 @@ public class JdbcAccountRepository implements AccountRepository, PagingAndSortin
 		}
 		return findOne(query.get(0));
 	}
-	
+
 	@Override
 	@Transactional
 	public List<Long> findSolutionIdsByUsername(String id) {
@@ -156,19 +156,19 @@ public class JdbcAccountRepository implements AccountRepository, PagingAndSortin
 	@Override
 	public void delete(Account entity) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void delete(Iterable<? extends Account> entities) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void deleteAll() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -181,59 +181,41 @@ public class JdbcAccountRepository implements AccountRepository, PagingAndSortin
 	@Transactional
 	public Page<Account> findAll(Pageable pageable) {
 		// find the total number of rows
-		Integer total = jdbcTemplate.queryForObject("select count(*) from Account", new RowMapper<Integer>() {
-			@Override
-			public Integer mapRow(ResultSet rs, int rowNum) throws SQLException {
-				return rs.getInt(1);
-			}			
-		});
-		
+		Integer total = jdbcTemplate.queryForObject("select count(*) from Account", (RowMapper<Integer>) (rs, rowNum) -> rs.getInt(1));
+
 		// calculate the offset
 		int offset = pageable.getPageNumber() * pageable.getPageSize();
-		
+
 		// select the page
 		List<Account> query = jdbcTemplate.query("select username, firstName, lastName from Account limit ? offset ?",
-				new RowMapper<Account>() {
-					public Account mapRow(ResultSet rs, int rowNum) throws SQLException {
-						return new Account(rs.getString("username"), null, rs.getString("firstName"), rs
-								.getString("lastName"));
-					}
-				}, pageable.getPageSize(), offset);
-		
+				(RowMapper<Account>) (rs, rowNum) -> new Account(rs.getString("username"), null, rs.getString("firstName"), rs
+						.getString("lastName")), pageable.getPageSize(), offset);
+
 		return new PageImpl<>(query, pageable, total);
 	}
 
 	@Override
 	@Transactional
 	public boolean isAdministrator(String id) {
-		return jdbcTemplate.queryForObject("select count(*) from Authorities where username = ? and authority = 'ROLE_ADMIN'", new RowMapper<Boolean>() {
-			@Override
-			public Boolean mapRow(ResultSet rs, int rowNum) throws SQLException {
-				return rs.getInt(1) == 1;
-			}			
-		},id);
+		return jdbcTemplate.queryForObject(
+				"select count(*) from Authorities where username = ? and authority = 'ROLE_ADMIN'",
+				(RowMapper<Boolean>) (rs, rowNum) -> rs.getInt(1) == 1, id);
 	}
 
 	@Override
 	@Transactional
 	public boolean isUser(String id) {
-		return jdbcTemplate.queryForObject("select count(*) from Authorities where username = ? and authority = 'ROLE_USER'", new RowMapper<Boolean>() {
-			@Override
-			public Boolean mapRow(ResultSet rs, int rowNum) throws SQLException {
-				return rs.getInt(1) == 1;
-			}			
-		},id);
+		return jdbcTemplate.queryForObject(
+				"select count(*) from Authorities where username = ? and authority = 'ROLE_USER'",
+				(RowMapper<Boolean>) (rs, rowNum) -> rs.getInt(1) == 1, id);
 	}
 
 	@Override
 	@Transactional
 	public boolean isUpload(String id) {
-		return jdbcTemplate.queryForObject("select count(*) from Authorities where username = ? and authority = 'ROLE_UPLOAD'", new RowMapper<Boolean>() {
-			@Override
-			public Boolean mapRow(ResultSet rs, int rowNum) throws SQLException {
-				return rs.getInt(1) == 1;
-			}			
-		},id);
+		return jdbcTemplate.queryForObject(
+				"select count(*) from Authorities where username = ? and authority = 'ROLE_UPLOAD'",
+				(RowMapper<Boolean>) (rs, rowNum) -> rs.getInt(1) == 1, id);
 	}
 
 	@Override
@@ -251,7 +233,7 @@ public class JdbcAccountRepository implements AccountRepository, PagingAndSortin
 					"delete from Authorities where username = ? and authority = ?",
 					username, "ROLE_ADMIN");
 		}
-		
+
 	}
 
 	@Override
