@@ -16,6 +16,10 @@ marketplace:
     maximum: 3
     solutions: 1,2,3,4,5,6,7,8,9,10
 
+multipart:
+  maxFileSize: -1
+  maxRequestSize: -1
+
 spring:
 # Enable ANSI logging if possible
   output:
