@@ -11,6 +11,7 @@
 package org.dawnsci.marketplace.services;
 import java.io.InputStream;
 import java.net.URL;
+import java.net.UnknownHostException;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
@@ -43,6 +44,7 @@ import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.env.Environment;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
@@ -69,17 +71,23 @@ public class MarketplaceDAO {
 	@Inject
 	private FileService fileService;
 
+	@Autowired(required = false)
 	@Value("${marketplace.featured.solutions:1}")
 	List<Long> featuredItems;
 
+	@Autowired(required = false)
 	@Value("${marketplace.featured.maximum:3}")
 	private int maxFeaturedItems;
 
+	@Autowired(required = false)
 	@Value("${marketplace.max-recent-solutions:12}")
 	private int maxRecentItems;
 
+	@Autowired(required = false)
 	@Value("${marketplace.base-url:http://localhost:8080}")
 	private String marketplaceBaseUrl;
+
+	private boolean catalogsUnavailable;
 
 	/**
 	 * HQL query to use when searching for a solution using a simple substring
@@ -136,7 +144,7 @@ public class MarketplaceDAO {
 		return marketplace;
 	}
 
-	private Marketplace loadSerialized(URL url) {
+	private Marketplace loadCatalogs(URL url) {
 		ResourceSet rs = new ResourceSetImpl();
 		rs.getPackageRegistry().put(null, MarketplacePackage.eINSTANCE);
 		try {
@@ -144,6 +152,10 @@ public class MarketplaceDAO {
 			InputStream is = url.openStream();
 			resource.load(is, rs.getLoadOptions());
 			return (Marketplace) resource.getContents().get(0);
+		} catch (UnknownHostException e){
+			// marketplace is unavailable flagging it as such
+			catalogsUnavailable = true;
+			logger.warn("Marketplace at "+url+" is unavailable");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -163,13 +175,11 @@ public class MarketplaceDAO {
 			catalogs.getItems().addAll(EcoreUtil.copyAll(query.list()));
 			sessionFactory.getCurrentSession().getTransaction().commit();
 			// also obtain catalogs from the Eclipse Marketplace
-			try {
-				Marketplace em = loadSerialized(new URL("http://marketplace.eclipse.org/catalogs/api/p"));
-				catalogs.getItems().addAll(EcoreUtil.copyAll(em.getCatalogs().getItems()));
-			} catch (Exception e){
-				// it's not a big deal if we cannot reach the Eclipse Marketplace
-				// but we would like to know what happened.
-				e.printStackTrace();
+			if (!catalogsUnavailable){
+				Marketplace em = loadCatalogs(new URL("http://marketplace.eclipse.org/catalogs/api/p"));
+				if (em != null) {
+					catalogs.getItems().addAll(EcoreUtil.copyAll(em.getCatalogs().getItems()));
+				}
 			}
 		} catch (Exception e) {
 			sessionFactory.getCurrentSession().getTransaction().rollback();
