@@ -1,6 +1,8 @@
 language: java
 sudo: false
-script: mvn clean verify
+script: 
+- mvn -Pserver clean install
+- mvn -Pclient clean install
 jdk:
 - oraclejdk8
 cache:

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <?pde?>
 <!-- generated with https://github.com/mbarbero/fr.obeo.releng.targetplatform -->
-<target name="Eclipse Marketplace Server Target Platform" sequenceNumber="1456745437">
+<target name="Eclipse Marketplace Server Target Platform" sequenceNumber="1476712729">
   <locations>
     <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
       <unit id="org.eclipse.equinox.p2.sdk.feature.group" version="3.9.101.v20160212-1721"/>
@@ -38,11 +38,11 @@
       <repository location="http://download.eclipse.org/eclipse/updates/4.5"/>
     </location>
     <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
-      <unit id="org.eclipse.mylyn.wikitext.core" version="2.7.0.v20151015-1452"/>
-      <unit id="org.eclipse.mylyn.wikitext.markdown.core" version="2.7.0.v20151009-1723"/>
-      <unit id="org.eclipse.mylyn.wikitext.markdown.ui" version="2.7.0.v20151009-1723"/>
-      <unit id="org.eclipse.mylyn.wikitext.ui" version="2.7.0.v20151009-1723"/>
-      <unit id="org.eclipse.mylyn.commons.workbench" version="3.18.0.v20151102-1813"/>
+      <unit id="org.eclipse.mylyn.wikitext.core" version="2.10.0.v20160630-1705"/>
+      <unit id="org.eclipse.mylyn.wikitext.markdown.core" version="2.10.0.v20160818-1444"/>
+      <unit id="org.eclipse.mylyn.wikitext.markdown.ui" version="2.10.0.v20160630-1705"/>
+      <unit id="org.eclipse.mylyn.wikitext.ui" version="2.10.0.v20160805-1545"/>
+      <unit id="org.eclipse.mylyn.commons.workbench" version="3.21.0.v20160630-1702"/>
       <repository location="http://download.eclipse.org/mylyn/releases/latest"/>
     </location>
   </locations>
