@@ -6,7 +6,7 @@ This server implementation differs from the Eclipse Foundation's server in some 
 * The Equinox p2 repositores along with all other data are hosted on the server.
 * User accounts are optionally integrated with GitHub, Twitter or Google accounts.
 * Feature metadata can be edited and published using a form from within Eclipse.
-  * Publishing also builds the feature using PDE build. 
+  * Publishing also builds the feature using PDE build.
 * Designed as a lightweight solution for organizations that require an in-house service for distributing Eclipse features.
 * This code is open source and released under the Eclipse Public License.
 
@@ -33,7 +33,7 @@ See the [notes for the server](org.dawnsci.marketplace.server/README.md) for mor
 
 ### Using the marketplace client
 
-Start Eclipse with required parameters for connecting to the server, e.g. 
+Start Eclipse with required parameters for connecting to the server, e.g.
 `/Eclipse.app/Contents/MacOS/eclipse -vmargs
 -Dorg.eclipse.epp.internal.mpc.core.service.DefaultMarketplaceService.url=http://localhost:8080/mpc
 -Dorg.eclipse.epp.internal.mpc.core.service.DefaultCatalogService.url=http://localhost:8080/mpc`
@@ -49,4 +49,7 @@ and launch the __org.dawnsci.marketplace.server__ project as a _Spring Boot
 App_.
 
 The server is built using Maven so it is sufficient to execute `mvn clean
-package` from the project root.
+install` from the project root.
+
+If you want to build the client for integration with an Eclipse RCP application
+you must specify to use the __client__ profile, `mvn -Pclient clean install`.
