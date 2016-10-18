@@ -1,6 +1,12 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<?xml version="1.0" encoding="UTF-8"?>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<modelVersion>4.0.0</modelVersion>
+
+	<name>DAWN Marketplace Eclipse Feature</name>
+	<artifactId>org.dawnsci.marketplace</artifactId>
+	<packaging>eclipse-feature</packaging>
 
 	<parent>
 		<relativePath>../pom.xml</relativePath>
@@ -8,10 +14,6 @@
 		<groupId>org.dawnsci.marketplace</groupId>
 		<version>1.0.0-SNAPSHOT</version>
 	</parent>
-
-	<name>DAWN Marketplace UI</name>
-	<artifactId>org.dawnsci.marketplace.ui</artifactId>
-	<packaging>eclipse-plugin</packaging>
 
 	<build>
 		<plugins>
@@ -28,11 +30,6 @@
 			<plugin>
 				<groupId>org.eclipse.tycho</groupId>
 				<artifactId>tycho-packaging-plugin</artifactId>
-				<version>${tycho.version}</version>
-			</plugin>
-			<plugin>
-				<groupId>org.eclipse.tycho</groupId>
-				<artifactId>target-platform-configuration</artifactId>
 				<version>${tycho.version}</version>
 			</plugin>
 		</plugins>
