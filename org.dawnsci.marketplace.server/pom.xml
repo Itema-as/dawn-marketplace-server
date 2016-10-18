@@ -2,6 +2,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
+	<name>DAWN Marketplace Server</name>
 	<artifactId>org.dawnsci.marketplace.server</artifactId>
 	<packaging>war</packaging>
 
